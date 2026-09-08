@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카드 자동결제 등록 프로토타입</title>
+<style>
+  :root{
+    --ink:#152238;
+    --ink-soft:#5B6B85;
+    --ink-faint:#8892A6;
+    --line:#E4E8EF;
+    --bg-shell:#F4F6F9;
+    --brand:#0F9E8E;
+    --brand-dark:#0B7A6E;
+    --brand-tint:#E4F6F3;
+    --warn:#D8532B;
+    --warn-tint:#FBE9E3;
+    --card-navy:#1E2A45;
+    --card-navy-2:#2C3B5C;
+    --rail-bg:#141D30;
+    --rail-bg-2:#1B2740;
+    --rail-line:#28324A;
+    --rail-text:#C7CEDE;
+    --rail-text-soft:#7E88A3;
+    --stage-bg:#E7EBF2;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;
+    color:var(--ink);
+    background:var(--bg-shell);
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+  }
+
+  /* ============ LEFT: INDEX RAIL ============ */
+  .rail{
+    flex:0 0 264px;
+    background:linear-gradient(180deg,var(--rail-bg),var(--rail-bg-2));
+    display:flex;
+    flex-direction:column;
+    padding:28px 0 20px;
+  }
+  .rail-head{ padding:0 24px 22px; border-bottom:1px solid var(--rail-line); margin-bottom:14px; }
+  .rail-eyebrow{ font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--brand); text-transform:uppercase; margin-bottom:6px; }
+  .rail-title{ font-size:16px; font-weight:700; color:#fff; line-height:1.4; }
+  .rail-sub{ font-size:12px; color:var(--rail-text-soft); margin-top:6px; line-height:1.5; }
+
+  .nav-list{ list-style:none; margin:0; padding:6px 14px; display:flex; flex-direction:column; gap:3px; flex:1; overflow-y:auto; }
+  .nav-item{
+    display:flex; align-items:center; gap:12px;
+    padding:11px 12px; border-radius:9px;
+    cursor:pointer;
+    border-left:3px solid transparent;
+  }
+  .nav-item .num{
+    flex:0 0 auto; width:24px; height:24px; border-radius:7px;
+    background:rgba(255,255,255,.06); color:var(--rail-text-soft);
+    font-size:11px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    font-variant-numeric:tabular-nums;
+  }
+  .nav-item .tx{ flex:1; min-width:0; }
+  .nav-item .name{ font-size:13.5px; font-weight:600; color:var(--rail-text); line-height:1.3; }
+  .nav-item .kind{ font-size:10.5px; color:var(--rail-text-soft); margin-top:2px; }
+  .nav-item.active{
+    background:rgba(15,158,142,.16);
+    border-left-color:var(--brand);
+  }
+  .nav-item.active .num{ background:var(--brand); color:#fff; }
+  .nav-item.active .name{ color:#fff; }
+
+  .rail-foot{ padding:16px 24px 0; border-top:1px solid var(--rail-line); margin-top:10px; }
+  .rail-foot-label{ font-size:10.5px; color:var(--rail-text-soft); line-height:1.6; }
+
+  /* ============ CENTER: STAGE ============ */
+  .stage{
+    flex:1;
+    background:var(--stage-bg);
+    overflow:auto;
+    display:flex;
+    justify-content:center;
+    padding:44px 40px;
+  }
+  .stage-frame{ position:relative; width:1040px; flex:0 0 auto; }
+
+  .browser-mock{
+    background:#fff;
+    border-radius:12px;
+    border:1px solid #DCE1EA;
+    box-shadow:0 24px 48px -24px rgba(21,34,56,.38), 0 2px 6px rgba(21,34,56,.06);
+    overflow:hidden;
+    transition:filter .15s ease;
+  }
+  .browser-mock.dimmed{ filter:blur(5px) brightness(.94); }
+
+  .browser-bar{
+    height:44px; background:#F1F3F7; border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:14px; padding:0 16px;
+  }
+  .browser-dots{ display:flex; gap:6px; flex:0 0 auto; }
+  .browser-dots span{ width:10px; height:10px; border-radius:50%; display:block; }
+  .browser-dots span:nth-child(1){ background:#EE6A5F; }
+  .browser-dots span:nth-child(2){ background:#F5BD4F; }
+  .browser-dots span:nth-child(3){ background:#61C454; }
+  .browser-address{
+    flex:1; height:28px; background:#fff; border:1px solid var(--line); border-radius:7px;
+    display:flex; align-items:center; gap:7px; padding:0 12px;
+    font-size:12px; color:var(--ink-soft);
+  }
+  .browser-address .lock{ font-size:10px; opacity:.7; }
+
+  .page-body{ position:relative; min-height:760px; }
+  .page-content-wrap{ transition:filter .15s ease; }
+  .page-content-wrap.dimmed{ filter:blur(5px) brightness(.94); }
+
+  .basepage{ }
+  .basepage[hidden]{ display:none; }
+
+  .site-header{
+    height:64px; padding:0 44px; border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .site-logo{ font-size:17px; font-weight:800; color:var(--ink); letter-spacing:-.01em; }
+  .site-logo span{ color:var(--brand); }
+  .site-nav{ display:flex; gap:22px; font-size:12.5px; color:var(--ink-soft); }
+  .breadcrumb{ padding:16px 44px 0; font-size:12px; color:var(--ink-faint); }
+  .breadcrumb .sep{ margin:0 6px; color:#C7CDDA; }
+  .breadcrumb .cur{ color:var(--ink-soft); font-weight:600; }
+
+  .page-content{ padding:28px 44px 56px; }
+  .page-content.narrow{ display:flex; justify-content:center; }
+  .page-head h1{ font-size:22px; margin:0 0 6px; letter-spacing:-.01em; }
+  .page-head p{ font-size:13.5px; color:var(--ink-soft); margin:0 0 30px; line-height:1.6; }
+
+  .split{ display:flex; gap:44px; }
+  .form-col{ width:520px; flex:0 0 auto; }
+  .preview-col{ flex:1; padding-top:2px; }
+  .form-panel{ width:420px; }
+
+  .radio-row{ display:flex; gap:22px; margin-bottom:20px; font-size:13.5px; }
+  .radio-row .opt{ display:flex; align-items:center; gap:7px; }
+  .dot-on{ width:17px;height:17px;border-radius:50%;background:var(--brand); position:relative; }
+  .dot-on::after{ content:"";position:absolute;top:5.5px;left:5.5px;width:6px;height:6px;border-radius:50%;background:#fff; }
+  .dot-off{ width:17px;height:17px;border-radius:50%;border:1.5px solid var(--line); }
+
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:12px; color:var(--ink-soft); margin-bottom:7px; font-weight:600; }
+  .field input[type=text]{
+    width:100%; border:1px solid var(--line); border-radius:8px;
+    padding:12px 13px; font-size:13.5px; color:var(--ink); background:#FBFCFD;
+  }
+
+  .terms-row{
+    display:flex; align-items:flex-start; gap:9px;
+    font-size:12.5px; color:var(--ink-soft);
+    border-top:1px solid var(--line); padding-top:16px; margin:2px 0 0;
+    cursor:pointer;
+  }
+  .terms-row .box{ width:16px;height:16px;border-radius:4px;background:var(--brand); flex:0 0 auto; margin-top:1px; }
+  .terms-row .tlabel{ flex:1; }
+  .terms-row .chev{ font-size:11px; color:var(--ink-soft); transition:transform .15s ease; flex:0 0 auto; }
+  .terms-row.open .chev{ transform:rotate(180deg); }
+  .terms-detail{ max-height:0; overflow:hidden; transition:max-height .2s ease; background:#FAFBFC; border-radius:8px; }
+  .terms-detail.open{ max-height:130px; margin-top:10px; }
+  .terms-detail .inner{ padding:12px 13px; font-size:11.5px; color:var(--ink-soft); line-height:1.7; max-height:106px; overflow-y:auto; }
+
+  .form-btn{ width:100%; margin-top:24px; }
+
+  .btn{ padding:13px; border-radius:9px; font-size:13.5px; font-weight:700; border:none; cursor:default; }
+  .btn-primary{ background:var(--brand); color:#fff; }
+  .btn-secondary{ background:#F1F3F6; color:var(--ink); }
+  .btn-ghost{ background:#fff; color:var(--brand-dark); border:1px solid var(--brand); }
+  .btn-warn{ background:var(--warn); color:#fff; }
+  .btn-stack{ display:flex; flex-direction:column; gap:10px; margin-top:22px; }
+
+  .preview-label{ font-size:12px; font-weight:700; color:var(--ink-soft); margin-bottom:12px; }
+  .card-visual{
+    background:linear-gradient(135deg,var(--card-navy),var(--card-navy-2));
+    border-radius:16px; padding:26px 26px 22px; color:#fff;
+    min-height:190px; display:flex; flex-direction:column; justify-content:space-between;
+    box-shadow:0 16px 30px -14px rgba(30,42,69,.55);
+  }
+  .card-visual .chip{ width:34px; height:24px; border-radius:5px; background:linear-gradient(135deg,#D9C68B,#B89B57); }
+  .card-visual .num{ font-size:18px; letter-spacing:2.5px; font-weight:600; margin:20px 0 18px; }
+  .card-visual .meta{ display:flex; justify-content:space-between; font-size:11px; opacity:.75; letter-spacing:.03em; }
+  .preview-note{ font-size:12px; color:var(--ink-faint); margin-top:14px; line-height:1.6; }
+
+  .otp-row{ display:flex; gap:10px; margin:4px 0 14px; }
+  .otp-box{
+    flex:1; height:56px; border:1px solid var(--line); border-radius:9px;
+    display:flex; align-items:center; justify-content:center; font-size:19px; font-weight:700;
+    background:#FBFCFD;
+  }
+  .otp-timer{ font-size:12.5px; color:var(--warn); text-align:right; margin-bottom:20px; font-variant-numeric:tabular-nums; }
+  .resend{ text-align:center; font-size:12.5px; color:var(--ink-soft); border:1px solid var(--line); border-radius:20px; padding:10px; margin-bottom:26px; }
+
+  .card-list{ width:640px; }
+  .card-row{
+    display:flex; align-items:center; justify-content:space-between;
+    border:1px solid var(--line); border-radius:11px; padding:16px 18px; margin-bottom:12px;
+  }
+  .card-row.default{ border-color:var(--brand); background:var(--brand-tint); }
+  .card-row .ci{ display:flex; align-items:center; gap:14px; }
+  .mini-chip{ width:34px;height:22px;border-radius:4px;background:linear-gradient(135deg,#3B4A6B,#1E2A45); }
+  .card-row .info .n{ font-size:13.5px; font-weight:700; }
+  .card-row .info .d{ font-size:11.5px; color:var(--ink-soft); margin-top:2px; }
+  .default-tag{ font-size:10.5px; font-weight:700; color:var(--brand-dark); background:#fff; border:1px solid var(--brand); padding:3px 9px; border-radius:10px; }
+  .kebab{ color:var(--ink-soft); font-size:18px; }
+  .add-card-btn{ width:100%; padding:14px; border-radius:10px; border:1px dashed #C9D0DC; background:#FAFBFC; text-align:center; font-size:12.5px; color:var(--ink-soft); font-weight:600; margin-top:2px; margin-bottom:24px; }
+  .cancel-billing-btn{ width:640px; }
+
+  .loading-wrap{ display:flex; flex-direction:column; align-items:center; text-align:center; padding:12px 4px 4px; }
+  .spinner{ width:38px;height:38px;border-radius:50%; border:4px solid var(--brand-tint); border-top-color:var(--brand); margin-bottom:18px; }
+  .loading-wrap .lt{ font-size:15px; font-weight:700; margin-bottom:8px; }
+  .loading-wrap .ls{ font-size:12.5px; color:var(--ink-soft); line-height:1.7; }
+
+  .done-hero{ text-align:center; padding:4px 0 6px; }
+  .icon-circle{ width:52px;height:52px;border-radius:50%; font-size:24px;font-weight:700; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+  .icon-circle.ok{ background:var(--brand-tint); color:var(--brand-dark); }
+  .icon-circle.no{ background:var(--warn-tint); color:var(--warn); }
+  .done-hero h2, .fail-hero h2{ font-size:16.5px; margin:0 0 7px; }
+  .done-hero p, .fail-hero p{ font-size:12.5px; color:var(--ink-soft); margin:0; line-height:1.65; }
+  .done-card{ background:linear-gradient(135deg,var(--card-navy),var(--card-navy-2)); color:#fff; border-radius:12px; padding:16px 18px; margin:18px 0 4px; }
+  .done-card .num{ font-size:14px; letter-spacing:1.2px; font-weight:600; margin-bottom:6px; }
+  .done-card .lbl{ font-size:11px; opacity:.72; }
+
+  .fail-hero{ padding-top:2px; }
+  .fail-detail{ background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin:18px 0 2px; font-size:12.5px; }
+  .fail-detail .row{ display:flex; justify-content:space-between; padding:5px 0; color:var(--ink-soft); }
+  .fail-detail .row b{ color:var(--ink); font-weight:700; }
+
+  /* ============ MODAL LAYER ============ */
+  .stage-overlay{
+    position:absolute; inset:0; background:rgba(15,23,42,.4); z-index:2;
+  }
+  .modal-layer{
+    position:absolute; inset:0; z-index:3;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .modal{
+    width:400px; background:#fff; border-radius:16px; padding:30px 28px 26px;
+    box-shadow:0 24px 48px -12px rgba(15,23,42,.35);
+  }
+  .modal[hidden]{ display:none; }
+  .modal.wide{ width:420px; }
+  .modal-title{ font-size:16px; font-weight:700; margin:0 0 9px; }
+  .modal-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.7; margin:0 0 22px; }
+  .modal-actions{ display:flex; gap:10px; }
+  .modal-actions .btn{ flex:1; padding:12px; font-size:13px; }
+
+  /* ============ RIGHT: DESCRIPTION PANEL ============ */
+  .desc{
+    flex:0 0 320px;
+    background:#fff;
+    border-left:1px solid var(--line);
+    padding:34px 28px;
+    overflow-y:auto;
+  }
+  .desc-eyebrow{ font-size:11px; font-weight:700; letter-spacing:.06em; color:var(--brand-dark); text-transform:uppercase; margin-bottom:10px; }
+  .desc-title{ font-size:19px; font-weight:800; margin:0 0 20px; letter-spacing:-.01em; }
+  .desc-block{ margin-bottom:20px; }
+  .desc-block:last-child{ margin-bottom:0; }
+  .desc-block .k{ font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; }
+  .desc-block .v{ font-size:13px; color:var(--ink); line-height:1.7; }
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-head">
+    <div class="rail-eyebrow">FLEXG BILLING</div>
+    <div class="rail-title">카드 자동결제 등록<br>화면 프로토타입</div>
+    <div class="rail-sub">화면을 선택하면 가운데 영역에 미리보기가 표시돼요.</div>
+  </div>
+  <ul class="nav-list" id="navList">
+    <li class="nav-item" data-screen="card-input"><div class="num">01</div><div class="tx"><div class="name">카드정보 입력</div><div class="kind">전체 화면</div></div></li>
+    <li class="nav-item" data-screen="otp"><div class="num">02</div><div class="tx"><div class="name">인증번호 확인</div><div class="kind">전체 화면</div></div></li>
+    <li class="nav-item" data-screen="identity"><div class="num">03</div><div class="tx"><div class="name">본인확인</div><div class="kind">전체 화면</div></div></li>
+    <li class="nav-item" data-screen="processing"><div class="num">04</div><div class="tx"><div class="name">처리중</div><div class="kind">팝업</div></div></li>
+    <li class="nav-item" data-screen="success"><div class="num">05</div><div class="tx"><div class="name">등록완료</div><div class="kind">팝업</div></div></li>
+    <li class="nav-item" data-screen="fail"><div class="num">06</div><div class="tx"><div class="name">등록실패</div><div class="kind">팝업</div></div></li>
+    <li class="nav-item" data-screen="card-manage"><div class="num">07</div><div class="tx"><div class="name">카드 관리</div><div class="kind">전체 화면</div></div></li>
+    <li class="nav-item" data-screen="cancel-popup"><div class="num">08</div><div class="tx"><div class="name">해지 확인 팝업</div><div class="kind">팝업</div></div></li>
+  </ul>
+  <div class="rail-foot">
+    <div class="rail-foot-label">개발 연동 없는 화면 프로토타입입니다.<br>버튼 및 입력값은 동작하지 않습니다.</div>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="stage-frame">
+    <div class="browser-mock" id="browserMock">
+      <div class="browser-bar">
+        <div class="browser-dots"><span></span><span></span><span></span></div>
+        <div class="browser-address"><span class="lock">🔒</span><span id="addressText">pay.flexg.co.kr/billing/card/new</span></div>
+      </div>
+      <div class="page-body">
+        <div class="page-content-wrap" id="pageContent">
+
+          <div class="basepage" id="basepage-cardinput">
+            <div class="site-header">
+              <div class="site-logo">FLEX<span>G</span></div>
+              <div class="site-nav"><span>고객센터</span><span>마이페이지</span></div>
+            </div>
+            <div class="breadcrumb">마이페이지<span class="sep">›</span>결제수단 관리<span class="sep">›</span><span class="cur">카드 등록</span></div>
+            <div class="page-content">
+              <div class="page-head">
+                <h1>자동결제 카드 등록</h1>
+                <p>매달 자동으로 결제될 카드를 등록해주세요.</p>
+              </div>
+              <div class="split">
+                <div class="form-col">
+                  <div class="radio-row">
+                    <div class="opt"><div class="dot-on"></div>개인 카드</div>
+                    <div class="opt"><div class="dot-off"></div>법인 카드</div>
+                  </div>
+                  <div class="field"><label>카드번호</label><input type="text" placeholder="0000 - 0000 - 0000 - 0000" disabled></div>
+                  <div class="field"><label>유효기간</label><input type="text" placeholder="MM / YY" disabled></div>
+                  <div class="field"><label>주민등록번호</label><input type="text" placeholder="생년월일 6자리 + ●●●●●●" disabled></div>
+                  <div class="terms-row" id="termsRow" onclick="toggleTerms()">
+                    <div class="box"></div>
+                    <div class="tlabel">[필수] 서비스 이용약관, 개인정보 처리 동의</div>
+                    <div class="chev">▾</div>
+                  </div>
+                  <div class="terms-detail" id="termsDetail">
+                    <div class="inner">
+                      제1조(목적) 이 약관은 플렉스지가 제공하는 카드 자동결제 서비스 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.<br><br>
+                      제2조(개인정보 수집·이용) 카드 자동결제 등록을 위해 카드번호, 유효기간, 주민등록번호 등의 정보를 수집하며, 결제 처리 목적으로만 이용합니다.
+                    </div>
+                  </div>
+                  <button class="btn btn-primary form-btn">다음</button>
+                </div>
+                <div class="preview-col">
+                  <div class="preview-label">카드 미리보기</div>
+                  <div class="card-visual">
+                    <div class="chip"></div>
+                    <div class="num">•••• •••• •••• ••••</div>
+                    <div class="meta"><span>MM / YY</span><span>FLEXG PAY</span></div>
+                  </div>
+                  <p class="preview-note">입력하신 카드 정보는 안전하게 암호화되어 카드사로 전송돼요.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="basepage" id="basepage-otp" hidden>
+            <div class="site-header">
+              <div class="site-logo">FLEX<span>G</span></div>
+              <div class="site-nav"><span>고객센터</span><span>마이페이지</span></div>
+            </div>
+            <div class="breadcrumb">마이페이지<span class="sep">›</span>결제수단 관리<span class="sep">›</span><span class="cur">인증번호 확인</span></div>
+            <div class="page-content narrow">
+              <div class="form-panel">
+                <div class="page-head">
+                  <h1>인증번호를 확인해주세요</h1>
+                  <p>010-••••-5678로 전송된 인증번호 6자리를 입력해주세요.</p>
+                </div>
+                <div class="otp-row">
+                  <div class="otp-box">•</div><div class="otp-box">•</div><div class="otp-box"></div>
+                  <div class="otp-box"></div><div class="otp-box"></div><div class="otp-box"></div>
+                </div>
+                <div class="otp-timer">2:59</div>
+                <div class="resend">문자 다시 받기</div>
+                <button class="btn btn-primary form-btn">확인</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="basepage" id="basepage-identity" hidden>
+            <div class="site-header">
+              <div class="site-logo">FLEX<span>G</span></div>
+              <div class="site-nav"><span>고객센터</span><span>마이페이지</span></div>
+            </div>
+            <div class="breadcrumb">마이페이지<span class="sep">›</span>결제수단 관리<span class="sep">›</span><span class="cur">본인확인</span></div>
+            <div class="page-content narrow">
+              <div class="form-panel">
+                <div class="page-head">
+                  <h1>본인 확인을 위해<br>정보를 확인해주세요</h1>
+                  <p>카드사 실명 확인을 위해 아래 정보가 필요해요.</p>
+                </div>
+                <div class="field"><label>휴대폰번호</label><input type="text" placeholder="010-1234-5678" disabled></div>
+                <div class="field"><label>통신사</label><input type="text" placeholder="SKT" disabled></div>
+                <div class="field"><label>주민등록번호</label><input type="text" placeholder="910101 - ●●●●●●" disabled></div>
+                <div class="field"><label>이름</label><input type="text" placeholder="홍길동" disabled></div>
+                <button class="btn btn-primary form-btn">다음</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="basepage" id="basepage-cardmanage" hidden>
+            <div class="site-header">
+              <div class="site-logo">FLEX<span>G</span></div>
+              <div class="site-nav"><span>고객센터</span><span>마이페이지</span></div>
+            </div>
+            <div class="breadcrumb">마이페이지<span class="sep">›</span><span class="cur">결제수단 관리</span></div>
+            <div class="page-content">
+              <div class="page-head">
+                <h1>결제 카드 관리</h1>
+                <p>자동결제에 사용할 카드를 관리해요.</p>
+              </div>
+              <div class="card-list">
+                <div class="card-row default">
+                  <div class="ci"><div class="mini-chip"></div><div class="info"><div class="n">국민카드 •• 4417</div><div class="d">자동결제 기본 카드</div></div></div>
+                  <div class="default-tag">기본</div>
+                </div>
+                <div class="card-row">
+                  <div class="ci"><div class="mini-chip"></div><div class="info"><div class="n">신한카드 •• 8820</div><div class="d">2026.01 등록</div></div></div>
+                  <div class="kebab">⋮</div>
+                </div>
+                <div class="add-card-btn">+ 카드 추가</div>
+              </div>
+              <button class="btn btn-secondary cancel-billing-btn">자동결제 해지</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="stage-overlay" id="stageOverlay" hidden></div>
+        <div class="modal-layer" id="modalLayer" hidden>
+
+          <div class="modal" id="modal-processing" hidden>
+            <div class="loading-wrap">
+              <div class="spinner"></div>
+              <div class="lt">카드 정보를 확인하고 있어요</div>
+              <div class="ls">잠시만 기다려주세요<br>화면을 벗어나지 마세요</div>
+            </div>
+          </div>
+
+          <div class="modal wide" id="modal-success" hidden>
+            <div class="done-hero">
+              <div class="icon-circle ok">✓</div>
+              <h2>카드 등록이 완료됐어요</h2>
+              <p>다음 결제부터 별도 인증 없이<br>자동으로 결제돼요</p>
+            </div>
+            <div class="done-card">
+              <div class="num">•••• •••• •••• 4417</div>
+              <div class="lbl">국민카드 · 개인</div>
+            </div>
+            <button class="btn btn-primary form-btn" style="margin-top:16px;">확인</button>
+          </div>
+
+          <div class="modal wide" id="modal-fail" hidden>
+            <div class="fail-hero">
+              <div class="icon-circle no">!</div>
+              <h2>카드 등록에 실패했어요</h2>
+              <p>입력하신 카드 정보를<br>다시 확인해주세요</p>
+            </div>
+            <div class="fail-detail">
+              <div class="row"><span>실패 사유</span><b>카드 정보 불일치</b></div>
+              <div class="row"><span>에러 코드</span><b>REJECT_CARD_COMPANY</b></div>
+            </div>
+            <div class="btn-stack">
+              <button class="btn btn-primary">다시 입력하기</button>
+              <button class="btn btn-ghost">다른 카드로 등록</button>
+            </div>
+          </div>
+
+          <div class="modal" id="modal-cancel" hidden>
+            <div class="modal-title">자동결제를 해지할까요?</div>
+            <div class="modal-desc">해지하면 등록된 카드로 더 이상 자동결제되지 않아요. 다음 결제부터는 직접 결제해야 해요.</div>
+            <div class="modal-actions">
+              <button class="btn btn-secondary">취소</button>
+              <button class="btn btn-warn">해지하기</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="desc">
+  <div class="desc-eyebrow" id="descEyebrow">01 · 전체 화면</div>
+  <div class="desc-title" id="descTitle">카드정보 입력</div>
+  <div class="desc-block">
+    <div class="k">목적</div>
+    <div class="v" id="descPurpose"></div>
+  </div>
+  <div class="desc-block">
+    <div class="k">주요 구성요소</div>
+    <div class="v" id="descParts"></div>
+  </div>
+  <div class="desc-block">
+    <div class="k">사용자 액션</div>
+    <div class="v" id="descAction"></div>
+  </div>
+</div>
+
+<script>
+  var SCREENS = {
+    'card-input': {
+      number:'01', label:'카드정보 입력', kind:'전체 화면', base:'cardinput', popup:null,
+      url:'pay.flexg.co.kr/billing/card/new',
+      purpose:'자동결제에 사용할 카드 정보를 최초로 등록받는 화면이에요.',
+      parts:'개인/법인 구분, 카드번호·유효기간·주민등록번호 입력, 펼침형 이용약관 동의, 카드 미리보기 패널로 구성돼요.',
+      action:'정보를 입력하고 약관에 동의한 뒤 다음 단계로 진행해요.'
+    },
+    'otp': {
+      number:'02', label:'인증번호 확인', kind:'전체 화면', base:'otp', popup:null,
+      url:'pay.flexg.co.kr/billing/card/verify-otp',
+      purpose:'입력한 휴대폰 번호로 발송된 인증번호로 카드 소유자 본인 여부를 확인해요.',
+      parts:'6자리 인증번호 입력 박스, 유효시간 타이머, 문자 재전송 영역으로 구성돼요.',
+      action:'수신한 인증번호를 입력해 확인하거나, 미수신 시 재전송을 요청해요.'
+    },
+    'identity': {
+      number:'03', label:'본인확인', kind:'전체 화면', base:'identity', popup:null,
+      url:'pay.flexg.co.kr/billing/card/identity',
+      purpose:'카드사 실명 확인을 위해 본인 정보를 최종 확인하는 화면이에요.',
+      parts:'휴대폰번호·통신사·주민등록번호·이름 입력 필드로 구성돼요.',
+      action:'정보를 확인한 뒤 다음 단계(카드 등록 처리)로 이동해요.'
+    },
+    'processing': {
+      number:'04', label:'처리중', kind:'팝업', base:'identity', popup:'processing',
+      url:'pay.flexg.co.kr/billing/card/identity',
+      purpose:'입력한 카드·본인확인 정보를 카드사에 조회하는 동안 대기 상태를 안내해요.',
+      parts:'로딩 스피너와 처리 안내 문구로 구성된 최소한의 팝업이에요.',
+      action:'별도 액션 없이 처리가 끝날 때까지 대기해요. 화면 이탈은 권장하지 않아요.'
+    },
+    'success': {
+      number:'05', label:'등록완료', kind:'팝업', base:'cardmanage', popup:'success',
+      url:'pay.flexg.co.kr/billing/cards',
+      purpose:'빌링키 발급이 정상적으로 완료됐음을 안내하는 화면이에요.',
+      parts:'완료 아이콘, 안내 문구, 마스킹된 등록 카드 정보 요약, 확인 버튼으로 구성돼요.',
+      action:'확인을 눌러 카드 관리 화면으로 돌아가요.'
+    },
+    'fail': {
+      number:'06', label:'등록실패', kind:'팝업', base:'cardinput', popup:'fail',
+      url:'pay.flexg.co.kr/billing/card/new',
+      purpose:'빌링키 발급이 실패한 사유를 안내하고 재시도를 유도해요.',
+      parts:'실패 아이콘, 실패 사유·에러 코드, 재입력/다른 카드 등록 버튼으로 구성돼요.',
+      action:'카드 정보를 다시 입력하거나 다른 카드로 재시도해요.'
+    },
+    'card-manage': {
+      number:'07', label:'카드 관리', kind:'전체 화면', base:'cardmanage', popup:null,
+      url:'pay.flexg.co.kr/billing/cards',
+      purpose:'등록된 자동결제 카드 목록을 조회하고 관리하는 화면이에요.',
+      parts:'기본 카드 표시가 포함된 카드 리스트, 카드 추가, 자동결제 해지 버튼으로 구성돼요.',
+      action:'카드를 추가하거나 개별 메뉴로 기본 카드를 바꾸고, 자동결제 해지를 요청해요.'
+    },
+    'cancel-popup': {
+      number:'08', label:'해지 확인 팝업', kind:'팝업', base:'cardmanage', popup:'cancel',
+      url:'pay.flexg.co.kr/billing/cards',
+      purpose:'자동결제 해지 전 최종 의사를 다시 확인해 실수 해지를 방지해요.',
+      parts:'해지 시 안내 문구와 취소/해지하기 버튼으로 구성된 확인 팝업이에요.',
+      action:'해지 의사를 최종 확인하거나, 취소를 눌러 카드 관리로 돌아가요.'
+    }
+  };
+
+  var pageContent = document.getElementById('pageContent');
+  var stageOverlay = document.getElementById('stageOverlay');
+  var modalLayer = document.getElementById('modalLayer');
+
+  function selectScreen(key){
+    var s = SCREENS[key];
+    if(!s) return;
+
+    document.querySelectorAll('.nav-item').forEach(function(el){
+      el.classList.toggle('active', el.getAttribute('data-screen') === key);
+    });
+
+    document.querySelectorAll('.basepage').forEach(function(el){
+      el.hidden = el.id !== 'basepage-' + s.base;
+    });
+
+    document.getElementById('addressText').textContent = s.url;
+
+    var hasPopup = !!s.popup;
+    pageContent.classList.toggle('dimmed', hasPopup);
+    stageOverlay.hidden = !hasPopup;
+    modalLayer.hidden = !hasPopup;
+    if(hasPopup){
+      document.querySelectorAll('.modal').forEach(function(el){
+        el.hidden = el.id !== 'modal-' + s.popup;
+      });
+    }
+
+    document.getElementById('descEyebrow').textContent = s.number + ' · ' + s.kind;
+    document.getElementById('descTitle').textContent = s.label;
+    document.getElementById('descPurpose').textContent = s.purpose;
+    document.getElementById('descParts').textContent = s.parts;
+    document.getElementById('descAction').textContent = s.action;
+  }
+
+  document.querySelectorAll('.nav-item').forEach(function(el){
+    el.addEventListener('click', function(){ selectScreen(el.getAttribute('data-screen')); });
+  });
+
+  function toggleTerms(){
+    document.getElementById('termsRow').classList.toggle('open');
+    document.getElementById('termsDetail').classList.toggle('open');
+  }
+
+  selectScreen('card-input');
+</script>
+</body>
+</html>
