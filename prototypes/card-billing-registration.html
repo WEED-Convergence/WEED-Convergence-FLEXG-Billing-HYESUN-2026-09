@@ -269,7 +269,7 @@
     <div class="flexg-popup" id="flexgPopup">
       <div class="popup-titlebar">
         <span class="popup-icon">💳</span>
-        <span id="popupTitle">카드 자동결제 등록</span>
+        <span>카드 자동결제 관리</span>
       </div>
       <div class="popup-underlay" id="popupUnderlay">
         <div class="popup-body" id="pageContent">
@@ -507,13 +507,6 @@
     }
   };
 
-  var POPUP_TITLES = {
-    cardinput:'카드 자동결제 등록',
-    identity:'본인 확인',
-    otp:'인증번호 확인',
-    cardmanage:'카드 자동결제 관리'
-  };
-
   var popupUnderlay = document.getElementById('popupUnderlay');
   var stageOverlay = document.getElementById('stageOverlay');
   var modalLayer = document.getElementById('modalLayer');
@@ -533,8 +526,6 @@
     document.querySelectorAll('.footer-variant').forEach(function(el){
       el.hidden = el.id !== 'footer-' + s.base;
     });
-
-    document.getElementById('popupTitle').textContent = POPUP_TITLES[s.base];
 
     var hasPopup = !!s.popup;
     popupUnderlay.classList.toggle('dimmed', hasPopup);
