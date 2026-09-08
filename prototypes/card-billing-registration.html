@@ -133,13 +133,10 @@
   .page-head h1{ font-size:22px; margin:0 0 6px; letter-spacing:-.01em; }
   .page-head p{ font-size:13.5px; color:var(--ink-soft); margin:0 0 30px; line-height:1.6; }
 
-  .split{ display:flex; gap:44px; }
-  .form-col{ width:520px; flex:0 0 auto; }
-  .preview-col{ flex:1; padding-top:2px; }
   .form-panel{ width:420px; }
 
   .radio-row{ display:flex; gap:22px; margin-bottom:20px; font-size:13.5px; }
-  .radio-row .opt{ display:flex; align-items:center; gap:7px; }
+  .radio-row .opt{ display:flex; align-items:center; gap:7px; cursor:pointer; }
   .dot-on{ width:17px;height:17px;border-radius:50%;background:var(--brand); position:relative; }
   .dot-on::after{ content:"";position:absolute;top:5.5px;left:5.5px;width:6px;height:6px;border-radius:50%;background:#fff; }
   .dot-off{ width:17px;height:17px;border-radius:50%;border:1.5px solid var(--line); }
@@ -173,18 +170,6 @@
   .btn-ghost{ background:#fff; color:var(--brand-dark); border:1px solid var(--brand); }
   .btn-warn{ background:var(--warn); color:#fff; }
   .btn-stack{ display:flex; flex-direction:column; gap:10px; margin-top:22px; }
-
-  .preview-label{ font-size:12px; font-weight:700; color:var(--ink-soft); margin-bottom:12px; }
-  .card-visual{
-    background:linear-gradient(135deg,var(--card-navy),var(--card-navy-2));
-    border-radius:16px; padding:26px 26px 22px; color:#fff;
-    min-height:190px; display:flex; flex-direction:column; justify-content:space-between;
-    box-shadow:0 16px 30px -14px rgba(30,42,69,.55);
-  }
-  .card-visual .chip{ width:34px; height:24px; border-radius:5px; background:linear-gradient(135deg,#D9C68B,#B89B57); }
-  .card-visual .num{ font-size:18px; letter-spacing:2.5px; font-weight:600; margin:20px 0 18px; }
-  .card-visual .meta{ display:flex; justify-content:space-between; font-size:11px; opacity:.75; letter-spacing:.03em; }
-  .preview-note{ font-size:12px; color:var(--ink-faint); margin-top:14px; line-height:1.6; }
 
   .otp-row{ display:flex; gap:10px; margin:4px 0 14px; }
   .otp-box{
@@ -285,7 +270,7 @@
     <li class="nav-item" data-screen="cancel-popup"><div class="num">08</div><div class="tx"><div class="name">해지 확인 팝업</div><div class="kind">팝업</div></div></li>
   </ul>
   <div class="rail-foot">
-    <div class="rail-foot-label">개발 연동 없는 화면 프로토타입입니다.<br>버튼 및 입력값은 동작하지 않습니다.</div>
+    <div class="rail-foot-label">개발 연동 없는 화면 프로토타입입니다.<br>카드정보 입력의 개인/법인 전환, 약관 펼치기 외에는 동작하지 않습니다.</div>
   </div>
 </div>
 
@@ -303,42 +288,38 @@
             <div class="site-header">
               <div class="site-logo">FLEX<span>G</span></div>
             </div>
-            <div class="page-content">
-              <div class="page-head">
-                <h1>자동결제 카드 등록</h1>
-                <p>매달 자동으로 결제될 카드를 등록해주세요.</p>
-              </div>
-              <div class="split">
-                <div class="form-col">
-                  <div class="radio-row">
-                    <div class="opt"><div class="dot-on"></div>개인 카드</div>
-                    <div class="opt"><div class="dot-off"></div>법인 카드</div>
-                  </div>
-                  <div class="field"><label>카드번호</label><input type="text" placeholder="0000 - 0000 - 0000 - 0000" disabled></div>
-                  <div class="field"><label>유효기간</label><input type="text" placeholder="MM / YY" disabled></div>
+            <div class="page-content narrow">
+              <div class="form-panel">
+                <div class="page-head">
+                  <h1>자동결제 카드 등록</h1>
+                  <p>매달 자동으로 결제될 카드를 등록해주세요.</p>
+                </div>
+                <div class="radio-row">
+                  <div class="opt" onclick="selectCardType('personal')"><div class="dot-on" id="dotPersonal"></div>개인 카드</div>
+                  <div class="opt" onclick="selectCardType('corporate')"><div class="dot-off" id="dotCorporate"></div>법인 카드</div>
+                </div>
+                <div class="field"><label>카드번호</label><input type="text" placeholder="0000 - 0000 - 0000 - 0000" disabled></div>
+                <div class="field"><label>유효기간</label><input type="text" placeholder="MM / YY" disabled></div>
+                <div id="personalFields">
                   <div class="field"><label>주민등록번호</label><input type="text" placeholder="생년월일 6자리 + ●●●●●●" disabled></div>
-                  <div class="terms-row" id="termsRow" onclick="toggleTerms()">
-                    <div class="box"></div>
-                    <div class="tlabel">[필수] 서비스 이용약관, 개인정보 처리 동의</div>
-                    <div class="chev">▾</div>
-                  </div>
-                  <div class="terms-detail" id="termsDetail">
-                    <div class="inner">
-                      제1조(목적) 이 약관은 플렉스지가 제공하는 카드 자동결제 서비스 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.<br><br>
-                      제2조(개인정보 수집·이용) 카드 자동결제 등록을 위해 카드번호, 유효기간, 주민등록번호 등의 정보를 수집하며, 결제 처리 목적으로만 이용합니다.
-                    </div>
-                  </div>
-                  <button class="btn btn-primary form-btn">다음</button>
                 </div>
-                <div class="preview-col">
-                  <div class="preview-label">카드 미리보기</div>
-                  <div class="card-visual">
-                    <div class="chip"></div>
-                    <div class="num">•••• •••• •••• ••••</div>
-                    <div class="meta"><span>MM / YY</span><span>FLEXG PAY</span></div>
-                  </div>
-                  <p class="preview-note">입력하신 카드 정보는 안전하게 암호화되어 카드사로 전송돼요.</p>
+                <div id="corporateFields" hidden>
+                  <div class="field"><label>법인(사업자)명</label><input type="text" placeholder="플렉스지 주식회사" disabled></div>
+                  <div class="field"><label>사업자등록번호</label><input type="text" placeholder="000 - 00 - 00000" disabled></div>
+                  <div class="field"><label>대표자 주민등록번호</label><input type="text" placeholder="생년월일 6자리 + ●●●●●●" disabled></div>
                 </div>
+                <div class="terms-row" id="termsRow" onclick="toggleTerms()">
+                  <div class="box"></div>
+                  <div class="tlabel">[필수] 서비스 이용약관, 개인정보 처리 동의</div>
+                  <div class="chev">▾</div>
+                </div>
+                <div class="terms-detail" id="termsDetail">
+                  <div class="inner">
+                    제1조(목적) 이 약관은 플렉스지가 제공하는 카드 자동결제 서비스 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.<br><br>
+                    제2조(개인정보 수집·이용) 카드 자동결제 등록을 위해 카드번호, 유효기간, 주민등록번호 등의 정보를 수집하며, 결제 처리 목적으로만 이용합니다.
+                  </div>
+                </div>
+                <button class="btn btn-primary form-btn">다음</button>
               </div>
             </div>
           </div>
@@ -487,8 +468,8 @@
       number:'01', label:'카드정보 입력', kind:'전체 화면', base:'cardinput', popup:null,
       url:'pay.flexg.co.kr/billing/card/new',
       purpose:'자동결제에 사용할 카드 정보를 최초로 등록받는 화면이에요.',
-      parts:'개인/법인 구분, 카드번호·유효기간·주민등록번호 입력, 펼침형 이용약관 동의, 카드 미리보기 패널로 구성돼요.',
-      action:'정보를 입력하고 약관에 동의한 뒤 다음 단계로 진행해요.'
+      parts:'개인/법인 카드 구분, 카드번호·유효기간·본인확인 정보 입력, 펼침형 이용약관 동의로 구성돼요. 법인 카드 선택 시 사업자등록번호 등 법인 정보 입력란으로 바뀌어요.',
+      action:'카드 종류를 고르고 정보를 입력한 뒤 약관에 동의하고 다음 단계로 진행해요.'
     },
     'identity': {
       number:'02', label:'본인확인', kind:'전체 화면', base:'identity', popup:null,
@@ -581,6 +562,14 @@
   function toggleTerms(){
     document.getElementById('termsRow').classList.toggle('open');
     document.getElementById('termsDetail').classList.toggle('open');
+  }
+
+  function selectCardType(type){
+    var isPersonal = type === 'personal';
+    document.getElementById('dotPersonal').className = isPersonal ? 'dot-on' : 'dot-off';
+    document.getElementById('dotCorporate').className = isPersonal ? 'dot-off' : 'dot-on';
+    document.getElementById('personalFields').hidden = !isPersonal;
+    document.getElementById('corporateFields').hidden = isPersonal;
   }
 
   selectScreen('card-input');
