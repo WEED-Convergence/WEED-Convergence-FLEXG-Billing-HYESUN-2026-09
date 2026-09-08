@@ -242,6 +242,7 @@
     position:absolute; inset:0; z-index:3;
     display:flex; align-items:center; justify-content:center;
   }
+  .modal-layer[hidden]{ display:none; }
   .modal{
     width:400px; background:#fff; border-radius:16px; padding:30px 28px 26px;
     box-shadow:0 24px 48px -12px rgba(15,23,42,.35);
@@ -574,11 +575,9 @@
     pageContent.classList.toggle('dimmed', hasPopup);
     stageOverlay.hidden = !hasPopup;
     modalLayer.hidden = !hasPopup;
-    if(hasPopup){
-      document.querySelectorAll('.modal').forEach(function(el){
-        el.hidden = el.id !== 'modal-' + s.popup;
-      });
-    }
+    document.querySelectorAll('.modal').forEach(function(el){
+      el.hidden = !(hasPopup && el.id === 'modal-' + s.popup);
+    });
 
     document.getElementById('descEyebrow').textContent = s.number + ' · ' + s.kind;
     document.getElementById('descTitle').textContent = s.label;
