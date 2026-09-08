@@ -103,8 +103,9 @@
   }
   .popup-titlebar .popup-icon{ font-size:15px; }
 
-  .popup-underlay{ position:relative; transition:filter .15s ease; }
-  .popup-underlay.dimmed{ filter:blur(5px) brightness(.94); }
+  .popup-underlay{ position:relative; }
+  .popup-dim{ transition:filter .15s ease; }
+  .popup-dim.dimmed{ filter:blur(5px) brightness(.94); }
 
   .popup-body{ min-height:664px; overflow-y:auto; }
   .popup-footer{
@@ -272,6 +273,7 @@
         <span>카드 자동결제 관리</span>
       </div>
       <div class="popup-underlay" id="popupUnderlay">
+        <div class="popup-dim" id="popupDim">
         <div class="popup-body" id="pageContent">
 
           <div class="basepage" id="basepage-cardinput">
@@ -381,6 +383,7 @@
           <div class="footer-variant" id="footer-cardmanage" hidden>
             <button class="btn btn-secondary">닫기</button>
           </div>
+        </div>
         </div>
 
         <div class="stage-overlay" id="stageOverlay" hidden></div>
@@ -507,7 +510,7 @@
     }
   };
 
-  var popupUnderlay = document.getElementById('popupUnderlay');
+  var popupDim = document.getElementById('popupDim');
   var stageOverlay = document.getElementById('stageOverlay');
   var modalLayer = document.getElementById('modalLayer');
 
@@ -528,7 +531,7 @@
     });
 
     var hasPopup = !!s.popup;
-    popupUnderlay.classList.toggle('dimmed', hasPopup);
+    popupDim.classList.toggle('dimmed', hasPopup);
     stageOverlay.hidden = !hasPopup;
     modalLayer.hidden = !hasPopup;
     document.querySelectorAll('.modal').forEach(function(el){
