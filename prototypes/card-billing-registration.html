@@ -458,17 +458,16 @@
   }
 
   .as-intro-hero{
+    position:relative; overflow:hidden;
     background:linear-gradient(135deg,var(--card-navy),var(--card-navy-2)); color:#fff;
     padding:34px 22px 28px; transition:opacity .15s ease;
   }
   .as-intro-hero.off{ opacity:.4; }
-  .as-intro-hero-eyebrow{ font-size:11px; opacity:.7; margin-bottom:8px; }
-  .as-intro-card-badge{
-    display:inline-block; font-size:10.5px; font-weight:700; padding:4px 10px;
-    border-radius:10px; background:rgba(255,255,255,.18); margin-bottom:14px;
-  }
-  .as-intro-card-badge.off{ background:rgba(255,255,255,.1); }
-  .as-intro-card-title{ font-size:19px; font-weight:800; line-height:1.4; }
+  .as-intro-hero-blob-1{ position:absolute; width:140px; height:140px; top:-60px; right:-40px; }
+  .as-intro-hero-blob-2{ position:absolute; width:100px; height:100px; bottom:-50px; left:-30px; }
+  .as-intro-hero-icon{ position:relative; width:38px; height:38px; margin-bottom:12px; display:block; }
+  .as-intro-hero-eyebrow{ position:relative; font-size:11px; opacity:.7; margin-bottom:8px; }
+  .as-intro-card-title{ position:relative; font-size:19px; font-weight:800; line-height:1.4; }
   .as-intro-benefits{ padding:22px 22px 30px; }
   .as-intro-benefits-head{ font-size:13px; font-weight:800; color:var(--ink); margin-bottom:12px; }
   .as-intro-benefit-row{
@@ -478,6 +477,10 @@
   .as-intro-benefit-row:last-child{ border-bottom:none; }
   .as-intro-benefit-row .check{ color:var(--brand); font-weight:800; flex:0 0 auto; }
   #introPreviewHtmlView{ padding:0; }
+  .as-intro-notice{ padding:16px 22px; border-top:8px solid #EEF0F4; background:#fff; }
+  .as-intro-notice-head{ font-size:11.5px; font-weight:800; color:var(--ink-soft); margin-bottom:6px; }
+  .as-intro-notice-body{ font-size:11px; color:var(--ink-soft); line-height:1.7; white-space:pre-line; }
+  .as-intro-notice[hidden]{ display:none; }
 
   .as-intro-consent{ padding:18px 22px 24px; border-top:8px solid #EEF0F4; background:#fff; }
   .as-intro-consent-item{ display:flex; align-items:center; gap:8px; padding:6px 0; font-size:12px; color:var(--ink); }
@@ -1264,6 +1267,7 @@
             <h1>정기멤버십 소개 페이지 및 약관 관리</h1>
             <p class="as-desc">템플릿에 멤버십명·혜택을 채우거나 HTML을 직접 작성해 소개 페이지를 만들어요. 구매자가 멤버십 가입하기를 누르는 시점에 노출되는 정기결제 동의 항목과 유의사항도 함께 관리해요.</p>
 
+            <div class="as-subhead" style="margin-top:0;">소개 페이지</div>
             <div class="as-intro-layout">
               <div class="as-panel as-intro-form">
                 <div class="as-row">
@@ -1296,6 +1300,16 @@
                     <div class="as-field"><textarea class="as-textarea as-intro-html-input" id="introHtmlInput" placeholder="&lt;div&gt;직접 작성한 HTML을 입력하세요&lt;/div&gt;"></textarea></div>
                   </div>
                 </div>
+
+                <div class="as-row" style="align-items:flex-start;">
+                  <div class="as-label">유의사항</div>
+                  <div class="as-field"><textarea class="as-textarea" id="introNoticeInput" style="min-height:90px;">해지 시 환불이 불가능하며 종료 예정일까지 혜택이 유지됩니다.
+결제 수단 정보가 만료되거나 결제에 실패할 경우 혜택이 일시 중단될 수 있습니다.</textarea></div>
+                </div>
+                <div class="as-row">
+                  <div class="as-label">유의사항 노출 여부</div>
+                  <div class="as-field"><div class="as-toggle on" id="introNoticeToggle"><div class="knob"></div></div></div>
+                </div>
               </div>
 
               <div class="as-intro-preview">
@@ -1305,7 +1319,12 @@
                   <div class="as-intro-phone-body">
                     <div id="introPreviewTemplateView">
                       <div class="as-intro-hero" id="introPreviewCard">
-                        <div class="as-intro-card-badge" id="introPreviewBadge">진열 중</div>
+                        <svg class="as-intro-hero-blob-1" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#fff" opacity=".08"/></svg>
+                        <svg class="as-intro-hero-blob-2" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#fff" opacity=".06"/></svg>
+                        <svg class="as-intro-hero-icon" viewBox="0 0 48 48" aria-hidden="true">
+                          <path d="M24 4l4.5 9.6L39 15l-7.5 7.2L33.5 33 24 27.6 14.5 33l2-10.8L9 15l10.5-1.4L24 4z" fill="#FFD873"/>
+                          <circle cx="24" cy="24" r="22.5" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="1.5"/>
+                        </svg>
                         <div class="as-intro-hero-eyebrow">정기멤버십</div>
                         <div class="as-intro-card-title" id="introPreviewTitle">FLEXG 프리미엄 멤버십</div>
                       </div>
@@ -1315,6 +1334,11 @@
                       </div>
                     </div>
                     <div id="introPreviewHtmlView" hidden></div>
+
+                    <div class="as-intro-notice" id="introPreviewNotice">
+                      <div class="as-intro-notice-head">유의사항</div>
+                      <div class="as-intro-notice-body" id="introPreviewNoticeBody"></div>
+                    </div>
 
                     <div class="as-intro-consent">
                       <div class="as-intro-consent-item"><span class="check">✓</span><span class="label">개인정보 수집 이용 및 처리 동의</span><span class="view">보기</span></div>
@@ -1346,18 +1370,6 @@
 제2조(정기결제) 정기멤버십은 등록된 결제수단(빌링키)으로 매월 자동 결제되며, 결제일은 최초 가입일을 기준으로 합니다.
 
 제3조(해지) 회원은 언제든지 정기멤버십을 해지할 수 있으며, 해지 시 다음 결제부터 청구되지 않습니다.</textarea></div>
-              </div>
-            </div>
-
-            <div class="as-panel" style="max-width:640px;">
-              <div class="as-row" style="align-items:flex-start;">
-                <div class="as-label">유의사항</div>
-                <div class="as-field"><textarea class="as-textarea" disabled>해지 시 환불이 불가능하며 종료 예정일까지 혜택이 유지됩니다.
-결제 수단 정보가 만료되거나 결제에 실패할 경우 혜택이 일시 중단될 수 있습니다.</textarea></div>
-              </div>
-              <div class="as-row">
-                <div class="as-label">유의사항 노출 여부</div>
-                <div class="as-field"><div class="as-toggle on"><div class="knob"></div></div></div>
               </div>
             </div>
 
@@ -1745,11 +1757,13 @@
   var introNameInput = document.getElementById('introNameInput');
   var introBenefitInput = document.getElementById('introBenefitInput');
   var introHtmlInput = document.getElementById('introHtmlInput');
+  var introNoticeInput = document.getElementById('introNoticeInput');
+  var introNoticeToggle = document.getElementById('introNoticeToggle');
   var introToggle = document.getElementById('introToggle');
   var introPreviewTitle = document.getElementById('introPreviewTitle');
   var introPreviewList = document.getElementById('introPreviewList');
-  var introPreviewCard = document.getElementById('introPreviewCard');
-  var introPreviewBadge = document.getElementById('introPreviewBadge');
+  var introPreviewNotice = document.getElementById('introPreviewNotice');
+  var introPreviewNoticeBody = document.getElementById('introPreviewNoticeBody');
   var introPhone = document.getElementById('introPhone');
   var introPreviewTemplateView = document.getElementById('introPreviewTemplateView');
   var introPreviewHtmlView = document.getElementById('introPreviewHtmlView');
@@ -1792,8 +1806,18 @@
       introToggle.classList.toggle('on');
       var isOn = introToggle.classList.contains('on');
       introPhone.classList.toggle('off', !isOn);
-      introPreviewBadge.classList.toggle('off', !isOn);
-      introPreviewBadge.textContent = isOn ? '진열 중' : '진열 OFF';
+    });
+  }
+  if(introNoticeInput){
+    introNoticeInput.addEventListener('input', function(){
+      introPreviewNoticeBody.textContent = introNoticeInput.value;
+    });
+    introPreviewNoticeBody.textContent = introNoticeInput.value;
+  }
+  if(introNoticeToggle){
+    introNoticeToggle.addEventListener('click', function(){
+      introNoticeToggle.classList.toggle('on');
+      introPreviewNotice.hidden = !introNoticeToggle.classList.contains('on');
     });
   }
 
