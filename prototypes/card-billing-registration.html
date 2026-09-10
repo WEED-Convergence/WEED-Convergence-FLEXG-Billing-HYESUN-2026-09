@@ -1166,9 +1166,38 @@
             <p class="as-desc">상품별로 적용할 멤버십 종류와 전용가를 설정합니다.</p>
 
             <div class="as-panel" style="max-width:none; margin-bottom:22px;">
-              <div class="as-field-group" style="max-width:420px;">
-                <div class="as-label">상품 검색</div>
-                <div class="as-field"><input class="as-input" type="text" id="productListSearchInput" placeholder="상품명 또는 상품코드로 검색"></div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">상품 검색</div>
+                  <div class="as-field"><input class="as-input" type="text" id="productListSearchInput" placeholder="상품명 또는 상품코드로 검색"></div>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">멤버십 전용 여부</div>
+                  <select class="as-input" disabled>
+                    <option>전체</option>
+                    <option>멤버십 전용</option>
+                    <option>공통판매</option>
+                  </select>
+                </div>
+              </div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">적용 멤버십</div>
+                  <select class="as-input" disabled>
+                    <option>전체</option>
+                    <option>멤버십 1</option>
+                    <option>멤버십 2</option>
+                    <option>멤버십 3</option>
+                  </select>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">등록일</div>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <input class="as-input" type="text" placeholder="2026-01-01" disabled style="max-width:130px;">
+                    <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                    <input class="as-input" type="text" placeholder="2026-09-10" disabled style="max-width:130px;">
+                  </div>
+                </div>
               </div>
               <div class="as-actions center">
                 <button class="as-btn as-btn-secondary" id="productListResetBtn">초기화</button>
@@ -1181,7 +1210,7 @@
             </div>
             <div class="as-warn-box">· "멤버십 전용"으로 설정한 상품은 비회원이 shop에서 클릭하면 "멤버십 가입 후 구매 가능한 전용 상품입니다" 안내 팝업과 함께 멤버십 가입하기로 유도됩니다.</div>
             <div style="display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-bottom:12px;">
-              <button class="as-btn as-btn-secondary as-btn-sm" id="productSearchBtn">상품 불러오기</button>
+              <button class="as-btn as-btn-primary as-btn-sm" id="productSearchBtn">상품 불러오기</button>
               <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
               <select class="as-input as-btn-sm" style="padding:6px 10px;" disabled>
                 <option>10개씩 보기</option>
@@ -1199,7 +1228,7 @@
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
                     <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 29,000원</span><span class="as-mem-badge">멤버십 2 · 25,000원</span></td>
                     <td>2026.02.10</td><td>128건</td>
-                    <td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
+                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 데일리 케어 3종" data-code="FXG-1002">
                     <td>2</td><td><div class="as-thumb">🧴</div></td><td>FXG-1002</td>
@@ -1207,7 +1236,7 @@
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
                     <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 18,900원</span></td>
                     <td>2026.02.10</td><td>96건</td>
-                    <td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
+                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 리필 파우치" data-code="FXG-1003">
                     <td>3</td><td><div class="as-thumb">🧴</div></td><td>FXG-1003</td>
@@ -1215,7 +1244,7 @@
                     <td><div class="as-toggle as-sale-type-toggle on"><div class="knob"></div></div></td>
                     <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 9,900원</span><span class="as-mem-badge">멤버십 2 · 8,900원</span><span class="as-mem-badge">멤버십 3 · 7,900원</span></td>
                     <td>2026.03.02</td><td>214건</td>
-                    <td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
+                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 기획 선물세트" data-code="FXG-1004">
                     <td>4</td><td><div class="as-thumb">🎁</div></td><td>FXG-1004</td>
@@ -1223,7 +1252,7 @@
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
                     <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 45,000원</span></td>
                     <td>2026.03.15</td><td>41건</td>
-                    <td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
+                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 핸드크림" data-code="FXG-1005">
                     <td>5</td><td><div class="as-thumb">🧴</div></td><td>FXG-1005</td>
@@ -1231,7 +1260,7 @@
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
                     <td class="as-mem-badges"><span class="as-mem-badge">멤버십 2 · 5,900원</span></td>
                     <td>2026.04.01</td><td>67건</td>
-                    <td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
+                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 바디워시 500ml" data-code="FXG-1006">
                     <td>6</td><td><div class="as-thumb">🧴</div></td><td>FXG-1006</td>
@@ -1239,7 +1268,7 @@
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
                     <td class="as-mem-badges"><span class="as-mem-badge">멤버십 2 · 11,500원</span></td>
                     <td>2026.04.01</td><td>88건</td>
-                    <td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
+                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 헤어 트리트먼트" data-code="FXG-1007">
                     <td>7</td><td><div class="as-thumb">🧴</div></td><td>FXG-1007</td>
@@ -1247,7 +1276,7 @@
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
                     <td class="as-mem-badges"><span class="as-mem-badge">멤버십 2 · 16,900원</span></td>
                     <td>2026.05.20</td><td>33건</td>
-                    <td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
+                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr id="productListNoResults" hidden><td colspan="10" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>
                 </tbody>
@@ -1258,10 +1287,6 @@
               <div class="as-page-btn">‹</div>
               <div class="as-page-btn active">1</div>
               <div class="as-page-btn">›</div>
-            </div>
-
-            <div class="as-actions right" style="margin-top:14px;">
-              <button class="as-btn as-btn-primary">저장</button>
             </div>
           </section>
 
@@ -2083,7 +2108,7 @@
       '<td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>' +
       '<td class="as-mem-badges"></td>' +
       '<td>2026.09.10</td><td>0건</td>' +
-      '<td><button class="as-btn as-btn-secondary as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>';
+      '<td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>';
     if(productListNoResults){
       productTableBody.insertBefore(tr, productListNoResults);
     } else {
