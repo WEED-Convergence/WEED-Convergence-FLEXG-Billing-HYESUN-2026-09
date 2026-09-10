@@ -18,11 +18,13 @@
     --warn-tint:#FBE9E3;
     --card-navy:#1E2A45;
     --card-navy-2:#2C3B5C;
-    --rail-bg:#141D30;
-    --rail-bg-2:#1B2740;
-    --rail-line:#28324A;
-    --rail-text:#C7CEDE;
-    --rail-text-soft:#7E88A3;
+    --rail-bg:#FFE9E0;
+    --rail-bg-2:#FFD9E8;
+    --rail-line:rgba(21,34,56,.08);
+    --rail-text:#152238;
+    --rail-text-soft:#7A6B7A;
+    --rail-accent-2:#8B5CF6;
+    --rail-accent-2-tint:rgba(139,92,246,.14);
     --stage-bg:#E7EBF2;
   }
   *{box-sizing:border-box;}
@@ -40,17 +42,19 @@
   /* ============ LEFT: INDEX RAIL ============ */
   .rail{
     flex:0 0 264px;
-    background:linear-gradient(180deg,var(--rail-bg),var(--rail-bg-2));
+    background:linear-gradient(160deg,var(--rail-bg),var(--rail-bg-2));
     display:flex;
     flex-direction:column;
     padding:28px 0 20px;
   }
-  .rail-head{ padding:0 24px 22px; border-bottom:1px solid var(--rail-line); margin-bottom:14px; }
-  .rail-eyebrow{ font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--brand); text-transform:uppercase; margin-bottom:6px; }
-  .rail-title{ font-size:16px; font-weight:700; color:#fff; line-height:1.4; }
-  .rail-sub{ font-size:12px; color:var(--rail-text-soft); margin-top:6px; line-height:1.5; }
 
   .nav-list{ list-style:none; margin:0; padding:6px 14px; display:flex; flex-direction:column; gap:3px; flex:1; overflow-y:auto; }
+  .nav-section-label{
+    font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--brand-dark); padding:14px 12px 6px;
+  }
+  .nav-section-label:first-child{ padding-top:6px; }
+  .nav-section-label.alt{ color:var(--rail-accent-2); }
   .nav-item{
     display:flex; align-items:center; gap:12px;
     padding:11px 12px; border-radius:9px;
@@ -59,7 +63,7 @@
   }
   .nav-item .num{
     flex:0 0 auto; width:24px; height:24px; border-radius:7px;
-    background:rgba(255,255,255,.06); color:var(--rail-text-soft);
+    background:rgba(21,34,56,.06); color:var(--rail-text-soft);
     font-size:11px; font-weight:700;
     display:flex; align-items:center; justify-content:center;
     font-variant-numeric:tabular-nums;
@@ -68,11 +72,18 @@
   .nav-item .name{ font-size:13.5px; font-weight:600; color:var(--rail-text); line-height:1.3; }
   .nav-item .kind{ font-size:10.5px; color:var(--rail-text-soft); margin-top:2px; }
   .nav-item.active{
-    background:rgba(15,158,142,.16);
+    background:rgba(15,158,142,.18);
     border-left-color:var(--brand);
   }
   .nav-item.active .num{ background:var(--brand); color:#fff; }
-  .nav-item.active .name{ color:#fff; }
+  .nav-item.active .name{ color:var(--brand-dark); }
+
+  .nav-item.disabled{ cursor:default; opacity:.75; }
+  .nav-item.disabled .num{ background:var(--rail-accent-2-tint); color:var(--rail-accent-2); font-size:14px; }
+  .nav-item.disabled .kind{
+    display:inline-block; margin-top:4px; padding:2px 7px; border-radius:9px;
+    background:var(--rail-accent-2-tint); color:var(--rail-accent-2); font-weight:700;
+  }
 
   .rail-foot{ padding:16px 24px 0; border-top:1px solid var(--rail-line); margin-top:10px; }
   .rail-foot-label{ font-size:10.5px; color:var(--rail-text-soft); line-height:1.6; }
@@ -245,12 +256,8 @@
 <body>
 
 <div class="rail">
-  <div class="rail-head">
-    <div class="rail-eyebrow">FLEXG BILLING</div>
-    <div class="rail-title">카드 자동결제 등록<br>화면 프로토타입</div>
-    <div class="rail-sub">화면을 선택하면 가운데 영역에 미리보기가 표시돼요.</div>
-  </div>
   <ul class="nav-list" id="navList">
+    <li class="nav-section-label">자동결제</li>
     <li class="nav-item" data-screen="card-input"><div class="num">01</div><div class="tx"><div class="name">카드정보 입력</div><div class="kind">전체 화면</div></div></li>
     <li class="nav-item" data-screen="identity"><div class="num">02</div><div class="tx"><div class="name">본인확인</div><div class="kind">전체 화면</div></div></li>
     <li class="nav-item" data-screen="otp"><div class="num">03</div><div class="tx"><div class="name">인증번호 확인</div><div class="kind">전체 화면</div></div></li>
@@ -259,6 +266,9 @@
     <li class="nav-item" data-screen="fail"><div class="num">06</div><div class="tx"><div class="name">등록실패</div><div class="kind">팝업</div></div></li>
     <li class="nav-item" data-screen="card-manage"><div class="num">07</div><div class="tx"><div class="name">카드 관리</div><div class="kind">전체 화면</div></div></li>
     <li class="nav-item" data-screen="cancel-popup"><div class="num">08</div><div class="tx"><div class="name">해지 확인 팝업</div><div class="kind">팝업</div></div></li>
+
+    <li class="nav-section-label alt">정기멤버십</li>
+    <li class="nav-item disabled"><div class="num">＋</div><div class="tx"><div class="name">정기멤버십</div><div class="kind">기획중</div></div></li>
   </ul>
   <div class="rail-foot">
     <div class="rail-foot-label">개발 연동 없는 화면 프로토타입입니다.<br>카드정보 입력의 개인/법인 전환, 약관 펼치기 외에는 동작하지 않습니다.</div>
