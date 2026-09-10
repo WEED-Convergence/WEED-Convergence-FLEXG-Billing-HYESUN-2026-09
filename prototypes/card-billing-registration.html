@@ -312,10 +312,10 @@
   .as-content h1{ font-size:18px; margin:0 0 5px; letter-spacing:-.01em; color:var(--ink); }
   .as-content .as-desc{ font-size:12px; color:var(--ink-soft); margin:0 0 20px; }
 
-  .as-tabs{ display:flex; align-items:center; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
-  .as-tab{ display:flex; align-items:center; gap:8px; padding:9px 12px 9px 16px; border-radius:8px 8px 0 0; font-size:12.5px; font-weight:700; color:var(--ink-soft); background:#EDEFF3; cursor:pointer; }
-  .as-tab.active{ background:#fff; color:var(--brand-dark); border:1px solid var(--line); border-bottom:2px solid var(--brand); margin-bottom:-1px; }
-  .as-tab[hidden]{ display:none; }
+  .as-tabs, .as-ptabs{ display:flex; align-items:center; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
+  .as-tab, .as-ptab{ display:flex; align-items:center; gap:8px; padding:9px 12px 9px 16px; border-radius:8px 8px 0 0; font-size:12.5px; font-weight:700; color:var(--ink-soft); background:#EDEFF3; cursor:pointer; }
+  .as-tab.active, .as-ptab.active{ background:#fff; color:var(--brand-dark); border:1px solid var(--line); border-bottom:2px solid var(--brand); margin-bottom:-1px; }
+  .as-tab[hidden], .as-ptab[hidden]{ display:none; }
   .as-tab-del{
     display:flex; align-items:center; justify-content:center;
     width:16px; height:16px; border-radius:50%; font-size:12px; font-weight:700;
@@ -1085,22 +1085,71 @@
 
           <section class="admin-screen" id="adminscreen-products" hidden>
             <h1>정기멤버십 전용 상품 관리</h1>
-            <p class="as-desc">정기멤버십 가입자에게만 제공되는 전용가 상품을 관리합니다.</p>
-            <div class="as-search-row">
-              <input class="as-input" type="text" id="productSearchInput" placeholder="상품명으로 검색">
-              <button class="as-btn as-btn-secondary" id="productSearchBtn">상품 불러오기</button>
+            <p class="as-desc">멤버십별로 정기멤버십 가입자에게만 제공되는 전용가 상품을 관리합니다.</p>
+
+            <div class="as-ptabs" id="productMemTabs">
+              <div class="as-ptab active" data-mem="1"><span class="as-tab-label">멤버십 1</span></div>
+              <div class="as-ptab" data-mem="2"><span class="as-tab-label">멤버십 2</span></div>
+              <div class="as-ptab" data-mem="3"><span class="as-tab-label">멤버십 3</span></div>
             </div>
-            <table class="as-table" id="productTable">
-              <thead><tr><th>상품명</th><th>정가</th><th>멤버십 전용가</th></tr></thead>
-              <tbody id="productTableBody">
-                <tr data-product="플렉스지 프리미엄 세트"><td>플렉스지 프리미엄 세트</td><td>39,000원</td><td><input class="as-input" type="text" placeholder="29,000" disabled></td></tr>
-                <tr data-product="플렉스지 데일리 케어 3종"><td>플렉스지 데일리 케어 3종</td><td>24,000원</td><td><input class="as-input" type="text" placeholder="18,900" disabled></td></tr>
-                <tr data-product="플렉스지 리필 파우치"><td>플렉스지 리필 파우치</td><td>12,000원</td><td><input class="as-input" type="text" placeholder="9,900" disabled></td></tr>
-                <tr data-product="플렉스지 기획 선물세트"><td>플렉스지 기획 선물세트</td><td>58,000원</td><td><input class="as-input" type="text" placeholder="45,000" disabled></td></tr>
-              </tbody>
-            </table>
-            <div class="as-actions right" style="margin-top:14px;">
-              <button class="as-btn as-btn-primary">저장</button>
+
+            <div class="as-pmem-panel" data-mem="1">
+              <div class="as-search-row">
+                <input class="as-input as-product-search" type="text" placeholder="상품명으로 검색">
+                <button class="as-btn as-btn-secondary as-product-load-btn" data-mem="1">상품 불러오기</button>
+              </div>
+              <div class="as-table-wrap">
+                <table class="as-table" style="min-width:680px;">
+                  <thead><tr><th>상품명</th><th>정가</th><th>멤버십 전용가</th><th>등록일</th><th>주문건수</th></tr></thead>
+                  <tbody id="productTableBody-1">
+                    <tr data-product="플렉스지 프리미엄 세트"><td>플렉스지 프리미엄 세트</td><td>39,000원</td><td><input class="as-input" type="text" placeholder="29,000" disabled></td><td>2026.02.10</td><td>128건</td></tr>
+                    <tr data-product="플렉스지 데일리 케어 3종"><td>플렉스지 데일리 케어 3종</td><td>24,000원</td><td><input class="as-input" type="text" placeholder="18,900" disabled></td><td>2026.02.10</td><td>96건</td></tr>
+                    <tr data-product="플렉스지 리필 파우치"><td>플렉스지 리필 파우치</td><td>12,000원</td><td><input class="as-input" type="text" placeholder="9,900" disabled></td><td>2026.03.02</td><td>214건</td></tr>
+                    <tr data-product="플렉스지 기획 선물세트"><td>플렉스지 기획 선물세트</td><td>58,000원</td><td><input class="as-input" type="text" placeholder="45,000" disabled></td><td>2026.03.15</td><td>41건</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="as-actions right" style="margin-top:14px;">
+                <button class="as-btn as-btn-primary">저장</button>
+              </div>
+            </div>
+
+            <div class="as-pmem-panel" data-mem="2" hidden>
+              <div class="as-search-row">
+                <input class="as-input as-product-search" type="text" placeholder="상품명으로 검색">
+                <button class="as-btn as-btn-secondary as-product-load-btn" data-mem="2">상품 불러오기</button>
+              </div>
+              <div class="as-table-wrap">
+                <table class="as-table" style="min-width:680px;">
+                  <thead><tr><th>상품명</th><th>정가</th><th>멤버십 전용가</th><th>등록일</th><th>주문건수</th></tr></thead>
+                  <tbody id="productTableBody-2">
+                    <tr data-product="플렉스지 핸드크림"><td>플렉스지 핸드크림</td><td>8,000원</td><td><input class="as-input" type="text" placeholder="5,900" disabled></td><td>2026.04.01</td><td>67건</td></tr>
+                    <tr data-product="플렉스지 바디워시 500ml"><td>플렉스지 바디워시 500ml</td><td>15,000원</td><td><input class="as-input" type="text" placeholder="11,500" disabled></td><td>2026.04.01</td><td>88건</td></tr>
+                    <tr data-product="플렉스지 헤어 트리트먼트"><td>플렉스지 헤어 트리트먼트</td><td>21,000원</td><td><input class="as-input" type="text" placeholder="16,900" disabled></td><td>2026.05.20</td><td>33건</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="as-actions right" style="margin-top:14px;">
+                <button class="as-btn as-btn-primary">저장</button>
+              </div>
+            </div>
+
+            <div class="as-pmem-panel" data-mem="3" hidden>
+              <div class="as-search-row">
+                <input class="as-input as-product-search" type="text" placeholder="상품명으로 검색">
+                <button class="as-btn as-btn-secondary as-product-load-btn" data-mem="3">상품 불러오기</button>
+              </div>
+              <div class="as-table-wrap">
+                <table class="as-table" style="min-width:680px;">
+                  <thead><tr><th>상품명</th><th>정가</th><th>멤버십 전용가</th><th>등록일</th><th>주문건수</th></tr></thead>
+                  <tbody id="productTableBody-3">
+                    <tr><td colspan="5" style="text-align:center;color:var(--ink-soft);">등록된 전용 상품이 없습니다. 상품 불러오기로 추가해 주세요.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="as-actions right" style="margin-top:14px;">
+                <button class="as-btn as-btn-primary">저장</button>
+              </div>
             </div>
           </section>
 
@@ -1541,9 +1590,9 @@
     },
     'membership-products': {
       number:'10', label:'정기멤버십 전용 상품 관리', kind:'어드민 화면', admin:'products',
-      purpose:'쇼핑몰에 등록된 상품을 불러와 정기멤버십 가입자에게만 제공되는 전용가 상품을 지정하는 관리자 화면이에요.',
-      parts:'상품명 검색창과 상품 불러오기 버튼, 상품명·정가·멤버십 전용가로 구성된 상품 리스트로 이루어져요. 상품 불러오기 버튼을 누르면 쇼핑몰 상품 목록에서 검색·추가할 수 있는 팝업이 떠요.',
-      action:'상품명을 검색하고 상품 불러오기를 눌러 팝업에서 상품을 추가해요. 이미 추가된 상품은 "담김"으로 표시돼요. 추가된 상품마다 전용가를 입력하고 저장해요.'
+      purpose:'멤버십별로 쇼핑몰에 등록된 상품을 불러와 정기멤버십 가입자에게만 제공되는 전용가 상품을 지정하는 관리자 화면이에요.',
+      parts:'멤버십 1/2/3 탭으로 구분되며, 각 탭 안에 상품명 검색창과 상품 불러오기 버튼, 상품명·정가·멤버십 전용가·등록일·주문건수로 구성된 상품 리스트가 있어요. 상품 불러오기 버튼을 누르면 쇼핑몰 상품 목록에서 검색·추가할 수 있는 팝업이 떠요.',
+      action:'멤버십 탭을 선택하고, 상품명을 검색해 상품 불러오기를 눌러 팝업에서 상품을 추가해요. 이미 추가된 상품은 "담김"으로 표시돼요. 추가된 상품마다 전용가를 입력하고 저장해요.'
     },
     'membership-subscribers': {
       number:'11', label:'정기멤버십 가입자 관리', kind:'어드민 화면', admin:'subscribers',
@@ -1734,27 +1783,42 @@
     { name:'플렉스지 헤어 트리트먼트', price:'21,000원' }
   ];
 
-  var productSearchInput = document.getElementById('productSearchInput');
-  var productSearchBtn = document.getElementById('productSearchBtn');
-  var productTableBody = document.getElementById('productTableBody');
   var asProductModalOverlay = document.getElementById('asProductModalOverlay');
   var asProductModalClose = document.getElementById('asProductModalClose');
   var productCatalogBody = document.getElementById('productCatalogBody');
+  var currentProductTableBody = null;
+  var currentProductSearchInput = null;
+
+  function selectProductMemTab(mem){
+    document.querySelectorAll('.as-ptab[data-mem]').forEach(function(t){
+      t.classList.toggle('active', t.getAttribute('data-mem') === mem);
+    });
+    document.querySelectorAll('.as-pmem-panel').forEach(function(p){
+      p.hidden = p.getAttribute('data-mem') !== mem;
+    });
+  }
+  document.querySelectorAll('.as-ptab[data-mem]').forEach(function(el){
+    el.addEventListener('click', function(){ selectProductMemTab(el.getAttribute('data-mem')); });
+  });
 
   function isProductAdded(name){
-    return !!productTableBody.querySelector('tr[data-product="' + name + '"]');
+    return !!(currentProductTableBody && currentProductTableBody.querySelector('tr[data-product="' + name + '"]'));
   }
 
   function addProductRow(product){
+    if(!currentProductTableBody) return;
+    var emptyRow = currentProductTableBody.querySelector('td[colspan]');
+    if(emptyRow) emptyRow.parentElement.remove();
     var tr = document.createElement('tr');
     tr.setAttribute('data-product', product.name);
     tr.innerHTML = '<td>' + product.name + '</td><td>' + product.price + '</td>' +
-      '<td><input class="as-input" type="text" placeholder="전용가 입력" disabled></td>';
-    productTableBody.appendChild(tr);
+      '<td><input class="as-input" type="text" placeholder="전용가 입력" disabled></td>' +
+      '<td>2026.09.10</td><td>0건</td>';
+    currentProductTableBody.appendChild(tr);
   }
 
   function renderProductCatalog(){
-    var keyword = productSearchInput.value.trim();
+    var keyword = currentProductSearchInput ? currentProductSearchInput.value.trim() : '';
     var list = keyword
       ? PRODUCT_CATALOG.filter(function(p){ return p.name.indexOf(keyword) !== -1; })
       : PRODUCT_CATALOG;
@@ -1779,12 +1843,15 @@
     });
   }
 
-  if(productSearchBtn){
-    productSearchBtn.addEventListener('click', function(){
+  document.querySelectorAll('.as-product-load-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var panel = btn.closest('.as-pmem-panel');
+      currentProductTableBody = document.getElementById('productTableBody-' + btn.getAttribute('data-mem'));
+      currentProductSearchInput = panel ? panel.querySelector('.as-product-search') : null;
       renderProductCatalog();
       asProductModalOverlay.hidden = false;
     });
-  }
+  });
   if(asProductModalClose){
     asProductModalClose.addEventListener('click', function(){ asProductModalOverlay.hidden = true; });
   }
