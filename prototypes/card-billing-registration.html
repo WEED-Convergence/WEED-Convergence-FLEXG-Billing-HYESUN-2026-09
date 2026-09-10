@@ -414,6 +414,8 @@
   .as-status.pending{ background:#FFF4E0; color:#B4700B; }
   .as-status.failed{ background:#FBE9E3; color:#D8532B; }
 
+  .as-stat-group-label{ font-size:12.5px; font-weight:800; color:var(--ink); margin-bottom:10px; }
+  .as-stat-group-label .hint{ font-size:11px; font-weight:600; color:var(--ink-faint); margin-left:4px; }
   .as-stat-row{ display:flex; gap:14px; margin-bottom:26px; flex-wrap:wrap; }
   .as-stat-card{
     position:relative; background:#fff; border:1px solid var(--line); border-radius:12px;
@@ -1289,31 +1291,31 @@
               </div>
             </div>
 
-            <div class="as-stat-row">
+            <div class="as-stat-group-label">전체 현황 <span class="hint">(조회 조건과 무관하게 항상 전체 값)</span></div>
+            <div class="as-stat-row" style="margin-bottom:20px;">
               <div class="as-stat-card">
                 <div class="as-stat-icon">👥</div>
                 <div class="as-stat-label">전체 가입자 수</div>
                 <div class="as-stat-value">1,284<span class="unit">명</span></div>
               </div>
               <div class="as-stat-card">
+                <div class="as-stat-icon">🧾</div>
+                <div class="as-stat-label">정기멤버십 누적 주문 건수</div>
+                <div class="as-stat-value">3,842<span class="unit">건</span></div>
+              </div>
+            </div>
+
+            <div class="as-stat-group-label">선택 기간 현황 <span class="hint">(위 조회 기간·멤버십 조건 적용)</span></div>
+            <div class="as-stat-row">
+              <div class="as-stat-card">
                 <div class="as-stat-icon">✨</div>
-                <div class="as-stat-label">이번 달 신규 가입자 수</div>
+                <div class="as-stat-label">신규 가입자 수</div>
                 <div class="as-stat-value">96<span class="unit">명</span></div>
               </div>
               <div class="as-stat-card risk">
                 <div class="as-stat-icon">⚠️</div>
-                <div class="as-stat-label">이번 달 해지자 수</div>
+                <div class="as-stat-label">해지자 수</div>
                 <div class="as-stat-value">21<span class="unit">명</span></div>
-              </div>
-              <div class="as-stat-card">
-                <div class="as-stat-icon">💰</div>
-                <div class="as-stat-label">이번 달 멤버십 매출</div>
-                <div class="as-stat-value">12,730,400<span class="unit">원</span></div>
-              </div>
-              <div class="as-stat-card">
-                <div class="as-stat-icon">🧾</div>
-                <div class="as-stat-label">정기멤버십 누적 주문 건수</div>
-                <div class="as-stat-value">3,842<span class="unit">건</span></div>
               </div>
               <div class="as-stat-card risk">
                 <div class="as-stat-icon">📉</div>
@@ -1321,8 +1323,13 @@
                 <div class="as-stat-value">1.6<span class="unit">%</span></div>
               </div>
               <div class="as-stat-card">
+                <div class="as-stat-icon">💰</div>
+                <div class="as-stat-label">멤버십 매출</div>
+                <div class="as-stat-value">12,730,400<span class="unit">원</span></div>
+              </div>
+              <div class="as-stat-card">
                 <div class="as-stat-icon">🛒</div>
-                <div class="as-stat-label">정기멤버십 평균 결제금액(객단가)</div>
+                <div class="as-stat-label">평균 결제금액(객단가)</div>
                 <div class="as-stat-value">14,200<span class="unit">원</span></div>
               </div>
               <div class="as-stat-card risk">
@@ -1685,7 +1692,7 @@
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
       purpose:'조회 조건을 지정해 정기멤버십 가입자·주문·매출 현황을 멤버십별로 구체적으로 확인하고, 신규가입·해지 회원 목록까지 바로 조회할 수 있는 통계 화면이에요.',
-      parts:'상단 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건과 조회/초기화 버튼, 전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출·정기멤버십 누적 주문 건수·해지율·평균 결제금액(객단가)·결제 실패율 요약 카드(위험 지표는 강조 색으로 구분)가 있어요. 그 아래 전용 상품 판매 순위 테이블이 있고, 월별·일별 가입자 추이 테이블에는 멤버십 컬럼과 각 테이블 전용 멤버십 선택 셀렉트가 있어요. 신규가입·해지 수치는 링크로 표시되어 클릭하면 회원 이름·아이디로 검색 가능한 회원 목록 팝업이 떠요.',
+      parts:'상단 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건과 조회/초기화 버튼이 있어요. 요약 카드는 "전체 현황"(전체 가입자 수·누적 주문 건수, 조회 조건과 무관)과 "선택 기간 현황"(신규 가입자·해지자·해지율·매출·객단가·결제 실패율, 조회 조건에 반응)으로 구분돼요. 위험 지표는 강조 색으로 표시돼요. 그 아래 전용 상품 판매 순위 테이블이 있고, 월별·일별 가입자 추이 테이블에는 멤버십 컬럼과 각 테이블 전용 멤버십 선택 셀렉트가 있어요. 신규가입·해지 수치는 링크로 표시되어 클릭하면 회원 이름·아이디로 검색 가능한 회원 목록 팝업이 떠요.',
       action:'조회 기간과 멤버십을 선택해 조회하고, 신규가입·해지 숫자를 클릭해 해당 회원 목록을 확인해요. 팝업 안에서 이름이나 아이디로 다시 검색할 수 있어요.'
     },
     'membership-intro': {
