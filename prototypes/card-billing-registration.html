@@ -1472,8 +1472,10 @@
             <div class="as-modal-title" id="memberListModalTitle">신규가입 회원 목록</div>
             <div class="as-modal-close" id="memberListModalClose">✕</div>
           </div>
-          <div class="as-search-row" style="margin-bottom:14px;">
+          <div class="as-search-row" style="margin-bottom:14px; max-width:none;">
             <input class="as-input" type="text" id="memberListSearchInput" placeholder="회원 이름 또는 아이디로 검색">
+            <button class="as-btn as-btn-primary" id="memberListSearchBtn">검색</button>
+            <button class="as-btn as-btn-secondary" id="memberListResetBtn">초기화</button>
           </div>
           <div class="as-coupon-table-wrap">
             <table class="as-table" id="memberListTable">
@@ -2006,6 +2008,17 @@
   });
   if(memberListSearchInput){
     memberListSearchInput.addEventListener('input', renderMemberList);
+  }
+  var memberListSearchBtn = document.getElementById('memberListSearchBtn');
+  var memberListResetBtn = document.getElementById('memberListResetBtn');
+  if(memberListSearchBtn){
+    memberListSearchBtn.addEventListener('click', renderMemberList);
+  }
+  if(memberListResetBtn){
+    memberListResetBtn.addEventListener('click', function(){
+      memberListSearchInput.value = '';
+      renderMemberList();
+    });
   }
   if(memberListModalClose){
     memberListModalClose.addEventListener('click', function(){ asMemberListModalOverlay.hidden = true; });
