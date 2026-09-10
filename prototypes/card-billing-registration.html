@@ -270,6 +270,7 @@
     background:#fff; border-radius:12px; border:1px solid #DCE1EA;
     box-shadow:0 24px 48px -24px rgba(21,34,56,.38), 0 2px 6px rgba(21,34,56,.06);
     overflow:hidden; height:calc(100vh - 88px); display:flex; flex-direction:column;
+    position:relative;
   }
   .admin-shell[hidden]{ display:none; }
 
@@ -311,12 +312,11 @@
   .as-content h1{ font-size:18px; margin:0 0 5px; letter-spacing:-.01em; color:var(--ink); }
   .as-content .as-desc{ font-size:12px; color:var(--ink-soft); margin:0 0 20px; }
 
-  .as-tabs{ display:flex; align-items:center; gap:6px; margin-bottom:6px; }
+  .as-tabs{ display:flex; align-items:center; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
   .as-tab{ padding:9px 16px; border-radius:8px 8px 0 0; font-size:12.5px; font-weight:700; color:var(--ink-soft); background:#EDEFF3; cursor:pointer; }
   .as-tab.active{ background:#fff; color:var(--brand-dark); border:1px solid var(--line); border-bottom:2px solid var(--brand); margin-bottom:-1px; }
   .as-tab-add{ padding:9px 14px; border-radius:8px; font-size:11.5px; font-weight:700; color:var(--ink-soft); border:1px dashed #C9D0DC; cursor:pointer; }
   .as-tab-add[hidden]{ display:none; }
-  .as-tabs-note{ font-size:11px; color:var(--ink-soft); margin:0 0 18px; }
 
   .as-panel{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:22px 24px; max-width:560px; margin-bottom:18px; }
   .as-row{ display:flex; align-items:center; gap:20px; padding:12px 0; border-bottom:1px solid var(--line); }
@@ -347,9 +347,24 @@
   .as-coupon-note{ font-size:11.5px; color:var(--ink-soft); margin:0 0 12px; }
   .as-coupon-table-wrap{ overflow-x:auto; margin-top:14px; }
   .as-coupon-table-wrap[hidden]{ display:none; }
+  .as-coupon-btn-row{ display:flex; gap:8px; }
   .as-td-sub{ font-size:11px; color:var(--ink-soft); margin-top:2px; }
   .as-td-actions{ display:flex; gap:6px; justify-content:flex-end; }
   .as-btn-sm{ padding:6px 12px; font-size:11px; white-space:nowrap; }
+
+  .as-modal-overlay{
+    position:absolute; inset:0; background:rgba(15,23,42,.4); z-index:5;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .as-modal-overlay[hidden]{ display:none; }
+  .as-modal{
+    width:760px; max-height:80%; background:#fff; border-radius:14px;
+    padding:26px 28px 22px; box-shadow:0 24px 48px -12px rgba(15,23,42,.35);
+    overflow-y:auto;
+  }
+  .as-modal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .as-modal-title{ font-size:16px; font-weight:800; color:var(--ink); }
+  .as-modal-close{ font-size:14px; color:var(--ink-soft); cursor:pointer; padding:4px; }
   .as-radio-row{ display:flex; gap:16px; }
   .as-radio-opt{ display:flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); }
   .as-radio-dot{ width:14px; height:14px; border-radius:50%; border:1.5px solid var(--line); position:relative; }
@@ -655,7 +670,6 @@
               <div class="as-tab" data-mem="3" hidden>멤버십 3</div>
               <div class="as-tab-add" id="memAddBtn">+ 멤버십 추가</div>
             </div>
-            <div class="as-tabs-note" id="memTabsNote">멤버십은 최대 3개까지 등록할 수 있어요. (2/3 등록됨)</div>
 
             <div class="as-mem-panel" data-mem="1">
               <div class="as-panel">
@@ -731,20 +745,9 @@
                   <div class="as-toggle on"><div class="knob"></div></div>
                 </div>
                 <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
-                <div class="as-coupon-table-wrap" hidden>
-                  <table class="as-table">
-                    <thead><tr><th>쿠폰명/유효기간</th><th>혜택 종류</th><th>쿠폰 종류</th><th></th></tr></thead>
-                    <tbody>
-                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>쿠폰비율할인최대할인금액이생겼다</div><div class="as-td-sub">무제한</div></td><td>30.12% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>솔테스트</div><div class="as-td-sub">무제한</div></td><td>50,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데스</div><div class="as-td-sub">무제한</div></td><td>2,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데쇼</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>이은비 테스트</div><div class="as-td-sub">무제한</div></td><td>15% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>123456</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                    </tbody>
-                  </table>
+                <div class="as-coupon-btn-row">
+                  <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
+                  <button class="as-btn as-btn-primary">쿠폰 메시지 보내기</button>
                 </div>
               </div>
 
@@ -828,20 +831,9 @@
                   <div class="as-toggle on"><div class="knob"></div></div>
                 </div>
                 <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
-                <div class="as-coupon-table-wrap" hidden>
-                  <table class="as-table">
-                    <thead><tr><th>쿠폰명/유효기간</th><th>혜택 종류</th><th>쿠폰 종류</th><th></th></tr></thead>
-                    <tbody>
-                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>쿠폰비율할인최대할인금액이생겼다</div><div class="as-td-sub">무제한</div></td><td>30.12% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>솔테스트</div><div class="as-td-sub">무제한</div></td><td>50,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데스</div><div class="as-td-sub">무제한</div></td><td>2,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데쇼</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>이은비 테스트</div><div class="as-td-sub">무제한</div></td><td>15% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>123456</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                    </tbody>
-                  </table>
+                <div class="as-coupon-btn-row">
+                  <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
+                  <button class="as-btn as-btn-primary">쿠폰 메시지 보내기</button>
                 </div>
               </div>
 
@@ -925,14 +917,9 @@
                   <div class="as-toggle"><div class="knob"></div></div>
                 </div>
                 <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
-                <div class="as-coupon-table-wrap" hidden>
-                  <table class="as-table">
-                    <thead><tr><th>쿠폰명/유효기간</th><th>혜택 종류</th><th>쿠폰 종류</th><th></th></tr></thead>
-                    <tbody>
-                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                    </tbody>
-                  </table>
+                <div class="as-coupon-btn-row">
+                  <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
+                  <button class="as-btn as-btn-primary">쿠폰 메시지 보내기</button>
                 </div>
               </div>
 
@@ -1081,6 +1068,30 @@
 
         </div>
       </div>
+
+      <div class="as-modal-overlay" id="asModalOverlay" hidden>
+        <div class="as-modal">
+          <div class="as-modal-head">
+            <div class="as-modal-title">쿠폰 지급</div>
+            <div class="as-modal-close" id="asModalClose">✕</div>
+          </div>
+          <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
+          <div class="as-coupon-table-wrap">
+            <table class="as-table">
+              <thead><tr><th>쿠폰명/유효기간</th><th>혜택 종류</th><th>쿠폰 종류</th><th></th></tr></thead>
+              <tbody>
+                <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button></td></tr>
+                <tr><td><div>쿠폰비율할인최대할인금액이생겼다</div><div class="as-td-sub">무제한</div></td><td>30.12% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button></td></tr>
+                <tr><td><div>솔테스트</div><div class="as-td-sub">무제한</div></td><td>50,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button></td></tr>
+                <tr><td><div>다이조V데스</div><div class="as-td-sub">무제한</div></td><td>2,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button></td></tr>
+                <tr><td><div>다이조V데쇼</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button></td></tr>
+                <tr><td><div>이은비 테스트</div><div class="as-td-sub">무제한</div></td><td>15% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button></td></tr>
+                <tr><td><div>123456</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1154,9 +1165,9 @@
     },
     'membership-basic': {
       number:'09', label:'정기멤버십 기본 설정', kind:'어드민 화면', admin:'basic',
-      purpose:'멤버십을 최대 3개까지 등록하고, 각 멤버십별 기본 정보와 가입자 혜택을 설정하는 관리자 화면이에요.',
-      parts:'멤버십 탭(최대 3개)으로 구분되며, 각 탭 안에 사용 여부 토글, 멤버십명·정기결제 금액 입력과 포인트 지급·즉시 할인·배송비 혜택 설정 카드가 있어요.',
-      action:'탭에서 멤버십을 선택하고, 기본 정보와 혜택 조건을 입력한 뒤 저장해요. 탭이 3개 미만이면 멤버십을 추가할 수 있어요.'
+      purpose:'멤버십을 개수 제한 없이 등록하고, 각 멤버십별 기본 정보와 가입자 혜택을 설정하는 관리자 화면이에요.',
+      parts:'멤버십 탭으로 구분되며(+ 멤버십 추가로 계속 늘릴 수 있어요), 각 탭 안에 사용 여부 토글, 멤버십명·정기결제 금액 입력과 포인트 지급·즉시 할인·배송비 혜택·쿠폰 지급 설정 카드가 있어요.',
+      action:'탭에서 멤버십을 선택하고, 기본 정보와 혜택 조건을 입력한 뒤 저장해요. + 멤버십 추가로 새 멤버십 탭을 계속 만들 수 있어요.'
     },
     'membership-products': {
       number:'10', label:'정기멤버십 전용 상품 관리', kind:'어드민 화면', admin:'products',
@@ -1263,26 +1274,57 @@
     el.addEventListener('click', function(){ selectMemTab(el.getAttribute('data-mem')); });
   });
 
+  var memCount = document.querySelectorAll('.as-tab[data-mem]:not([hidden])').length;
+  var memTemplatePanel = document.querySelector('.as-mem-panel[data-mem="3"]');
+  var memTemplateTab = document.querySelector('.as-tab[data-mem="3"]');
   var memAddBtn = document.getElementById('memAddBtn');
+
   if(memAddBtn){
     memAddBtn.addEventListener('click', function(){
-      var tab3 = document.querySelector('.as-tab[data-mem="3"]');
-      if(!tab3 || !tab3.hidden) return;
-      tab3.hidden = false;
-      memAddBtn.hidden = true;
-      document.getElementById('memTabsNote').textContent = '멤버십은 최대 3개까지 등록할 수 있어요. (3/3 등록됨)';
-      selectMemTab('3');
+      memCount++;
+      var mem = String(memCount);
+      var tab, panel;
+      if(memTemplateTab.hidden){
+        tab = memTemplateTab;
+        panel = memTemplatePanel;
+        tab.hidden = false;
+      } else {
+        tab = memTemplateTab.cloneNode(true);
+        tab.removeAttribute('hidden');
+        tab.setAttribute('data-mem', mem);
+        memTemplateTab.parentNode.insertBefore(tab, memAddBtn);
+
+        panel = memTemplatePanel.cloneNode(true);
+        panel.setAttribute('data-mem', mem);
+        panel.hidden = true;
+        memTemplatePanel.parentNode.appendChild(panel);
+
+        tab.addEventListener('click', function(){ selectMemTab(tab.getAttribute('data-mem')); });
+        bindCouponOpenButtons(panel);
+      }
+      tab.textContent = '멤버십 ' + mem;
+      selectMemTab(mem);
     });
   }
 
-  document.querySelectorAll('.as-coupon-open').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var wrap = btn.nextElementSibling;
-      if(!wrap || !wrap.classList.contains('as-coupon-table-wrap')) return;
-      wrap.hidden = !wrap.hidden;
-      btn.textContent = wrap.hidden ? '지급' : '목록 닫기';
+  var asModalOverlay = document.getElementById('asModalOverlay');
+  var asModalClose = document.getElementById('asModalClose');
+
+  function bindCouponOpenButtons(scope){
+    scope.querySelectorAll('.as-coupon-open').forEach(function(btn){
+      btn.addEventListener('click', function(){ asModalOverlay.hidden = false; });
     });
-  });
+  }
+  bindCouponOpenButtons(document);
+
+  if(asModalClose){
+    asModalClose.addEventListener('click', function(){ asModalOverlay.hidden = true; });
+  }
+  if(asModalOverlay){
+    asModalOverlay.addEventListener('click', function(e){
+      if(e.target === asModalOverlay) asModalOverlay.hidden = true;
+    });
+  }
 
   function toggleTerms(){
     document.getElementById('termsRow').classList.toggle('open');
