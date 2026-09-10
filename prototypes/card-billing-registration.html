@@ -400,6 +400,25 @@
     font-family:inherit; line-height:1.6; resize:vertical;
   }
 
+  .as-intro-layout{ display:flex; gap:24px; align-items:flex-start; margin-bottom:20px; }
+  .as-intro-form{ flex:0 0 420px; max-width:420px; }
+  .as-intro-preview{ flex:1; min-width:280px; max-width:400px; }
+  .as-intro-preview-label{ font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; margin-bottom:10px; }
+  .as-intro-card{
+    background:linear-gradient(135deg,var(--card-navy),var(--card-navy-2)); color:#fff;
+    border-radius:14px; padding:26px 24px; transition:opacity .15s ease;
+  }
+  .as-intro-card.off{ opacity:.4; }
+  .as-intro-card-badge{
+    display:inline-block; font-size:10.5px; font-weight:700; padding:4px 10px;
+    border-radius:10px; background:rgba(255,255,255,.18); margin-bottom:14px;
+  }
+  .as-intro-card-badge.off{ background:rgba(255,255,255,.1); }
+  .as-intro-card-title{ font-size:18px; font-weight:800; margin-bottom:16px; line-height:1.4; }
+  .as-intro-card-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .as-intro-card-list li{ font-size:12.5px; padding-left:19px; position:relative; line-height:1.5; }
+  .as-intro-card-list li::before{ content:"✓"; position:absolute; left:0; color:#7CE0C6; font-weight:700; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -423,6 +442,7 @@
     <li class="nav-item" data-screen="membership-subscribers"><div class="num">11</div><div class="tx"><div class="name">정기멤버십 가입자 관리</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-stats"><div class="num">12</div><div class="tx"><div class="name">정기멤버십 통계/현황</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-policy"><div class="num">13</div><div class="tx"><div class="name">정기멤버십 정책/약관 관리</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-intro"><div class="num">14</div><div class="tx"><div class="name">정기멤버십 소개 페이지 관리</div><div class="kind">어드민 화면</div></div></li>
   </ul>
   <div class="rail-foot">
     <div class="rail-foot-label">개발 연동 없는 화면 프로토타입입니다.<br>카드정보 입력의 개인/법인 전환, 약관 펼치기 외에는 동작하지 않습니다.</div>
@@ -642,6 +662,7 @@
             <li class="as-lnb-sub" data-admin="subscribers"><span class="dot">·</span>정기멤버십 가입자 관리</li>
             <li class="as-lnb-sub" data-admin="stats"><span class="dot">·</span>정기멤버십 통계/현황</li>
             <li class="as-lnb-sub" data-admin="policy"><span class="dot">·</span>정기멤버십 정책/약관 관리</li>
+            <li class="as-lnb-sub" data-admin="intro"><span class="dot">·</span>정기멤버십 소개 페이지 관리</li>
 
             <li class="as-lnb-item">포인트 및 리워드</li>
             <li class="as-lnb-item">포인트 사용내역</li>
@@ -671,7 +692,7 @@
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">연동 상태</div>
-                  <div class="as-field"><span class="as-status paid">연동됨</span></div>
+                  <div class="as-field"><span class="as-status pending" id="pgStatusBadge">미연동</span></div>
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">PG사</div>
@@ -681,17 +702,20 @@
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">클라이언트 키</div>
-                  <div class="as-field"><input class="as-input" type="text" placeholder="live_ck_..." disabled></div>
+                  <div class="as-field"><input class="as-input" type="text" placeholder="연동 후 자동으로 입력돼요" id="pgClientKeyInput" disabled></div>
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">시크릿 키</div>
-                  <div class="as-field"><input class="as-input" type="password" placeholder="live_sk_..." disabled></div>
+                  <div class="as-field"><input class="as-input" type="password" placeholder="연동 후 자동으로 입력돼요" id="pgSecretKeyInput" disabled></div>
                 </div>
               </div>
             </div>
-            <div class="as-actions">
-              <button class="as-btn as-btn-secondary">연동 해제</button>
-              <button class="as-btn as-btn-primary">저장 후 연동하기</button>
+            <div class="as-actions" id="pgActionsDisconnected">
+              <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
+            </div>
+            <div class="as-actions" id="pgActionsConnected" hidden>
+              <button class="as-btn as-btn-secondary" id="pgDisconnectBtn">연동 해제</button>
+              <button class="as-btn as-btn-primary">저장</button>
             </div>
 
             <div class="as-subhead">멤버십</div>
@@ -1087,6 +1111,48 @@
             </div>
           </section>
 
+          <section class="admin-screen" id="adminscreen-intro" hidden>
+            <h1>정기멤버십 소개 페이지 관리</h1>
+            <p class="as-desc">멤버십명과 혜택을 입력하면 구매자에게 노출될 소개 템플릿에 바로 반영돼요. 진열을 켜면 프론트 페이지에 노출돼요.</p>
+
+            <div class="as-intro-layout">
+              <div class="as-panel as-intro-form">
+                <div class="as-row">
+                  <div class="as-label">진열 여부</div>
+                  <div class="as-field"><div class="as-toggle on" id="introToggle"><div class="knob"></div></div></div>
+                </div>
+                <div class="as-row" style="align-items:flex-start;">
+                  <div class="as-label">멤버십명</div>
+                  <div class="as-field"><input class="as-input" type="text" id="introNameInput" value="FLEXG 프리미엄 멤버십"></div>
+                </div>
+                <div class="as-row" style="align-items:flex-start;">
+                  <div class="as-label">혜택 소개</div>
+                  <div class="as-field"><textarea class="as-textarea" id="introBenefitInput" style="min-height:140px;">월 3,000원 적립금 지급
+전 상품 무료배송
+생일월 5,000원 쿠폰 지급</textarea></div>
+                </div>
+              </div>
+
+              <div class="as-intro-preview">
+                <div class="as-intro-preview-label">미리보기 · 구매자 화면 노출 예시</div>
+                <div class="as-intro-card" id="introPreviewCard">
+                  <div class="as-intro-card-badge" id="introPreviewBadge">진열 중</div>
+                  <div class="as-intro-card-title" id="introPreviewTitle">FLEXG 프리미엄 멤버십</div>
+                  <ul class="as-intro-card-list" id="introPreviewList">
+                    <li>월 3,000원 적립금 지급</li>
+                    <li>전 상품 무료배송</li>
+                    <li>생일월 5,000원 쿠폰 지급</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-actions">
+              <button class="as-btn as-btn-secondary">취소</button>
+              <button class="as-btn as-btn-primary">저장</button>
+            </div>
+          </section>
+
         </div>
       </div>
 
@@ -1111,6 +1177,20 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      <div class="as-modal-overlay" id="asPgModalOverlay" hidden>
+        <div class="as-modal" style="width:420px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title">토스페이먼츠 연동</div>
+            <div class="as-modal-close" id="asPgModalClose">✕</div>
+          </div>
+          <p style="font-size:12.5px;color:var(--ink-soft);line-height:1.75;margin:0 0 20px;">
+            아래 버튼을 누르면 토스페이먼츠 가맹점 연동 페이지로 이동해요.<br>
+            로그인하고 권한을 허용하면 클라이언트 키·시크릿 키가 자동으로 연동돼요.
+          </p>
+          <button class="as-btn as-btn-primary" style="width:100%;" id="asPgModalConnectBtn">토스페이먼츠에서 연동 완료</button>
         </div>
       </div>
     </div>
@@ -1213,6 +1293,12 @@
       purpose:'정기멤버십 이용약관과 유의사항을 관리하고 구매자 화면 노출 여부를 설정하는 화면이에요.',
       parts:'이용약관 입력 영역, 유의사항 입력 영역(둘 다 textarea), 프론트 노출 여부 토글과 취소/저장 버튼으로 구성돼요.',
       action:'약관·유의사항 내용을 입력하고 노출 여부를 설정한 뒤 저장해요.'
+    },
+    'membership-intro': {
+      number:'14', label:'정기멤버십 소개 페이지 관리', kind:'어드민 화면', admin:'intro',
+      purpose:'멤버십명과 혜택을 입력하면 구매자에게 노출될 소개 템플릿에 실시간으로 반영되는 화면이에요. 진열 여부를 켜면 프론트 페이지에 노출돼요.',
+      parts:'멤버십명·혜택 소개 입력창과 진열 여부 토글로 구성된 입력 영역, 그리고 입력값이 실시간으로 반영되는 소개 카드 미리보기 영역으로 구성돼요.',
+      action:'멤버십명과 혜택을 입력하면 오른쪽 미리보기 카드에 바로 반영돼요. 진열 토글을 켜면 프론트에 노출되고, 저장으로 확정해요.'
     }
   };
 
@@ -1338,6 +1424,84 @@
   if(asModalOverlay){
     asModalOverlay.addEventListener('click', function(e){
       if(e.target === asModalOverlay) asModalOverlay.hidden = true;
+    });
+  }
+
+  var asPgModalOverlay = document.getElementById('asPgModalOverlay');
+  var asPgModalClose = document.getElementById('asPgModalClose');
+  var asPgModalConnectBtn = document.getElementById('asPgModalConnectBtn');
+  var pgConnectBtn = document.getElementById('pgConnectBtn');
+  var pgDisconnectBtn = document.getElementById('pgDisconnectBtn');
+  var pgStatusBadge = document.getElementById('pgStatusBadge');
+  var pgClientKeyInput = document.getElementById('pgClientKeyInput');
+  var pgSecretKeyInput = document.getElementById('pgSecretKeyInput');
+  var pgActionsDisconnected = document.getElementById('pgActionsDisconnected');
+  var pgActionsConnected = document.getElementById('pgActionsConnected');
+
+  if(pgConnectBtn){
+    pgConnectBtn.addEventListener('click', function(){ asPgModalOverlay.hidden = false; });
+  }
+  if(asPgModalClose){
+    asPgModalClose.addEventListener('click', function(){ asPgModalOverlay.hidden = true; });
+  }
+  if(asPgModalOverlay){
+    asPgModalOverlay.addEventListener('click', function(e){
+      if(e.target === asPgModalOverlay) asPgModalOverlay.hidden = true;
+    });
+  }
+  if(asPgModalConnectBtn){
+    asPgModalConnectBtn.addEventListener('click', function(){
+      asPgModalOverlay.hidden = true;
+      pgStatusBadge.textContent = '연동됨';
+      pgStatusBadge.className = 'as-status paid';
+      pgClientKeyInput.value = 'live_ck_2j3k4h5g6f7d8s9a0p';
+      pgSecretKeyInput.value = 'live_sk_9q8w7e6r5t4y3u2i1o';
+      pgActionsDisconnected.hidden = true;
+      pgActionsConnected.hidden = false;
+    });
+  }
+  if(pgDisconnectBtn){
+    pgDisconnectBtn.addEventListener('click', function(){
+      pgStatusBadge.textContent = '미연동';
+      pgStatusBadge.className = 'as-status pending';
+      pgClientKeyInput.value = '';
+      pgSecretKeyInput.value = '';
+      pgActionsConnected.hidden = true;
+      pgActionsDisconnected.hidden = false;
+    });
+  }
+
+  var introNameInput = document.getElementById('introNameInput');
+  var introBenefitInput = document.getElementById('introBenefitInput');
+  var introToggle = document.getElementById('introToggle');
+  var introPreviewTitle = document.getElementById('introPreviewTitle');
+  var introPreviewList = document.getElementById('introPreviewList');
+  var introPreviewCard = document.getElementById('introPreviewCard');
+  var introPreviewBadge = document.getElementById('introPreviewBadge');
+
+  if(introNameInput){
+    introNameInput.addEventListener('input', function(){
+      introPreviewTitle.textContent = introNameInput.value || '멤버십명을 입력하세요';
+    });
+  }
+  if(introBenefitInput){
+    introBenefitInput.addEventListener('input', function(){
+      var lines = introBenefitInput.value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+      introPreviewList.innerHTML = '';
+      lines.forEach(function(line){
+        var li = document.createElement('li');
+        li.textContent = line;
+        introPreviewList.appendChild(li);
+      });
+    });
+  }
+  if(introToggle){
+    introToggle.addEventListener('click', function(){
+      introToggle.classList.toggle('on');
+      var isOn = introToggle.classList.contains('on');
+      introPreviewCard.classList.toggle('off', !isOn);
+      introPreviewBadge.classList.toggle('off', !isOn);
+      introPreviewBadge.textContent = isOn ? '진열 중' : '진열 OFF';
     });
   }
 
