@@ -1339,7 +1339,7 @@
             <h1>정기멤버십 통계/현황</h1>
             <p class="as-desc">정기멤버십 가입자와 매출 현황을 한눈에 확인합니다.</p>
 
-            <div class="as-stat-group-label">전체 현황 <span class="hint">(조회 조건과 무관하게 항상 전체 값)</span></div>
+            <div class="as-stat-group-label">전체 현황</div>
             <div class="as-stat-row" style="margin-bottom:20px;">
               <div class="as-stat-card">
                 <div class="as-stat-icon">👥</div>
@@ -1353,6 +1353,7 @@
               </div>
             </div>
 
+            <div class="as-stat-group-label">선택 기간 현황</div>
             <div class="as-panel" style="margin-bottom:22px; max-width:none;">
               <div class="as-row-pair">
                 <div class="as-field-group" style="flex:0 0 auto;">
@@ -1389,7 +1390,6 @@
               </div>
             </div>
 
-            <div class="as-stat-group-label">선택 기간 현황 <span class="hint">(위 조회 기간·멤버십 조건 적용)</span></div>
             <div class="as-stat-row">
               <div class="as-stat-card">
                 <div class="as-stat-icon">✨</div>
@@ -1419,17 +1419,34 @@
               </div>
             </div>
 
-            <div class="as-subhead">전용 상품 판매 순위 <span style="font-size:11px; font-weight:600; color:var(--ink-faint);">(위 조회 기간·멤버십 조건 적용)</span></div>
-            <table class="as-table" style="max-width:520px;">
-              <thead><tr><th>순위</th><th>상품명</th><th>주문건수</th></tr></thead>
-              <tbody>
-                <tr><td>1</td><td>플렉스지 리필 파우치</td><td>214건</td></tr>
-                <tr><td>2</td><td>플렉스지 프리미엄 세트</td><td>128건</td></tr>
-                <tr><td>3</td><td>플렉스지 데일리 케어 3종</td><td>96건</td></tr>
-                <tr><td>4</td><td>플렉스지 바디워시 500ml</td><td>88건</td></tr>
-                <tr><td>5</td><td>플렉스지 핸드크림</td><td>67건</td></tr>
-              </tbody>
-            </table>
+            <div style="display:flex; gap:24px; flex-wrap:wrap; margin-bottom:8px;">
+              <div>
+                <div class="as-subhead" style="margin-top:0;">전용 상품 판매 순위</div>
+                <table class="as-table" style="max-width:480px;">
+                  <thead><tr><th>순위</th><th>상품명</th><th>주문건수</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>플렉스지 리필 파우치</td><td>214건</td></tr>
+                    <tr><td>2</td><td>플렉스지 프리미엄 세트</td><td>128건</td></tr>
+                    <tr><td>3</td><td>플렉스지 데일리 케어 3종</td><td>96건</td></tr>
+                    <tr><td>4</td><td>플렉스지 바디워시 500ml</td><td>88건</td></tr>
+                    <tr><td>5</td><td>플렉스지 핸드크림</td><td>67건</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <div class="as-subhead" style="margin-top:0;">전용 상품 매출 순위</div>
+                <table class="as-table" style="max-width:480px;">
+                  <thead><tr><th>순위</th><th>상품명</th><th>매출</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>플렉스지 프리미엄 세트</td><td>3,456,000원</td></tr>
+                    <tr><td>2</td><td>플렉스지 기획 선물세트</td><td>1,845,000원</td></tr>
+                    <tr><td>3</td><td>플렉스지 리필 파우치</td><td>1,712,600원</td></tr>
+                    <tr><td>4</td><td>플렉스지 데일리 케어 3종</td><td>1,353,200원</td></tr>
+                    <tr><td>5</td><td>플렉스지 바디워시 500ml</td><td>891,000원</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
             <div class="as-trend-group">
               <div class="as-list-toolbar">
@@ -1805,7 +1822,7 @@
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
       purpose:'조회 조건을 지정해 정기멤버십 가입자·주문·매출 현황을 멤버십별로 구체적으로 확인하고, 신규가입·해지 회원 목록까지 바로 조회할 수 있는 통계 화면이에요.',
-      parts:'"전체 현황" 요약 카드(전체 가입자 수·누적 주문 건수, 조회 조건과 무관)가 맨 위에 있고, 그 아래 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건 패널과 중앙 정렬된 초기화/조회 버튼이 있어요. 그 아래 "선택 기간 현황" 카드(신규 가입자·해지자 수·해지율(한 카드로 통합)·매출·객단가·결제 실패율, 조회 조건에 반응)가 이어져요. 위험 지표는 강조 색으로 표시돼요. 전용 상품 판매 순위 테이블도 같은 조건을 따르고, 월별·일별 가입자 추이 테이블은 회색 박스 하나로 함께 묶여 다른 영역과 구분돼요. 신규가입·해지 수치는 링크로 표시되어 클릭하면 회원 이름·아이디로 검색 가능한 회원 목록 팝업이 떠요.',
+      parts:'"전체 현황" 요약 카드(전체 가입자 수·누적 주문 건수, 조회 조건과 무관)가 맨 위에 있고, 이어서 "선택 기간 현황" 제목·조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건 패널과 중앙 정렬된 초기화/조회 버튼, 그 아래 선택 기간 현황 카드(신규 가입자·해지자 수·해지율(한 카드로 통합)·매출·객단가·결제 실패율, 조회 조건에 반응)가 이어져요. 위험 지표는 강조 색으로 표시돼요. 전용 상품 판매 순위와 전용 상품 매출 순위 테이블이 나란히 있고, 월별·일별 가입자 추이 테이블은 회색 박스 하나로 함께 묶여 다른 영역과 구분돼요. 신규가입·해지 수치는 링크로 표시되어 클릭하면 회원 이름·아이디로 검색 가능한 회원 목록 팝업이 떠요.',
       action:'조회 기간과 멤버십을 선택해 조회하고, 신규가입·해지 숫자를 클릭해 해당 회원 목록을 확인해요. 팝업 안에서 이름이나 아이디로 다시 검색할 수 있어요.'
     },
     'membership-intro': {
