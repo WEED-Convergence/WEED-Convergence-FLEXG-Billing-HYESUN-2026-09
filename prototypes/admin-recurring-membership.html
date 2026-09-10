@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>정기멤버십 어드민 화면 프로토타입</title>
+<style>
+  :root{
+    --ink:#152238;
+    --ink-soft:#5B6B85;
+    --ink-faint:#8892A6;
+    --line:#E4E8EF;
+    --bg-page:#F1F3F7;
+    --brand:#0F9E8E;
+    --brand-dark:#0B7A6E;
+    --brand-tint:#E4F6F3;
+
+    --gnb-bg:#17181C;
+    --gnb-text:#C7CAD3;
+    --gnb-text-dim:#8A8D97;
+    --gnb-active:#33D17A;
+    --badge:#FF4D4F;
+
+    --lnb-bg:#24262B;
+    --lnb-bg-2:#2A2C32;
+    --lnb-line:rgba(255,255,255,.07);
+    --lnb-text:#C7CAD3;
+    --lnb-text-dim:#8A8D97;
+    --lnb-label:#9A9DA7;
+    --lnb-active-bg:rgba(255,255,255,.06);
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;
+    color:var(--ink);
+    background:var(--bg-page);
+    min-width:1440px;
+  }
+
+  /* ============ GNB ============ */
+  .gnb{
+    height:52px; background:var(--gnb-bg);
+    display:flex; align-items:center;
+    padding:0 20px; gap:2px;
+  }
+  .gnb-home{ width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:var(--gnb-text); font-size:16px; margin-right:8px; border-right:1px solid rgba(255,255,255,.1); padding-right:16px; }
+  .gnb-item{
+    position:relative;
+    display:flex; align-items:center; gap:4px;
+    padding:0 16px; height:52px;
+    font-size:14px; font-weight:500; color:var(--gnb-text);
+    border-bottom:2px solid transparent;
+    cursor:default; white-space:nowrap;
+  }
+  .gnb-item.live{ color:#FF4D4F; font-weight:700; }
+  .gnb-item.active{
+    color:#fff; font-weight:700;
+    border-bottom-color:var(--gnb-active);
+  }
+  .gnb-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--badge); color:#fff;
+    font-size:9px; font-weight:800; line-height:1;
+    transform:translateY(-6px);
+  }
+
+  /* ============ APP BODY ============ */
+  .app-body{ display:flex; align-items:stretch; min-height:calc(100vh - 52px); }
+
+  /* ============ LNB ============ */
+  .lnb{
+    flex:0 0 232px;
+    background:linear-gradient(180deg,var(--lnb-bg),var(--lnb-bg-2));
+    padding:22px 0 30px;
+  }
+  .lnb-head{ display:flex; align-items:center; justify-content:space-between; padding:0 20px 18px; }
+  .lnb-title{ font-size:20px; font-weight:800; color:#fff; }
+  .lnb-guide{
+    display:flex; align-items:center; gap:5px;
+    background:#F5934D; color:#fff; font-size:11.5px; font-weight:700;
+    padding:6px 10px; border-radius:14px;
+  }
+
+  .lnb-list{ list-style:none; margin:0; padding:0; }
+  .lnb-group-label{
+    font-size:13.5px; font-weight:700; color:var(--lnb-label);
+    padding:11px 20px 5px;
+  }
+  .lnb-item{
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:13.5px; font-weight:600; color:var(--lnb-text);
+    padding:11px 20px; border-left:3px solid transparent;
+    cursor:default;
+  }
+  .lnb-item.active{
+    background:var(--lnb-active-bg); border-left-color:var(--gnb-active);
+    color:#fff;
+  }
+  .lnb-subitem{
+    display:flex; align-items:center; gap:6px;
+    font-size:12.5px; color:var(--lnb-text-dim);
+    padding:9px 20px 9px 30px; border-left:3px solid transparent;
+    cursor:default;
+  }
+  .lnb-subitem .dot{ font-size:11px; color:var(--lnb-text-dim); }
+  .lnb-subitem.clickable{ cursor:pointer; }
+  .lnb-subitem.clickable:hover{ color:var(--lnb-text); }
+  .lnb-subitem.active{
+    background:var(--lnb-active-bg); border-left-color:var(--gnb-active);
+    color:#fff; font-weight:700;
+  }
+  .lnb-subitem.active .dot{ color:var(--gnb-active); }
+  .lnb-n-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:15px; height:15px; border-radius:50%;
+    background:var(--badge); color:#fff; font-size:9px; font-weight:800;
+  }
+  .lnb-new-tag{
+    font-size:9.5px; font-weight:800; color:var(--gnb-active);
+    border:1px solid var(--gnb-active); border-radius:8px;
+    padding:1px 6px; margin-left:6px;
+  }
+
+  /* ============ CONTENT ============ */
+  .content{ flex:1; padding:32px 40px 60px; }
+  .content-head{ margin-bottom:24px; }
+  .content-head h1{ font-size:21px; margin:0 0 6px; letter-spacing:-.01em; }
+  .content-head p{ font-size:13px; color:var(--ink-soft); margin:0; }
+
+  .panel{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:28px 30px; max-width:640px; margin-bottom:22px;
+  }
+  .form-row{
+    display:flex; align-items:center; gap:24px;
+    padding:14px 0; border-bottom:1px solid var(--line);
+  }
+  .form-row:last-child{ border-bottom:none; }
+  .form-label{ flex:0 0 160px; font-size:13px; font-weight:700; color:var(--ink); }
+  .form-field{ flex:1; }
+  .input{
+    width:100%; border:1px solid var(--line); border-radius:8px;
+    padding:11px 13px; font-size:13.5px; color:var(--ink); background:#FBFCFD;
+  }
+  .input-suffix{ position:relative; }
+  .input-suffix .input{ padding-right:44px; }
+  .input-suffix .suffix{
+    position:absolute; right:13px; top:50%; transform:translateY(-50%);
+    font-size:12.5px; color:var(--ink-soft); font-weight:600;
+  }
+
+  .toggle{
+    position:relative; display:inline-block; width:44px; height:25px;
+    border-radius:13px; background:#D8DCE4; flex:0 0 auto;
+  }
+  .toggle .knob{
+    position:absolute; top:3px; left:3px; width:19px; height:19px;
+    border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.25);
+  }
+  .toggle.on{ background:var(--brand); }
+  .toggle.on .knob{ left:22px; }
+
+  .form-actions{ display:flex; gap:10px; max-width:640px; }
+  .form-actions.right{ justify-content:flex-end; max-width:none; }
+  .btn{ padding:11px 22px; border-radius:8px; font-size:13.5px; font-weight:700; border:none; cursor:default; }
+  .btn-primary{ background:var(--brand); color:#fff; }
+  .btn-secondary{ background:#EDEFF3; color:var(--ink); }
+
+  .benefit-card{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:22px 26px; max-width:640px; margin-bottom:16px;
+  }
+  .benefit-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+  .benefit-title{ font-size:14.5px; font-weight:800; }
+  .benefit-body{ }
+  .radio-row{ display:flex; gap:20px; }
+  .radio-opt{ display:flex; align-items:center; gap:6px; font-size:13px; color:var(--ink); cursor:default; }
+  .radio-dot{ width:16px; height:16px; border-radius:50%; border:1.5px solid var(--line); position:relative; }
+  .radio-dot.on{ border-color:var(--brand); }
+  .radio-dot.on::after{ content:""; position:absolute; top:3px; left:3px; width:8px; height:8px; border-radius:50%; background:var(--brand); }
+
+  .search-row{ display:flex; gap:8px; margin-bottom:18px; max-width:420px; }
+  .search-row .input{ flex:1; }
+
+  .admin-table{ width:100%; max-width:980px; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .admin-table th{
+    background:#F7F8FA; font-size:12px; font-weight:700; color:var(--ink-soft);
+    text-align:left; padding:12px 18px; border-bottom:1px solid var(--line);
+  }
+  .admin-table td{ padding:13px 18px; font-size:13px; border-bottom:1px solid var(--line); color:var(--ink); }
+  .admin-table tr:last-child td{ border-bottom:none; }
+  .admin-table .input{ padding:8px 10px; font-size:12.5px; max-width:140px; }
+  .status-tag{ font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:12px; }
+  .status-tag.paid{ background:var(--brand-tint); color:var(--brand-dark); }
+  .status-tag.pending{ background:#FFF4E0; color:#B4700B; }
+  .status-tag.failed{ background:#FBE9E3; color:#D8532B; }
+
+  .screen[hidden]{ display:none; }
+</style>
+</head>
+<body>
+
+<div class="gnb">
+  <div class="gnb-home">⌂</div>
+  <div class="gnb-item">상품<span class="gnb-badge">N</span></div>
+  <div class="gnb-item">주문<span class="gnb-badge">N</span></div>
+  <div class="gnb-item">발주<span class="gnb-badge">N</span></div>
+  <div class="gnb-item">CS</div>
+  <div class="gnb-item">정산</div>
+  <div class="gnb-item">매출</div>
+  <div class="gnb-item">통계</div>
+  <div class="gnb-item active">회원</div>
+  <div class="gnb-item">CRM<span class="gnb-badge">N</span></div>
+  <div class="gnb-item live">LIVE<span class="gnb-badge">N</span></div>
+  <div class="gnb-item">메시지</div>
+  <div class="gnb-item">게시판</div>
+  <div class="gnb-item">APP</div>
+  <div class="gnb-item">셀러</div>
+  <div class="gnb-item">제휴<span class="gnb-badge">N</span></div>
+</div>
+
+<div class="app-body">
+  <div class="lnb">
+    <div class="lnb-head">
+      <div class="lnb-title">회원</div>
+      <div class="lnb-guide">📘 가이드</div>
+    </div>
+    <ul class="lnb-list">
+      <li class="lnb-item">회원목록</li>
+      <li class="lnb-item">회원등급</li>
+
+      <li class="lnb-group-label">회원가입 현황</li>
+      <li class="lnb-subitem"><span class="dot">·</span>회원가입 현황</li>
+      <li class="lnb-subitem"><span class="dot">·</span>채널별 회원가입 현황</li>
+
+      <li class="lnb-group-label">정기멤버십<span class="lnb-new-tag">NEW</span></li>
+      <li class="lnb-subitem clickable" data-screen="basic"><span class="dot">·</span>정기멤버십 기본 설정</li>
+      <li class="lnb-subitem clickable" data-screen="benefit"><span class="dot">·</span>정기멤버십 혜택 설정</li>
+      <li class="lnb-subitem clickable" data-screen="products"><span class="dot">·</span>정기멤버십 전용 상품 관리</li>
+      <li class="lnb-subitem clickable" data-screen="subscribers"><span class="dot">·</span>정기멤버십 가입자 관리</li>
+
+      <li class="lnb-item">포인트 및 리워드</li>
+      <li class="lnb-item">포인트 사용내역</li>
+
+      <li class="lnb-group-label">리워드 현황</li>
+      <li class="lnb-subitem"><span class="dot">·</span>리워드 매출 현황</li>
+      <li class="lnb-subitem"><span class="dot">·</span>리워드 회원가입 현황</li>
+      <li class="lnb-subitem"><span class="dot">·</span>리워드 App설치 현황</li>
+
+      <li class="lnb-item">할인코드</li>
+      <li class="lnb-item">할인코드 사용내역</li>
+      <li class="lnb-item">쿠폰목록</li>
+      <li class="lnb-item">대량 쿠폰 자동 발급<span class="lnb-n-badge">N</span></li>
+      <li class="lnb-item">추첨 이벤트</li>
+      <li class="lnb-item">개인정보보호 배상책임보험</li>
+    </ul>
+  </div>
+
+  <div class="content" id="content">
+
+    <section class="screen" id="screen-basic">
+      <div class="content-head">
+        <h1>정기멤버십 기본 설정</h1>
+        <p>정기멤버십 서비스의 사용 여부와 기본 정보를 설정해요.</p>
+      </div>
+      <div class="panel">
+        <div class="form-row">
+          <div class="form-label">멤버십 사용 여부</div>
+          <div class="form-field"><div class="toggle on"><div class="knob"></div></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-label">멤버십명</div>
+          <div class="form-field"><input class="input" type="text" placeholder="예: FLEXG 정기멤버십" disabled></div>
+        </div>
+        <div class="form-row">
+          <div class="form-label">정기결제 금액</div>
+          <div class="form-field">
+            <div class="input-suffix"><input class="input" type="text" placeholder="9,900" disabled><span class="suffix">원</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-secondary">취소</button>
+        <button class="btn btn-primary">저장</button>
+      </div>
+    </section>
+
+    <section class="screen" id="screen-benefit" hidden>
+      <div class="content-head">
+        <h1>정기멤버십 혜택 설정</h1>
+        <p>정기멤버십 가입자에게 제공할 혜택을 설정해요.</p>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-head">
+          <div class="benefit-title">상품 구매시 포인트 지급</div>
+          <div class="toggle on"><div class="knob"></div></div>
+        </div>
+        <div class="benefit-body">
+          <div class="form-row">
+            <div class="form-label">지급 조건 금액</div>
+            <div class="form-field"><div class="input-suffix"><input class="input" type="text" placeholder="10,000" disabled><span class="suffix">원 이상</span></div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">지급률</div>
+            <div class="form-field"><div class="input-suffix"><input class="input" type="text" placeholder="5" disabled><span class="suffix">%</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-head">
+          <div class="benefit-title">상품 구매시 즉시 할인</div>
+          <div class="toggle on"><div class="knob"></div></div>
+        </div>
+        <div class="benefit-body">
+          <div class="form-row">
+            <div class="form-label">할인 조건 금액</div>
+            <div class="form-field"><div class="input-suffix"><input class="input" type="text" placeholder="20,000" disabled><span class="suffix">원 이상</span></div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">할인율</div>
+            <div class="form-field"><div class="input-suffix"><input class="input" type="text" placeholder="10" disabled><span class="suffix">%</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-head">
+          <div class="benefit-title">장바구니 배송비 혜택</div>
+          <div class="toggle on"><div class="knob"></div></div>
+        </div>
+        <div class="benefit-body">
+          <div class="form-row">
+            <div class="form-label">무료배송 조건 금액</div>
+            <div class="form-field"><div class="input-suffix"><input class="input" type="text" placeholder="0" disabled><span class="suffix">원 이상</span></div></div>
+          </div>
+          <div class="form-row">
+            <div class="form-label">묶음상품 포함 여부</div>
+            <div class="form-field">
+              <div class="radio-row">
+                <div class="radio-opt"><div class="radio-dot on"></div>포함</div>
+                <div class="radio-opt"><div class="radio-dot"></div>제외</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-secondary">취소</button>
+        <button class="btn btn-primary">적용</button>
+      </div>
+    </section>
+
+    <section class="screen" id="screen-products" hidden>
+      <div class="content-head">
+        <h1>정기멤버십 전용 상품 관리</h1>
+        <p>정기멤버십 가입자에게만 제공되는 전용가 상품을 관리해요.</p>
+      </div>
+      <div class="search-row">
+        <input class="input" type="text" placeholder="상품명으로 검색" disabled>
+        <button class="btn btn-secondary">검색</button>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>상품명</th><th>정가</th><th>멤버십 전용가</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>플렉스지 프리미엄 세트</td><td>39,000원</td><td><input class="input" type="text" placeholder="29,000" disabled></td></tr>
+          <tr><td>플렉스지 데일리 케어 3종</td><td>24,000원</td><td><input class="input" type="text" placeholder="18,900" disabled></td></tr>
+          <tr><td>플렉스지 리필 파우치</td><td>12,000원</td><td><input class="input" type="text" placeholder="9,900" disabled></td></tr>
+          <tr><td>플렉스지 기획 선물세트</td><td>58,000원</td><td><input class="input" type="text" placeholder="45,000" disabled></td></tr>
+        </tbody>
+      </table>
+      <div class="form-actions right" style="margin-top:16px;">
+        <button class="btn btn-primary">저장</button>
+      </div>
+    </section>
+
+    <section class="screen" id="screen-subscribers" hidden>
+      <div class="content-head">
+        <h1>정기멤버십 가입자 관리</h1>
+        <p>정기멤버십에 가입한 회원 목록과 결제 현황을 확인해요.</p>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>아이디</th><th>가입일</th><th>결제상태</th><th>다음 결제예정일</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>flexg_user01</td><td>2026.02.14</td><td><span class="status-tag paid">결제완료</span></td><td>2026.09.14</td></tr>
+          <tr><td>weed_min22</td><td>2026.03.02</td><td><span class="status-tag paid">결제완료</span></td><td>2026.09.02</td></tr>
+          <tr><td>subin_kim</td><td>2026.04.19</td><td><span class="status-tag pending">결제대기</span></td><td>2026.09.19</td></tr>
+          <tr><td>hyesun_choi</td><td>2026.05.27</td><td><span class="status-tag failed">결제실패</span></td><td>2026.09.27</td></tr>
+          <tr><td>flexg_biz03</td><td>2026.06.30</td><td><span class="status-tag paid">결제완료</span></td><td>2026.09.30</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  function selectScreen(key){
+    document.querySelectorAll('.lnb-subitem[data-screen]').forEach(function(el){
+      el.classList.toggle('active', el.getAttribute('data-screen') === key);
+    });
+    document.querySelectorAll('.screen').forEach(function(el){
+      el.hidden = el.id !== 'screen-' + key;
+    });
+  }
+  document.querySelectorAll('.lnb-subitem.clickable').forEach(function(el){
+    el.addEventListener('click', function(){ selectScreen(el.getAttribute('data-screen')); });
+  });
+  selectScreen('basic');
+</script>
+</body>
+</html>
