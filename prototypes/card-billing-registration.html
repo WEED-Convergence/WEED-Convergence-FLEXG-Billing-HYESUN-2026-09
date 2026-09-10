@@ -338,8 +338,9 @@
   }
   .as-test-product{ margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--line); }
   .as-test-product-note{ font-size:11.5px; color:var(--warn); font-weight:600; line-height:1.7; margin-bottom:12px; }
-  .as-test-product-selected{ font-size:12px; color:var(--ink-soft); margin-top:10px; }
+  .as-test-product-selected{ display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft); margin-top:10px; }
   .as-test-product-selected .name{ color:var(--brand-dark); font-weight:700; }
+  .as-test-product-selected .as-thumb{ width:28px; height:28px; font-size:13px; }
   .as-row{ display:flex; align-items:center; gap:20px; padding:12px 0; border-bottom:1px solid var(--line); }
   .as-row:last-child{ border-bottom:none; }
   .as-label{ flex:0 0 140px; font-size:12.5px; font-weight:700; color:var(--ink); }
@@ -370,7 +371,6 @@
 
   .as-subhead{
     font-size:13.5px; font-weight:800; color:var(--ink); margin:28px 0 12px; max-width:560px;
-    padding-left:10px; border-left:3px solid var(--brand);
   }
   .as-benefit{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px 22px; max-width:560px; margin-bottom:14px; }
   .as-benefit-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
@@ -842,7 +842,7 @@
               <div class="as-test-product">
                 <div class="as-test-product-note">PG사의 심사를 위해 테스트 상품의 상세 페이지 URL이 필요합니다. '숨김' 상태의 테스트용 상품 1개를 선택해 주세요.</div>
                 <button class="as-btn as-btn-secondary" id="testProductBtn">테스트 상품 불러오기</button>
-                <div class="as-test-product-selected" id="testProductSelected">선택된 상품: <span class="name">플렉스지 프리미엄 세트</span></div>
+                <div class="as-test-product-selected" id="testProductSelected">선택된 상품: <div class="as-thumb">🎁</div><span class="name">플렉스지 프리미엄 세트</span></div>
               </div>
               <div class="as-row-pair">
                 <div class="as-field-group">
@@ -1695,7 +1695,7 @@
           </div>
           <div class="as-coupon-table-wrap">
             <table class="as-table" id="testProductCatalogTable">
-              <thead><tr><th>상품명</th><th>정가</th><th></th></tr></thead>
+              <thead><tr><th>썸네일</th><th>상품명</th><th>정가</th><th></th></tr></thead>
               <tbody id="testProductCatalogBody"></tbody>
             </table>
           </div>
@@ -2224,11 +2224,11 @@
   }
 
   var TEST_PRODUCT_CATALOG = [
-    { name:'플렉스지 프리미엄 세트', price:'39,000원' },
-    { name:'플렉스지 데일리 케어 3종', price:'24,000원' },
-    { name:'플렉스지 리필 파우치', price:'12,000원' },
-    { name:'플렉스지 기획 선물세트', price:'58,000원' },
-    { name:'플렉스지 핸드크림', price:'8,000원' }
+    { name:'플렉스지 프리미엄 세트', price:'39,000원', thumb:'🎁' },
+    { name:'플렉스지 데일리 케어 3종', price:'24,000원', thumb:'🧴' },
+    { name:'플렉스지 리필 파우치', price:'12,000원', thumb:'🧴' },
+    { name:'플렉스지 기획 선물세트', price:'58,000원', thumb:'🎁' },
+    { name:'플렉스지 핸드크림', price:'8,000원', thumb:'🧴' }
   ];
 
   var pgConnectBtn = document.getElementById('pgConnectBtn');
@@ -2247,15 +2247,15 @@
 
     testProductCatalogBody.innerHTML = '';
     if(list.length === 0){
-      testProductCatalogBody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>';
+      testProductCatalogBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>';
       return;
     }
     list.forEach(function(p){
       var tr = document.createElement('tr');
-      tr.innerHTML = '<td>' + p.name + '</td><td>' + p.price + '</td>' +
+      tr.innerHTML = '<td><div class="as-thumb">' + p.thumb + '</div></td><td>' + p.name + '</td><td>' + p.price + '</td>' +
         '<td class="as-td-actions"><button class="as-btn as-btn-primary as-btn-sm">선택</button></td>';
       tr.querySelector('button').addEventListener('click', function(){
-        testProductSelected.innerHTML = '선택된 상품: <span class="name">' + p.name + '</span>';
+        testProductSelected.innerHTML = '선택된 상품: <div class="as-thumb">' + p.thumb + '</div><span class="name">' + p.name + '</span>';
         if(pgConnectBtn) pgConnectBtn.disabled = false;
         asTestProductModalOverlay.hidden = true;
       });
