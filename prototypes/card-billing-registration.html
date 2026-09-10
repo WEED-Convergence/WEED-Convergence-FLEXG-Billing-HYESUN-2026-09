@@ -306,7 +306,7 @@
   .as-lnb-n{ display:inline-flex; align-items:center; justify-content:center; width:14px; height:14px; border-radius:50%; background:var(--badge); color:#fff; font-size:8px; font-weight:800; }
   .as-lnb-new{ font-size:9px; font-weight:800; color:var(--gnb-active); border:1px solid var(--gnb-active); border-radius:7px; padding:1px 5px; margin-left:5px; }
 
-  .as-content{ flex:1; padding:26px 32px 40px; overflow-y:auto; }
+  .as-content{ flex:1; padding:26px 32px 40px; overflow-y:auto; background:#F1F2F6; }
   .as-content h1{ font-size:18px; margin:0 0 5px; letter-spacing:-.01em; color:var(--ink); }
   .as-content .as-desc{ font-size:12px; color:var(--ink-soft); margin:0 0 20px; }
 
@@ -324,7 +324,18 @@
   .as-tab-add{ padding:9px 14px; border-radius:8px; font-size:11.5px; font-weight:700; color:var(--ink-soft); border:1px dashed #C9D0DC; cursor:pointer; }
   .as-tab-add[hidden]{ display:none; }
 
-  .as-panel{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:22px 24px; max-width:560px; margin-bottom:18px; }
+  .as-mem-panel{
+    background:#F7F8FA; border:1px solid var(--line); border-top:none;
+    border-radius:0 10px 10px 10px; padding:24px 24px 22px; margin-bottom:10px;
+  }
+  .as-mem-panel > .as-panel{ box-shadow:none; }
+  .as-mem-panel > .as-subhead:first-of-type{ margin-top:0; }
+
+  .as-panel{
+    background:#fff; border:1px solid var(--line); border-radius:10px;
+    box-shadow:0 2px 10px -4px rgba(21,34,56,.08);
+    padding:22px 24px; max-width:560px; margin-bottom:18px;
+  }
   .as-test-product{ margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--line); }
   .as-test-product-note{ font-size:11.5px; color:var(--warn); font-weight:600; line-height:1.7; margin-bottom:12px; }
   .as-test-product-selected{ font-size:12px; color:var(--ink-soft); margin-top:10px; }
@@ -357,7 +368,10 @@
   .as-btn-primary{ background:var(--brand); color:#fff; }
   .as-btn-secondary{ background:#EDEFF3; color:var(--ink); }
 
-  .as-subhead{ font-size:13.5px; font-weight:800; color:var(--ink); margin:22px 0 12px; max-width:560px; }
+  .as-subhead{
+    font-size:13.5px; font-weight:800; color:var(--ink); margin:28px 0 12px; max-width:560px;
+    padding-left:10px; border-left:3px solid var(--brand);
+  }
   .as-benefit{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px 22px; max-width:560px; margin-bottom:14px; }
   .as-benefit-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .as-benefit-title{ font-size:13px; font-weight:800; color:var(--ink); }
@@ -442,7 +456,11 @@
   .as-search-row{ display:flex; gap:7px; margin-bottom:16px; max-width:380px; }
   .as-search-row .as-input{ flex:1; }
 
-  .as-table{ width:100%; max-width:880px; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .as-table{
+    width:100%; max-width:880px; border-collapse:collapse; background:#fff;
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    box-shadow:0 2px 10px -4px rgba(21,34,56,.08);
+  }
   .as-table th{ background:#F7F8FA; font-size:11px; font-weight:700; color:var(--ink-soft); text-align:left; padding:10px 16px; border-bottom:1px solid var(--line); white-space:nowrap; }
   .as-table td{ padding:11px 16px; font-size:12px; border-bottom:1px solid var(--line); color:var(--ink); white-space:nowrap; vertical-align:top; }
   .as-table tr:last-child td{ border-bottom:none; }
@@ -453,10 +471,19 @@
   .as-status.failed{ background:#FBE9E3; color:#D8532B; }
 
   .as-trend-group{
-    background:#F7F8FA; border:1px solid var(--line); border-radius:12px;
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 2px 10px -4px rgba(21,34,56,.08);
     padding:22px 24px 24px; margin-top:8px;
   }
-  .as-stat-group-label{ font-size:12.5px; font-weight:800; color:var(--ink); margin-bottom:10px; }
+  .as-result-group{
+    background:#F7F8FA; border:1px solid var(--line); border-radius:12px;
+    padding:22px 22px 4px; margin-bottom:8px;
+  }
+  .as-result-group .as-stat-row{ margin-bottom:24px; }
+  .as-stat-group-label{
+    font-size:12.5px; font-weight:800; color:var(--ink); margin:24px 0 10px;
+    padding-left:10px; border-left:3px solid var(--brand);
+  }
   .as-stat-group-label .hint{ font-size:11px; font-weight:600; color:var(--ink-faint); margin-left:4px; }
   .as-stat-row{ display:flex; gap:14px; margin-bottom:26px; flex-wrap:wrap; }
   .as-stat-card{
@@ -815,7 +842,7 @@
               <div class="as-test-product">
                 <div class="as-test-product-note">PG사의 심사를 위해 테스트 상품의 상세 페이지 URL이 필요합니다. '숨김' 상태의 테스트용 상품 1개를 선택해 주세요.</div>
                 <button class="as-btn as-btn-secondary" id="testProductBtn">테스트 상품 불러오기</button>
-                <div class="as-test-product-selected" id="testProductSelected">선택된 상품: 없음</div>
+                <div class="as-test-product-selected" id="testProductSelected">선택된 상품: <span class="name">플렉스지 프리미엄 세트</span></div>
               </div>
               <div class="as-row-pair">
                 <div class="as-field-group">
@@ -839,7 +866,7 @@
               </div>
             </div>
             <div class="as-actions">
-              <button class="as-btn as-btn-primary" id="pgConnectBtn" disabled>연동하기</button>
+              <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
               <button class="as-btn as-btn-secondary">연동 해제</button>
             </div>
 
@@ -1238,7 +1265,14 @@
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">멤버십</div>
-                  <div class="as-field"><input class="as-input" type="text" value="전체" disabled></div>
+                  <div class="as-field">
+                    <select class="as-input" disabled>
+                      <option>전체</option>
+                      <option>멤버십 1</option>
+                      <option>멤버십 2</option>
+                      <option>멤버십 3</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               <div class="as-row-pair">
@@ -1262,7 +1296,14 @@
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">결제상태</div>
-                  <div class="as-field"><input class="as-input" type="text" value="전체" disabled></div>
+                  <div class="as-field">
+                    <select class="as-input" disabled>
+                      <option>전체</option>
+                      <option>결제완료</option>
+                      <option>결제대기</option>
+                      <option>결제실패</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1290,37 +1331,37 @@
                     <td>1</td><td>flexg_user01</td><td>베이직 멤버십</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td>
                     <td>7회차</td><td>9,900원</td><td>69,300원</td><td>2026.09.14</td>
                     <td>2026.09.09 14:22</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
                     <td>2</td><td>weed_min22</td><td>프리미엄 멤버십</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td>
                     <td>6회차</td><td>19,900원</td><td>119,400원</td><td>2026.09.02</td>
                     <td>2026.09.10 09:03</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
                     <td>3</td><td>subin_kim</td><td>베이직 멤버십</td><td>2026.04.19</td><td><span class="as-status pending">결제대기</span></td>
                     <td>5회차</td><td>9,900원</td><td>39,600원</td><td>2026.09.19</td>
                     <td>2026.08.30 21:47</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
                     <td>4</td><td>hyesun_choi</td><td>프리미엄 멤버십</td><td>2026.05.27</td><td><span class="as-status failed">결제실패</span></td>
                     <td>4회차</td><td>19,900원</td><td>59,700원</td><td>2026.09.27</td>
                     <td>2026.09.01 11:15</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
                     <td>5</td><td>flexg_biz03</td><td>베이직 멤버십</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td>
                     <td>3회차</td><td>9,900원</td><td>29,700원</td><td>2026.09.30</td>
                     <td>2026.09.10 08:40</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
                     <td>6</td><td>flexg_dev99</td><td>프리미엄 멤버십</td><td>2026.07.11</td><td><span class="as-status pending">결제대기</span></td>
                     <td>2회차</td><td>19,900원</td><td>19,900원</td><td>2026.09.11</td>
                     <td>2026.09.08 19:02</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -1339,7 +1380,7 @@
             <h1>정기멤버십 통계/현황</h1>
             <p class="as-desc">정기멤버십 가입자와 매출 현황을 한눈에 확인합니다.</p>
 
-            <div class="as-stat-group-label">전체 현황</div>
+            <div class="as-stat-group-label" style="margin-top:0;">전체 현황</div>
             <div class="as-stat-row" style="margin-bottom:20px;">
               <div class="as-stat-card">
                 <div class="as-stat-icon">👥</div>
@@ -1390,61 +1431,63 @@
               </div>
             </div>
 
-            <div class="as-stat-row">
-              <div class="as-stat-card">
-                <div class="as-stat-icon">✨</div>
-                <div class="as-stat-label">신규 가입자 수</div>
-                <div class="as-stat-value">96<span class="unit">명</span></div>
+            <div class="as-result-group">
+              <div class="as-stat-row">
+                <div class="as-stat-card">
+                  <div class="as-stat-icon">✨</div>
+                  <div class="as-stat-label">신규 가입자 수</div>
+                  <div class="as-stat-value">96<span class="unit">명</span></div>
+                </div>
+                <div class="as-stat-card risk">
+                  <div class="as-stat-icon">⚠️</div>
+                  <div class="as-stat-label">해지자 수 · 해지율</div>
+                  <div class="as-stat-value">21<span class="unit">명</span></div>
+                  <div class="as-stat-sub">해지율 1.6%</div>
+                </div>
+                <div class="as-stat-card">
+                  <div class="as-stat-icon">💰</div>
+                  <div class="as-stat-label">멤버십 매출</div>
+                  <div class="as-stat-value">12,730,400<span class="unit">원</span></div>
+                </div>
+                <div class="as-stat-card">
+                  <div class="as-stat-icon">🛒</div>
+                  <div class="as-stat-label">평균 결제금액(객단가)</div>
+                  <div class="as-stat-value">14,200<span class="unit">원</span></div>
+                </div>
+                <div class="as-stat-card risk">
+                  <div class="as-stat-icon">🚫</div>
+                  <div class="as-stat-label">결제 실패율</div>
+                  <div class="as-stat-value">3.2<span class="unit">%</span></div>
+                </div>
               </div>
-              <div class="as-stat-card risk">
-                <div class="as-stat-icon">⚠️</div>
-                <div class="as-stat-label">해지자 수 · 해지율</div>
-                <div class="as-stat-value">21<span class="unit">명</span></div>
-                <div class="as-stat-sub">해지율 1.6%</div>
-              </div>
-              <div class="as-stat-card">
-                <div class="as-stat-icon">💰</div>
-                <div class="as-stat-label">멤버십 매출</div>
-                <div class="as-stat-value">12,730,400<span class="unit">원</span></div>
-              </div>
-              <div class="as-stat-card">
-                <div class="as-stat-icon">🛒</div>
-                <div class="as-stat-label">평균 결제금액(객단가)</div>
-                <div class="as-stat-value">14,200<span class="unit">원</span></div>
-              </div>
-              <div class="as-stat-card risk">
-                <div class="as-stat-icon">🚫</div>
-                <div class="as-stat-label">결제 실패율</div>
-                <div class="as-stat-value">3.2<span class="unit">%</span></div>
-              </div>
-            </div>
 
-            <div style="display:flex; gap:24px; flex-wrap:wrap; margin-bottom:8px;">
-              <div>
-                <div class="as-subhead" style="margin-top:0;">전용 상품 판매 순위</div>
-                <table class="as-table" style="max-width:480px;">
-                  <thead><tr><th>순위</th><th>상품명</th><th>주문건수</th></tr></thead>
-                  <tbody>
-                    <tr><td>1</td><td>플렉스지 리필 파우치</td><td>214건</td></tr>
-                    <tr><td>2</td><td>플렉스지 프리미엄 세트</td><td>128건</td></tr>
-                    <tr><td>3</td><td>플렉스지 데일리 케어 3종</td><td>96건</td></tr>
-                    <tr><td>4</td><td>플렉스지 바디워시 500ml</td><td>88건</td></tr>
-                    <tr><td>5</td><td>플렉스지 핸드크림</td><td>67건</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div>
-                <div class="as-subhead" style="margin-top:0;">전용 상품 매출 순위</div>
-                <table class="as-table" style="max-width:480px;">
-                  <thead><tr><th>순위</th><th>상품명</th><th>매출</th></tr></thead>
-                  <tbody>
-                    <tr><td>1</td><td>플렉스지 프리미엄 세트</td><td>3,456,000원</td></tr>
-                    <tr><td>2</td><td>플렉스지 기획 선물세트</td><td>1,845,000원</td></tr>
-                    <tr><td>3</td><td>플렉스지 리필 파우치</td><td>1,712,600원</td></tr>
-                    <tr><td>4</td><td>플렉스지 데일리 케어 3종</td><td>1,353,200원</td></tr>
-                    <tr><td>5</td><td>플렉스지 바디워시 500ml</td><td>891,000원</td></tr>
-                  </tbody>
-                </table>
+              <div style="display:flex; gap:24px; flex-wrap:wrap;">
+                <div style="flex:1; min-width:320px;">
+                  <div class="as-subhead" style="margin-top:0;">전용 상품 판매 순위</div>
+                  <table class="as-table" style="max-width:none;">
+                    <thead><tr><th>순위</th><th>상품명</th><th>주문건수</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>플렉스지 리필 파우치</td><td>214건</td></tr>
+                      <tr><td>2</td><td>플렉스지 프리미엄 세트</td><td>128건</td></tr>
+                      <tr><td>3</td><td>플렉스지 데일리 케어 3종</td><td>96건</td></tr>
+                      <tr><td>4</td><td>플렉스지 바디워시 500ml</td><td>88건</td></tr>
+                      <tr><td>5</td><td>플렉스지 핸드크림</td><td>67건</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div style="flex:1; min-width:320px;">
+                  <div class="as-subhead" style="margin-top:0;">전용 상품 매출 순위</div>
+                  <table class="as-table" style="max-width:none;">
+                    <thead><tr><th>순위</th><th>상품명</th><th>매출</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>플렉스지 프리미엄 세트</td><td>3,456,000원</td></tr>
+                      <tr><td>2</td><td>플렉스지 기획 선물세트</td><td>1,845,000원</td></tr>
+                      <tr><td>3</td><td>플렉스지 리필 파우치</td><td>1,712,600원</td></tr>
+                      <tr><td>4</td><td>플렉스지 데일리 케어 3종</td><td>1,353,200원</td></tr>
+                      <tr><td>5</td><td>플렉스지 바디워시 500ml</td><td>891,000원</td></tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
@@ -1815,9 +1858,9 @@
     },
     'membership-subscribers': {
       number:'11', label:'정기멤버십 가입자 관리', kind:'어드민 화면', admin:'subscribers',
-      purpose:'검색 조건으로 정기멤버십 가입자를 조회하고, 결제 현황을 확인하며 일시정지·해지 처리까지 할 수 있는 관리자 화면이에요.',
-      parts:'상단 아이디·멤버십·가입 기간(빠른 기간 선택 버튼 포함)·결제상태 검색 조건과 중앙 정렬된 초기화/조회 버튼이 있어요. "가입자 목록" 제목과 전체 인원 수, 엑셀 다운로드 버튼이 이어져요. 목록 테이블은 No./아이디/멤버십/가입일/결제상태/결제차수/정기결제 금액/누적 결제금액/다음 결제예정일/최근 로그인/관리(일시정지·해지 버튼) 컬럼으로 구성되고, 하단에 페이지네이션이 있어요.',
-      action:'조건을 지정해 조회하고, 가입자별 결제 현황을 확인해요. 관리 컬럼에서 일시정지하거나 즉시 해지 처리할 수 있어요.'
+      purpose:'검색 조건으로 정기멤버십 가입자를 조회하고, 결제 현황을 확인하며 해지 처리까지 할 수 있는 관리자 화면이에요.',
+      parts:'상단 아이디·멤버십·가입 기간(빠른 기간 선택 버튼 포함)·결제상태 검색 조건과 중앙 정렬된 초기화/조회 버튼이 있어요. "가입자 목록" 제목과 전체 인원 수, 엑셀 다운로드 버튼이 이어져요. 목록 테이블은 No./아이디/멤버십/가입일/결제상태/결제차수/정기결제 금액/누적 결제금액/다음 결제예정일/최근 로그인/관리(해지 버튼) 컬럼으로 구성되고, 하단에 페이지네이션이 있어요.',
+      action:'조건을 지정해 조회하고, 가입자별 결제 현황을 확인해요. 관리 컬럼에서 즉시 해지 처리할 수 있어요.'
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
