@@ -1210,7 +1210,12 @@
                 </div>
                 <div class="as-field-group" style="flex:0 0 180px;">
                   <div class="as-label">멤버십</div>
-                  <input class="as-input" type="text" value="전체" disabled>
+                  <select class="as-input" disabled>
+                    <option>전체</option>
+                    <option>멤버십 1</option>
+                    <option>멤버십 2</option>
+                    <option>멤버십 3</option>
+                  </select>
                 </div>
                 <button class="as-btn as-btn-primary">조회</button>
                 <button class="as-btn as-btn-secondary">초기화</button>
@@ -1236,29 +1241,35 @@
               </div>
             </div>
 
-            <div class="as-subhead">월별 가입자 추이</div>
-            <table class="as-table" style="max-width:640px;">
-              <thead><tr><th>월</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
+            <div class="as-list-toolbar">
+              <div class="as-subhead" style="margin:0;">월별 가입자 추이</div>
+              <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
+            </div>
+            <table class="as-table" style="max-width:720px;">
+              <thead><tr><th>월</th><th>멤버십</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
               <tbody>
-                <tr><td>2026.05</td><td>72</td><td>14</td><td>1,041</td></tr>
-                <tr><td>2026.06</td><td>84</td><td>19</td><td>1,106</td></tr>
-                <tr><td>2026.07</td><td>65</td><td>17</td><td>1,154</td></tr>
-                <tr><td>2026.08</td><td>90</td><td>25</td><td>1,219</td></tr>
-                <tr><td>2026.09</td><td>96</td><td>21</td><td>1,284</td></tr>
+                <tr><td>2026.05</td><td>멤버십 1</td><td>72</td><td>14</td><td>1,041</td></tr>
+                <tr><td>2026.06</td><td>멤버십 2</td><td>84</td><td>19</td><td>1,106</td></tr>
+                <tr><td>2026.07</td><td>멤버십 1</td><td>65</td><td>17</td><td>1,154</td></tr>
+                <tr><td>2026.08</td><td>멤버십 2</td><td>90</td><td>25</td><td>1,219</td></tr>
+                <tr><td>2026.09</td><td>멤버십 1</td><td>96</td><td>21</td><td>1,284</td></tr>
               </tbody>
             </table>
 
-            <div class="as-subhead">일별 가입자 추이</div>
-            <table class="as-table" style="max-width:640px;">
-              <thead><tr><th>날짜</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
+            <div class="as-list-toolbar" style="margin-top:24px;">
+              <div class="as-subhead" style="margin:0;">일별 가입자 추이</div>
+              <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
+            </div>
+            <table class="as-table" style="max-width:720px;">
+              <thead><tr><th>날짜</th><th>멤버십</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
               <tbody>
-                <tr><td>2026.09.04</td><td>11</td><td>2</td><td>1,258</td></tr>
-                <tr><td>2026.09.05</td><td>9</td><td>3</td><td>1,264</td></tr>
-                <tr><td>2026.09.06</td><td>14</td><td>4</td><td>1,274</td></tr>
-                <tr><td>2026.09.07</td><td>8</td><td>1</td><td>1,281</td></tr>
-                <tr><td>2026.09.08</td><td>6</td><td>2</td><td>1,285</td></tr>
-                <tr><td>2026.09.09</td><td>10</td><td>3</td><td>1,292</td></tr>
-                <tr><td>2026.09.10</td><td>13</td><td>6</td><td>1,299</td></tr>
+                <tr><td>2026.09.04</td><td>멤버십 1</td><td>11</td><td>2</td><td>1,258</td></tr>
+                <tr><td>2026.09.05</td><td>멤버십 2</td><td>9</td><td>3</td><td>1,264</td></tr>
+                <tr><td>2026.09.06</td><td>멤버십 1</td><td>14</td><td>4</td><td>1,274</td></tr>
+                <tr><td>2026.09.07</td><td>멤버십 2</td><td>8</td><td>1</td><td>1,281</td></tr>
+                <tr><td>2026.09.08</td><td>멤버십 1</td><td>6</td><td>2</td><td>1,285</td></tr>
+                <tr><td>2026.09.09</td><td>멤버십 2</td><td>10</td><td>3</td><td>1,292</td></tr>
+                <tr><td>2026.09.10</td><td>멤버십 1</td><td>13</td><td>6</td><td>1,299</td></tr>
               </tbody>
             </table>
           </section>
@@ -1514,9 +1525,9 @@
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
-      purpose:'조회 조건을 지정해 정기멤버십 가입자와 매출 현황을 구체적으로 확인하는 통계 화면이에요.',
-      parts:'상단 조회 기간·멤버십 검색 조건과 조회/초기화 버튼, 전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출 요약 카드, 월별 가입자 추이 테이블과 일별 가입자 추이 테이블로 구성돼요.',
-      action:'조회 기간과 멤버십을 선택해 조회하면, 요약 지표와 월별·일별 추이를 확인할 수 있어요.'
+      purpose:'조회 조건을 지정해 정기멤버십 가입자와 매출 현황을 멤버십별로 구체적으로 확인하는 통계 화면이에요.',
+      parts:'상단 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건과 조회/초기화 버튼, 전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출 요약 카드가 있어요. 월별·일별 가입자 추이 테이블에는 멤버십 컬럼이 있어 어느 멤버십의 수치인지 구분되고, 각 테이블 상단 우측에 엑셀 다운로드 버튼이 있어요.',
+      action:'조회 기간과 멤버십(전체 또는 특정 멤버십)을 선택해 조회하면, 요약 지표와 멤버십별 월별·일별 추이를 확인할 수 있어요.'
     },
     'membership-intro': {
       number:'13', label:'정기멤버십 소개 페이지 및 약관 관리', kind:'어드민 화면', admin:'intro',
