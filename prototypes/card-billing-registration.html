@@ -364,6 +364,18 @@
   .as-td-sub{ font-size:11px; color:var(--ink-soft); margin-top:2px; }
   .as-td-actions{ display:flex; gap:6px; justify-content:flex-end; }
   .as-btn-sm{ padding:6px 12px; font-size:11px; white-space:nowrap; }
+  .as-btn-warn{ background:var(--warn); color:#fff; }
+
+  .as-table-wrap{ overflow-x:auto; max-width:100%; }
+  .as-list-toolbar{ display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+  .as-list-count{ font-size:12px; color:var(--ink-soft); }
+  .as-pagination{ display:flex; align-items:center; justify-content:center; gap:4px; margin-top:16px; }
+  .as-page-btn{
+    min-width:28px; height:28px; padding:0 6px; border-radius:6px; border:1px solid var(--line);
+    background:#fff; color:var(--ink-soft); font-size:11.5px; font-weight:600;
+    display:flex; align-items:center; justify-content:center; cursor:default;
+  }
+  .as-page-btn.active{ background:var(--brand); border-color:var(--brand); color:#fff; }
 
   .as-modal-overlay{
     position:absolute; inset:0; background:rgba(15,23,42,.4); z-index:5;
@@ -1083,16 +1095,100 @@
           <section class="admin-screen" id="adminscreen-subscribers" hidden>
             <h1>정기멤버십 가입자 관리</h1>
             <p class="as-desc">정기멤버십에 가입한 회원 목록과 결제 현황을 확인해요.</p>
-            <table class="as-table">
-              <thead><tr><th>아이디</th><th>가입일</th><th>결제상태</th><th>다음 결제예정일</th></tr></thead>
-              <tbody>
-                <tr><td>flexg_user01</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td><td>2026.09.14</td></tr>
-                <tr><td>weed_min22</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td><td>2026.09.02</td></tr>
-                <tr><td>subin_kim</td><td>2026.04.19</td><td><span class="as-status pending">결제대기</span></td><td>2026.09.19</td></tr>
-                <tr><td>hyesun_choi</td><td>2026.05.27</td><td><span class="as-status failed">결제실패</span></td><td>2026.09.27</td></tr>
-                <tr><td>flexg_biz03</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td><td>2026.09.30</td></tr>
-              </tbody>
-            </table>
+
+            <div class="as-panel" style="margin-bottom:22px;">
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">아이디 검색</div>
+                  <div class="as-field"><input class="as-input" type="text" placeholder="아이디 입력" disabled></div>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">멤버십</div>
+                  <div class="as-field"><input class="as-input" type="text" value="전체" disabled></div>
+                </div>
+              </div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">가입 기간</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:6px;">
+                    <input class="as-input" type="text" value="2026-01-01" disabled style="max-width:130px;">
+                    <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                    <input class="as-input" type="text" value="2026-09-10" disabled style="max-width:130px;">
+                  </div>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">결제상태</div>
+                  <div class="as-field"><input class="as-input" type="text" value="전체" disabled></div>
+                </div>
+              </div>
+            </div>
+            <div class="as-actions">
+              <button class="as-btn as-btn-primary">조회</button>
+              <button class="as-btn as-btn-secondary">초기화</button>
+            </div>
+
+            <div class="as-list-toolbar" style="margin-top:24px;">
+              <div class="as-list-count">전체 <b>6</b>명</div>
+              <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
+            </div>
+
+            <div class="as-table-wrap">
+              <table class="as-table" style="min-width:1080px;">
+                <thead>
+                  <tr>
+                    <th>No.</th><th>아이디</th><th>멤버십</th><th>가입일</th><th>결제상태</th>
+                    <th>결제차수</th><th>정기결제 금액</th><th>누적 결제금액</th><th>다음 결제예정일</th>
+                    <th>최근 로그인</th><th>관리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td><td>flexg_user01</td><td>베이직 멤버십</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>7회차</td><td>9,900원</td><td>69,300원</td><td>2026.09.14</td>
+                    <td>2026.09.09 14:22</td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                  </tr>
+                  <tr>
+                    <td>2</td><td>weed_min22</td><td>프리미엄 멤버십</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>6회차</td><td>19,900원</td><td>119,400원</td><td>2026.09.02</td>
+                    <td>2026.09.10 09:03</td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                  </tr>
+                  <tr>
+                    <td>3</td><td>subin_kim</td><td>베이직 멤버십</td><td>2026.04.19</td><td><span class="as-status pending">결제대기</span></td>
+                    <td>5회차</td><td>9,900원</td><td>39,600원</td><td>2026.09.19</td>
+                    <td>2026.08.30 21:47</td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                  </tr>
+                  <tr>
+                    <td>4</td><td>hyesun_choi</td><td>프리미엄 멤버십</td><td>2026.05.27</td><td><span class="as-status failed">결제실패</span></td>
+                    <td>4회차</td><td>19,900원</td><td>59,700원</td><td>2026.09.27</td>
+                    <td>2026.09.01 11:15</td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                  </tr>
+                  <tr>
+                    <td>5</td><td>flexg_biz03</td><td>베이직 멤버십</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>3회차</td><td>9,900원</td><td>29,700원</td><td>2026.09.30</td>
+                    <td>2026.09.10 08:40</td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                  </tr>
+                  <tr>
+                    <td>6</td><td>flexg_dev99</td><td>프리미엄 멤버십</td><td>2026.07.11</td><td><span class="as-status pending">결제대기</span></td>
+                    <td>2회차</td><td>19,900원</td><td>19,900원</td><td>2026.09.11</td>
+                    <td>2026.09.08 19:02</td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">일시정지</button><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="as-pagination">
+              <div class="as-page-btn">‹</div>
+              <div class="as-page-btn active">1</div>
+              <div class="as-page-btn">2</div>
+              <div class="as-page-btn">3</div>
+              <div class="as-page-btn">›</div>
+            </div>
           </section>
 
           <section class="admin-screen" id="adminscreen-stats" hidden>
@@ -1399,9 +1495,9 @@
     },
     'membership-subscribers': {
       number:'11', label:'정기멤버십 가입자 관리', kind:'어드민 화면', admin:'subscribers',
-      purpose:'정기멤버십 가입자 목록과 결제 현황을 조회하는 관리자 화면이에요.',
-      parts:'아이디·가입일·결제상태·다음 결제예정일 컬럼으로 구성된 가입자 목록 테이블이에요.',
-      action:'가입자별 결제 상태와 다음 결제예정일을 확인해요.'
+      purpose:'검색 조건으로 정기멤버십 가입자를 조회하고, 결제 현황을 확인하며 일시정지·해지 처리까지 할 수 있는 관리자 화면이에요.',
+      parts:'상단 아이디·멤버십·가입 기간·결제상태 검색 조건과 조회/초기화 버튼, 전체 인원 수와 엑셀 다운로드 버튼이 있어요. 목록 테이블은 No./아이디/멤버십/가입일/결제상태/결제차수/정기결제 금액/누적 결제금액/다음 결제예정일/최근 로그인/관리(일시정지·해지 버튼) 컬럼으로 구성되고, 하단에 페이지네이션이 있어요.',
+      action:'조건을 지정해 조회하고, 가입자별 결제 현황을 확인해요. 관리 컬럼에서 일시정지하거나 즉시 해지 처리할 수 있어요.'
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
