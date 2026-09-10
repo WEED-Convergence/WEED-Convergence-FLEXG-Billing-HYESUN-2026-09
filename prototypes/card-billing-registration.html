@@ -345,11 +345,11 @@
   .as-benefit-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .as-benefit-title{ font-size:13px; font-weight:800; color:var(--ink); }
   .as-coupon-note{ font-size:11.5px; color:var(--ink-soft); margin:0 0 12px; }
-  .as-coupon-table-wrap{ overflow-x:auto; }
+  .as-coupon-table-wrap{ overflow-x:auto; margin-top:14px; }
+  .as-coupon-table-wrap[hidden]{ display:none; }
   .as-td-sub{ font-size:11px; color:var(--ink-soft); margin-top:2px; }
   .as-td-actions{ display:flex; gap:6px; justify-content:flex-end; }
   .as-btn-sm{ padding:6px 12px; font-size:11px; white-space:nowrap; }
-  .as-btn-ghost{ background:#fff; color:var(--brand-dark); border:1px solid var(--brand); }
   .as-radio-row{ display:flex; gap:16px; }
   .as-radio-opt{ display:flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); }
   .as-radio-dot{ width:14px; height:14px; border-radius:50%; border:1.5px solid var(--line); position:relative; }
@@ -368,6 +368,18 @@
   .as-status.paid{ background:var(--brand-tint); color:var(--brand-dark); }
   .as-status.pending{ background:#FFF4E0; color:#B4700B; }
   .as-status.failed{ background:#FBE9E3; color:#D8532B; }
+
+  .as-stat-row{ display:flex; gap:14px; margin-bottom:26px; flex-wrap:wrap; }
+  .as-stat-card{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px 20px; flex:1; min-width:170px; }
+  .as-stat-label{ font-size:11.5px; color:var(--ink-soft); margin-bottom:9px; font-weight:600; }
+  .as-stat-value{ font-size:21px; font-weight:800; color:var(--ink); }
+  .as-stat-value .unit{ font-size:12.5px; font-weight:600; color:var(--ink-soft); margin-left:2px; }
+
+  .as-textarea{
+    width:100%; min-height:100px; border:1px solid var(--line); border-radius:7px;
+    padding:10px 11px; font-size:12px; color:var(--ink); background:#FBFCFD;
+    font-family:inherit; line-height:1.6; resize:vertical;
+  }
 
   .admin-screen[hidden]{ display:none; }
 </style>
@@ -390,6 +402,9 @@
     <li class="nav-item" data-screen="membership-basic"><div class="num">09</div><div class="tx"><div class="name">정기멤버십 기본 설정</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-products"><div class="num">10</div><div class="tx"><div class="name">정기멤버십 전용 상품 관리</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-subscribers"><div class="num">11</div><div class="tx"><div class="name">정기멤버십 가입자 관리</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-payment"><div class="num">12</div><div class="tx"><div class="name">정기멤버십 결제수단 연동 설정</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-stats"><div class="num">13</div><div class="tx"><div class="name">정기멤버십 통계/현황</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-policy"><div class="num">14</div><div class="tx"><div class="name">정기멤버십 정책/약관 관리</div><div class="kind">어드민 화면</div></div></li>
   </ul>
   <div class="rail-foot">
     <div class="rail-foot-label">개발 연동 없는 화면 프로토타입입니다.<br>카드정보 입력의 개인/법인 전환, 약관 펼치기 외에는 동작하지 않습니다.</div>
@@ -607,6 +622,9 @@
             <li class="as-lnb-sub" data-admin="basic"><span class="dot">·</span>정기멤버십 기본 설정</li>
             <li class="as-lnb-sub" data-admin="products"><span class="dot">·</span>정기멤버십 전용 상품 관리</li>
             <li class="as-lnb-sub" data-admin="subscribers"><span class="dot">·</span>정기멤버십 가입자 관리</li>
+            <li class="as-lnb-sub" data-admin="payment"><span class="dot">·</span>정기멤버십 결제수단 연동 설정</li>
+            <li class="as-lnb-sub" data-admin="stats"><span class="dot">·</span>정기멤버십 통계/현황</li>
+            <li class="as-lnb-sub" data-admin="policy"><span class="dot">·</span>정기멤버십 정책/약관 관리</li>
 
             <li class="as-lnb-item">포인트 및 리워드</li>
             <li class="as-lnb-item">포인트 사용내역</li>
@@ -632,9 +650,9 @@
             <p class="as-desc">정기멤버십 서비스의 사용 여부, 기본 정보와 가입자 혜택을 설정해요.</p>
 
             <div class="as-tabs" id="memTabs">
-              <div class="as-tab active" data-mem="1">베이직 멤버십</div>
-              <div class="as-tab" data-mem="2">프리미엄 멤버십</div>
-              <div class="as-tab" data-mem="3" hidden>신규 멤버십</div>
+              <div class="as-tab active" data-mem="1">멤버십 1</div>
+              <div class="as-tab" data-mem="2">멤버십 2</div>
+              <div class="as-tab" data-mem="3" hidden>멤버십 3</div>
               <div class="as-tab-add" id="memAddBtn">+ 멤버십 추가</div>
             </div>
             <div class="as-tabs-note" id="memTabsNote">멤버십은 최대 3개까지 등록할 수 있어요. (2/3 등록됨)</div>
@@ -647,7 +665,7 @@
                 </div>
                 <div class="as-row">
                   <div class="as-label">멤버십명</div>
-                  <div class="as-field"><input class="as-input" type="text" placeholder="베이직 멤버십" disabled></div>
+                  <div class="as-field"><input class="as-input" type="text" placeholder="예: 정기멤버십명 입력" disabled></div>
                 </div>
                 <div class="as-row">
                   <div class="as-label">정기결제 금액</div>
@@ -713,17 +731,18 @@
                   <div class="as-toggle on"><div class="knob"></div></div>
                 </div>
                 <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <div class="as-coupon-table-wrap">
+                <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
+                <div class="as-coupon-table-wrap" hidden>
                   <table class="as-table">
                     <thead><tr><th>쿠폰명/유효기간</th><th>혜택 종류</th><th>쿠폰 종류</th><th></th></tr></thead>
                     <tbody>
-                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>쿠폰비율할인최대할인금액이생겼다</div><div class="as-td-sub">무제한</div></td><td>30.12% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>솔테스트</div><div class="as-td-sub">무제한</div></td><td>50,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데스</div><div class="as-td-sub">무제한</div></td><td>2,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데쇼</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>이은비 테스트</div><div class="as-td-sub">무제한</div></td><td>15% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>123456</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>쿠폰비율할인최대할인금액이생겼다</div><div class="as-td-sub">무제한</div></td><td>30.12% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>솔테스트</div><div class="as-td-sub">무제한</div></td><td>50,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>다이조V데스</div><div class="as-td-sub">무제한</div></td><td>2,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>다이조V데쇼</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>이은비 테스트</div><div class="as-td-sub">무제한</div></td><td>15% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>123456</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -743,7 +762,7 @@
                 </div>
                 <div class="as-row">
                   <div class="as-label">멤버십명</div>
-                  <div class="as-field"><input class="as-input" type="text" placeholder="프리미엄 멤버십" disabled></div>
+                  <div class="as-field"><input class="as-input" type="text" placeholder="예: 정기멤버십명 입력" disabled></div>
                 </div>
                 <div class="as-row">
                   <div class="as-label">정기결제 금액</div>
@@ -809,17 +828,18 @@
                   <div class="as-toggle on"><div class="knob"></div></div>
                 </div>
                 <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <div class="as-coupon-table-wrap">
+                <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
+                <div class="as-coupon-table-wrap" hidden>
                   <table class="as-table">
                     <thead><tr><th>쿠폰명/유효기간</th><th>혜택 종류</th><th>쿠폰 종류</th><th></th></tr></thead>
                     <tbody>
-                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>쿠폰비율할인최대할인금액이생겼다</div><div class="as-td-sub">무제한</div></td><td>30.12% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>솔테스트</div><div class="as-td-sub">무제한</div></td><td>50,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데스</div><div class="as-td-sub">무제한</div></td><td>2,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>다이조V데쇼</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>이은비 테스트</div><div class="as-td-sub">무제한</div></td><td>15% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
-                      <tr><td><div>123456</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>쿠폰비율할인최대할인금액이생겼다</div><div class="as-td-sub">무제한</div></td><td>30.12% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>솔테스트</div><div class="as-td-sub">무제한</div></td><td>50,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>다이조V데스</div><div class="as-td-sub">무제한</div></td><td>2,000원 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>다이조V데쇼</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>이은비 테스트</div><div class="as-td-sub">무제한</div></td><td>15% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>123456</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -839,7 +859,7 @@
                 </div>
                 <div class="as-row">
                   <div class="as-label">멤버십명</div>
-                  <div class="as-field"><input class="as-input" type="text" placeholder="예: 신규 멤버십" disabled></div>
+                  <div class="as-field"><input class="as-input" type="text" placeholder="예: 정기멤버십명 입력" disabled></div>
                 </div>
                 <div class="as-row">
                   <div class="as-label">정기결제 금액</div>
@@ -905,11 +925,12 @@
                   <div class="as-toggle"><div class="knob"></div></div>
                 </div>
                 <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <div class="as-coupon-table-wrap">
+                <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
+                <div class="as-coupon-table-wrap" hidden>
                   <table class="as-table">
                     <thead><tr><th>쿠폰명/유효기간</th><th>혜택 종류</th><th>쿠폰 종류</th><th></th></tr></thead>
                     <tbody>
-                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-ghost as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
+                      <tr><td><div>상품별 쿠폰테스트 ??</div><div class="as-td-sub">무제한</div></td><td>10% 할인</td><td>한번만 다운로드 가능</td><td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">지급</button><button class="as-btn as-btn-primary as-btn-sm">쿠폰 메시지 보내기</button></td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -956,6 +977,106 @@
                 <tr><td>flexg_biz03</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td><td>2026.09.30</td></tr>
               </tbody>
             </table>
+          </section>
+
+          <section class="admin-screen" id="adminscreen-payment" hidden>
+            <h1>정기멤버십 결제수단(자동결제) 연동 설정</h1>
+            <p class="as-desc">정기멤버십 결제에 사용할 PG/빌링키 연동 상태와 등록된 카드를 관리해요.</p>
+
+            <div class="as-panel">
+              <div class="as-row">
+                <div class="as-label">연동 상태</div>
+                <div class="as-field"><span class="as-status paid">연동됨</span></div>
+              </div>
+              <div class="as-row">
+                <div class="as-label">연동 PG사</div>
+                <div class="as-field">KCP</div>
+              </div>
+            </div>
+
+            <div class="as-panel">
+              <div class="as-row">
+                <div class="as-label">카드 등록 안내</div>
+                <div class="as-field">
+                  <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-soft);line-height:1.6;">정기멤버십 결제는 등록된 카드로 자동 결제됩니다.</p>
+                  <button class="as-btn as-btn-secondary">카드 등록/변경</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-subhead">현재 등록된 카드 정보</div>
+            <table class="as-table" style="max-width:560px;">
+              <thead><tr><th>카드사명</th><th>카드번호</th><th>등록일</th></tr></thead>
+              <tbody>
+                <tr><td>국민카드</td><td>•• 4417</td><td>2026.02.14</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="admin-screen" id="adminscreen-stats" hidden>
+            <h1>정기멤버십 통계/현황</h1>
+            <p class="as-desc">정기멤버십 가입자와 매출 현황을 한눈에 확인해요.</p>
+
+            <div class="as-stat-row">
+              <div class="as-stat-card">
+                <div class="as-stat-label">전체 가입자 수</div>
+                <div class="as-stat-value">1,284<span class="unit">명</span></div>
+              </div>
+              <div class="as-stat-card">
+                <div class="as-stat-label">이번 달 신규 가입자 수</div>
+                <div class="as-stat-value">96<span class="unit">명</span></div>
+              </div>
+              <div class="as-stat-card">
+                <div class="as-stat-label">이번 달 해지자 수</div>
+                <div class="as-stat-value">21<span class="unit">명</span></div>
+              </div>
+              <div class="as-stat-card">
+                <div class="as-stat-label">이번 달 멤버십 매출</div>
+                <div class="as-stat-value">12,730,400<span class="unit">원</span></div>
+              </div>
+            </div>
+
+            <div class="as-subhead">월별 가입자 추이</div>
+            <table class="as-table" style="max-width:640px;">
+              <thead><tr><th>월</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
+              <tbody>
+                <tr><td>2026.05</td><td>72</td><td>14</td><td>1,041</td></tr>
+                <tr><td>2026.06</td><td>84</td><td>19</td><td>1,106</td></tr>
+                <tr><td>2026.07</td><td>65</td><td>17</td><td>1,154</td></tr>
+                <tr><td>2026.08</td><td>90</td><td>25</td><td>1,219</td></tr>
+                <tr><td>2026.09</td><td>96</td><td>21</td><td>1,284</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="admin-screen" id="adminscreen-policy" hidden>
+            <h1>정기멤버십 정책/약관 관리</h1>
+            <p class="as-desc">정기멤버십 이용약관과 유의사항을 관리하고, 구매자 화면 노출 여부를 설정해요.</p>
+
+            <div class="as-panel" style="max-width:640px;">
+              <div class="as-row" style="align-items:flex-start;">
+                <div class="as-label">이용약관</div>
+                <div class="as-field"><textarea class="as-textarea" disabled>제1조(목적) 이 약관은 정기멤버십 서비스 이용과 관련하여 회사와 회원 간의 권리, 의무 및 책임사항을 규정합니다.
+
+제2조(멤버십 결제) 정기멤버십은 등록된 결제수단으로 매월 자동 결제되며, 결제일은 최초 가입일을 기준으로 합니다.
+
+제3조(해지) 회원은 언제든지 정기멤버십을 해지할 수 있으며, 해지 시 다음 결제부터 청구되지 않습니다.</textarea></div>
+              </div>
+              <div class="as-row" style="align-items:flex-start;">
+                <div class="as-label">유의사항</div>
+                <div class="as-field"><textarea class="as-textarea" disabled>해지 시 환불이 불가능하며 종료 예정일까지 혜택이 유지됩니다.
+결제 수단 정보가 만료되거나 결제에 실패할 경우 혜택이 일시 중단될 수 있습니다.</textarea></div>
+              </div>
+              <div class="as-row">
+                <div class="as-label">프론트 노출 여부</div>
+                <div class="as-field"><div class="as-toggle on"><div class="knob"></div></div></div>
+              </div>
+            </div>
+
+            <div class="as-actions">
+              <button class="as-btn as-btn-secondary">취소</button>
+              <button class="as-btn as-btn-primary">저장</button>
+            </div>
           </section>
 
         </div>
@@ -1048,6 +1169,24 @@
       purpose:'정기멤버십 가입자 목록과 결제 현황을 조회하는 관리자 화면이에요.',
       parts:'아이디·가입일·결제상태·다음 결제예정일 컬럼으로 구성된 가입자 목록 테이블이에요.',
       action:'가입자별 결제 상태와 다음 결제예정일을 확인해요.'
+    },
+    'membership-payment': {
+      number:'12', label:'정기멤버십 결제수단 연동 설정', kind:'어드민 화면', admin:'payment',
+      purpose:'정기멤버십 결제에 사용할 PG/빌링키 연동 상태와 등록된 카드를 관리하는 화면이에요.',
+      parts:'연동 상태 뱃지와 PG사명 표시, 카드 등록/변경 안내와 버튼, 현재 등록된 카드 정보 테이블로 구성돼요.',
+      action:'연동 상태를 확인하고, 카드 등록/변경 버튼으로 자동결제 카드 등록 화면으로 이동해요.'
+    },
+    'membership-stats': {
+      number:'13', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
+      purpose:'정기멤버십 가입자와 매출 현황을 한눈에 확인하는 통계 화면이에요.',
+      parts:'전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출 요약 카드와, 월별 가입자 추이 테이블로 구성돼요.',
+      action:'요약 지표와 월별 추이를 확인해요.'
+    },
+    'membership-policy': {
+      number:'14', label:'정기멤버십 정책/약관 관리', kind:'어드민 화면', admin:'policy',
+      purpose:'정기멤버십 이용약관과 유의사항을 관리하고 구매자 화면 노출 여부를 설정하는 화면이에요.',
+      parts:'이용약관 입력 영역, 유의사항 입력 영역(둘 다 textarea), 프론트 노출 여부 토글과 취소/저장 버튼으로 구성돼요.',
+      action:'약관·유의사항 내용을 입력하고 노출 여부를 설정한 뒤 저장해요.'
     }
   };
 
@@ -1136,6 +1275,15 @@
     });
   }
 
+  document.querySelectorAll('.as-coupon-open').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var wrap = btn.nextElementSibling;
+      if(!wrap || !wrap.classList.contains('as-coupon-table-wrap')) return;
+      wrap.hidden = !wrap.hidden;
+      btn.textContent = wrap.hidden ? '지급' : '목록 닫기';
+    });
+  });
+
   function toggleTerms(){
     document.getElementById('termsRow').classList.toggle('open');
     document.getElementById('termsDetail').classList.toggle('open');
@@ -1149,7 +1297,7 @@
     document.getElementById('corporateFields').hidden = isPersonal;
   }
 
-  selectScreen('card-input');
+  selectScreen('membership-basic');
 </script>
 </body>
 </html>
