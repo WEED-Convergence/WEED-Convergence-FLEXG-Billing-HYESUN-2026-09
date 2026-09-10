@@ -429,6 +429,7 @@
   .as-stat-value{ font-size:23px; font-weight:800; color:var(--ink); letter-spacing:-.01em; }
   .as-stat-card.risk .as-stat-value{ color:var(--warn); }
   .as-stat-value .unit{ font-size:12.5px; font-weight:600; color:var(--ink-soft); margin-left:2px; }
+  .as-stat-sub{ font-size:11.5px; font-weight:700; color:var(--warn); margin-top:5px; }
 
   .as-textarea{
     width:100%; min-height:100px; border:1px solid var(--line); border-radius:7px;
@@ -1267,8 +1268,8 @@
             <h1>정기멤버십 통계/현황</h1>
             <p class="as-desc">정기멤버십 가입자와 매출 현황을 한눈에 확인합니다.</p>
 
-            <div class="as-panel" style="margin-bottom:22px;">
-              <div style="display:flex; gap:20px; align-items:flex-end; flex-wrap:wrap;">
+            <div class="as-panel" style="margin-bottom:22px; max-width:none;">
+              <div style="display:flex; gap:16px; align-items:flex-end; flex-wrap:nowrap;">
                 <div class="as-field-group" style="flex:0 0 auto;">
                   <div class="as-label">조회 기간</div>
                   <div style="display:flex; align-items:center; gap:6px;">
@@ -1277,7 +1278,7 @@
                     <input class="as-input" type="text" value="2026-09-10" disabled style="width:120px;">
                   </div>
                 </div>
-                <div class="as-field-group" style="flex:0 0 180px;">
+                <div class="as-field-group" style="flex:0 0 160px;">
                   <div class="as-label">멤버십</div>
                   <select class="as-input" disabled>
                     <option>전체</option>
@@ -1286,8 +1287,10 @@
                     <option>멤버십 3</option>
                   </select>
                 </div>
-                <button class="as-btn as-btn-primary">조회</button>
-                <button class="as-btn as-btn-secondary">초기화</button>
+                <div style="display:flex; gap:8px;">
+                  <button class="as-btn as-btn-primary">조회</button>
+                  <button class="as-btn as-btn-secondary">초기화</button>
+                </div>
               </div>
             </div>
 
@@ -1314,13 +1317,9 @@
               </div>
               <div class="as-stat-card risk">
                 <div class="as-stat-icon">⚠️</div>
-                <div class="as-stat-label">해지자 수</div>
+                <div class="as-stat-label">해지자 수 · 해지율</div>
                 <div class="as-stat-value">21<span class="unit">명</span></div>
-              </div>
-              <div class="as-stat-card risk">
-                <div class="as-stat-icon">📉</div>
-                <div class="as-stat-label">해지율</div>
-                <div class="as-stat-value">1.6<span class="unit">%</span></div>
+                <div class="as-stat-sub">해지율 1.6%</div>
               </div>
               <div class="as-stat-card">
                 <div class="as-stat-icon">💰</div>
@@ -1692,7 +1691,7 @@
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
       purpose:'조회 조건을 지정해 정기멤버십 가입자·주문·매출 현황을 멤버십별로 구체적으로 확인하고, 신규가입·해지 회원 목록까지 바로 조회할 수 있는 통계 화면이에요.',
-      parts:'상단 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건과 조회/초기화 버튼이 있어요. 요약 카드는 "전체 현황"(전체 가입자 수·누적 주문 건수, 조회 조건과 무관)과 "선택 기간 현황"(신규 가입자·해지자·해지율·매출·객단가·결제 실패율, 조회 조건에 반응)으로 구분돼요. 위험 지표는 강조 색으로 표시돼요. 바로 아래 전용 상품 판매 순위 테이블도 같은 조회 기간·멤버십 조건을 따라요. 월별·일별 가입자 추이 테이블에는 멤버십 컬럼과 각 테이블 전용 멤버십 선택 셀렉트가 있어요. 신규가입·해지 수치는 링크로 표시되어 클릭하면 회원 이름·아이디로 검색 가능한 회원 목록 팝업이 떠요.',
+      parts:'상단 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건과, 그 옆에 바로 붙은 조회/초기화 버튼이 한 줄로 있어요. 요약 카드는 "전체 현황"(전체 가입자 수·누적 주문 건수, 조회 조건과 무관)과 "선택 기간 현황"(신규 가입자·해지자 수·해지율(한 카드로 통합)·매출·객단가·결제 실패율, 조회 조건에 반응)으로 구분돼요. 위험 지표는 강조 색으로 표시돼요. 바로 아래 전용 상품 판매 순위 테이블도 같은 조회 기간·멤버십 조건을 따라요. 월별·일별 가입자 추이 테이블에는 멤버십 컬럼과 각 테이블 전용 멤버십 선택 셀렉트가 있어요. 신규가입·해지 수치는 링크로 표시되어 클릭하면 회원 이름·아이디로 검색 가능한 회원 목록 팝업이 떠요.',
       action:'조회 기간과 멤버십을 선택해 조회하고, 신규가입·해지 숫자를 클릭해 해당 회원 목록을 확인해요. 팝업 안에서 이름이나 아이디로 다시 검색할 수 있어요.'
     },
     'membership-intro': {
