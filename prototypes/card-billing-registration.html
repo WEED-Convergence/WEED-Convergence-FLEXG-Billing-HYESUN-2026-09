@@ -417,9 +417,8 @@
     <li class="nav-item" data-screen="membership-basic"><div class="num">09</div><div class="tx"><div class="name">정기멤버십 기본 설정</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-products"><div class="num">10</div><div class="tx"><div class="name">정기멤버십 전용 상품 관리</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-subscribers"><div class="num">11</div><div class="tx"><div class="name">정기멤버십 가입자 관리</div><div class="kind">어드민 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-payment"><div class="num">12</div><div class="tx"><div class="name">정기멤버십 결제수단 연동 설정</div><div class="kind">어드민 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-stats"><div class="num">13</div><div class="tx"><div class="name">정기멤버십 통계/현황</div><div class="kind">어드민 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-policy"><div class="num">14</div><div class="tx"><div class="name">정기멤버십 정책/약관 관리</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-stats"><div class="num">12</div><div class="tx"><div class="name">정기멤버십 통계/현황</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-policy"><div class="num">13</div><div class="tx"><div class="name">정기멤버십 정책/약관 관리</div><div class="kind">어드민 화면</div></div></li>
   </ul>
   <div class="rail-foot">
     <div class="rail-foot-label">개발 연동 없는 화면 프로토타입입니다.<br>카드정보 입력의 개인/법인 전환, 약관 펼치기 외에는 동작하지 않습니다.</div>
@@ -637,7 +636,6 @@
             <li class="as-lnb-sub" data-admin="basic"><span class="dot">·</span>정기멤버십 기본 설정</li>
             <li class="as-lnb-sub" data-admin="products"><span class="dot">·</span>정기멤버십 전용 상품 관리</li>
             <li class="as-lnb-sub" data-admin="subscribers"><span class="dot">·</span>정기멤버십 가입자 관리</li>
-            <li class="as-lnb-sub" data-admin="payment"><span class="dot">·</span>정기멤버십 결제수단 연동 설정</li>
             <li class="as-lnb-sub" data-admin="stats"><span class="dot">·</span>정기멤버십 통계/현황</li>
             <li class="as-lnb-sub" data-admin="policy"><span class="dot">·</span>정기멤버십 정책/약관 관리</li>
 
@@ -664,6 +662,23 @@
             <h1>정기멤버십 기본 설정</h1>
             <p class="as-desc">정기멤버십 서비스의 사용 여부, 기본 정보와 가입자 혜택을 설정해요.</p>
 
+            <div class="as-subhead" style="margin-top:0;">PG/빌링키 연동 설정</div>
+            <div class="as-panel">
+              <div class="as-row">
+                <div class="as-label">연동 상태</div>
+                <div class="as-field"><span class="as-status paid">연동됨</span></div>
+              </div>
+              <div class="as-row">
+                <div class="as-label">연동 PG사</div>
+                <div class="as-field"><input class="as-input" type="text" placeholder="예: KCP" disabled></div>
+              </div>
+            </div>
+            <div class="as-actions">
+              <button class="as-btn as-btn-secondary">연동 해제</button>
+              <button class="as-btn as-btn-primary">PG 연동 설정</button>
+            </div>
+
+            <div class="as-subhead">멤버십</div>
             <div class="as-tabs" id="memTabs">
               <div class="as-tab active" data-mem="1">멤버십 1</div>
               <div class="as-tab" data-mem="2">멤버십 2</div>
@@ -966,40 +981,6 @@
             </table>
           </section>
 
-          <section class="admin-screen" id="adminscreen-payment" hidden>
-            <h1>정기멤버십 결제수단(자동결제) 연동 설정</h1>
-            <p class="as-desc">정기멤버십 결제에 사용할 PG/빌링키 연동 상태와 등록된 카드를 관리해요.</p>
-
-            <div class="as-panel">
-              <div class="as-row">
-                <div class="as-label">연동 상태</div>
-                <div class="as-field"><span class="as-status paid">연동됨</span></div>
-              </div>
-              <div class="as-row">
-                <div class="as-label">연동 PG사</div>
-                <div class="as-field">KCP</div>
-              </div>
-            </div>
-
-            <div class="as-panel">
-              <div class="as-row">
-                <div class="as-label">카드 등록 안내</div>
-                <div class="as-field">
-                  <p style="margin:0 0 12px;font-size:12.5px;color:var(--ink-soft);line-height:1.6;">정기멤버십 결제는 등록된 카드로 자동 결제됩니다.</p>
-                  <button class="as-btn as-btn-secondary">카드 등록/변경</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="as-subhead">현재 등록된 카드 정보</div>
-            <table class="as-table" style="max-width:560px;">
-              <thead><tr><th>카드사명</th><th>카드번호</th><th>등록일</th></tr></thead>
-              <tbody>
-                <tr><td>국민카드</td><td>•• 4417</td><td>2026.02.14</td></tr>
-              </tbody>
-            </table>
-          </section>
-
           <section class="admin-screen" id="adminscreen-stats" hidden>
             <h1>정기멤버십 통계/현황</h1>
             <p class="as-desc">정기멤버십 가입자와 매출 현황을 한눈에 확인해요.</p>
@@ -1165,9 +1146,9 @@
     },
     'membership-basic': {
       number:'09', label:'정기멤버십 기본 설정', kind:'어드민 화면', admin:'basic',
-      purpose:'멤버십을 개수 제한 없이 등록하고, 각 멤버십별 기본 정보와 가입자 혜택을 설정하는 관리자 화면이에요.',
-      parts:'멤버십 탭으로 구분되며(+ 멤버십 추가로 계속 늘릴 수 있어요), 각 탭 안에 사용 여부 토글, 멤버십명·정기결제 금액 입력과 포인트 지급·즉시 할인·배송비 혜택·쿠폰 지급 설정 카드가 있어요.',
-      action:'탭에서 멤버십을 선택하고, 기본 정보와 혜택 조건을 입력한 뒤 저장해요. + 멤버십 추가로 새 멤버십 탭을 계속 만들 수 있어요.'
+      purpose:'판매자가 PG/빌링키 연동을 설정하고, 멤버십을 개수 제한 없이 등록해 각 멤버십별 기본 정보와 가입자 혜택을 설정하는 관리자 화면이에요.',
+      parts:'상단 PG/빌링키 연동 상태·PG사 설정 영역과, 멤버십 탭 영역(+ 멤버십 추가로 계속 늘릴 수 있어요)으로 구성돼요. 각 멤버십 탭 안에는 사용 여부 토글, 멤버십명·정기결제 금액 입력과 포인트 지급·즉시 할인·배송비 혜택·쿠폰 지급 설정 카드가 있어요.',
+      action:'PG사를 연동 설정하고, 탭에서 멤버십을 선택해 기본 정보와 혜택 조건을 입력한 뒤 저장해요. + 멤버십 추가로 새 멤버십 탭을 계속 만들 수 있어요.'
     },
     'membership-products': {
       number:'10', label:'정기멤버십 전용 상품 관리', kind:'어드민 화면', admin:'products',
@@ -1181,20 +1162,14 @@
       parts:'아이디·가입일·결제상태·다음 결제예정일 컬럼으로 구성된 가입자 목록 테이블이에요.',
       action:'가입자별 결제 상태와 다음 결제예정일을 확인해요.'
     },
-    'membership-payment': {
-      number:'12', label:'정기멤버십 결제수단 연동 설정', kind:'어드민 화면', admin:'payment',
-      purpose:'정기멤버십 결제에 사용할 PG/빌링키 연동 상태와 등록된 카드를 관리하는 화면이에요.',
-      parts:'연동 상태 뱃지와 PG사명 표시, 카드 등록/변경 안내와 버튼, 현재 등록된 카드 정보 테이블로 구성돼요.',
-      action:'연동 상태를 확인하고, 카드 등록/변경 버튼으로 자동결제 카드 등록 화면으로 이동해요.'
-    },
     'membership-stats': {
-      number:'13', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
+      number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
       purpose:'정기멤버십 가입자와 매출 현황을 한눈에 확인하는 통계 화면이에요.',
       parts:'전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출 요약 카드와, 월별 가입자 추이 테이블로 구성돼요.',
       action:'요약 지표와 월별 추이를 확인해요.'
     },
     'membership-policy': {
-      number:'14', label:'정기멤버십 정책/약관 관리', kind:'어드민 화면', admin:'policy',
+      number:'13', label:'정기멤버십 정책/약관 관리', kind:'어드민 화면', admin:'policy',
       purpose:'정기멤버십 이용약관과 유의사항을 관리하고 구매자 화면 노출 여부를 설정하는 화면이에요.',
       parts:'이용약관 입력 영역, 유의사항 입력 영역(둘 다 textarea), 프론트 노출 여부 토글과 취소/저장 버튼으로 구성돼요.',
       action:'약관·유의사항 내용을 입력하고 노출 여부를 설정한 뒤 저장해요.'
