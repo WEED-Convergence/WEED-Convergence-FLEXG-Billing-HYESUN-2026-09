@@ -354,7 +354,6 @@
 
   .as-subhead{ font-size:13.5px; font-weight:800; color:var(--ink); margin:22px 0 12px; max-width:560px; }
   .as-benefit{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px 22px; max-width:560px; margin-bottom:14px; }
-  .as-benefit.as-benefit-wide{ max-width:880px; }
   .as-benefit-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
   .as-benefit-title{ font-size:13px; font-weight:800; color:var(--ink); }
   .as-coupon-note{ font-size:11.5px; color:var(--ink-soft); margin:0 0 12px; }
@@ -466,6 +465,13 @@
   .as-intro-benefit-row:last-child{ border-bottom:none; }
   .as-intro-benefit-row .check{ color:var(--brand); font-weight:800; flex:0 0 auto; }
   #introPreviewHtmlView{ padding:0; }
+
+  .as-intro-consent{ padding:18px 22px 24px; border-top:8px solid #EEF0F4; background:#fff; }
+  .as-intro-consent-item{ display:flex; align-items:center; gap:8px; padding:6px 0; font-size:12px; color:var(--ink); }
+  .as-intro-consent-item .check{ color:var(--brand); font-weight:800; flex:0 0 auto; }
+  .as-intro-consent-item .label{ flex:1; }
+  .as-intro-consent-item .view{ font-size:11px; color:var(--ink-faint); text-decoration:underline; flex:0 0 auto; }
+  .as-intro-consent-note{ font-size:11px; color:var(--ink-soft); margin-top:8px; line-height:1.6; }
 
   .admin-screen[hidden]{ display:none; }
 </style>
@@ -738,7 +744,7 @@
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">연동 상태</div>
-                  <div class="as-field"><span class="as-status pending" id="pgStatusBadge">미연동</span></div>
+                  <div class="as-field"><span class="as-status pending">미연동</span></div>
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">PG사</div>
@@ -748,20 +754,17 @@
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">클라이언트 키</div>
-                  <div class="as-field"><input class="as-input" type="text" placeholder="연동 후 자동으로 입력돼요" id="pgClientKeyInput" disabled></div>
+                  <div class="as-field"><input class="as-input" type="text" placeholder="연동 후 자동으로 입력돼요" disabled></div>
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">시크릿 키</div>
-                  <div class="as-field"><input class="as-input" type="password" placeholder="연동 후 자동으로 입력돼요" id="pgSecretKeyInput" disabled></div>
+                  <div class="as-field"><input class="as-input" type="password" placeholder="연동 후 자동으로 입력돼요" disabled></div>
                 </div>
               </div>
             </div>
-            <div class="as-actions" id="pgActionsDisconnected">
-              <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
-            </div>
-            <div class="as-actions" id="pgActionsConnected" hidden>
-              <button class="as-btn as-btn-secondary" id="pgDisconnectBtn">연동 해제</button>
-              <button class="as-btn as-btn-primary">저장</button>
+            <div class="as-actions">
+              <button class="as-btn as-btn-primary">연동하기</button>
+              <button class="as-btn as-btn-secondary">연동 해제</button>
             </div>
 
             <div class="as-subhead">멤버십</div>
@@ -848,7 +851,7 @@
                 </div>
               </div>
 
-              <div class="as-benefit as-benefit-wide">
+              <div class="as-benefit">
                 <div class="as-benefit-head">
                   <div class="as-benefit-title">쿠폰 지급</div>
                   <div class="as-toggle on"><div class="knob"></div></div>
@@ -942,7 +945,7 @@
                 </div>
               </div>
 
-              <div class="as-benefit as-benefit-wide">
+              <div class="as-benefit">
                 <div class="as-benefit-head">
                   <div class="as-benefit-title">쿠폰 지급</div>
                   <div class="as-toggle on"><div class="knob"></div></div>
@@ -1036,7 +1039,7 @@
                 </div>
               </div>
 
-              <div class="as-benefit as-benefit-wide">
+              <div class="as-benefit">
                 <div class="as-benefit-head">
                   <div class="as-benefit-title">쿠폰 지급</div>
                   <div class="as-toggle"><div class="knob"></div></div>
@@ -1095,6 +1098,25 @@
             <h1>정기멤버십 통계/현황</h1>
             <p class="as-desc">정기멤버십 가입자와 매출 현황을 한눈에 확인해요.</p>
 
+            <div class="as-panel" style="margin-bottom:22px;">
+              <div style="display:flex; gap:20px; align-items:flex-end; flex-wrap:wrap;">
+                <div class="as-field-group" style="flex:0 0 auto;">
+                  <div class="as-label">조회 기간</div>
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <input class="as-input" type="text" value="2026-09-01" disabled style="width:120px;">
+                    <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                    <input class="as-input" type="text" value="2026-09-10" disabled style="width:120px;">
+                  </div>
+                </div>
+                <div class="as-field-group" style="flex:0 0 180px;">
+                  <div class="as-label">멤버십</div>
+                  <input class="as-input" type="text" value="전체" disabled>
+                </div>
+                <button class="as-btn as-btn-primary">조회</button>
+                <button class="as-btn as-btn-secondary">초기화</button>
+              </div>
+            </div>
+
             <div class="as-stat-row">
               <div class="as-stat-card">
                 <div class="as-stat-label">전체 가입자 수</div>
@@ -1125,11 +1147,25 @@
                 <tr><td>2026.09</td><td>96</td><td>21</td><td>1,284</td></tr>
               </tbody>
             </table>
+
+            <div class="as-subhead">일별 가입자 추이</div>
+            <table class="as-table" style="max-width:640px;">
+              <thead><tr><th>날짜</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
+              <tbody>
+                <tr><td>2026.09.04</td><td>11</td><td>2</td><td>1,258</td></tr>
+                <tr><td>2026.09.05</td><td>9</td><td>3</td><td>1,264</td></tr>
+                <tr><td>2026.09.06</td><td>14</td><td>4</td><td>1,274</td></tr>
+                <tr><td>2026.09.07</td><td>8</td><td>1</td><td>1,281</td></tr>
+                <tr><td>2026.09.08</td><td>6</td><td>2</td><td>1,285</td></tr>
+                <tr><td>2026.09.09</td><td>10</td><td>3</td><td>1,292</td></tr>
+                <tr><td>2026.09.10</td><td>13</td><td>6</td><td>1,299</td></tr>
+              </tbody>
+            </table>
           </section>
 
           <section class="admin-screen" id="adminscreen-intro" hidden>
             <h1>정기멤버십 소개 페이지 및 약관 관리</h1>
-            <p class="as-desc">템플릿에 멤버십명·혜택을 채우거나 HTML을 직접 작성해 소개 페이지를 만들고, 이용약관·유의사항도 함께 관리해요. 진열을 켜면 모바일 프론트 페이지에 노출돼요.</p>
+            <p class="as-desc">템플릿에 멤버십명·혜택을 채우거나 HTML을 직접 작성해 소개 페이지를 만들어요. 구매자가 멤버십 가입하기를 누르는 시점에 노출되는 정기결제 동의 항목과 유의사항도 함께 관리해요.</p>
 
             <div class="as-intro-layout">
               <div class="as-panel as-intro-form">
@@ -1182,6 +1218,12 @@
                       </div>
                     </div>
                     <div id="introPreviewHtmlView" hidden></div>
+
+                    <div class="as-intro-consent">
+                      <div class="as-intro-consent-item"><span class="check">✓</span><span class="label">개인정보 수집 이용 및 처리 동의</span><span class="view">보기</span></div>
+                      <div class="as-intro-consent-item"><span class="check">✓</span><span class="label">전자지급 거래대행 서비스 이용약관 동의</span><span class="view">보기</span></div>
+                      <div class="as-intro-consent-note">위 내용을 확인하였으며 자동결제 동의합니다.</div>
+                    </div>
                   </div>
                   <div class="as-intro-phone-footer">
                     <button class="as-intro-btn-skip">다음에 할게요</button>
@@ -1191,23 +1233,33 @@
               </div>
             </div>
 
-            <div class="as-subhead">이용약관 및 유의사항</div>
+            <div class="as-subhead">정기결제 동의 항목</div>
+            <p class="as-desc" style="margin-top:-8px;">구매자가 "멤버십 가입하기"를 눌러 정기결제를 신청할 때, 아래 항목이 동의 체크리스트로 함께 노출돼요.</p>
             <div class="as-panel" style="max-width:640px;">
               <div class="as-row" style="align-items:flex-start;">
-                <div class="as-label">이용약관</div>
-                <div class="as-field"><textarea class="as-textarea" disabled>제1조(목적) 이 약관은 정기멤버십 서비스 이용과 관련하여 회사와 회원 간의 권리, 의무 및 책임사항을 규정합니다.
+                <div class="as-label">개인정보 수집·이용 동의</div>
+                <div class="as-field"><textarea class="as-textarea" disabled>1. 수집 항목: 이름, 휴대폰번호, 카드 정보(빌링키)
+2. 수집 목적: 정기멤버십 자동결제 처리 및 결제 이력 관리
+3. 보유 기간: 멤버십 해지 후 5년(전자상거래법에 따른 대금결제 기록 보관 기준)</textarea></div>
+              </div>
+              <div class="as-row" style="align-items:flex-start;">
+                <div class="as-label">전자지급 거래대행 서비스 이용약관 동의</div>
+                <div class="as-field"><textarea class="as-textarea" disabled>제1조(목적) 이 약관은 PG사를 통한 전자지급 거래대행 서비스 이용과 관련하여 회사와 회원 간의 권리, 의무 및 책임사항을 규정합니다.
 
-제2조(멤버십 결제) 정기멤버십은 등록된 결제수단으로 매월 자동 결제되며, 결제일은 최초 가입일을 기준으로 합니다.
+제2조(정기결제) 정기멤버십은 등록된 결제수단(빌링키)으로 매월 자동 결제되며, 결제일은 최초 가입일을 기준으로 합니다.
 
 제3조(해지) 회원은 언제든지 정기멤버십을 해지할 수 있으며, 해지 시 다음 결제부터 청구되지 않습니다.</textarea></div>
               </div>
+            </div>
+
+            <div class="as-panel" style="max-width:640px;">
               <div class="as-row" style="align-items:flex-start;">
                 <div class="as-label">유의사항</div>
                 <div class="as-field"><textarea class="as-textarea" disabled>해지 시 환불이 불가능하며 종료 예정일까지 혜택이 유지됩니다.
 결제 수단 정보가 만료되거나 결제에 실패할 경우 혜택이 일시 중단될 수 있습니다.</textarea></div>
               </div>
               <div class="as-row">
-                <div class="as-label">프론트 노출 여부</div>
+                <div class="as-label">유의사항 노출 여부</div>
                 <div class="as-field"><div class="as-toggle on"><div class="knob"></div></div></div>
               </div>
             </div>
@@ -1245,19 +1297,6 @@
         </div>
       </div>
 
-      <div class="as-modal-overlay" id="asPgModalOverlay" hidden>
-        <div class="as-modal" style="width:420px;">
-          <div class="as-modal-head">
-            <div class="as-modal-title">토스페이먼츠 연동</div>
-            <div class="as-modal-close" id="asPgModalClose">✕</div>
-          </div>
-          <p style="font-size:12.5px;color:var(--ink-soft);line-height:1.75;margin:0 0 20px;">
-            아래 버튼을 누르면 토스페이먼츠 가맹점 연동 페이지로 이동해요.<br>
-            로그인하고 권한을 허용하면 클라이언트 키·시크릿 키가 자동으로 연동돼요.
-          </p>
-          <button class="as-btn as-btn-primary" style="width:100%;" id="asPgModalConnectBtn">토스페이먼츠에서 연동 완료</button>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -1349,15 +1388,15 @@
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
-      purpose:'정기멤버십 가입자와 매출 현황을 한눈에 확인하는 통계 화면이에요.',
-      parts:'전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출 요약 카드와, 월별 가입자 추이 테이블로 구성돼요.',
-      action:'요약 지표와 월별 추이를 확인해요.'
+      purpose:'조회 조건을 지정해 정기멤버십 가입자와 매출 현황을 구체적으로 확인하는 통계 화면이에요.',
+      parts:'상단 조회 기간·멤버십 검색 조건과 조회/초기화 버튼, 전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출 요약 카드, 월별 가입자 추이 테이블과 일별 가입자 추이 테이블로 구성돼요.',
+      action:'조회 기간과 멤버십을 선택해 조회하면, 요약 지표와 월별·일별 추이를 확인할 수 있어요.'
     },
     'membership-intro': {
       number:'13', label:'정기멤버십 소개 페이지 및 약관 관리', kind:'어드민 화면', admin:'intro',
-      purpose:'멤버십명·혜택을 템플릿 또는 HTML 직접 입력으로 구성해 구매자에게 노출될 소개 페이지를 실시간 미리보기로 만들고, 이용약관·유의사항도 함께 관리하는 화면이에요.',
-      parts:'상단에는 진열 여부 토글, 템플릿/HTML 입력 모드 탭, 입력값이 실시간 반영되는 모바일 소개 페이지 미리보기(하단에 다음에 할게요/멤버십 가입하기 버튼 포함)가 있어요. 하단에는 이용약관·유의사항 입력 영역과 프론트 노출 여부 토글이 있어요.',
-      action:'템플릿에 멤버십명·혜택을 입력하거나 HTML을 직접 작성하면 오른쪽 모바일 미리보기에 바로 반영돼요. 진열 토글로 노출 여부를 정하고, 약관·유의사항도 입력한 뒤 저장해요.'
+      purpose:'멤버십명·혜택을 템플릿 또는 HTML 직접 입력으로 구성해 구매자에게 노출될 소개 페이지를 실시간 미리보기로 만들고, 가입 시점에 노출되는 정기결제 동의 항목·유의사항도 함께 관리하는 화면이에요.',
+      parts:'상단에는 진열 여부 토글, 템플릿/HTML 입력 모드 탭, 입력값이 실시간 반영되는 모바일 소개 페이지 미리보기가 있어요. 미리보기 하단에는 개인정보 수집·이용 동의, 전자지급 거래대행 서비스 이용약관 동의 체크리스트와 다음에 할게요/멤버십 가입하기 버튼이 있어요. 화면 하단에는 이 동의 항목들의 실제 약관 내용과 유의사항 입력 영역, 유의사항 노출 여부 토글이 있어요.',
+      action:'템플릿에 멤버십명·혜택을 입력하거나 HTML을 직접 작성하면 오른쪽 모바일 미리보기에 바로 반영돼요. 구매자가 멤버십 가입하기를 누르는 시점에 노출될 동의 항목·약관·유의사항 내용을 입력한 뒤 저장해요.'
     }
   };
 
@@ -1517,50 +1556,6 @@
   if(asModalOverlay){
     asModalOverlay.addEventListener('click', function(e){
       if(e.target === asModalOverlay) asModalOverlay.hidden = true;
-    });
-  }
-
-  var asPgModalOverlay = document.getElementById('asPgModalOverlay');
-  var asPgModalClose = document.getElementById('asPgModalClose');
-  var asPgModalConnectBtn = document.getElementById('asPgModalConnectBtn');
-  var pgConnectBtn = document.getElementById('pgConnectBtn');
-  var pgDisconnectBtn = document.getElementById('pgDisconnectBtn');
-  var pgStatusBadge = document.getElementById('pgStatusBadge');
-  var pgClientKeyInput = document.getElementById('pgClientKeyInput');
-  var pgSecretKeyInput = document.getElementById('pgSecretKeyInput');
-  var pgActionsDisconnected = document.getElementById('pgActionsDisconnected');
-  var pgActionsConnected = document.getElementById('pgActionsConnected');
-
-  if(pgConnectBtn){
-    pgConnectBtn.addEventListener('click', function(){ asPgModalOverlay.hidden = false; });
-  }
-  if(asPgModalClose){
-    asPgModalClose.addEventListener('click', function(){ asPgModalOverlay.hidden = true; });
-  }
-  if(asPgModalOverlay){
-    asPgModalOverlay.addEventListener('click', function(e){
-      if(e.target === asPgModalOverlay) asPgModalOverlay.hidden = true;
-    });
-  }
-  if(asPgModalConnectBtn){
-    asPgModalConnectBtn.addEventListener('click', function(){
-      asPgModalOverlay.hidden = true;
-      pgStatusBadge.textContent = '연동됨';
-      pgStatusBadge.className = 'as-status paid';
-      pgClientKeyInput.value = 'live_ck_2j3k4h5g6f7d8s9a0p';
-      pgSecretKeyInput.value = 'live_sk_9q8w7e6r5t4y3u2i1o';
-      pgActionsDisconnected.hidden = true;
-      pgActionsConnected.hidden = false;
-    });
-  }
-  if(pgDisconnectBtn){
-    pgDisconnectBtn.addEventListener('click', function(){
-      pgStatusBadge.textContent = '미연동';
-      pgStatusBadge.className = 'as-status pending';
-      pgClientKeyInput.value = '';
-      pgSecretKeyInput.value = '';
-      pgActionsConnected.hidden = true;
-      pgActionsDisconnected.hidden = false;
     });
   }
 
