@@ -1165,19 +1165,30 @@
             <h1>정기멤버십 전용 상품 관리</h1>
             <p class="as-desc">상품별로 적용할 멤버십 종류와 전용가를 설정합니다.</p>
 
+            <div class="as-panel" style="max-width:none; margin-bottom:22px;">
+              <div class="as-field-group" style="max-width:420px;">
+                <div class="as-label">상품 검색</div>
+                <div class="as-field"><input class="as-input" type="text" id="productListSearchInput" placeholder="상품명 또는 상품코드로 검색"></div>
+              </div>
+              <div class="as-actions center">
+                <button class="as-btn as-btn-secondary" id="productListResetBtn">초기화</button>
+                <button class="as-btn as-btn-primary" id="productListSearchBtn">검색</button>
+              </div>
+            </div>
+
             <div class="as-list-toolbar">
               <div class="as-list-count"><span class="as-list-heading">상품 목록</span>전체 <b>7</b>개</div>
-              <div style="display:flex; gap:8px;">
+              <div style="display:flex; gap:8px; align-items:center;">
+                <select class="as-input as-btn-sm" style="padding:6px 10px;" disabled>
+                  <option>10개씩 보기</option>
+                  <option>50개씩 보기</option>
+                  <option>100개씩 보기</option>
+                </select>
                 <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
                 <button class="as-btn as-btn-secondary as-btn-sm" id="productSearchBtn">상품 불러오기</button>
               </div>
             </div>
             <div class="as-warn-box">· "멤버십 전용"으로 설정한 상품은 비회원이 shop에서 클릭하면 "멤버십 가입 후 구매 가능한 전용 상품입니다" 안내 팝업과 함께 멤버십 가입하기로 유도됩니다.</div>
-            <div class="as-search-row" style="max-width:none;">
-              <input class="as-input" type="text" id="productListSearchInput" placeholder="상품명 또는 상품코드로 검색" style="max-width:360px;">
-              <button class="as-btn as-btn-primary" id="productListSearchBtn">검색</button>
-              <button class="as-btn as-btn-secondary" id="productListResetBtn">초기화</button>
-            </div>
             <div class="as-table-wrap">
               <table class="as-table" style="min-width:1080px;">
                 <thead><tr><th>No.</th><th>썸네일</th><th>상품코드</th><th>상품명</th><th>판매가</th><th>멤버십 전용</th><th>적용 멤버십 · 전용가</th><th>등록일</th><th>주문건수</th><th>관리</th></tr></thead>
