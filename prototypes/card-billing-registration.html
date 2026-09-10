@@ -313,8 +313,16 @@
   .as-content .as-desc{ font-size:12px; color:var(--ink-soft); margin:0 0 20px; }
 
   .as-tabs{ display:flex; align-items:center; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
-  .as-tab{ padding:9px 16px; border-radius:8px 8px 0 0; font-size:12.5px; font-weight:700; color:var(--ink-soft); background:#EDEFF3; cursor:pointer; }
+  .as-tab{ display:flex; align-items:center; gap:8px; padding:9px 12px 9px 16px; border-radius:8px 8px 0 0; font-size:12.5px; font-weight:700; color:var(--ink-soft); background:#EDEFF3; cursor:pointer; }
   .as-tab.active{ background:#fff; color:var(--brand-dark); border:1px solid var(--line); border-bottom:2px solid var(--brand); margin-bottom:-1px; }
+  .as-tab[hidden]{ display:none; }
+  .as-tab-del{
+    display:flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:50%; font-size:12px; font-weight:700;
+    color:var(--ink-soft); cursor:pointer;
+  }
+  .as-tab-del:hover{ background:rgba(216,83,43,.12); color:var(--warn); }
+  .as-tab-del[hidden]{ display:none; }
   .as-tab-add{ padding:9px 14px; border-radius:8px; font-size:11.5px; font-weight:700; color:var(--ink-soft); border:1px dashed #C9D0DC; cursor:pointer; }
   .as-tab-add[hidden]{ display:none; }
 
@@ -720,9 +728,9 @@
 
             <div class="as-subhead">멤버십</div>
             <div class="as-tabs" id="memTabs">
-              <div class="as-tab active" data-mem="1">멤버십 1</div>
-              <div class="as-tab" data-mem="2">멤버십 2</div>
-              <div class="as-tab" data-mem="3" hidden>멤버십 3</div>
+              <div class="as-tab active" data-mem="1"><span class="as-tab-label">멤버십 1</span><span class="as-tab-del" data-mem="1">×</span></div>
+              <div class="as-tab" data-mem="2"><span class="as-tab-label">멤버십 2</span><span class="as-tab-del" data-mem="2">×</span></div>
+              <div class="as-tab" data-mem="3" hidden><span class="as-tab-label">멤버십 3</span><span class="as-tab-del" data-mem="3">×</span></div>
               <div class="as-tab-add" id="memAddBtn">+ 멤버십 추가</div>
             </div>
 
@@ -1371,9 +1379,45 @@
     });
   }
 
-  document.querySelectorAll('.as-tab[data-mem]').forEach(function(el){
+  function bindTabSelect(el){
     el.addEventListener('click', function(){ selectMemTab(el.getAttribute('data-mem')); });
-  });
+  }
+
+  function updateTabDeleteVisibility(){
+    var visibleTabs = document.querySelectorAll('.as-tab[data-mem]:not([hidden])');
+    var onlyOne = visibleTabs.length <= 1;
+    visibleTabs.forEach(function(t){
+      var del = t.querySelector('.as-tab-del');
+      if(del) del.hidden = onlyOne;
+    });
+  }
+
+  function deleteMemTab(mem){
+    var remaining = document.querySelectorAll('.as-tab[data-mem]:not([hidden])').length;
+    if(remaining <= 1) return;
+    var tab = document.querySelector('.as-tab[data-mem="' + mem + '"]:not([hidden])');
+    var panel = document.querySelector('.as-mem-panel[data-mem="' + mem + '"]');
+    if(!tab) return;
+    var wasActive = tab.classList.contains('active');
+    tab.remove();
+    if(panel) panel.remove();
+    if(wasActive){
+      var firstTab = document.querySelector('.as-tab[data-mem]:not([hidden])');
+      if(firstTab) selectMemTab(firstTab.getAttribute('data-mem'));
+    }
+    updateTabDeleteVisibility();
+  }
+
+  function bindTabDelete(el){
+    el.addEventListener('click', function(e){
+      e.stopPropagation();
+      deleteMemTab(el.getAttribute('data-mem'));
+    });
+  }
+
+  document.querySelectorAll('.as-tab[data-mem]').forEach(bindTabSelect);
+  document.querySelectorAll('.as-tab-del').forEach(bindTabDelete);
+  updateTabDeleteVisibility();
 
   var memCount = document.querySelectorAll('.as-tab[data-mem]:not([hidden])').length;
   var memTemplatePanel = document.querySelector('.as-mem-panel[data-mem="3"]');
@@ -1384,27 +1428,25 @@
     memAddBtn.addEventListener('click', function(){
       memCount++;
       var mem = String(memCount);
-      var tab, panel;
-      if(memTemplateTab.hidden){
-        tab = memTemplateTab;
-        panel = memTemplatePanel;
-        tab.hidden = false;
-      } else {
-        tab = memTemplateTab.cloneNode(true);
-        tab.removeAttribute('hidden');
-        tab.setAttribute('data-mem', mem);
-        memTemplateTab.parentNode.insertBefore(tab, memAddBtn);
 
-        panel = memTemplatePanel.cloneNode(true);
-        panel.setAttribute('data-mem', mem);
-        panel.hidden = true;
-        memTemplatePanel.parentNode.appendChild(panel);
+      var tab = memTemplateTab.cloneNode(true);
+      tab.removeAttribute('hidden');
+      tab.setAttribute('data-mem', mem);
+      memTemplateTab.parentNode.insertBefore(tab, memAddBtn);
 
-        tab.addEventListener('click', function(){ selectMemTab(tab.getAttribute('data-mem')); });
-        bindCouponOpenButtons(panel);
-      }
-      tab.textContent = '멤버십 ' + mem;
+      var panel = memTemplatePanel.cloneNode(true);
+      panel.setAttribute('data-mem', mem);
+      panel.hidden = true;
+      memTemplatePanel.parentNode.appendChild(panel);
+
+      tab.querySelector('.as-tab-label').textContent = '멤버십 ' + mem;
+      tab.querySelector('.as-tab-del').setAttribute('data-mem', mem);
+      bindTabSelect(tab);
+      bindTabDelete(tab.querySelector('.as-tab-del'));
+      bindCouponOpenButtons(panel);
+
       selectMemTab(mem);
+      updateTabDeleteVisibility();
     });
   }
 
