@@ -380,6 +380,7 @@
     display:flex; align-items:center; justify-content:center; cursor:default;
   }
   .as-page-btn.active{ background:var(--brand); border-color:var(--brand); color:#fff; }
+  .as-link-num{ color:var(--brand-dark); font-weight:700; text-decoration:underline; cursor:pointer; }
 
   .as-modal-overlay{
     position:absolute; inset:0; background:rgba(15,23,42,.4); z-index:5;
@@ -1297,20 +1298,33 @@
                 <div class="as-stat-label">이번 달 멤버십 매출</div>
                 <div class="as-stat-value">12,730,400<span class="unit">원</span></div>
               </div>
+              <div class="as-stat-card">
+                <div class="as-stat-label">정기멤버십 누적 주문 건수</div>
+                <div class="as-stat-value">3,842<span class="unit">건</span></div>
+              </div>
             </div>
 
             <div class="as-list-toolbar">
               <div class="as-subhead" style="margin:0;">월별 가입자 추이</div>
-              <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <select class="as-input as-btn-sm" style="padding:6px 10px;" disabled>
+                  <option>전체 멤버십</option>
+                  <option>멤버십 1</option>
+                  <option>멤버십 2</option>
+                  <option>멤버십 3</option>
+                </select>
+                <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
+              </div>
             </div>
+            <p class="as-desc" style="margin:-6px 0 12px; font-size:11px;">신규가입·해지 수치를 클릭하면 해당 회원 목록을 확인할 수 있습니다.</p>
             <table class="as-table" style="max-width:720px;">
               <thead><tr><th>월</th><th>멤버십</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
               <tbody>
-                <tr><td>2026.05</td><td>멤버십 1</td><td>72</td><td>14</td><td>1,041</td></tr>
-                <tr><td>2026.06</td><td>멤버십 2</td><td>84</td><td>19</td><td>1,106</td></tr>
-                <tr><td>2026.07</td><td>멤버십 1</td><td>65</td><td>17</td><td>1,154</td></tr>
-                <tr><td>2026.08</td><td>멤버십 2</td><td>90</td><td>25</td><td>1,219</td></tr>
-                <tr><td>2026.09</td><td>멤버십 1</td><td>96</td><td>21</td><td>1,284</td></tr>
+                <tr><td>2026.05</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.05">72</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.05">14</span></td><td>1,041</td></tr>
+                <tr><td>2026.06</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.06">84</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.06">19</span></td><td>1,106</td></tr>
+                <tr><td>2026.07</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.07">65</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.07">17</span></td><td>1,154</td></tr>
+                <tr><td>2026.08</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.08">90</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.08">25</span></td><td>1,219</td></tr>
+                <tr><td>2026.09</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09">96</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09">21</span></td><td>1,284</td></tr>
               </tbody>
             </table>
 
@@ -1321,13 +1335,13 @@
             <table class="as-table" style="max-width:720px;">
               <thead><tr><th>날짜</th><th>멤버십</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
               <tbody>
-                <tr><td>2026.09.04</td><td>멤버십 1</td><td>11</td><td>2</td><td>1,258</td></tr>
-                <tr><td>2026.09.05</td><td>멤버십 2</td><td>9</td><td>3</td><td>1,264</td></tr>
-                <tr><td>2026.09.06</td><td>멤버십 1</td><td>14</td><td>4</td><td>1,274</td></tr>
-                <tr><td>2026.09.07</td><td>멤버십 2</td><td>8</td><td>1</td><td>1,281</td></tr>
-                <tr><td>2026.09.08</td><td>멤버십 1</td><td>6</td><td>2</td><td>1,285</td></tr>
-                <tr><td>2026.09.09</td><td>멤버십 2</td><td>10</td><td>3</td><td>1,292</td></tr>
-                <tr><td>2026.09.10</td><td>멤버십 1</td><td>13</td><td>6</td><td>1,299</td></tr>
+                <tr><td>2026.09.04</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.04">11</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.04">2</span></td><td>1,258</td></tr>
+                <tr><td>2026.09.05</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.09.05">9</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.05">3</span></td><td>1,264</td></tr>
+                <tr><td>2026.09.06</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.06">14</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.06">4</span></td><td>1,274</td></tr>
+                <tr><td>2026.09.07</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.09.07">8</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.07">1</span></td><td>1,281</td></tr>
+                <tr><td>2026.09.08</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.08">6</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.08">2</span></td><td>1,285</td></tr>
+                <tr><td>2026.09.09</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.09.09">10</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.09">3</span></td><td>1,292</td></tr>
+                <tr><td>2026.09.10</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.10">13</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.10">6</span></td><td>1,299</td></tr>
               </tbody>
             </table>
           </section>
@@ -1449,6 +1463,24 @@
             </div>
           </section>
 
+        </div>
+      </div>
+
+      <div class="as-modal-overlay" id="asMemberListModalOverlay" hidden>
+        <div class="as-modal" style="width:600px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title" id="memberListModalTitle">신규가입 회원 목록</div>
+            <div class="as-modal-close" id="memberListModalClose">✕</div>
+          </div>
+          <div class="as-search-row" style="margin-bottom:14px;">
+            <input class="as-input" type="text" id="memberListSearchInput" placeholder="회원 이름 또는 아이디로 검색">
+          </div>
+          <div class="as-coupon-table-wrap">
+            <table class="as-table" id="memberListTable">
+              <thead><tr><th>아이디</th><th>이름</th><th>멤버십</th><th>일자</th></tr></thead>
+              <tbody id="memberListTableBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -1602,9 +1634,9 @@
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
-      purpose:'조회 조건을 지정해 정기멤버십 가입자와 매출 현황을 멤버십별로 구체적으로 확인하는 통계 화면이에요.',
-      parts:'상단 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건과 조회/초기화 버튼, 전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출 요약 카드가 있어요. 월별·일별 가입자 추이 테이블에는 멤버십 컬럼이 있어 어느 멤버십의 수치인지 구분되고, 각 테이블 상단 우측에 엑셀 다운로드 버튼이 있어요.',
-      action:'조회 기간과 멤버십(전체 또는 특정 멤버십)을 선택해 조회하면, 요약 지표와 멤버십별 월별·일별 추이를 확인할 수 있어요.'
+      purpose:'조회 조건을 지정해 정기멤버십 가입자·주문·매출 현황을 멤버십별로 구체적으로 확인하고, 신규가입·해지 회원 목록까지 바로 조회할 수 있는 통계 화면이에요.',
+      parts:'상단 조회 기간·멤버십(전체/멤버십 1/2/3) 검색 조건과 조회/초기화 버튼, 전체 가입자 수·이번 달 신규 가입자·이번 달 해지자·이번 달 매출·정기멤버십 누적 주문 건수 요약 카드가 있어요. 월별·일별 가입자 추이 테이블에는 멤버십 컬럼이 있고, 월별 추이 상단에는 멤버십 선택 셀렉트가 별도로 있어요. 신규가입·해지 수치는 링크로 표시되어 클릭하면 회원 이름·아이디로 검색 가능한 회원 목록 팝업이 떠요.',
+      action:'조회 기간과 멤버십을 선택해 조회하고, 신규가입·해지 숫자를 클릭해 해당 회원 목록을 확인해요. 팝업 안에서 이름이나 아이디로 다시 검색할 수 있어요.'
     },
     'membership-intro': {
       number:'13', label:'정기멤버십 소개 페이지 및 약관 관리', kind:'어드민 화면', admin:'intro',
@@ -1916,6 +1948,71 @@
   if(asTestProductModalOverlay){
     asTestProductModalOverlay.addEventListener('click', function(e){
       if(e.target === asTestProductModalOverlay) asTestProductModalOverlay.hidden = true;
+    });
+  }
+
+  var NEW_MEMBER_LIST = [
+    { id:'flexg_user01', name:'김지훈', mem:'멤버십 1' },
+    { id:'weed_min22', name:'민서연', mem:'멤버십 2' },
+    { id:'subin_kim', name:'김수빈', mem:'멤버십 1' },
+    { id:'hyesun_choi', name:'최혜선', mem:'멤버십 2' },
+    { id:'flexg_biz03', name:'박도윤', mem:'멤버십 1' },
+    { id:'flexg_dev99', name:'이하은', mem:'멤버십 2' }
+  ];
+  var CANCEL_MEMBER_LIST = [
+    { id:'flexg_old12', name:'정우진', mem:'멤버십 1' },
+    { id:'weed_bye07', name:'한소율', mem:'멤버십 2' },
+    { id:'subin_out', name:'오태민', mem:'멤버십 1' }
+  ];
+
+  var asMemberListModalOverlay = document.getElementById('asMemberListModalOverlay');
+  var memberListModalTitle = document.getElementById('memberListModalTitle');
+  var memberListModalClose = document.getElementById('memberListModalClose');
+  var memberListSearchInput = document.getElementById('memberListSearchInput');
+  var memberListTableBody = document.getElementById('memberListTableBody');
+  var currentMemberListSource = [];
+  var currentMemberListPeriod = '';
+
+  function renderMemberList(){
+    var keyword = memberListSearchInput.value.trim();
+    var list = keyword
+      ? currentMemberListSource.filter(function(m){
+          return m.name.indexOf(keyword) !== -1 || m.id.indexOf(keyword) !== -1;
+        })
+      : currentMemberListSource;
+
+    memberListTableBody.innerHTML = '';
+    if(list.length === 0){
+      memberListTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>';
+      return;
+    }
+    list.forEach(function(m){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + m.id + '</td><td>' + m.name + '</td><td>' + m.mem + '</td><td>' + currentMemberListPeriod + '</td>';
+      memberListTableBody.appendChild(tr);
+    });
+  }
+
+  document.querySelectorAll('.as-link-num').forEach(function(el){
+    el.addEventListener('click', function(){
+      var type = el.getAttribute('data-type');
+      currentMemberListPeriod = el.getAttribute('data-period');
+      currentMemberListSource = type === 'cancel' ? CANCEL_MEMBER_LIST : NEW_MEMBER_LIST;
+      memberListModalTitle.textContent = (type === 'cancel' ? '해지 회원 목록 · ' : '신규가입 회원 목록 · ') + currentMemberListPeriod;
+      memberListSearchInput.value = '';
+      renderMemberList();
+      asMemberListModalOverlay.hidden = false;
+    });
+  });
+  if(memberListSearchInput){
+    memberListSearchInput.addEventListener('input', renderMemberList);
+  }
+  if(memberListModalClose){
+    memberListModalClose.addEventListener('click', function(){ asMemberListModalOverlay.hidden = true; });
+  }
+  if(asMemberListModalOverlay){
+    asMemberListModalOverlay.addEventListener('click', function(e){
+      if(e.target === asMemberListModalOverlay) asMemberListModalOverlay.hidden = true;
     });
   }
 
