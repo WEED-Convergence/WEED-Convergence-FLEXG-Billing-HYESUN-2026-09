@@ -327,6 +327,10 @@
   .as-tab-add[hidden]{ display:none; }
 
   .as-panel{ background:#fff; border:1px solid var(--line); border-radius:10px; padding:22px 24px; max-width:560px; margin-bottom:18px; }
+  .as-test-product{ margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--line); }
+  .as-test-product-note{ font-size:11.5px; color:var(--warn); font-weight:600; line-height:1.7; margin-bottom:12px; }
+  .as-test-product-selected{ font-size:12px; color:var(--ink-soft); margin-top:10px; }
+  .as-test-product-selected .name{ color:var(--brand-dark); font-weight:700; }
   .as-row{ display:flex; align-items:center; gap:20px; padding:12px 0; border-bottom:1px solid var(--line); }
   .as-row:last-child{ border-bottom:none; }
   .as-label{ flex:0 0 140px; font-size:12.5px; font-weight:700; color:var(--ink); }
@@ -757,6 +761,11 @@
 
             <div class="as-subhead" style="margin-top:0;">PG/빌링키 연동 설정</div>
             <div class="as-panel">
+              <div class="as-test-product">
+                <div class="as-test-product-note">PG 연동을 위해서는 실제 판매 중인 상품을 1개 이상 등록해야 한다. 상품명에 '테스트', '샘플' 등의 단어나 1원 등 임의 가격이 포함된 상품은 등록할 수 없다.</div>
+                <button class="as-btn as-btn-secondary" id="testProductBtn">테스트 상품 불러오기</button>
+                <div class="as-test-product-selected" id="testProductSelected">선택된 상품: 없음</div>
+              </div>
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">연동 상태</div>
@@ -779,7 +788,7 @@
               </div>
             </div>
             <div class="as-actions">
-              <button class="as-btn as-btn-primary">연동하기</button>
+              <button class="as-btn as-btn-primary" id="pgConnectBtn" disabled>연동하기</button>
               <button class="as-btn as-btn-secondary">연동 해제</button>
             </div>
 
@@ -1394,6 +1403,25 @@
         </div>
       </div>
 
+      <div class="as-modal-overlay" id="asTestProductModalOverlay" hidden>
+        <div class="as-modal" style="width:520px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title">테스트 상품 불러오기</div>
+            <div class="as-modal-close" id="asTestProductModalClose">✕</div>
+          </div>
+          <div class="as-coupon-note">· 상품명으로 검색해 PG 심사용으로 등록할 실제 판매 상품을 선택한다.</div>
+          <div class="as-search-row" style="margin-bottom:14px;">
+            <input class="as-input" type="text" id="testProductSearchInput" placeholder="상품명으로 검색">
+          </div>
+          <div class="as-coupon-table-wrap">
+            <table class="as-table" id="testProductCatalogTable">
+              <thead><tr><th>상품명</th><th>정가</th><th></th></tr></thead>
+              <tbody id="testProductCatalogBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <div class="as-modal-overlay" id="asProductModalOverlay" hidden>
         <div class="as-modal" style="width:520px;">
           <div class="as-modal-head">
@@ -1507,9 +1535,9 @@
     },
     'membership-basic': {
       number:'09', label:'정기멤버십 기본 설정', kind:'어드민 화면', admin:'basic',
-      purpose:'판매자가 토스페이먼츠 PG/빌링키 연동을 설정하고, 멤버십을 개수 제한 없이 등록해 각 멤버십별 기본 정보와 가입자 혜택을 설정하는 관리자 화면이에요.',
-      parts:'상단 PG/빌링키 연동 상태와 토스페이먼츠 클라이언트 키·시크릿 키 입력 영역과, 멤버십 탭 영역(+ 멤버십 추가로 계속 늘릴 수 있어요)으로 구성돼요. 각 멤버십 탭 안에는 사용 여부 토글, 멤버십명·정기결제 금액 입력과 포인트 지급·즉시 할인·배송비 혜택·쿠폰 지급 설정 카드가 있어요.',
-      action:'토스페이먼츠 API 키를 입력해 연동 설정하고, 탭에서 멤버십을 선택해 기본 정보와 혜택 조건을 입력한 뒤 저장해요. + 멤버십 추가로 새 멤버십 탭을 계속 만들 수 있어요.'
+      purpose:'판매자가 PG 심사용 테스트 상품을 등록하고 토스페이먼츠 PG/빌링키 연동을 설정하며, 멤버십을 개수 제한 없이 등록해 각 멤버십별 기본 정보와 가입자 혜택을 설정하는 관리자 화면이에요.',
+      parts:'PG/빌링키 연동 설정 카드 상단에 테스트 상품 불러오기(실제 판매 상품 검색·선택) 영역이 있고, 그 아래 연동 상태·PG사·토스페이먼츠 클라이언트 키·시크릿 키 입력과 연동하기/연동 해제 버튼이 있어요. 테스트 상품을 선택하기 전에는 연동하기 버튼이 비활성 상태예요. 하단에는 멤버십 탭 영역(+ 멤버십 추가로 계속 늘릴 수 있어요)이 있고, 각 탭 안에 사용 여부 토글, 멤버십명·정기결제 금액 입력과 포인트 지급·즉시 할인·배송비 혜택·쿠폰 지급 설정 카드가 있어요.',
+      action:'테스트 상품 불러오기로 심사용 상품을 선택하면 연동하기 버튼이 활성화돼요. 토스페이먼츠 API 키를 입력해 연동 설정하고, 탭에서 멤버십을 선택해 기본 정보와 혜택 조건을 입력한 뒤 저장해요. + 멤버십 추가로 새 멤버십 탭을 계속 만들 수 있어요.'
     },
     'membership-products': {
       number:'10', label:'정기멤버십 전용 상품 관리', kind:'어드민 화면', admin:'products',
@@ -1763,6 +1791,64 @@
   if(asProductModalOverlay){
     asProductModalOverlay.addEventListener('click', function(e){
       if(e.target === asProductModalOverlay) asProductModalOverlay.hidden = true;
+    });
+  }
+
+  var TEST_PRODUCT_CATALOG = [
+    { name:'플렉스지 프리미엄 세트', price:'39,000원' },
+    { name:'플렉스지 데일리 케어 3종', price:'24,000원' },
+    { name:'플렉스지 리필 파우치', price:'12,000원' },
+    { name:'플렉스지 기획 선물세트', price:'58,000원' },
+    { name:'플렉스지 핸드크림', price:'8,000원' }
+  ];
+
+  var pgConnectBtn = document.getElementById('pgConnectBtn');
+  var testProductBtn = document.getElementById('testProductBtn');
+  var testProductSelected = document.getElementById('testProductSelected');
+  var testProductSearchInput = document.getElementById('testProductSearchInput');
+  var testProductCatalogBody = document.getElementById('testProductCatalogBody');
+  var asTestProductModalOverlay = document.getElementById('asTestProductModalOverlay');
+  var asTestProductModalClose = document.getElementById('asTestProductModalClose');
+
+  function renderTestProductCatalog(){
+    var keyword = testProductSearchInput.value.trim();
+    var list = keyword
+      ? TEST_PRODUCT_CATALOG.filter(function(p){ return p.name.indexOf(keyword) !== -1; })
+      : TEST_PRODUCT_CATALOG;
+
+    testProductCatalogBody.innerHTML = '';
+    if(list.length === 0){
+      testProductCatalogBody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--ink-soft);">검색 결과가 없다.</td></tr>';
+      return;
+    }
+    list.forEach(function(p){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + p.name + '</td><td>' + p.price + '</td>' +
+        '<td class="as-td-actions"><button class="as-btn as-btn-primary as-btn-sm">선택</button></td>';
+      tr.querySelector('button').addEventListener('click', function(){
+        testProductSelected.innerHTML = '선택된 상품: <span class="name">' + p.name + '</span>';
+        if(pgConnectBtn) pgConnectBtn.disabled = false;
+        asTestProductModalOverlay.hidden = true;
+      });
+      testProductCatalogBody.appendChild(tr);
+    });
+  }
+
+  if(testProductBtn){
+    testProductBtn.addEventListener('click', function(){
+      renderTestProductCatalog();
+      asTestProductModalOverlay.hidden = false;
+    });
+  }
+  if(testProductSearchInput){
+    testProductSearchInput.addEventListener('input', renderTestProductCatalog);
+  }
+  if(asTestProductModalClose){
+    asTestProductModalClose.addEventListener('click', function(){ asTestProductModalOverlay.hidden = true; });
+  }
+  if(asTestProductModalOverlay){
+    asTestProductModalOverlay.addEventListener('click', function(e){
+      if(e.target === asTestProductModalOverlay) asTestProductModalOverlay.hidden = true;
     });
   }
 
