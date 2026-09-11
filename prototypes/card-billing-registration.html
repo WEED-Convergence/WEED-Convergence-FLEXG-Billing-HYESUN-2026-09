@@ -381,6 +381,11 @@
     background:var(--warn-tint); border:1px solid var(--warn); border-radius:8px;
     padding:12px 14px; margin:0 0 16px;
   }
+  .as-info-box{
+    font-size:11.5px; font-weight:700; color:var(--brand-dark); line-height:1.7;
+    background:var(--brand-tint); border:1px solid var(--brand); border-radius:8px;
+    padding:12px 14px; margin:0 0 16px; max-width:560px;
+  }
   .as-coupon-table-wrap{ overflow-x:auto; margin-top:14px; }
   .as-coupon-table-wrap[hidden]{ display:none; }
   .as-coupon-btn-row{ display:flex; gap:8px; }
@@ -469,6 +474,8 @@
   .as-status.paid{ background:var(--brand-tint); color:var(--brand-dark); }
   .as-status.pending{ background:#FFF4E0; color:#B4700B; }
   .as-status.failed{ background:#FBE9E3; color:#D8532B; }
+  .as-status.retry{ background:#FFF4E0; color:#B4700B; cursor:pointer; }
+  .as-status.finalfail{ background:#FBE9E3; color:#D8532B; cursor:pointer; }
 
   .as-trend-group{
     background:#fff; border:1px solid var(--line); border-radius:12px;
@@ -870,6 +877,8 @@
               <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
               <button class="as-btn as-btn-secondary">연동 해제</button>
             </div>
+
+            <div class="as-info-box">ⓘ 정기결제가 실패하면 1일 후 1회 자동으로 재결제를 시도합니다. 재시도까지 실패하면 결제가 최종 실패 처리되며, 가입자 관리에서 확인하실 수 있습니다.</div>
 
             <div class="as-subhead">멤버십</div>
             <div class="as-tabs" id="memTabs">
@@ -1338,7 +1347,8 @@
                     <select class="as-input" disabled>
                       <option>전체</option>
                       <option>결제완료</option>
-                      <option>결제실패</option>
+                      <option>재시도중</option>
+                      <option>최종실패</option>
                     </select>
                   </div>
                 </div>
@@ -1390,7 +1400,7 @@
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
-                    <td>4</td><td>hyesun_choi</td><td>멤버십 2</td><td>2026.05.27</td><td><span class="as-status failed">결제실패</span></td>
+                    <td>4</td><td>hyesun_choi</td><td>멤버십 2</td><td>2026.05.27</td><td><span class="as-status retry" data-fail-reason="카드 한도초과" data-fail-at="2026.09.10 14:32" data-retry-at="2026.09.11 14:32">재시도중</span></td>
                     <td>4회차</td><td>19,900원</td><td>59,700원</td><td>2026.10.27</td>
                     <td>2026.09.01 11:15</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
@@ -1797,6 +1807,18 @@
         </div>
       </div>
 
+      <div class="as-modal-overlay" id="asFailReasonModalOverlay" hidden>
+        <div class="as-modal" style="width:360px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title" id="failReasonModalTitle">결제 실패 상세</div>
+            <div class="as-modal-close" id="failReasonModalClose">✕</div>
+          </div>
+          <div class="as-row"><div class="as-label" style="flex:0 0 90px;">실패 사유</div><div class="as-field" id="failReasonText" style="font-weight:700; color:var(--warn);"></div></div>
+          <div class="as-row"><div class="as-label" style="flex:0 0 90px;">실패 일시</div><div class="as-field" id="failReasonAt"></div></div>
+          <div class="as-row" id="failReasonRetryRow"><div class="as-label" style="flex:0 0 90px;">재시도 예정</div><div class="as-field" id="failReasonRetryAt"></div></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1854,7 +1876,7 @@
     },
     'membership-subscribers': {
       number:'11', label:'정기멤버십 가입자 관리', kind:'어드민 화면', admin:'subscribers',
-      policy:'정기결제는 자동결제라 결제 시점에 완료 또는 실패로 즉시 확정되고, 결제 대기 상태는 존재하지 않아요. 결제가 실패해도 멤버십은 자동으로 해지되지 않고 다음 회차에 재시도돼요. 관리자가 해지를 처리하면 다음 결제만 중단되고, 이미 결제한 이번 주기 혜택은 종료 예정일까지 유지되며 환불은 발생하지 않아요.'
+      policy:'정기결제는 자동결제라 결제 시점에 완료 또는 실패로 즉시 확정되고, 결제 대기 상태는 존재하지 않아요. 결제가 실패하면 1일 후 1회 자동으로 재시도되며(재시도중), 이때도 실패하면 추가 재시도 없이 최종실패로 처리돼요. 실패해도 멤버십은 자동으로 해지되지 않아요. 관리자가 해지를 처리하면 다음 결제만 중단되고, 이미 결제한 이번 주기 혜택은 종료 예정일까지 유지되며 환불은 발생하지 않아요.'
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
@@ -2020,6 +2042,34 @@
   if(asModalOverlay){
     asModalOverlay.addEventListener('click', function(e){
       if(e.target === asModalOverlay) asModalOverlay.hidden = true;
+    });
+  }
+
+  var asFailReasonModalOverlay = document.getElementById('asFailReasonModalOverlay');
+  var failReasonModalTitle = document.getElementById('failReasonModalTitle');
+  var failReasonModalClose = document.getElementById('failReasonModalClose');
+  var failReasonText = document.getElementById('failReasonText');
+  var failReasonAt = document.getElementById('failReasonAt');
+  var failReasonRetryRow = document.getElementById('failReasonRetryRow');
+  var failReasonRetryAt = document.getElementById('failReasonRetryAt');
+
+  document.querySelectorAll('.as-status.retry, .as-status.finalfail').forEach(function(el){
+    el.addEventListener('click', function(){
+      var isRetry = el.classList.contains('retry');
+      failReasonModalTitle.textContent = (isRetry ? '재시도중' : '최종실패') + ' 상세';
+      failReasonText.textContent = el.getAttribute('data-fail-reason');
+      failReasonAt.textContent = el.getAttribute('data-fail-at');
+      failReasonRetryRow.hidden = !isRetry;
+      if(isRetry) failReasonRetryAt.textContent = el.getAttribute('data-retry-at');
+      asFailReasonModalOverlay.hidden = false;
+    });
+  });
+  if(failReasonModalClose){
+    failReasonModalClose.addEventListener('click', function(){ asFailReasonModalOverlay.hidden = true; });
+  }
+  if(asFailReasonModalOverlay){
+    asFailReasonModalOverlay.addEventListener('click', function(e){
+      if(e.target === asFailReasonModalOverlay) asFailReasonModalOverlay.hidden = true;
     });
   }
 
