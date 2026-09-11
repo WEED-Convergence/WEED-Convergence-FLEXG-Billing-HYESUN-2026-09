@@ -1352,7 +1352,14 @@
 
             <div class="as-list-toolbar" style="margin-top:24px;">
               <div class="as-list-count"><span class="as-list-heading">가입자 목록</span>전체 <b>6</b>명</div>
-              <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
+                <select class="as-input as-btn-sm" style="padding:6px 10px; width:auto; flex:0 0 auto;" disabled>
+                  <option>10개씩 보기</option>
+                  <option>50개씩 보기</option>
+                  <option>100개씩 보기</option>
+                </select>
+              </div>
             </div>
 
             <div class="as-table-wrap">
