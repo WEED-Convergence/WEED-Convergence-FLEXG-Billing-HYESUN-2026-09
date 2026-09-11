@@ -905,7 +905,7 @@
               <div class="as-panel">
                 <div class="as-row">
                   <div class="as-label">멤버십 사용 여부</div>
-                  <div class="as-field"><div class="as-toggle on"><div class="knob"></div></div></div>
+                  <div class="as-field"><div class="as-toggle as-mem-active-toggle on"><div class="knob"></div></div></div>
                 </div>
                 <div class="as-row-pair">
                   <div class="as-field-group">
@@ -994,7 +994,7 @@
               <div class="as-panel">
                 <div class="as-row">
                   <div class="as-label">멤버십 사용 여부</div>
-                  <div class="as-field"><div class="as-toggle on"><div class="knob"></div></div></div>
+                  <div class="as-field"><div class="as-toggle as-mem-active-toggle on"><div class="knob"></div></div></div>
                 </div>
                 <div class="as-row-pair">
                   <div class="as-field-group">
@@ -1083,7 +1083,7 @@
               <div class="as-panel">
                 <div class="as-row">
                   <div class="as-label">멤버십 사용 여부</div>
-                  <div class="as-field"><div class="as-toggle"><div class="knob"></div></div></div>
+                  <div class="as-field"><div class="as-toggle as-mem-active-toggle"><div class="knob"></div></div></div>
                 </div>
                 <div class="as-row-pair">
                   <div class="as-field-group">
@@ -1810,6 +1810,20 @@
         </div>
       </div>
 
+      <div class="as-modal-overlay" id="asMemActiveModalOverlay" hidden>
+        <div class="as-modal" style="width:400px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title" id="memActiveModalTitle">멤버십 1을 사용 중지하시겠습니까?</div>
+            <div class="as-modal-close" id="memActiveModalClose">✕</div>
+          </div>
+          <div class="modal-desc" style="margin:0 0 20px;">신규 가입이 중단되고, 기존 가입자는 이미 결제된 기간까지만 이용할 수 있습니다.</div>
+          <div class="as-actions right">
+            <button class="as-btn as-btn-secondary" id="memActiveCancelBtn">취소</button>
+            <button class="as-btn as-btn-warn" id="memActiveConfirmBtn">중지하기</button>
+          </div>
+        </div>
+      </div>
+
       <div class="as-modal-overlay" id="asPgDisconnectModalOverlay" hidden>
         <div class="as-modal" style="width:400px;">
           <div class="as-modal-head">
@@ -2037,9 +2051,53 @@
       bindTabSelect(tab);
       bindTabDelete(tab.querySelector('.as-tab-del'));
       bindCouponOpenButtons(panel);
+      bindMemActiveToggle(panel);
 
       selectMemTab(mem);
       updateTabDeleteVisibility();
+    });
+  }
+
+  var asMemActiveModalOverlay = document.getElementById('asMemActiveModalOverlay');
+  var memActiveModalTitle = document.getElementById('memActiveModalTitle');
+  var memActiveModalClose = document.getElementById('memActiveModalClose');
+  var memActiveCancelBtn = document.getElementById('memActiveCancelBtn');
+  var memActiveConfirmBtn = document.getElementById('memActiveConfirmBtn');
+  var pendingMemActiveToggle = null;
+
+  function closeMemActiveModal(){ asMemActiveModalOverlay.hidden = true; pendingMemActiveToggle = null; }
+
+  function bindMemActiveToggle(scope){
+    scope.querySelectorAll('.as-mem-active-toggle').forEach(function(toggle){
+      toggle.addEventListener('click', function(){
+        if(!toggle.classList.contains('on')){
+          toggle.classList.add('on');
+          return;
+        }
+        var panel = toggle.closest('.as-mem-panel');
+        var mem = panel.getAttribute('data-mem');
+        var nameInput = panel.querySelector('.as-row-pair .as-field-group input.as-input');
+        var tabLabel = document.querySelector('.as-tab[data-mem="' + mem + '"] .as-tab-label');
+        var name = (nameInput && nameInput.value.trim()) || (tabLabel ? tabLabel.textContent.trim() : '멤버십');
+        memActiveModalTitle.textContent = name + '을 사용 중지하시겠습니까?';
+        pendingMemActiveToggle = toggle;
+        asMemActiveModalOverlay.hidden = false;
+      });
+    });
+  }
+  bindMemActiveToggle(document);
+
+  if(memActiveModalClose) memActiveModalClose.addEventListener('click', closeMemActiveModal);
+  if(memActiveCancelBtn) memActiveCancelBtn.addEventListener('click', closeMemActiveModal);
+  if(asMemActiveModalOverlay){
+    asMemActiveModalOverlay.addEventListener('click', function(e){
+      if(e.target === asMemActiveModalOverlay) closeMemActiveModal();
+    });
+  }
+  if(memActiveConfirmBtn){
+    memActiveConfirmBtn.addEventListener('click', function(){
+      if(pendingMemActiveToggle) pendingMemActiveToggle.classList.remove('on');
+      closeMemActiveModal();
     });
   }
 
