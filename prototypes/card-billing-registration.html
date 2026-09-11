@@ -857,7 +857,7 @@
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">연동 상태</div>
-                  <div class="as-field"><span class="as-status pending">미연동</span></div>
+                  <div class="as-field"><span class="as-status pending" id="pgStatusBadge">미연동</span></div>
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">PG사</div>
@@ -877,7 +877,7 @@
             </div>
             <div class="as-actions">
               <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
-              <button class="as-btn as-btn-secondary">연동 해제</button>
+              <button class="as-btn as-btn-secondary" id="pgDisconnectBtn">연동 해제</button>
             </div>
 
             <div class="as-subhead" style="margin-top:20px;">이용안내</div>
@@ -889,7 +889,7 @@
                 <li>판매자가 설정한 혜택은 정기멤버십 전용 상품으로 지정된 상품에만 적용되며, 지정된 상품이 없으면 혜택이 적용되지 않습니다.</li>
                 <li>판매자가 PG 연동을 해제하면 신규 가입은 중단되고, 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
                 <li>판매자가 멤버십 사용 여부를 끄면 신규 가입은 중단되고, 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
-                <li>회원이 탈퇴하면 가입 중인 멤버십은 자동으로 해지됩니다.</li>
+                <li>회원이 쇼핑몰을 탈퇴하면, 가입 중인 정기멤버십도 함께 자동으로 해지됩니다.</li>
               </ul>
             </div>
 
@@ -1810,6 +1810,20 @@
         </div>
       </div>
 
+      <div class="as-modal-overlay" id="asPgDisconnectModalOverlay" hidden>
+        <div class="as-modal" style="width:400px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title">PG 연동을 해제하시겠습니까?</div>
+            <div class="as-modal-close" id="pgDisconnectModalClose">✕</div>
+          </div>
+          <div class="modal-desc" style="margin:0 0 20px;">연동을 해제하면 멤버십1/2/3에 설정한 모든 정보(가격, 혜택, 전용 상품 등)가 초기화됩니다. 다시 연동하더라도 기존 설정은 복구되지 않습니다.</div>
+          <div class="as-actions right">
+            <button class="as-btn as-btn-secondary" id="pgDisconnectCancelBtn">취소</button>
+            <button class="as-btn as-btn-warn" id="pgDisconnectConfirmBtn">연동 해제하기</button>
+          </div>
+        </div>
+      </div>
+
       <div class="as-modal-overlay" id="asFailReasonModalOverlay" hidden>
         <div class="as-modal" style="width:360px;">
           <div class="as-modal-head">
@@ -2273,6 +2287,33 @@
   ];
 
   var pgConnectBtn = document.getElementById('pgConnectBtn');
+
+  var pgDisconnectBtn = document.getElementById('pgDisconnectBtn');
+  var pgStatusBadge = document.getElementById('pgStatusBadge');
+  var asPgDisconnectModalOverlay = document.getElementById('asPgDisconnectModalOverlay');
+  var pgDisconnectModalClose = document.getElementById('pgDisconnectModalClose');
+  var pgDisconnectCancelBtn = document.getElementById('pgDisconnectCancelBtn');
+  var pgDisconnectConfirmBtn = document.getElementById('pgDisconnectConfirmBtn');
+
+  function closePgDisconnectModal(){ asPgDisconnectModalOverlay.hidden = true; }
+  if(pgDisconnectBtn){
+    pgDisconnectBtn.addEventListener('click', function(){ asPgDisconnectModalOverlay.hidden = false; });
+  }
+  if(pgDisconnectModalClose) pgDisconnectModalClose.addEventListener('click', closePgDisconnectModal);
+  if(pgDisconnectCancelBtn) pgDisconnectCancelBtn.addEventListener('click', closePgDisconnectModal);
+  if(asPgDisconnectModalOverlay){
+    asPgDisconnectModalOverlay.addEventListener('click', function(e){
+      if(e.target === asPgDisconnectModalOverlay) closePgDisconnectModal();
+    });
+  }
+  if(pgDisconnectConfirmBtn){
+    pgDisconnectConfirmBtn.addEventListener('click', function(){
+      pgStatusBadge.className = 'as-status pending';
+      pgStatusBadge.textContent = '미연동';
+      closePgDisconnectModal();
+    });
+  }
+
   var testProductBtn = document.getElementById('testProductBtn');
   var testProductSelected = document.getElementById('testProductSelected');
   var testProductSearchInput = document.getElementById('testProductSearchInput');
