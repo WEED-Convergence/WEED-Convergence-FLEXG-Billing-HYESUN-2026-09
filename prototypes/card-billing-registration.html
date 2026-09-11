@@ -603,12 +603,12 @@
     <li class="nav-item" data-screen="cancel-popup"><div class="num">08</div><div class="tx"><div class="name">해지 확인 팝업</div><div class="kind">팝업</div></div></li>
 
     <li class="nav-section-label alt">정기멤버십</li>
+    <li class="nav-item" data-screen="policy"><div class="tx"><div class="name">정기멤버십 정책</div><div class="kind">메모</div></div></li>
     <li class="nav-item" data-screen="membership-basic"><div class="num">09</div><div class="tx"><div class="name">정기멤버십 기본 설정</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-products"><div class="num">10</div><div class="tx"><div class="name">정기멤버십 전용 상품 관리</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-subscribers"><div class="num">11</div><div class="tx"><div class="name">정기멤버십 가입자 관리</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-stats"><div class="num">12</div><div class="tx"><div class="name">정기멤버십 통계/현황</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-intro"><div class="num">13</div><div class="tx"><div class="name">정기멤버십 소개 페이지 및 약관 관리</div><div class="kind">어드민 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-policy"><div class="num">14</div><div class="tx"><div class="name">정기멤버십 정책</div><div class="kind">어드민 화면</div></div></li>
   </ul>
 </div>
 
@@ -820,7 +820,6 @@
             <li class="as-lnb-sub"><span class="dot">·</span>채널별 회원가입 현황</li>
 
             <li class="as-lnb-group">정기멤버십<span class="as-lnb-new">NEW</span></li>
-            <li class="as-lnb-sub" data-admin="policy"><span class="dot">·</span>정기멤버십 정책</li>
             <li class="as-lnb-sub" data-admin="basic"><span class="dot">·</span>정기멤버십 기본 설정</li>
             <li class="as-lnb-sub" data-admin="products"><span class="dot">·</span>정기멤버십 전용 상품 관리</li>
             <li class="as-lnb-sub" data-admin="subscribers"><span class="dot">·</span>정기멤버십 가입자 관리</li>
@@ -845,82 +844,6 @@
         </div>
 
         <div class="as-content">
-
-          <section class="admin-screen" id="adminscreen-policy" hidden>
-            <h1>정기멤버십 정책</h1>
-            <p class="as-desc">아래 정책은 FlexG 정기멤버십의 기본 운영 기준이며, 추후 조정될 수 있습니다.</p>
-
-            <div class="as-subhead" style="margin-top:0;">1. 결제 정책</div>
-            <div class="as-usage-note">
-              <ul>
-                <li>결제 주기: 매월 자동 결제되며, 가입일 기준으로 고정됩니다.</li>
-                <li>결제 실패 시: 1일 후 1회만 자동으로 재시도합니다.</li>
-                <li>재시도까지 실패하면 최종실패로 처리되며, 이후 자동 재시도는 없습니다(다음 결제 주기에도 재시도하지 않습니다).</li>
-                <li>결제 금액 변경 시: 기존 가입자는 기존 금액을 유지하며, 변경된 금액은 신규 가입자부터 적용됩니다.</li>
-              </ul>
-            </div>
-
-            <div class="as-subhead">2. 결제상태값 정의</div>
-            <table class="as-table" style="max-width:640px;">
-              <thead><tr><th>상태값</th><th>의미</th></tr></thead>
-              <tbody>
-                <tr><td><span class="as-status paid">결제완료</span></td><td>정상적으로 결제되었습니다.</td></tr>
-                <tr><td><span class="as-status" style="background:#FFF4E0; color:#B4700B;">재시도중</span></td><td>1차 실패 후 1일 뒤 재시도를 대기하거나 진행 중입니다.</td></tr>
-                <tr><td><span class="as-status" style="background:#FBE9E3; color:#D8532B;">최종실패</span></td><td>재시도까지 실패하여 결제가 종료되었습니다.</td></tr>
-              </tbody>
-            </table>
-
-            <div class="as-subhead">3. 이용상태값 정의</div>
-            <table class="as-table" style="max-width:640px;">
-              <thead><tr><th>상태값</th><th>의미</th><th>관리 버튼</th></tr></thead>
-              <tbody>
-                <tr><td><span class="as-status active">이용중</span></td><td>정상적으로 이용 중입니다.</td><td>해지</td></tr>
-                <tr><td><span class="as-status endsoon">해지예정</span></td><td>해지가 신청되어 다음 결제일까지 이용이 유지됩니다.</td><td>-</td></tr>
-                <tr><td><span class="as-status ended">해지완료</span></td><td>이용이 종료되었습니다.</td><td>-</td></tr>
-              </tbody>
-            </table>
-
-            <div class="as-subhead">4. 해지 정책</div>
-            <div class="as-usage-note">
-              <ul>
-                <li>해지를 신청해도 즉시 해지되지 않으며, 다음 결제일까지 이용이 유지된 후 자동으로 해지됩니다.</li>
-                <li>해지취소 기능은 제공하지 않습니다(되돌릴 수 없으며, 해지 버튼 클릭 시 확인 팝업으로 다시 확인합니다).</li>
-                <li>해지 후 재이용은 재가입으로만 가능하며, 첫 달 프로모션 등 별도 혜택은 제공하지 않습니다.</li>
-                <li>해지 시 환불은 불가합니다.</li>
-                <li>일시정지 기능은 제공하지 않습니다.</li>
-                <li>멤버십 등급 변경(업/다운그레이드) 기능은 제공하지 않습니다.</li>
-              </ul>
-            </div>
-
-            <div class="as-subhead">5. PG 연동 관련</div>
-            <div class="as-usage-note">
-              <ul>
-                <li>PG 심사를 위해 실제 판매 중인 상품 1개를 테스트 상품으로 등록해야 합니다.</li>
-                <li>PG 연동을 해제하면 신규 가입이 중단되고, 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
-                <li>연동 해제 후 재연동하면 기존 멤버십 설정(가격, 혜택 등)이 초기화되며, 이때 확인 팝업이 노출됩니다.</li>
-              </ul>
-            </div>
-
-            <div class="as-subhead">6. 혜택/상품 정책</div>
-            <div class="as-usage-note">
-              <ul>
-                <li>혜택은 정기멤버십 전용 상품으로 지정된 상품에만 적용되며, 지정된 상품이 없으면 혜택이 적용되지 않습니다.</li>
-                <li>전용 상품을 삭제하면 전용 상품 목록에서도 함께 삭제됩니다.</li>
-                <li>전용 상품 유형은 공통판매(전체 노출, 회원에게만 차등가 적용)와 멤버십 전용(비회원 구매 불가) 두 가지입니다.</li>
-              </ul>
-            </div>
-
-            <div class="as-subhead">7. 기타 정책</div>
-            <div class="as-usage-note">
-              <ul>
-                <li>한 회원은 동시에 하나의 멤버십에만 가입할 수 있습니다.</li>
-                <li>회원이 쇼핑몰을 탈퇴하면 가입 중인 멤버십은 자동으로 해지됩니다.</li>
-                <li>멤버십 사용 여부(개별 등급)를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
-                <li>알림톡 기능은 제공하지 않습니다(보류).</li>
-                <li>정산은 별도 화면 없이 기존 매출 탭에 합산되어 반영됩니다.</li>
-              </ul>
-            </div>
-          </section>
 
           <section class="admin-screen" id="adminscreen-basic">
             <h1>정기멤버십 기본 설정</h1>
@@ -1951,6 +1874,84 @@
 
     </div>
   </div>
+
+  <div class="admin-shell" id="policyShell" hidden>
+    <div class="as-content" style="flex:1; height:100%;">
+      <h1>정기멤버십 정책</h1>
+      <p class="as-desc">아래 정책은 FlexG 정기멤버십의 기본 운영 기준이며, 추후 조정될 수 있습니다.</p>
+
+      <div class="as-subhead" style="margin-top:0;">1. 결제 정책</div>
+      <div class="as-usage-note">
+        <ul>
+          <li>결제 주기: 매월 자동 결제되며, 가입일 기준으로 고정됩니다.</li>
+          <li>결제 실패 시: 1일 후 1회만 자동으로 재시도합니다.</li>
+          <li>재시도까지 실패하면 최종실패로 처리되며, 이후 자동 재시도는 없습니다(다음 결제 주기에도 재시도하지 않습니다).</li>
+          <li>결제 금액 변경 시: 기존 가입자는 기존 금액을 유지하며, 변경된 금액은 신규 가입자부터 적용됩니다.</li>
+        </ul>
+      </div>
+
+      <div class="as-subhead">2. 결제상태값 정의</div>
+      <table class="as-table" style="max-width:640px;">
+        <thead><tr><th>상태값</th><th>의미</th></tr></thead>
+        <tbody>
+          <tr><td><span class="as-status paid">결제완료</span></td><td>정상적으로 결제되었습니다.</td></tr>
+          <tr><td><span class="as-status" style="background:#FFF4E0; color:#B4700B;">재시도중</span></td><td>1차 실패 후 1일 뒤 재시도를 대기하거나 진행 중입니다.</td></tr>
+          <tr><td><span class="as-status" style="background:#FBE9E3; color:#D8532B;">최종실패</span></td><td>재시도까지 실패하여 결제가 종료되었습니다.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="as-subhead">3. 이용상태값 정의</div>
+      <table class="as-table" style="max-width:640px;">
+        <thead><tr><th>상태값</th><th>의미</th><th>관리 버튼</th></tr></thead>
+        <tbody>
+          <tr><td><span class="as-status active">이용중</span></td><td>정상적으로 이용 중입니다.</td><td>해지</td></tr>
+          <tr><td><span class="as-status endsoon">해지예정</span></td><td>해지가 신청되어 다음 결제일까지 이용이 유지됩니다.</td><td>-</td></tr>
+          <tr><td><span class="as-status ended">해지완료</span></td><td>이용이 종료되었습니다.</td><td>-</td></tr>
+        </tbody>
+      </table>
+
+      <div class="as-subhead">4. 해지 정책</div>
+      <div class="as-usage-note">
+        <ul>
+          <li>해지를 신청해도 즉시 해지되지 않으며, 다음 결제일까지 이용이 유지된 후 자동으로 해지됩니다.</li>
+          <li>해지취소 기능은 제공하지 않습니다(되돌릴 수 없으며, 해지 버튼 클릭 시 확인 팝업으로 다시 확인합니다).</li>
+          <li>해지 후 재이용은 재가입으로만 가능하며, 첫 달 프로모션 등 별도 혜택은 제공하지 않습니다.</li>
+          <li>해지 시 환불은 불가합니다.</li>
+          <li>일시정지 기능은 제공하지 않습니다.</li>
+          <li>멤버십 등급 변경(업/다운그레이드) 기능은 제공하지 않습니다.</li>
+        </ul>
+      </div>
+
+      <div class="as-subhead">5. PG 연동 관련</div>
+      <div class="as-usage-note">
+        <ul>
+          <li>PG 심사를 위해 실제 판매 중인 상품 1개를 테스트 상품으로 등록해야 합니다.</li>
+          <li>PG 연동을 해제하면 신규 가입이 중단되고, 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
+          <li>연동 해제 후 재연동하면 기존 멤버십 설정(가격, 혜택 등)이 초기화되며, 이때 확인 팝업이 노출됩니다.</li>
+        </ul>
+      </div>
+
+      <div class="as-subhead">6. 혜택/상품 정책</div>
+      <div class="as-usage-note">
+        <ul>
+          <li>혜택은 정기멤버십 전용 상품으로 지정된 상품에만 적용되며, 지정된 상품이 없으면 혜택이 적용되지 않습니다.</li>
+          <li>전용 상품을 삭제하면 전용 상품 목록에서도 함께 삭제됩니다.</li>
+          <li>전용 상품 유형은 공통판매(전체 노출, 회원에게만 차등가 적용)와 멤버십 전용(비회원 구매 불가) 두 가지입니다.</li>
+        </ul>
+      </div>
+
+      <div class="as-subhead">7. 기타 정책</div>
+      <div class="as-usage-note">
+        <ul>
+          <li>한 회원은 동시에 하나의 멤버십에만 가입할 수 있습니다.</li>
+          <li>회원이 쇼핑몰을 탈퇴하면 가입 중인 멤버십은 자동으로 해지됩니다.</li>
+          <li>멤버십 사용 여부(개별 등급)를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
+          <li>알림톡 기능은 제공하지 않습니다(보류).</li>
+          <li>정산은 별도 화면 없이 기존 매출 탭에 합산되어 반영됩니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="desc">
@@ -2016,9 +2017,9 @@
       number:'13', label:'정기멤버십 소개 페이지 및 약관 관리', kind:'어드민 화면', admin:'intro',
       policy:'소개 페이지는 "진열" 상태일 때만 구매자에게 노출되고, 정기결제 동의 항목(개인정보 수집·이용, 전자지급 거래대행 이용약관)은 가입 시 필수 동의로 노출돼요. 유의사항 노출 여부는 별도로 켜고 끌 수 있고, 해지 시 환불은 불가하지만 이용 종료 예정일까지는 혜택이 유지돼요.'
     },
-    'membership-policy': {
-      number:'14', label:'정기멤버십 정책', kind:'어드민 화면', admin:'policy',
-      policy:'결제·상태값·해지·PG 연동·혜택·기타 정책을 한 문서로 모아둔 정적 화면이에요. 다른 정기멤버십 화면(09~13)에서 이미 적용된 운영 기준을 한곳에서 확인할 수 있도록 정리했고, 이 화면 자체는 버튼이나 입력 없이 읽기 전용으로 구성돼요.'
+    'policy': {
+      number:'', label:'정기멤버십 정책', kind:'메모', doc:true,
+      policy:'결제·상태값·해지·PG 연동·혜택·기타 정책을 한 문서로 모아둔 개인 참고용 화면이에요. 실제 어드민 GNB/LNB에는 노출되지 않고, 다른 정기멤버십 화면(09~13)에서 이미 적용된 운영 기준을 한곳에서 확인할 수 있도록 정리했어요. 버튼이나 입력 없이 읽기 전용으로 구성돼요.'
     }
   };
 
@@ -2027,6 +2028,7 @@
   var modalLayer = document.getElementById('modalLayer');
   var flexgPopup = document.getElementById('flexgPopup');
   var adminShell = document.getElementById('adminShell');
+  var policyShell = document.getElementById('policyShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -2038,11 +2040,17 @@
     });
 
     var isAdmin = !!s.admin;
-    flexgPopup.hidden = isAdmin;
+    var isDoc = !!s.doc;
+    flexgPopup.hidden = isAdmin || isDoc;
     adminShell.hidden = !isAdmin;
-    stageFrame.classList.toggle('wide', isAdmin);
+    policyShell.hidden = !isDoc;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc);
 
-    if(isAdmin){
+    if(isDoc){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isAdmin){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
@@ -2071,7 +2079,7 @@
       });
     }
 
-    document.getElementById('descEyebrow').textContent = s.number + ' · ' + s.kind;
+    document.getElementById('descEyebrow').textContent = s.number ? (s.number + ' · ' + s.kind) : s.kind;
     document.getElementById('descTitle').textContent = s.label;
     document.getElementById('descPolicy').textContent = s.policy;
   }
