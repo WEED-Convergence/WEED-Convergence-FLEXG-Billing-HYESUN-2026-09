@@ -897,9 +897,9 @@
 
             <div class="as-subhead">멤버십</div>
             <div class="as-tabs" id="memTabs">
-              <div class="as-tab active" data-mem="1"><span class="as-tab-label">멤버십 1</span><span class="as-tab-del" data-mem="1">×</span></div>
-              <div class="as-tab" data-mem="2"><span class="as-tab-label">멤버십 2</span><span class="as-tab-del" data-mem="2">×</span></div>
-              <div class="as-tab" data-mem="3" hidden><span class="as-tab-label">멤버십 3</span><span class="as-tab-del" data-mem="3">×</span></div>
+              <div class="as-tab active" data-mem="1" data-has-subscribers="true"><span class="as-tab-label">멤버십 1</span><span class="as-tab-del" data-mem="1">×</span></div>
+              <div class="as-tab" data-mem="2" data-has-subscribers="false"><span class="as-tab-label">멤버십 2</span><span class="as-tab-del" data-mem="2">×</span></div>
+              <div class="as-tab" data-mem="3" hidden data-has-subscribers="false"><span class="as-tab-label">멤버십 3</span><span class="as-tab-del" data-mem="3">×</span></div>
               <div class="as-tab-add" id="memAddBtn">+ 멤버십 추가</div>
             </div>
 
@@ -1832,6 +1832,32 @@
         </div>
       </div>
 
+      <div class="as-modal-overlay" id="asMemDeleteModalOverlay" hidden>
+        <div class="as-modal" style="width:400px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title">이 멤버십을 삭제하시겠습니까?</div>
+            <div class="as-modal-close" id="memDeleteModalClose">✕</div>
+          </div>
+          <div class="as-actions right" style="margin-top:4px;">
+            <button class="as-btn as-btn-secondary" id="memDeleteCancelBtn">취소</button>
+            <button class="as-btn as-btn-warn" id="memDeleteConfirmBtn">삭제하기</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="as-modal-overlay" id="asMemDeleteBlockedModalOverlay" hidden>
+        <div class="as-modal" style="width:400px;">
+          <div class="as-modal-head">
+            <div class="as-modal-title">가입자가 있어 삭제할 수 없습니다</div>
+            <div class="as-modal-close" id="memDeleteBlockedModalClose">✕</div>
+          </div>
+          <div class="modal-desc" style="margin:0 0 20px;">이 멤버십에는 현재 가입자가 있어 바로 삭제할 수 없습니다. 먼저 '멤버십 사용 여부'를 꺼서 신규 가입을 중단해 주세요. 모든 가입자의 이용이 종료된 이후에는 삭제할 수 있습니다.</div>
+          <div class="as-actions right">
+            <button class="as-btn as-btn-primary" id="memDeleteBlockedOkBtn">확인</button>
+          </div>
+        </div>
+      </div>
+
       <div class="as-modal-overlay" id="asMemActiveModalOverlay" hidden>
         <div class="as-modal" style="width:400px;">
           <div class="as-modal-head">
@@ -2126,10 +2152,52 @@
     updateTabDeleteVisibility();
   }
 
+  var asMemDeleteModalOverlay = document.getElementById('asMemDeleteModalOverlay');
+  var memDeleteModalClose = document.getElementById('memDeleteModalClose');
+  var memDeleteCancelBtn = document.getElementById('memDeleteCancelBtn');
+  var memDeleteConfirmBtn = document.getElementById('memDeleteConfirmBtn');
+  var pendingDeleteMem = null;
+
+  function closeMemDeleteModal(){ asMemDeleteModalOverlay.hidden = true; pendingDeleteMem = null; }
+  if(memDeleteModalClose) memDeleteModalClose.addEventListener('click', closeMemDeleteModal);
+  if(memDeleteCancelBtn) memDeleteCancelBtn.addEventListener('click', closeMemDeleteModal);
+  if(asMemDeleteModalOverlay){
+    asMemDeleteModalOverlay.addEventListener('click', function(e){
+      if(e.target === asMemDeleteModalOverlay) closeMemDeleteModal();
+    });
+  }
+  if(memDeleteConfirmBtn){
+    memDeleteConfirmBtn.addEventListener('click', function(){
+      if(pendingDeleteMem) deleteMemTab(pendingDeleteMem);
+      closeMemDeleteModal();
+    });
+  }
+
+  var asMemDeleteBlockedModalOverlay = document.getElementById('asMemDeleteBlockedModalOverlay');
+  var memDeleteBlockedModalClose = document.getElementById('memDeleteBlockedModalClose');
+  var memDeleteBlockedOkBtn = document.getElementById('memDeleteBlockedOkBtn');
+
+  function closeMemDeleteBlockedModal(){ asMemDeleteBlockedModalOverlay.hidden = true; }
+  if(memDeleteBlockedModalClose) memDeleteBlockedModalClose.addEventListener('click', closeMemDeleteBlockedModal);
+  if(memDeleteBlockedOkBtn) memDeleteBlockedOkBtn.addEventListener('click', closeMemDeleteBlockedModal);
+  if(asMemDeleteBlockedModalOverlay){
+    asMemDeleteBlockedModalOverlay.addEventListener('click', function(e){
+      if(e.target === asMemDeleteBlockedModalOverlay) closeMemDeleteBlockedModal();
+    });
+  }
+
   function bindTabDelete(el){
     el.addEventListener('click', function(e){
       e.stopPropagation();
-      deleteMemTab(el.getAttribute('data-mem'));
+      var mem = el.getAttribute('data-mem');
+      var tab = document.querySelector('.as-tab[data-mem="' + mem + '"]:not([hidden])');
+      var hasSubscribers = tab && tab.getAttribute('data-has-subscribers') === 'true';
+      if(hasSubscribers){
+        asMemDeleteBlockedModalOverlay.hidden = false;
+      } else {
+        pendingDeleteMem = mem;
+        asMemDeleteModalOverlay.hidden = false;
+      }
     });
   }
 
