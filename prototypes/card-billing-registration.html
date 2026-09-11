@@ -476,6 +476,9 @@
   .as-status.failed{ background:#FBE9E3; color:#D8532B; }
   .as-status.retry{ background:#FFF4E0; color:#B4700B; cursor:pointer; }
   .as-status.finalfail{ background:#FBE9E3; color:#D8532B; cursor:pointer; }
+  .as-status.active{ background:var(--brand-tint); color:var(--brand-dark); }
+  .as-status.endsoon{ background:#FFF4E0; color:#B4700B; }
+  .as-status.ended{ background:#EDEFF3; color:var(--ink-soft); }
 
   .as-trend-group{
     background:#fff; border:1px solid var(--line); border-radius:12px;
@@ -1375,44 +1378,44 @@
               <table class="as-table" style="min-width:1080px;">
                 <thead>
                   <tr>
-                    <th>No.</th><th>아이디</th><th>멤버십</th><th>가입일</th><th>결제상태</th>
+                    <th>No.</th><th>아이디</th><th>멤버십</th><th>가입일</th><th>결제상태</th><th>이용상태</th>
                     <th>결제차수</th><th>정기결제 금액</th><th>누적 결제금액</th><th>다음 결제예정일</th>
                     <th>최근 로그인</th><th>관리</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td><td>flexg_user01</td><td>멤버십 1</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>1</td><td>flexg_user01</td><td>멤버십 1</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
                     <td>7회차</td><td>9,900원</td><td>69,300원</td><td>2026.10.14</td>
                     <td>2026.09.09 14:22</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
-                    <td>2</td><td>weed_min22</td><td>멤버십 2</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>2</td><td>weed_min22</td><td>멤버십 2</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status ended">해지완료</span></td>
                     <td>6회차</td><td>19,900원</td><td>119,400원</td><td>2026.09.02</td>
                     <td>2026.09.10 09:03</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions">-</td>
                   </tr>
                   <tr>
-                    <td>3</td><td>subin_kim</td><td>멤버십 1</td><td>2026.04.19</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>3</td><td>subin_kim</td><td>멤버십 1</td><td>2026.04.19</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
                     <td>5회차</td><td>9,900원</td><td>49,500원</td><td>2026.10.19</td>
                     <td>2026.08.30 21:47</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
-                    <td>4</td><td>hyesun_choi</td><td>멤버십 2</td><td>2026.05.27</td><td><span class="as-status retry" data-fail-reason="카드 한도초과" data-fail-at="2026.09.10 14:32" data-retry-at="2026.09.11 14:32">재시도중</span></td>
+                    <td>4</td><td>hyesun_choi</td><td>멤버십 2</td><td>2026.05.27</td><td><span class="as-status retry" data-fail-reason="카드 한도초과" data-fail-at="2026.09.10 14:32" data-retry-at="2026.09.11 14:32">재시도중</span></td><td><span class="as-status active">이용중</span></td>
                     <td>4회차</td><td>19,900원</td><td>59,700원</td><td>2026.10.27</td>
                     <td>2026.09.01 11:15</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
                   </tr>
                   <tr>
-                    <td>5</td><td>flexg_biz03</td><td>멤버십 1</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>5</td><td>flexg_biz03</td><td>멤버십 1</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status endsoon">해지예정</span></td>
                     <td>3회차</td><td>9,900원</td><td>29,700원</td><td>2026.10.30</td>
                     <td>2026.09.10 08:40</td>
-                    <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
+                    <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm">해지취소</button></td>
                   </tr>
                   <tr>
-                    <td>6</td><td>flexg_dev99</td><td>멤버십 2</td><td>2026.07.11</td><td><span class="as-status paid">결제완료</span></td>
+                    <td>6</td><td>flexg_dev99</td><td>멤버십 2</td><td>2026.07.11</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
                     <td>2회차</td><td>19,900원</td><td>39,800원</td><td>2026.10.11</td>
                     <td>2026.09.08 19:02</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm">해지</button></td>
