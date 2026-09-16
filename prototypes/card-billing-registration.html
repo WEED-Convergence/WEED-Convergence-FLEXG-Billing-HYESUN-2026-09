@@ -677,7 +677,7 @@
     <li class="nav-section-label">shop</li>
     <li class="nav-item" data-screen="tabbar"><div class="num">18</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="fullmenu"><div class="num">19</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-cancel"><div class="num">20</div><div class="tx"><div class="name">정기멤버십 해지</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-cancel"><div class="num">20</div><div class="tx"><div class="name">정기멤버십 이용현황 및 해지</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-cancel-done"><div class="num">21</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-landing"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
   </ul>
@@ -2580,16 +2580,17 @@
 
     <div class="admin-shell" id="cancelShell" hidden>
       <div class="as-content" style="flex:1; height:100%;">
-      <h1>정기멤버십 해지</h1>
-      <p class="as-desc">shop 구매자 화면에서 정기멤버십을 해지하는 필수 흐름만 구성한 화면입니다.</p>
+      <h1>정기멤버십 이용현황 및 해지</h1>
+      <p class="as-desc">shop 구매자 화면에서 이용현황 확인과 해지 신청을 한 화면에서 처리할 수 있도록 구성했습니다.</p>
 
       <div class="as-intro-layout" style="align-items:flex-start;">
         <div class="as-intro-preview">
           <div class="as-intro-phone" style="height:640px; position:relative;">
-            <div class="as-intro-phone-header">정기멤버십 해지</div>
+            <div class="as-intro-phone-header">정기멤버십</div>
             <div class="as-intro-phone-body" style="background:#fff; padding:20px 18px;">
 
-              <div style="background:linear-gradient(135deg,var(--card-navy),var(--card-navy-2)); border-radius:14px; padding:20px 18px; color:#fff; margin-bottom:18px;">
+              <div style="font-size:11px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; margin-bottom:8px;">이용현황</div>
+              <div style="background:linear-gradient(135deg,var(--card-navy),var(--card-navy-2)); border-radius:14px; padding:20px 18px; color:#fff; margin-bottom:22px;">
                 <div style="font-size:11px; opacity:.7; margin-bottom:6px;">이용 중인 멤버십</div>
                 <div style="font-size:17px; font-weight:800; margin-bottom:12px;">FLEXG 프리미엄 멤버십</div>
                 <div style="display:flex; justify-content:space-between; font-size:12px; opacity:.85; padding:7px 0; border-top:1px solid rgba(255,255,255,.15);">
@@ -2603,7 +2604,8 @@
                 </div>
               </div>
 
-              <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:22px;">
+              <div style="font-size:11px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; margin-bottom:8px;">해지</div>
+              <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:14px;">
                 · 해지하더라도 다음 결제일까지는 혜택이 계속 유지됩니다.<br>
                 · 해지 시 환불은 불가능합니다.<br>
                 · 해지 후 다시 이용하려면 재가입이 필요합니다.
@@ -2629,7 +2631,8 @@
 
       <div class="as-usage-note" style="margin-top:22px;">
         <ul>
-          <li>필수 흐름만 구성했습니다: 이용 중인 멤버십 정보 확인 → 해지하기 → 해지 확인 팝업 → 해지 접수(다음 결제일까지 이용 유지).</li>
+          <li>이용현황과 해지 신청을 한 화면으로 통합했습니다. 상단 "이용현황"에 멤버십명·정기결제 금액·다음 결제예정일·이용상태를 노출하고, 하단 "해지"에 안내 문구와 해지하기 버튼을 배치했습니다.</li>
+          <li>흐름: 이용현황 확인 → 해지하기 → 해지 확인 팝업 → 해지 접수(다음 결제일까지 이용 유지).</li>
         </ul>
       </div>
       </div>
@@ -2819,8 +2822,8 @@
       policy:'정기멤버십이 사용중인 경우에는 가장 하단에 정기멤버십 영역이 생성됩니다. 게시판 리스트 바로 아래, 배너가 아닌 게시판과 같은 리스트 스타일로 노출되며, 정기멤버십 바로가기(가입)·해지·전용상품 3개 항목으로 구성됩니다. 판매자가 정기멤버십을 사용하지 않는 경우에는 이 영역 자체가 노출되지 않습니다.'
     },
     'membership-cancel': {
-      number:'20', label:'정기멤버십 해지', kind:'모바일 화면', cancel:true,
-      policy:'필수 흐름만 담았어요: 이용 중인 멤버십 정보 확인 → 해지하기 → 해지 확인 팝업 → 해지 접수. 해지해도 다음 결제일까지는 이용이 유지되고, 환불은 불가하며, 해지취소 기능은 제공하지 않아요(정책과 동일).'
+      number:'20', label:'정기멤버십 이용현황 및 해지', kind:'모바일 화면', cancel:true,
+      policy:'이용현황과 해지 신청을 한 화면으로 통합했습니다. 상단에는 이용 중인 멤버십의 이용현황(멤버십명·정기결제 금액·다음 결제예정일·이용상태)을 보여주고, 하단에는 해지 안내와 해지하기 버튼을 배치했습니다. 해지하더라도 다음 결제일까지는 이용이 유지되며, 환불은 불가하고, 해지취소 기능은 제공하지 않습니다(정책과 동일).'
     },
     'membership-cancel-done': {
       number:'21', label:'정기멤버십 해지완료', kind:'모바일 화면', cancelDone:true,
