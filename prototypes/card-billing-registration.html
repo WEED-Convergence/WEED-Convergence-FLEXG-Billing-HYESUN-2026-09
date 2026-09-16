@@ -701,15 +701,16 @@
     <li class="nav-item" data-screen="icon-settings"><div class="num">16</div><div class="tx"><div class="name">아이콘</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="member-list"><div class="num">17</div><div class="tx"><div class="name">회원목록</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="admin-product-list"><div class="num">18</div><div class="tx"><div class="name">상품목록</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="admin-purchase-limit"><div class="num">19</div><div class="tx"><div class="name">구매 제한 조건</div><div class="kind">어드민 화면</div></div></li>
 
     <li class="nav-section-label">shop</li>
-    <li class="nav-item" data-screen="tabbar"><div class="num">19</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="fullmenu"><div class="num">20</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-cancel"><div class="num">21</div><div class="tx"><div class="name">정기멤버십 이용현황·해지</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-cancel-done"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-landing"><div class="num">23</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-guard-popup"><div class="num">24</div><div class="tx"><div class="name">멤버십 전용 상품 안내 팝업</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-product-list"><div class="num">25</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="tabbar"><div class="num">20</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="fullmenu"><div class="num">21</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-cancel"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 이용현황·해지</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-cancel-done"><div class="num">23</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-landing"><div class="num">24</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-guard-popup"><div class="num">25</div><div class="tx"><div class="name">멤버십 전용 상품 안내 팝업</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-product-list"><div class="num">26</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -2894,6 +2895,107 @@
       </div>
     </div>
 
+    <div class="admin-shell" id="purchaseLimitShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item active">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">상품</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item">상품목록</li>
+            <li class="as-lnb-item active">상품등록<span class="as-lnb-n">N</span></li>
+            <li class="as-lnb-item">상품 카테고리</li>
+            <li class="as-lnb-item">상품 태그</li>
+            <li class="as-lnb-item">상품 추적코드</li>
+            <li class="as-lnb-item">상품 예약 작업</li>
+            <li class="as-lnb-item">상품 판매 알림 신청</li>
+            <li class="as-lnb-item">묶음상품 그룹</li>
+            <li class="as-lnb-item">추천상품 그룹</li>
+            <li class="as-lnb-item">이벤트 관리</li>
+            <li class="as-lnb-item">단축URL 관리</li>
+            <li class="as-lnb-item">상품문의50</li>
+            <li class="as-lnb-item">1:1문의46</li>
+            <li class="as-lnb-item">구매후기</li>
+            <li class="as-lnb-item">공급사 관리</li>
+            <li class="as-lnb-item">상품고시정보 관리</li>
+            <li class="as-lnb-item">삭제 보관함</li>
+          </ul>
+        </div>
+
+        <div class="as-content">
+          <h1>상품 등록 · 구매 제한 조건</h1>
+          <p class="as-desc">상품 등록/수정 화면 중 "구매 제한 조건" 섹션입니다. 다른 섹션은 기존과 동일하여 생략했습니다.</p>
+
+          <div class="as-subhead" style="margin-top:0;">구매 제한 조건</div>
+          <div class="as-panel" style="max-width:none;">
+            <div class="as-row">
+              <div class="as-label">주문자 제한</div>
+              <div class="as-field">
+                <div class="as-radio-row">
+                  <div class="as-radio-opt"><div class="as-radio-dot on"></div>없음</div>
+                  <div class="as-radio-opt"><div class="as-radio-dot"></div>회원 구매만 허용</div>
+                </div>
+              </div>
+            </div>
+            <div class="as-row" style="align-items:flex-start;">
+              <div class="as-label">구매 제한</div>
+              <div class="as-field" style="display:flex; flex-wrap:wrap; gap:6px 18px; font-size:12px; color:var(--ink);">
+                <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>APP 구매만 허용</label>
+                <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>제주 지역 구매 불가</label>
+                <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>도시산간 지역 구매 불가</label>
+                <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>셀러 판매 전용 상품</label>
+                <label style="display:inline-flex; align-items:center; gap:5px; color:var(--warn); font-weight:700; border:1.5px solid var(--warn); background:var(--warn-tint); border-radius:6px; padding:3px 8px;"><input type="checkbox" disabled>정기멤버십 전용상품</label>
+              </div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">성인 인증 후 구매</div>
+              <div class="as-field" style="display:flex; align-items:center; gap:10px;">
+                <div class="as-toggle"><div class="knob"></div></div>
+                <span style="font-size:11px; color:var(--ink-faint);">ⓘ 미성년자 판매 불가 상품은 본인/성인인증이 반드시 필요합니다.</span>
+              </div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">구매 수량 제한</div>
+              <div class="as-field" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                최소 <input class="as-input" type="text" value="0" disabled style="max-width:70px;"> 개 이상 ~ 최대 <input class="as-input" type="text" value="0" disabled style="max-width:70px;"> 개 이하
+                <span style="font-size:11px; color:var(--ink-faint);">ⓘ 기간 제한은 회원만 구매 가능할 때 설정하실 수 있습니다.</span>
+              </div>
+            </div>
+            <div class="as-row" style="align-items:flex-start;">
+              <div class="as-label">주문 상품 금액 제한</div>
+              <div class="as-field">
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  최소 주문금액 <input class="as-input" type="text" value="0" disabled style="max-width:100px;"> 이상
+                  <span style="font-size:11px; color:var(--ink-faint);">ⓘ 주문시 배송비를 제외한 총 상품 금액</span>
+                </div>
+                <label style="display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink); margin-top:10px;"><input type="checkbox" disabled>동시 구매 불가 상품</label>
+                <span style="font-size:11px; color:var(--ink-faint);">ⓘ 동시 구매 불가 상품으로 설정된 상품들은 함께 구매할 수 없습니다. (단, 한 상품의 옵션 구매는 해당되지 않습니다)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="admin-shell" id="cancelShell" hidden>
       <div class="as-content" style="flex:1; height:100%;">
       <h1>정기멤버십 이용현황·해지</h1>
@@ -2981,7 +3083,7 @@
 
       <div class="as-usage-note" style="margin-top:22px;">
         <ul>
-          <li>해지 접수(화면 20, 해지예정) 후 다음 결제일이 지나 자동으로 이용이 종료되면 노출되는 화면입니다.</li>
+          <li>해지 접수(화면 22, 해지예정) 후 다음 결제일이 지나 자동으로 이용이 종료되면 노출되는 화면입니다.</li>
           <li>재이용은 재가입으로만 가능하며, 첫 달 프로모션 등 별도 혜택은 제공하지 않습니다.</li>
         </ul>
       </div>
@@ -2991,7 +3093,7 @@
     <div class="admin-shell" id="landingShell" hidden>
       <div class="as-content" style="flex:1; height:100%;">
       <h1>정기멤버십 소개 페이지</h1>
-      <p class="as-desc">화면 19(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지입니다. 화면 13에서 판매자가 입력한 내용이 그대로 반영됩니다.</p>
+      <p class="as-desc">화면 21(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지입니다. 화면 13에서 판매자가 입력한 내용이 그대로 반영됩니다.</p>
 
       <div class="as-intro-layout" style="align-items:flex-start;">
         <div class="as-intro-preview">
@@ -3079,7 +3181,7 @@
       <div class="as-usage-note" style="margin-top:22px;">
         <ul>
           <li>비회원 또는 멤버십 미가입 회원이 멤버십 전용 상품을 클릭하면 상품 상세 대신 이 안내 팝업이 노출됩니다.</li>
-          <li>"멤버십 가입하기"를 누르면 화면 22(정기멤버십 소개 페이지)로 이동합니다.</li>
+          <li>"멤버십 가입하기"를 누르면 화면 24(정기멤버십 소개 페이지)로 이동합니다.</li>
         </ul>
       </div>
       </div>
@@ -3244,32 +3346,36 @@
       number:'18', label:'상품목록', kind:'어드민 화면', plistAdmin:true,
       policy:'기존 상품 검색/목록 화면의 "해당 상품만 보기" 체크박스 목록에 "정기멤버십 상품" 항목 하나만 추가했어요. 나머지 검색 조건과 상품 리스트 테이블은 그대로 유지돼요.'
     },
+    'admin-purchase-limit': {
+      number:'19', label:'구매 제한 조건', kind:'어드민 화면', purchaseLimit:true,
+      policy:'상품 등록/수정 화면의 "구매 제한 조건" 섹션에서, "구매 제한" 체크박스 목록의 "셀러 판매 전용 상품" 옆에 "정기멤버십 전용상품" 항목 하나만 추가했어요. 나머지 항목(주문자 제한, 성인 인증 후 구매, 구매 수량 제한, 주문 상품 금액 제한)은 그대로 유지돼요.'
+    },
     'tabbar': {
-      number:'19', label:'탭바', kind:'모바일 화면', mobile:true,
+      number:'20', label:'탭바', kind:'모바일 화면', mobile:true,
       policy:'shop 하단 탭바 가장 우측의 마이페이지 아이콘을 없애고, 가장 중앙에 멤버십 아이콘을 강조 색상의 원형 배지로 추가해요. 전체메뉴·홈·쇼핑백·배송조회 아이콘의 위치와 기능은 그대로 유지돼요.'
     },
     'fullmenu': {
-      number:'20', label:'전체메뉴', kind:'모바일 화면', menu:true,
+      number:'21', label:'전체메뉴', kind:'모바일 화면', menu:true,
       policy:'정기멤버십이 사용중인 경우에는 가장 하단에 정기멤버십 영역이 생성됩니다. 게시판 리스트 바로 아래, 배너가 아닌 게시판과 같은 리스트 스타일로 노출되며, 정기멤버십 바로가기(가입)·해지·전용상품 3개 항목으로 구성됩니다. 판매자가 정기멤버십을 사용하지 않는 경우에는 이 영역 자체가 노출되지 않습니다.'
     },
     'membership-cancel': {
-      number:'21', label:'정기멤버십 이용현황·해지', kind:'모바일 화면', cancel:true,
+      number:'22', label:'정기멤버십 이용현황·해지', kind:'모바일 화면', cancel:true,
       policy:'이용현황과 해지 신청을 한 화면으로 통합했습니다. 상단에는 이용 중인 멤버십의 이용현황(멤버십명·정기결제 금액·다음 결제예정일·이용상태)을 보여주고, 하단에는 해지 안내와 해지하기 버튼을 배치했습니다. 해지하더라도 다음 결제일까지는 이용이 유지되며, 환불은 불가하고, 해지취소 기능은 제공하지 않습니다(정책과 동일).'
     },
     'membership-cancel-done': {
-      number:'22', label:'정기멤버십 해지완료', kind:'모바일 화면', cancelDone:true,
-      policy:'화면 21에서 해지를 접수(해지예정)한 뒤, 다음 결제일이 지나 이용이 실제로 종료되면 노출되는 화면이에요. 혜택은 더 이상 적용되지 않으며, 재이용하려면 재가입해야 해요(첫 달 프로모션 등 별도 혜택 없음).'
+      number:'23', label:'정기멤버십 해지완료', kind:'모바일 화면', cancelDone:true,
+      policy:'화면 22에서 해지를 접수(해지예정)한 뒤, 다음 결제일이 지나 이용이 실제로 종료되면 노출되는 화면이에요. 혜택은 더 이상 적용되지 않으며, 재이용하려면 재가입해야 해요(첫 달 프로모션 등 별도 혜택 없음).'
     },
     'membership-landing': {
-      number:'23', label:'정기멤버십 소개 페이지', kind:'모바일 화면', landing:true,
-      policy:'화면 20(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지예요. 화면 13(정기멤버십 소개 페이지 및 약관 관리)에서 판매자가 입력한 멤버십명·혜택·유의사항·약관 동의 항목이 그대로 반영돼요.'
+      number:'24', label:'정기멤버십 소개 페이지', kind:'모바일 화면', landing:true,
+      policy:'화면 21(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지예요. 화면 13(정기멤버십 소개 페이지 및 약관 관리)에서 판매자가 입력한 멤버십명·혜택·유의사항·약관 동의 항목이 그대로 반영돼요.'
     },
     'membership-guard-popup': {
-      number:'24', label:'멤버십 전용 상품 안내 팝업', kind:'모바일 화면', guard:true,
-      policy:'화면 10(정기멤버십 전용 상품 관리)에서 안내한 대로, 멤버십 전용으로 설정된 상품을 비회원 또는 멤버십 미가입 회원이 클릭하면 상품 상세 대신 이 안내 팝업이 노출돼요. "멤버십 가입하기"를 누르면 화면 23(정기멤버십 소개 페이지)로 연결돼요.'
+      number:'25', label:'멤버십 전용 상품 안내 팝업', kind:'모바일 화면', guard:true,
+      policy:'화면 10(정기멤버십 전용 상품 관리)에서 안내한 대로, 멤버십 전용으로 설정된 상품을 비회원 또는 멤버십 미가입 회원이 클릭하면 상품 상세 대신 이 안내 팝업이 노출돼요. "멤버십 가입하기"를 누르면 화면 24(정기멤버십 소개 페이지)로 연결돼요.'
     },
     'membership-product-list': {
-      number:'25', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
+      number:'26', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
       policy:'화면 10에서 멤버십 전용으로 지정한 상품들을 모아 보여주는 목록 화면이에요. 카테고리 탭은 제외하고, 상단 뒤로가기·홈·장바구니와 상품 개수·정렬 기준은 기존 상품 목록 화면과 동일하게 유지돼요.'
     }
   };
@@ -3291,6 +3397,7 @@
   var guardShell = document.getElementById('guardShell');
   var plistShell = document.getElementById('plistShell');
   var adminProductListShell = document.getElementById('adminProductListShell');
+  var purchaseLimitShell = document.getElementById('purchaseLimitShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -3314,7 +3421,8 @@
     var isGuard = !!s.guard;
     var isPlist = !!s.plist;
     var isPlistAdmin = !!s.plistAdmin;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isGuard || isPlist || isPlistAdmin;
+    var isPurchaseLimit = !!s.purchaseLimit;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isGuard || isPlist || isPlistAdmin || isPurchaseLimit;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -3328,9 +3436,14 @@
     guardShell.hidden = !isGuard;
     plistShell.hidden = !isPlist;
     adminProductListShell.hidden = !isPlistAdmin;
-    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isPlistAdmin);
+    purchaseLimitShell.hidden = !isPurchaseLimit;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isPlistAdmin || isPurchaseLimit);
 
-    if(isPlistAdmin){
+    if(isPurchaseLimit){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isPlistAdmin){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
