@@ -1877,25 +1877,6 @@
         </div>
       </div>
 
-      <div class="as-modal-overlay" id="asTestProductModalOverlay" hidden>
-        <div class="as-modal" style="width:520px;">
-          <div class="as-modal-head">
-            <div class="as-modal-title">테스트 상품 불러오기</div>
-            <div class="as-modal-close" id="asTestProductModalClose">✕</div>
-          </div>
-          <div class="as-coupon-note">· 상품명으로 검색해 PG 심사용으로 등록할 실제 판매 상품을 선택합니다.</div>
-          <div class="as-search-row" style="margin-bottom:14px;">
-            <input class="as-input" type="text" id="testProductSearchInput" placeholder="상품명으로 검색">
-          </div>
-          <div class="as-coupon-table-wrap">
-            <table class="as-table" id="testProductCatalogTable">
-              <thead><tr><th>썸네일</th><th>상품명</th><th>정가</th><th></th></tr></thead>
-              <tbody id="testProductCatalogBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
       <div class="as-modal-overlay" id="asProductModalOverlay" hidden>
         <div class="as-modal" style="width:560px; padding:0; overflow:hidden;">
           <div class="popup-titlebar" style="border-radius:14px 14px 0 0;">
@@ -1903,7 +1884,7 @@
             <span>상품 찾기</span>
           </div>
           <div style="padding:22px 24px 0;">
-            <div class="as-coupon-note" style="margin-bottom:12px;">· 쇼핑몰에 등록된 상품 중 정기멤버십 전용 상품으로 추가할 상품을 체크해 주세요.</div>
+            <div class="as-coupon-note" id="productModalNote" style="margin-bottom:12px;">· 쇼핑몰에 등록된 상품 중 정기멤버십 전용 상품으로 추가할 상품을 체크해 주세요.</div>
             <div class="as-search-row" style="max-width:none;">
               <select class="as-input" style="max-width:110px; flex:0 0 auto;" disabled><option>상품명</option></select>
               <input class="as-input" type="text" id="productCatalogSearchInput" placeholder="검색내용 입력">
@@ -3646,6 +3627,9 @@
 
   var asProductModalOverlay = document.getElementById('asProductModalOverlay');
   var asProductModalCancelBtn = document.getElementById('asProductModalCancelBtn');
+  var productModalNote = document.getElementById('productModalNote');
+  var productModalMode = 'exclusive';
+  var PRODUCT_MODAL_DEFAULT_NOTE = '· 쇼핑몰에 등록된 상품 중 정기멤버십 전용 상품으로 추가할 상품을 체크해 주세요.';
   var productCatalogBody = document.getElementById('productCatalogBody');
   var productCatalogSearchInput = document.getElementById('productCatalogSearchInput');
   var productCatalogSearchBtn = document.getElementById('productCatalogSearchBtn');
@@ -3692,11 +3676,20 @@
       return;
     }
     list.forEach(function(p){
-      var added = isProductAdded(p.name);
+      var added = productModalMode === 'exclusive' && isProductAdded(p.name);
       var tr = document.createElement('tr');
       tr.innerHTML = '<td><input type="checkbox" class="pc-check" data-name="' + p.name + '"' + (added ? ' disabled' : '') + '></td>' +
         '<td><div style="display:flex; align-items:center; gap:8px;"><div class="as-thumb">' + (p.thumb || '📦') + '</div><span>' + p.name + (added ? ' <span style="color:var(--ink-faint); font-size:10.5px;">(담김)</span>' : '') + '</span></div></td>' +
         '<td>' + p.code + '</td>';
+      var checkbox = tr.querySelector('.pc-check');
+      if(productModalMode === 'test'){
+        checkbox.addEventListener('change', function(){
+          if(!checkbox.checked) return;
+          productCatalogBody.querySelectorAll('.pc-check').forEach(function(other){
+            if(other !== checkbox) other.checked = false;
+          });
+        });
+      }
       productCatalogBody.appendChild(tr);
     });
   }
@@ -3704,6 +3697,19 @@
   if(productCatalogSelectBtn){
     productCatalogSelectBtn.addEventListener('click', function(){
       var checked = productCatalogBody.querySelectorAll('.pc-check:checked:not(:disabled)');
+      if(productModalMode === 'test'){
+        var picked = checked[0];
+        if(picked){
+          var name = picked.getAttribute('data-name');
+          var product = PRODUCT_CATALOG.filter(function(p){ return p.name === name; })[0];
+          if(product && testProductSelected){
+            testProductSelected.innerHTML = '선택된 상품: <div class="as-thumb">' + (product.thumb || '📦') + '</div><span class="name">' + product.name + '</span>';
+            if(pgConnectBtn) pgConnectBtn.disabled = false;
+          }
+        }
+        asProductModalOverlay.hidden = true;
+        return;
+      }
       checked.forEach(function(cb){
         var name = cb.getAttribute('data-name');
         var product = PRODUCT_CATALOG.filter(function(p){ return p.name === name; })[0];
@@ -3744,12 +3750,16 @@
   var productFindBtn = document.getElementById('productFindBtn');
   if(productFindBtn){
     productFindBtn.addEventListener('click', function(){
+      productModalMode = 'exclusive';
+      if(productModalNote) productModalNote.textContent = PRODUCT_MODAL_DEFAULT_NOTE;
       renderProductCatalog();
       asProductModalOverlay.hidden = false;
     });
   }
   if(productSearchBtn){
     productSearchBtn.addEventListener('click', function(){
+      productModalMode = 'exclusive';
+      if(productModalNote) productModalNote.textContent = PRODUCT_MODAL_DEFAULT_NOTE;
       renderProductCatalog();
       asProductModalOverlay.hidden = false;
     });
@@ -3783,14 +3793,6 @@
   }
   document.querySelectorAll('.as-sale-type-toggle').forEach(bindSaleTypeToggle);
 
-  var TEST_PRODUCT_CATALOG = [
-    { name:'플렉스지 프리미엄 세트', price:'39,000원', thumb:'🎁' },
-    { name:'플렉스지 데일리 케어 3종', price:'24,000원', thumb:'🧴' },
-    { name:'플렉스지 리필 파우치', price:'12,000원', thumb:'🧴' },
-    { name:'플렉스지 기획 선물세트', price:'58,000원', thumb:'🎁' },
-    { name:'플렉스지 핸드크림', price:'8,000원', thumb:'🧴' }
-  ];
-
   var pgConnectBtn = document.getElementById('pgConnectBtn');
 
   var pgDisconnectBtn = document.getElementById('pgDisconnectBtn');
@@ -3821,50 +3823,13 @@
 
   var testProductBtn = document.getElementById('testProductBtn');
   var testProductSelected = document.getElementById('testProductSelected');
-  var testProductSearchInput = document.getElementById('testProductSearchInput');
-  var testProductCatalogBody = document.getElementById('testProductCatalogBody');
-  var asTestProductModalOverlay = document.getElementById('asTestProductModalOverlay');
-  var asTestProductModalClose = document.getElementById('asTestProductModalClose');
-
-  function renderTestProductCatalog(){
-    var keyword = testProductSearchInput.value.trim();
-    var list = keyword
-      ? TEST_PRODUCT_CATALOG.filter(function(p){ return p.name.indexOf(keyword) !== -1; })
-      : TEST_PRODUCT_CATALOG;
-
-    testProductCatalogBody.innerHTML = '';
-    if(list.length === 0){
-      testProductCatalogBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>';
-      return;
-    }
-    list.forEach(function(p){
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td><div class="as-thumb">' + p.thumb + '</div></td><td>' + p.name + '</td><td>' + p.price + '</td>' +
-        '<td class="as-td-actions"><button class="as-btn as-btn-primary as-btn-sm">선택</button></td>';
-      tr.querySelector('button').addEventListener('click', function(){
-        testProductSelected.innerHTML = '선택된 상품: <div class="as-thumb">' + p.thumb + '</div><span class="name">' + p.name + '</span>';
-        if(pgConnectBtn) pgConnectBtn.disabled = false;
-        asTestProductModalOverlay.hidden = true;
-      });
-      testProductCatalogBody.appendChild(tr);
-    });
-  }
 
   if(testProductBtn){
     testProductBtn.addEventListener('click', function(){
-      renderTestProductCatalog();
-      asTestProductModalOverlay.hidden = false;
-    });
-  }
-  if(testProductSearchInput){
-    testProductSearchInput.addEventListener('input', renderTestProductCatalog);
-  }
-  if(asTestProductModalClose){
-    asTestProductModalClose.addEventListener('click', function(){ asTestProductModalOverlay.hidden = true; });
-  }
-  if(asTestProductModalOverlay){
-    asTestProductModalOverlay.addEventListener('click', function(e){
-      if(e.target === asTestProductModalOverlay) asTestProductModalOverlay.hidden = true;
+      productModalMode = 'test';
+      if(productModalNote) productModalNote.textContent = '· PG 심사용으로 등록할 실제 판매 상품 1개를 체크해 주세요.';
+      renderProductCatalog();
+      asProductModalOverlay.hidden = false;
     });
   }
 
