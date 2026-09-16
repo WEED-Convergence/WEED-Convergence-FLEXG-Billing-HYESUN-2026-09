@@ -299,6 +299,7 @@
   .as-lnb-list{ list-style:none; margin:0; padding:0; }
   .as-lnb-group{ font-size:12.5px; font-weight:700; color:var(--lnb-label); padding:8px 18px 3px; }
   .as-lnb-item{ font-size:12.5px; font-weight:600; color:var(--lnb-text); padding:7px 18px; border-left:3px solid transparent; }
+  .as-lnb-item.active{ background:var(--lnb-active-bg); border-left-color:var(--gnb-active); color:#fff; }
   .as-lnb-sub{ display:flex; align-items:center; gap:5px; font-size:11.5px; color:var(--lnb-text-dim); padding:6px 18px 6px 26px; border-left:3px solid transparent; }
   .as-lnb-sub .dot{ font-size:10px; }
   .as-lnb-sub.active{ background:var(--lnb-active-bg); border-left-color:var(--gnb-active); color:#fff; font-weight:700; }
@@ -552,6 +553,41 @@
   .as-intro-consent-item .view{ font-size:11px; color:var(--ink-faint); text-decoration:underline; flex:0 0 auto; }
   .as-intro-consent-note{ font-size:11px; color:var(--ink-soft); margin-top:8px; line-height:1.6; }
 
+  .tabbar-mock{
+    flex:0 0 auto; display:flex; align-items:flex-end; justify-content:space-around;
+    height:64px; padding-bottom:6px; background:#fff; border-top:1px solid var(--line);
+    position:relative;
+  }
+  .tabbar-item{ display:flex; flex-direction:column; align-items:center; gap:3px; }
+  .tabbar-item .ic{ font-size:19px; line-height:1; color:var(--ink-faint); }
+  .tabbar-item .lbl{ font-size:9.5px; font-weight:600; color:var(--ink-faint); }
+  .tabbar-item.mem{ position:relative; top:-16px; }
+  .tabbar-item.mem .ic-wrap{
+    width:46px; height:46px; border-radius:50%;
+    background:linear-gradient(135deg,#FFC24B,#FF4D4F);
+    display:flex; align-items:center; justify-content:center; font-size:22px;
+    border:3px solid #fff; box-shadow:0 8px 16px -4px rgba(255,77,79,.5);
+  }
+  .tabbar-item.mem .lbl{ color:#FF4D4F; font-weight:800; margin-top:1px; }
+
+  .at-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .at-card{
+    background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden;
+    box-shadow:0 2px 10px -4px rgba(21,34,56,.08); display:flex; flex-direction:column;
+  }
+  .at-card.new{ border:1px solid var(--brand); box-shadow:0 2px 12px -4px rgba(15,158,142,.3); }
+  .at-head{ background:#FAE100; color:#3A2E00; font-size:12.5px; font-weight:800; padding:9px 14px; display:flex; align-items:center; gap:6px; }
+  .at-head .talk-ic{ width:17px; height:17px; border-radius:5px; background:#3A1E1E; color:#FAE100; font-size:8.5px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .at-body{ padding:16px 16px 14px; flex:1; display:flex; flex-direction:column; }
+  .at-title{ font-size:14px; font-weight:800; color:var(--ink); line-height:1.35; margin-bottom:8px; white-space:pre-line; }
+  .at-icon{ font-size:24px; text-align:right; margin:-30px 0 8px; }
+  .at-sender{ font-size:10px; color:var(--ink-faint); margin-bottom:10px; }
+  .at-lines{ font-size:10.5px; color:var(--ink-soft); line-height:1.75; margin-bottom:10px; }
+  .at-lines .row{ display:flex; gap:4px; }
+  .at-note{ font-size:9.5px; color:var(--ink-faint); line-height:1.6; margin-top:auto; padding-top:8px; border-top:1px dashed var(--line); }
+  .at-btn{ margin:0; padding:11px; text-align:center; font-size:11.5px; font-weight:700; color:var(--ink-soft); background:#F1F3F6; border-top:1px solid var(--line); }
+  .at-new-tag{ display:inline-block; font-size:9.5px; font-weight:800; color:#fff; background:var(--brand); border-radius:8px; padding:2px 7px; margin-left:6px; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -576,6 +612,11 @@
     <li class="nav-item" data-screen="membership-subscribers"><div class="num">11</div><div class="tx"><div class="name">정기멤버십 가입자 관리</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-stats"><div class="num">12</div><div class="tx"><div class="name">정기멤버십 통계/현황</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-intro"><div class="num">13</div><div class="tx"><div class="name">정기멤버십 소개 페이지 및 약관 관리</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-alimtalk"><div class="num">14</div><div class="tx"><div class="name">알림톡 설정</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="member-list"><div class="num">15</div><div class="tx"><div class="name">회원목록</div><div class="kind">어드민 화면</div></div></li>
+
+    <li class="nav-section-label">shop</li>
+    <li class="nav-item" data-screen="tabbar"><div class="num">16</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -779,7 +820,7 @@
             <div class="as-lnb-guide">📘 가이드</div>
           </div>
           <ul class="as-lnb-list">
-            <li class="as-lnb-item">회원목록</li>
+            <li class="as-lnb-item" data-admin="memberlist">회원목록</li>
             <li class="as-lnb-item">회원등급</li>
 
             <li class="as-lnb-group">회원가입 현황</li>
@@ -1441,6 +1482,284 @@
             </div>
           </section>
 
+          <section class="admin-screen" id="adminscreen-memberlist" hidden>
+            <h1>회원목록</h1>
+            <p class="as-desc">가입한 회원을 검색하고 상태·등급·멤버십 가입 여부 등을 관리합니다.</p>
+
+            <div class="as-subhead" style="margin-top:0;">회원 검색</div>
+            <div class="as-panel" style="max-width:none;">
+              <div class="as-row-pair">
+                <div class="as-field-group"><div class="as-label">아이디</div><div class="as-field"><input class="as-input" type="text" placeholder="아이디 입력" disabled></div></div>
+                <div class="as-field-group"><div class="as-label">회원명</div><div class="as-field"><input class="as-input" type="text" placeholder="회원명 입력" disabled></div></div>
+                <div class="as-field-group"><div class="as-label">이메일</div><div class="as-field"><input class="as-input" type="text" placeholder="이메일 주소 입력" disabled></div></div>
+                <div class="as-field-group"><div class="as-label">연락처</div><div class="as-field"><input class="as-input" type="text" placeholder="연락처 입력" disabled></div></div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group" style="flex:2 1 340px;">
+                  <div class="as-label">회원가입일</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <input class="as-input" type="text" placeholder="날짜 입력" disabled style="max-width:130px;">
+                    <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                    <input class="as-input" type="text" placeholder="날짜 입력" disabled style="max-width:130px;">
+                    <div class="as-date-quick">
+                      <div class="as-date-quick-btn">오늘</div>
+                      <div class="as-date-quick-btn">7일</div>
+                      <div class="as-date-quick-btn">15일</div>
+                      <div class="as-date-quick-btn">1개월</div>
+                      <div class="as-date-quick-btn">2개월</div>
+                      <div class="as-date-quick-btn">전체</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">회원상태</div>
+                  <div class="as-field">
+                    <div class="as-radio-row" style="flex-wrap:wrap;">
+                      <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>대기</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>사용중</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>사용중지</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>삭제</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group" style="flex:1 1 100%;">
+                  <div class="as-label">멤버십 여부</div>
+                  <div class="as-field">
+                    <div class="as-radio-row" style="flex-wrap:wrap;">
+                      <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>가입</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>미가입</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group" style="flex:1 1 100%;">
+                  <div class="as-label">회원 유형</div>
+                  <div class="as-field" style="display:flex; flex-wrap:wrap; gap:6px 18px; font-size:12px; color:var(--ink);">
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" checked disabled>전체</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>카카오</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>네이버</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>애플</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>이메일</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>아이디</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>휴대폰</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group" style="flex:1 1 100%;">
+                  <div class="as-label">회원등급</div>
+                  <div class="as-field" style="display:flex; flex-wrap:wrap; gap:6px 18px; font-size:12px; color:var(--ink);">
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" checked disabled>전체</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>등급별할인1%</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>등급별할인2%</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>등급별할인10%</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>에이플등급</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>무이자</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>즉시할인테스트</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>등급쿠폰확인</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group" style="flex:1 1 100%;">
+                  <div class="as-label">라이브 구분</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:18px; flex-wrap:wrap; font-size:12px; color:var(--ink);">
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" checked disabled>전체</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>기존 회원</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>라이브 신규 회원</label>
+                    <span style="font-size:11px; color:var(--ink-faint);">ⓘ 라이브를 통해 유입된 신규 회원과 라이브 이전부터 있던 기존 회원을 구분합니다.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">포인트</div>
+                  <div class="as-field">
+                    <div class="as-radio-row">
+                      <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>보유</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>미보유</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">쿠폰</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                    <div class="as-radio-row">
+                      <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>보유</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>미보유</div>
+                    </div>
+                    <button class="as-btn as-btn-secondary as-btn-sm">데이터 집계</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">생년월일</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:8px;">
+                    <input class="as-input" type="text" placeholder="날짜 입력" disabled style="max-width:130px;">
+                    <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                    <input class="as-input" type="text" placeholder="날짜 입력" disabled style="max-width:130px;">
+                  </div>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">성별</div>
+                  <div class="as-field">
+                    <div class="as-radio-row">
+                      <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>남</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>여</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>비공개</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-row-pair">
+                <div class="as-field-group" style="flex:2 1 340px;">
+                  <div class="as-label">마케팅 수신 동의</div>
+                  <div class="as-field" style="display:flex; gap:18px; flex-wrap:wrap; font-size:12px; color:var(--ink);">
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>이메일 동의</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>휴대폰 동의</label>
+                    <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>수신거부</label>
+                  </div>
+                </div>
+                <div class="as-field-group">
+                  <div class="as-label">팬덤</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                    <div class="as-radio-row">
+                      <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>일반회원</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>팬덤회원</div>
+                    </div>
+                    <input class="as-input" type="text" placeholder="팬덤셀러명 입력" disabled style="max-width:160px;">
+                  </div>
+                </div>
+              </div>
+
+              <div class="as-actions center" style="margin-top:6px;">
+                <button class="as-btn as-btn-secondary">초기화</button>
+                <button class="as-btn as-btn-primary">검색</button>
+              </div>
+            </div>
+
+            <div class="as-list-toolbar" style="margin-top:26px;">
+              <div class="as-list-count"><span class="as-list-heading">회원 리스트</span>전체 <b>215</b>명 (페이지 1/3)</div>
+            </div>
+            <div class="as-list-note">
+              · 폐쇄몰 운영이 필요한 경우 회원가입 승인 방식으로 변경할 수 있습니다. <span style="color:var(--brand-dark); font-weight:700; text-decoration:underline;">쇼핑몰 정책 및 기능</span><br>
+              · 회원가입 방식을 변경해도 이미 가입한 회원의 상태는 변경되지 않습니다.
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <span style="font-size:12px; color:var(--ink-soft); font-weight:700;">선택 회원</span>
+                <select class="as-input as-btn-sm" style="width:auto;" disabled><option>상태변경</option></select>
+                <button class="as-btn as-btn-secondary as-btn-sm">적용</button>
+                <button class="as-btn as-btn-secondary as-btn-sm">SMS발송</button>
+                <button class="as-btn as-btn-secondary as-btn-sm">포인트 지급</button>
+                <button class="as-btn as-btn-warn as-btn-sm">포인트 차감</button>
+                <button class="as-btn as-btn-secondary as-btn-sm">쿠폰 지급</button>
+                <button class="as-btn as-btn-warn as-btn-sm">쿠폰 회수/삭제</button>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <button class="as-btn as-btn-primary as-btn-sm">회원 정보노출</button>
+                <select class="as-input as-btn-sm" style="width:auto;" disabled><option>가입순</option></select>
+                <select class="as-input as-btn-sm" style="width:auto;" disabled><option>100개씩 보기</option></select>
+              </div>
+            </div>
+
+            <div class="as-table-wrap">
+              <table class="as-table" style="min-width:1320px;">
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" disabled></th>
+                    <th>NO</th>
+                    <th>로그인경로<br>아이디<br>팬덤</th>
+                    <th>상태</th>
+                    <th>이름<br>이메일<br>전화번호<br>회원구분<br>메모</th>
+                    <th>가입일<br>최종로그인일자<br>최근구매일<br>로그인횟수</th>
+                    <th>총구매횟수<br>총구매금액</th>
+                    <th>총적립포인트</th>
+                    <th>가용쿠폰갯수</th>
+                    <th>생년월일<br>성별</th>
+                    <th>멤버십</th>
+                    <th>APP설치</th>
+                    <th>관리</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><input type="checkbox" disabled></td>
+                    <td>215</td>
+                    <td>일반회원<div class="as-td-sub">jin0219</div></td>
+                    <td><span class="as-status paid">사용중</span></td>
+                    <td>진혜정 (25478)<div class="as-td-sub">010-8775-0330</div><div class="as-td-sub">라이브 신규 회원</div></td>
+                    <td>2026-09-04 11:26:32<div class="as-td-sub">2026-09-04 11:26:41 · 1회</div></td>
+                    <td>0건<div class="as-td-sub">0원</div></td>
+                    <td>2,000<div class="as-td-sub"><button class="as-btn as-btn-secondary as-btn-sm">지급</button> <button class="as-btn as-btn-warn as-btn-sm">차감</button></div></td>
+                    <td>0장<div class="as-td-sub"><button class="as-btn as-btn-secondary as-btn-sm">지급</button> <button class="as-btn as-btn-warn as-btn-sm">회수/삭제</button></div></td>
+                    <td>비공개</td>
+                    <td><span class="as-status ended">미가입</span></td>
+                    <td>29<div class="as-td-sub">AOS 20 · iOS 9</div></td>
+                    <td><button class="as-btn as-btn-secondary as-btn-sm">회원상세</button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" disabled></td>
+                    <td>214</td>
+                    <td>일반회원<div class="as-td-sub">flexg_user01</div></td>
+                    <td><span class="as-status paid">사용중</span></td>
+                    <td>김지훈 (25201)<div class="as-td-sub">010-2231-8890</div><div class="as-td-sub">기존 회원</div></td>
+                    <td>2026-02-14 09:12:03<div class="as-td-sub">2026-09-09 14:22:10 · 42회</div></td>
+                    <td>7건<div class="as-td-sub">69,300원</div></td>
+                    <td>4,500<div class="as-td-sub"><button class="as-btn as-btn-secondary as-btn-sm">지급</button> <button class="as-btn as-btn-warn as-btn-sm">차감</button></div></td>
+                    <td>2장<div class="as-td-sub"><button class="as-btn as-btn-secondary as-btn-sm">지급</button> <button class="as-btn as-btn-warn as-btn-sm">회수/삭제</button></div></td>
+                    <td>1995.03<div class="as-td-sub">남</div></td>
+                    <td><span class="as-status paid">가입</span></td>
+                    <td>1<div class="as-td-sub">AOS 1 · iOS 0</div></td>
+                    <td><button class="as-btn as-btn-secondary as-btn-sm">회원상세</button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" disabled></td>
+                    <td>213</td>
+                    <td>일반회원<div class="as-td-sub">weed_min22</div></td>
+                    <td><span class="as-status paid">사용중</span></td>
+                    <td>민서연 (25198)<div class="as-td-sub">010-4471-2298</div><div class="as-td-sub">기존 회원</div></td>
+                    <td>2026-03-02 18:40:51<div class="as-td-sub">2026-09-10 09:03:17 · 21회</div></td>
+                    <td>6건<div class="as-td-sub">119,400원</div></td>
+                    <td>1,200<div class="as-td-sub"><button class="as-btn as-btn-secondary as-btn-sm">지급</button> <button class="as-btn as-btn-warn as-btn-sm">차감</button></div></td>
+                    <td>1장<div class="as-td-sub"><button class="as-btn as-btn-secondary as-btn-sm">지급</button> <button class="as-btn as-btn-warn as-btn-sm">회수/삭제</button></div></td>
+                    <td>1998.11<div class="as-td-sub">여</div></td>
+                    <td><span class="as-status paid">가입</span></td>
+                    <td>0<div class="as-td-sub">AOS 0 · iOS 0</div></td>
+                    <td><button class="as-btn as-btn-secondary as-btn-sm">회원상세</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="as-pagination">
+              <div class="as-page-btn">‹</div>
+              <div class="as-page-btn active">1</div>
+              <div class="as-page-btn">2</div>
+              <div class="as-page-btn">3</div>
+              <div class="as-page-btn">›</div>
+            </div>
+          </section>
+
         </div>
       </div>
 
@@ -1649,11 +1968,211 @@
           <li>멤버십은 판매자당 하나만 설정할 수 있는 단일 멤버십 구조이며, 여러 등급을 추가로 만들 수 없습니다.</li>
           <li>회원이 쇼핑몰을 탈퇴하면 가입 중인 멤버십은 자동으로 해지됩니다.</li>
           <li>멤버십 사용 여부를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
-          <li>알림톡 기능은 제공하지 않습니다(보류).</li>
+          <li>정기멤버십 가입완료·해지·쿠폰 발송 시 알림톡이 자동으로 발송되며, 메시지 &gt; 알림톡 설정에서 템플릿을 관리합니다.</li>
           <li>정산은 별도 화면 없이 기존 매출 탭에 합산되어 반영됩니다.</li>
         </ul>
       </div>
     </div>
+    </div>
+
+    <div class="admin-shell" id="tabbarShell" hidden>
+      <div class="as-content" style="flex:1; height:100%;">
+      <h1>탭바</h1>
+      <p class="as-desc">shop 하단 탭바에서 마이페이지 아이콘을 없애고, 가장 중앙에 멤버십 아이콘을 강조 색상으로 추가합니다.</p>
+
+      <div class="as-intro-layout" style="align-items:flex-start;">
+        <div class="as-intro-preview">
+          <div class="as-intro-preview-label">변경 전</div>
+          <div class="as-intro-phone" style="height:600px;">
+            <div class="as-intro-phone-header" style="font-size:13px;">the 8ple</div>
+            <div class="as-intro-phone-body" style="display:flex; align-items:center; justify-content:center; background:linear-gradient(160deg,#EAD9C2,#C9AE87); color:rgba(21,34,56,.4); font-size:12px; font-weight:700;">쇼핑몰 홈</div>
+            <div class="tabbar-mock">
+              <div class="tabbar-item"><span class="ic">☰</span><span class="lbl">전체메뉴</span></div>
+              <div class="tabbar-item"><span class="ic">🏠</span><span class="lbl">홈</span></div>
+              <div class="tabbar-item"><span class="ic">🛍️</span><span class="lbl">쇼핑백</span></div>
+              <div class="tabbar-item"><span class="ic">🛵</span><span class="lbl">배송조회</span></div>
+              <div class="tabbar-item"><span class="ic">🙍</span><span class="lbl">마이페이지</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="as-intro-preview">
+          <div class="as-intro-preview-label">변경 후</div>
+          <div class="as-intro-phone" style="height:600px;">
+            <div class="as-intro-phone-header" style="font-size:13px;">the 8ple</div>
+            <div class="as-intro-phone-body" style="display:flex; align-items:center; justify-content:center; background:linear-gradient(160deg,#EAD9C2,#C9AE87); color:rgba(21,34,56,.4); font-size:12px; font-weight:700;">쇼핑몰 홈</div>
+            <div class="tabbar-mock">
+              <div class="tabbar-item"><span class="ic">☰</span><span class="lbl">전체메뉴</span></div>
+              <div class="tabbar-item"><span class="ic">🏠</span><span class="lbl">홈</span></div>
+              <div class="tabbar-item mem"><span class="ic-wrap">👑</span><span class="lbl">멤버십</span></div>
+              <div class="tabbar-item"><span class="ic">🛍️</span><span class="lbl">쇼핑백</span></div>
+              <div class="tabbar-item"><span class="ic">🛵</span><span class="lbl">배송조회</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="as-usage-note" style="margin-top:22px;">
+        <ul>
+          <li>탭바 가장 우측의 마이페이지 아이콘을 삭제합니다.</li>
+          <li>탭바 가장 중앙에 멤버십 아이콘을 추가하고, 원형 강조 배경과 포인트 컬러로 다른 아이콘과 구분되게 표시합니다.</li>
+          <li>전체메뉴·홈·쇼핑백·배송조회 아이콘의 위치와 기능은 변경하지 않습니다.</li>
+        </ul>
+      </div>
+      </div>
+    </div>
+
+    <div class="admin-shell" id="alimtalkShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item active">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">메시지</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item">SMS 설정</li>
+            <li class="as-lnb-item">SMS 보내기</li>
+            <li class="as-lnb-item">광고성 SMS 보내기</li>
+            <li class="as-lnb-item">SMS 메시지관리</li>
+            <li class="as-lnb-item">SMS 발송내역</li>
+            <li class="as-lnb-item active">알림톡 설정</li>
+            <li class="as-lnb-item">알림톡 발송내역</li>
+
+            <li class="as-lnb-group">서비스 알림</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>담당자 그룹</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>담당자</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>메시지 설정</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>서비스 알림 내역</li>
+          </ul>
+        </div>
+        <div class="as-content">
+          <h1>알림톡 설정</h1>
+          <p class="as-desc">카카오 알림톡으로 발송되는 메시지 템플릿을 관리합니다. 정기멤버십 가입완료·해지·쿠폰 발송 시에도 아래 알림톡이 자동으로 발송됩니다.</p>
+
+          <div class="at-grid">
+            <div class="at-card">
+              <div class="at-head"><span class="talk-ic">talk</span>세컨찬스 상품구매 안내</div>
+              <div class="at-body">
+                <div class="at-icon">🎯</div>
+                <div class="at-title">세컨찬스 신청상품
+구매가 가능합니다.</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">#{회원명}님이 신청하신 세컨찬스 상품의 재고가 확보되어 바로 구매가 가능합니다.<br>재고가 다시 소진되면 구매가 어려워요.<br>▶ 구매하기: #{구매URL}</div>
+                <div class="at-note">※ 재고가 소진되면 세컨찬스 신청이 자동으로 종료됩니다.</div>
+              </div>
+              <div class="at-btn">쇼핑몰 바로가기</div>
+            </div>
+
+            <div class="at-card">
+              <div class="at-head"><span class="talk-ic">talk</span>선물하기</div>
+              <div class="at-body">
+                <div class="at-icon">🎁</div>
+                <div class="at-title">선물이
+도착했어요!</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">#{구매자명}님이 #{수령인명}님을 위해 선물을 준비했어요.<br>▶ 선물: #{상품명}<br>▶ 선물 수락 기한: #{만료일자}<br>▶ 선물보기: #{선물보기URL}</div>
+                <div class="at-note">※ 선물 수락 기한이 지나면 선물은 자동으로 취소되며, 결제 금액은 구매자에게 환불됩니다.</div>
+              </div>
+              <div class="at-btn">선물 보기</div>
+            </div>
+
+            <div class="at-card">
+              <div class="at-head"><span class="talk-ic">talk</span>선물하기 취소</div>
+              <div class="at-body">
+                <div class="at-icon">🚫</div>
+                <div class="at-title">선물이
+취소되었습니다.</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">#{수령인명}님께 보내신 선물이 거절되었거나, 배송지 정보가 기한 내 입력되지 않아 취소되었습니다.<br>▶ 주문내역 확인: #{비회원 주문URL}</div>
+                <div class="at-note">※ 결제하신 금액은 주문자님께 환불 처리됩니다.</div>
+              </div>
+              <div class="at-btn">주문/배송조회</div>
+            </div>
+
+            <div class="at-card">
+              <div class="at-head"><span class="talk-ic">talk</span>선물하기 배송조회</div>
+              <div class="at-body">
+                <div class="at-icon">🚚</div>
+                <div class="at-title">선물 배송 진행
+안내드립니다.</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">고객님의 선물이 배송 준비 중입니다.<br>▶ 선물: #{상품명}<br>▶ 배송 조회: #{비회원 주문URL}</div>
+                <div class="at-note">※ 본 메시지는 고객님이 수신한 선물 배송 진행을 안내하기 위한 알림입니다.</div>
+              </div>
+              <div class="at-btn">비회원 주문/배송조회</div>
+            </div>
+
+            <div class="at-card">
+              <div class="at-head"><span class="talk-ic">talk</span>선물 배송지 입력 안내</div>
+              <div class="at-body">
+                <div class="at-icon">📍</div>
+                <div class="at-title">선물이 기다리고 있어요
+배송지를 알려주세요!</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">선물을 받기 위한 배송지 정보를 입력해 주세요!<br>▶ 선물: #{상품명}<br>▶ 선물 수락 기한: #{만료일자}<br>▶ 배송지 입력: #{선물보기URL}</div>
+                <div class="at-note">※ 선물 수락 기한이 지나면 선물은 자동 취소되며, 주문자에게 환불 처리됩니다.</div>
+              </div>
+              <div class="at-btn">배송지 입력</div>
+            </div>
+
+            <div class="at-card new">
+              <div class="at-head"><span class="talk-ic">talk</span>정기멤버십 가입완료 안내<span class="at-new-tag">NEW</span></div>
+              <div class="at-body">
+                <div class="at-icon">👑</div>
+                <div class="at-title">정기멤버십 가입이
+완료됐어요!</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">#{회원명}님, 정기멤버십 가입이 완료되어 혜택이 바로 적용돼요.<br>▶ 멤버십: #{멤버십명}<br>▶ 가입일: #{가입일자}<br>▶ 다음 결제일: #{다음결제일자}</div>
+                <div class="at-note">※ 정기멤버십 발송 조건: 정기멤버십 가입 완료 시점</div>
+              </div>
+              <div class="at-btn">마이멤버십 확인</div>
+            </div>
+
+            <div class="at-card new">
+              <div class="at-head"><span class="talk-ic">talk</span>정기멤버십 해지 안내<span class="at-new-tag">NEW</span></div>
+              <div class="at-body">
+                <div class="at-icon">📭</div>
+                <div class="at-title">정기멤버십이
+해지됐어요</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">#{회원명}님의 정기멤버십 해지가 완료됐어요.<br>▶ 멤버십: #{멤버십명}<br>▶ 이용 종료일: #{이용종료일자}</div>
+                <div class="at-note">※ 정기멤버십 발송 조건: 정기멤버십 해지 완료 시점(이용 종료일까지 혜택은 유지돼요)</div>
+              </div>
+              <div class="at-btn">멤버십 다시 가입하기</div>
+            </div>
+
+            <div class="at-card new">
+              <div class="at-head"><span class="talk-ic">talk</span>정기멤버십 쿠폰 발송 안내<span class="at-new-tag">NEW</span></div>
+              <div class="at-body">
+                <div class="at-icon">🎟️</div>
+                <div class="at-title">정기멤버십 쿠폰이
+발송됐어요!</div>
+                <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
+                <div class="at-lines">#{회원명}님께 정기멤버십 쿠폰이 발송됐어요.<br>▶ 멤버십: #{멤버십명}<br>▶ 쿠폰: #{쿠폰명}<br>▶ 사용기한: #{쿠폰만료일자}</div>
+                <div class="at-note">※ 정기멤버십 발송 조건: 정기멤버십 혜택 쿠폰 발송 시점</div>
+              </div>
+              <div class="at-btn">쿠폰 확인하기</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1724,6 +2243,18 @@
     'policy': {
       number:'', label:'정기멤버십 정책', kind:'메모', doc:true,
       policy:'결제·상태값·해지·PG 연동·혜택·기타 정책을 한 문서로 모아둔 참고용 화면이에요. 실제 어드민 GNB/LNB에는 노출되지 않고, 다른 정기멤버십 화면(09~13)에서 이미 적용된 운영 기준을 한곳에서 확인할 수 있도록 정리했어요. 버튼이나 입력 없이 읽기 전용으로 구성돼요.'
+    },
+    'membership-alimtalk': {
+      number:'14', label:'알림톡 설정', kind:'어드민 화면', msg:true,
+      policy:'메시지 &gt; 알림톡 설정 화면에 정기멤버십용 알림톡 템플릿 3개(가입완료·해지·쿠폰 발송)가 추가돼요. 기존 세컨찬스·선물하기 알림톡과 같은 카드 형태로 노출되고, 각 카드는 발송 조건과 예시 문구, 사용 가능한 치환 태그를 보여줘요.'
+    },
+    'member-list': {
+      number:'15', label:'회원목록', kind:'어드민 화면', admin:'memberlist',
+      policy:'기존 회원 검색 화면에 "멤버십 여부" 검색 조건과 회원 리스트의 "멤버십" 컬럼이 추가돼요. 다른 검색 조건과 마찬가지로 전체/가입/미가입 중 하나를 골라 조회할 수 있고, 리스트의 멤버십 컬럼은 해당 회원이 정기멤버십에 가입되어 있는지를 바로 보여줘요.'
+    },
+    'tabbar': {
+      number:'16', label:'탭바', kind:'모바일 화면', mobile:true,
+      policy:'shop 하단 탭바 가장 우측의 마이페이지 아이콘을 없애고, 가장 중앙에 멤버십 아이콘을 강조 색상의 원형 배지로 추가해요. 전체메뉴·홈·쇼핑백·배송조회 아이콘의 위치와 기능은 그대로 유지돼요.'
     }
   };
 
@@ -1733,6 +2264,8 @@
   var flexgPopup = document.getElementById('flexgPopup');
   var adminShell = document.getElementById('adminShell');
   var policyShell = document.getElementById('policyShell');
+  var tabbarShell = document.getElementById('tabbarShell');
+  var alimtalkShell = document.getElementById('alimtalkShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -1745,12 +2278,24 @@
 
     var isAdmin = !!s.admin;
     var isDoc = !!s.doc;
-    flexgPopup.hidden = isAdmin || isDoc;
+    var isMobile = !!s.mobile;
+    var isMsg = !!s.msg;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMsg;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
-    stageFrame.classList.toggle('wide', isAdmin || isDoc);
+    tabbarShell.hidden = !isMobile;
+    alimtalkShell.hidden = !isMsg;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg);
 
-    if(isDoc){
+    if(isMsg){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isMobile){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isDoc){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
@@ -1762,7 +2307,7 @@
       document.querySelectorAll('.admin-screen').forEach(function(el){
         el.hidden = el.id !== 'adminscreen-' + s.admin;
       });
-      document.querySelectorAll('.as-lnb-sub[data-admin]').forEach(function(el){
+      document.querySelectorAll('.as-lnb-sub[data-admin], .as-lnb-item[data-admin]').forEach(function(el){
         el.classList.toggle('active', el.getAttribute('data-admin') === s.admin);
       });
     } else {
