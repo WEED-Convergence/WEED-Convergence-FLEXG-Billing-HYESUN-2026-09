@@ -310,27 +310,6 @@
   .as-content h1{ font-size:18px; margin:0 0 5px; letter-spacing:-.01em; color:var(--ink); }
   .as-content .as-desc{ font-size:12px; color:var(--ink-soft); margin:0 0 20px; }
 
-  .as-tabs{ display:flex; align-items:center; gap:6px; margin-bottom:18px; flex-wrap:wrap; }
-  .as-tab{ display:flex; align-items:center; gap:8px; padding:9px 12px 9px 16px; border-radius:8px 8px 0 0; font-size:12.5px; font-weight:700; color:var(--ink-soft); background:#EDEFF3; cursor:pointer; }
-  .as-tab.active{ background:#fff; color:var(--brand-dark); border:1px solid var(--line); border-bottom:2px solid var(--brand); margin-bottom:-1px; }
-  .as-tab[hidden]{ display:none; }
-  .as-tab-del{
-    display:flex; align-items:center; justify-content:center;
-    width:16px; height:16px; border-radius:50%; font-size:12px; font-weight:700;
-    color:var(--ink-soft); cursor:pointer;
-  }
-  .as-tab-del:hover{ background:rgba(216,83,43,.12); color:var(--warn); }
-  .as-tab-del[hidden]{ display:none; }
-  .as-tab-add{ padding:9px 14px; border-radius:8px; font-size:11.5px; font-weight:700; color:var(--ink-soft); border:1px dashed #C9D0DC; cursor:pointer; }
-  .as-tab-add[hidden]{ display:none; }
-
-  .as-mem-panel{
-    background:#F7F8FA; border:1px solid var(--line); border-top:none;
-    border-radius:0 10px 10px 10px; padding:24px 24px 22px; margin-bottom:10px;
-  }
-  .as-mem-panel > .as-panel{ box-shadow:none; }
-  .as-mem-panel > .as-subhead:first-of-type{ margin-top:0; }
-
   .as-panel{
     background:#fff; border:1px solid var(--line); border-radius:10px;
     box-shadow:0 2px 10px -4px rgba(21,34,56,.08);
@@ -413,13 +392,6 @@
   .as-page-btn.active{ background:var(--brand); border-color:var(--brand); color:#fff; }
   .as-link-num{ color:var(--brand-dark); font-weight:700; text-decoration:underline; cursor:pointer; }
 
-  .as-mem-badges{ display:flex; flex-wrap:nowrap; gap:5px; }
-  .as-mem-badge{
-    display:inline-block; font-size:10.5px; font-weight:700; white-space:nowrap;
-    padding:3px 9px; border-radius:10px; background:var(--brand-tint); color:var(--brand-dark);
-  }
-  .as-mem-badges:empty::before{ content:"미설정"; font-size:11px; color:var(--ink-faint); font-weight:600; }
-
   .as-sale-type-toggle.on{ background:var(--rail-accent-2); }
   .as-exclusive-badge{
     display:inline-block; font-size:9.5px; font-weight:800; color:#fff;
@@ -427,11 +399,6 @@
     margin-left:6px; vertical-align:middle;
   }
   .as-exclusive-badge[hidden]{ display:none; }
-
-  .as-mem-price-row{ display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); }
-  .as-mem-price-row:last-child{ border-bottom:none; }
-  .as-mem-price-row .mem-name{ flex:0 0 62px; font-size:12.5px; font-weight:700; color:var(--ink); }
-  .as-mem-price-row .as-input-suffix{ flex:1; }
 
   .as-thumb{
     width:38px; height:38px; border-radius:8px; background:var(--brand-tint);
@@ -890,283 +857,95 @@
                 <li>판매자가 설정한 혜택은 정기멤버십 전용 상품으로 지정된 상품에만 적용되며, 지정된 상품이 없으면 혜택이 적용되지 않습니다.</li>
                 <li>판매자가 PG 연동을 해제하거나 멤버십 사용 여부를 끄면, 신규 가입은 중단되고 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
                 <li>회원이 쇼핑몰을 탈퇴하면, 가입 중인 정기멤버십도 함께 자동으로 해지됩니다.</li>
-                <li>회원은 동시에 하나의 멤버십에만 가입할 수 있습니다.</li>
                 <li>판매자가 정기멤버십 전용 상품을 삭제하면 전용 상품 목록에서도 함께 삭제됩니다.</li>
               </ul>
             </div>
 
-            <div class="as-subhead">멤버십</div>
-            <div class="as-tabs" id="memTabs">
-              <div class="as-tab active" data-mem="1" data-has-subscribers="true"><span class="as-tab-label">멤버십 1</span><span class="as-tab-del" data-mem="1">×</span></div>
-              <div class="as-tab" data-mem="2" data-has-subscribers="false"><span class="as-tab-label">멤버십 2</span><span class="as-tab-del" data-mem="2">×</span></div>
-              <div class="as-tab" data-mem="3" hidden data-has-subscribers="false"><span class="as-tab-label">멤버십 3</span><span class="as-tab-del" data-mem="3">×</span></div>
-              <div class="as-tab-add" id="memAddBtn">+ 멤버십 추가</div>
-            </div>
-
-            <div class="as-mem-panel" data-mem="1">
-              <div class="as-panel">
-                <div class="as-row">
-                  <div class="as-label">멤버십 사용 여부</div>
-                  <div class="as-field"><div class="as-toggle as-mem-active-toggle on"><div class="knob"></div></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">멤버십명</div>
-                    <div class="as-field"><input class="as-input" type="text" placeholder="예: 정기멤버십명 입력" disabled></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">정기결제 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" placeholder="9,900" disabled><span class="as-suffix">원</span></div></div>
-                  </div>
-                </div>
+            <div class="as-subhead">멤버십 설정</div>
+            <div class="as-panel">
+              <div class="as-row">
+                <div class="as-label">멤버십 사용 여부</div>
+                <div class="as-field"><div class="as-toggle as-mem-active-toggle on"><div class="knob"></div></div></div>
               </div>
-
-              <div class="as-subhead">혜택 설정</div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">상품 구매시 포인트 지급</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">멤버십명</div>
+                  <div class="as-field"><input class="as-input" type="text" placeholder="예: 정기멤버십명 입력" disabled></div>
                 </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">지급 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">지급률</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">상품 구매시 즉시 할인</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">할인 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">할인율</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">장바구니 배송비 혜택</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">무료배송 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">묶음상품 포함 여부</div>
-                    <div class="as-field">
-                      <div class="as-radio-row">
-                        <div class="as-radio-opt"><div class="as-radio-dot on"></div>포함</div>
-                        <div class="as-radio-opt"><div class="as-radio-dot"></div>제외</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">쿠폰 지급</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
-                </div>
-                <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <div class="as-coupon-btn-row">
-                  <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
-                  <button class="as-btn as-btn-primary">쿠폰 메시지 보내기</button>
+                <div class="as-field-group">
+                  <div class="as-label">정기결제 금액</div>
+                  <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" placeholder="9,900" disabled><span class="as-suffix">원</span></div></div>
                 </div>
               </div>
             </div>
 
-            <div class="as-mem-panel" data-mem="2" hidden>
-              <div class="as-panel">
-                <div class="as-row">
-                  <div class="as-label">멤버십 사용 여부</div>
-                  <div class="as-field"><div class="as-toggle as-mem-active-toggle on"><div class="knob"></div></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">멤버십명</div>
-                    <div class="as-field"><input class="as-input" type="text" placeholder="예: 정기멤버십명 입력" disabled></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">정기결제 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" placeholder="19,900" disabled><span class="as-suffix">원</span></div></div>
-                  </div>
-                </div>
+            <div class="as-subhead">혜택 설정</div>
+
+            <div class="as-benefit">
+              <div class="as-benefit-head">
+                <div class="as-benefit-title">상품 구매시 포인트 지급</div>
+                <div class="as-toggle on"><div class="knob"></div></div>
               </div>
-
-              <div class="as-subhead">혜택 설정</div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">상품 구매시 포인트 지급</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">지급 조건 금액</div>
+                  <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
                 </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">지급 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">지급률</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">상품 구매시 즉시 할인</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">할인 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">할인율</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">장바구니 배송비 혜택</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">무료배송 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">묶음상품 포함 여부</div>
-                    <div class="as-field">
-                      <div class="as-radio-row">
-                        <div class="as-radio-opt"><div class="as-radio-dot on"></div>포함</div>
-                        <div class="as-radio-opt"><div class="as-radio-dot"></div>제외</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">쿠폰 지급</div>
-                  <div class="as-toggle on"><div class="knob"></div></div>
-                </div>
-                <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <div class="as-coupon-btn-row">
-                  <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
-                  <button class="as-btn as-btn-primary">쿠폰 메시지 보내기</button>
+                <div class="as-field-group">
+                  <div class="as-label">지급률</div>
+                  <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
                 </div>
               </div>
             </div>
 
-            <div class="as-mem-panel" data-mem="3" hidden>
-              <div class="as-panel">
-                <div class="as-row">
-                  <div class="as-label">멤버십 사용 여부</div>
-                  <div class="as-field"><div class="as-toggle as-mem-active-toggle"><div class="knob"></div></div></div>
+            <div class="as-benefit">
+              <div class="as-benefit-head">
+                <div class="as-benefit-title">상품 구매시 즉시 할인</div>
+                <div class="as-toggle on"><div class="knob"></div></div>
+              </div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">할인 조건 금액</div>
+                  <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
                 </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">멤버십명</div>
-                    <div class="as-field"><input class="as-input" type="text" placeholder="예: 정기멤버십명 입력" disabled></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">정기결제 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" placeholder="0" disabled><span class="as-suffix">원</span></div></div>
-                  </div>
+                <div class="as-field-group">
+                  <div class="as-label">할인율</div>
+                  <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
                 </div>
               </div>
+            </div>
 
-              <div class="as-subhead">혜택 설정</div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">상품 구매시 포인트 지급</div>
-                  <div class="as-toggle"><div class="knob"></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">지급 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">지급률</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
-                  </div>
-                </div>
+            <div class="as-benefit">
+              <div class="as-benefit-head">
+                <div class="as-benefit-title">장바구니 배송비 혜택</div>
+                <div class="as-toggle on"><div class="knob"></div></div>
               </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">상품 구매시 즉시 할인</div>
-                  <div class="as-toggle"><div class="knob"></div></div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">무료배송 조건 금액</div>
+                  <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
                 </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">할인 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">할인율</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">%</span></div></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">장바구니 배송비 혜택</div>
-                  <div class="as-toggle"><div class="knob"></div></div>
-                </div>
-                <div class="as-row-pair">
-                  <div class="as-field-group">
-                    <div class="as-label">무료배송 조건 금액</div>
-                    <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" disabled><span class="as-suffix">원 이상</span></div></div>
-                  </div>
-                  <div class="as-field-group">
-                    <div class="as-label">묶음상품 포함 여부</div>
-                    <div class="as-field">
-                      <div class="as-radio-row">
-                        <div class="as-radio-opt"><div class="as-radio-dot on"></div>포함</div>
-                        <div class="as-radio-opt"><div class="as-radio-dot"></div>제외</div>
-                      </div>
+                <div class="as-field-group">
+                  <div class="as-label">묶음상품 포함 여부</div>
+                  <div class="as-field">
+                    <div class="as-radio-row">
+                      <div class="as-radio-opt"><div class="as-radio-dot on"></div>포함</div>
+                      <div class="as-radio-opt"><div class="as-radio-dot"></div>제외</div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div class="as-benefit">
-                <div class="as-benefit-head">
-                  <div class="as-benefit-title">쿠폰 지급</div>
-                  <div class="as-toggle"><div class="knob"></div></div>
-                </div>
-                <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
-                <div class="as-coupon-btn-row">
-                  <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
-                  <button class="as-btn as-btn-primary">쿠폰 메시지 보내기</button>
-                </div>
+            <div class="as-benefit">
+              <div class="as-benefit-head">
+                <div class="as-benefit-title">쿠폰 지급</div>
+                <div class="as-toggle on"><div class="knob"></div></div>
+              </div>
+              <div class="as-coupon-note">· 쿠폰 발급 수량이 제한되어 있어도 관리자가 쿠폰을 지급하는 것은 제한 없이 가능합니다.</div>
+              <div class="as-coupon-btn-row">
+                <button class="as-btn as-btn-secondary as-coupon-open">지급</button>
+                <button class="as-btn as-btn-primary">쿠폰 메시지 보내기</button>
               </div>
             </div>
 
@@ -1178,7 +957,7 @@
 
           <section class="admin-screen" id="adminscreen-products" hidden>
             <h1>정기멤버십 전용 상품 관리</h1>
-            <p class="as-desc">상품별로 적용할 멤버십 종류와 전용가를 설정합니다.</p>
+            <p class="as-desc">상품별로 멤버십 전용가를 설정합니다.</p>
 
             <div class="as-panel" style="max-width:none; margin-bottom:22px;">
               <div class="as-row-pair">
@@ -1196,15 +975,6 @@
                 </div>
               </div>
               <div class="as-row-pair">
-                <div class="as-field-group">
-                  <div class="as-label">멤버십</div>
-                  <select class="as-input" disabled>
-                    <option>전체</option>
-                    <option>멤버십 1</option>
-                    <option>멤버십 2</option>
-                    <option>멤버십 3</option>
-                  </select>
-                </div>
                 <div class="as-field-group">
                   <div class="as-label">등록일</div>
                   <div style="display:flex; align-items:center; gap:6px;">
@@ -1234,68 +1004,65 @@
               </select>
             </div>
             <div class="as-table-wrap">
-              <table class="as-table" style="min-width:1080px;">
-                <thead><tr><th>No.</th><th>썸네일</th><th>상품코드</th><th>상품명</th><th>판매가</th><th>멤버십 전용</th><th>적용 멤버십 · 전용가</th><th>등록일</th><th>주문건수</th><th>관리</th></tr></thead>
+              <table class="as-table" style="min-width:980px;">
+                <thead><tr><th>No.</th><th>썸네일</th><th>상품코드</th><th>상품명</th><th>판매가</th><th>멤버십 전용</th><th>멤버십 전용가</th><th>등록일</th><th>주문건수</th></tr></thead>
                 <tbody id="productTableBody">
                   <tr data-product="플렉스지 프리미엄 세트" data-code="FXG-1001">
                     <td>1</td><td><div class="as-thumb">🎁</div></td><td>FXG-1001</td>
                     <td>플렉스지 프리미엄 세트<span class="as-exclusive-badge" hidden>전용</span></td><td>39,000원</td>
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
-                    <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 29,000원</span><span class="as-mem-badge">멤버십 2 · 25,000원</span></td>
+                    <td><div class="as-input-suffix"><input class="as-input" type="text" value="29,000" disabled><span class="as-suffix">원</span></div></td>
                     <td>2026.02.10</td><td>128건</td>
-                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 데일리 케어 3종" data-code="FXG-1002">
                     <td>2</td><td><div class="as-thumb">🧴</div></td><td>FXG-1002</td>
                     <td>플렉스지 데일리 케어 3종<span class="as-exclusive-badge" hidden>전용</span></td><td>24,000원</td>
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
-                    <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 18,900원</span></td>
+                    <td><div class="as-input-suffix"><input class="as-input" type="text" value="18,900" disabled><span class="as-suffix">원</span></div></td>
                     <td>2026.02.10</td><td>96건</td>
-                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 리필 파우치" data-code="FXG-1003">
                     <td>3</td><td><div class="as-thumb">🧴</div></td><td>FXG-1003</td>
                     <td>플렉스지 리필 파우치<span class="as-exclusive-badge">전용</span></td><td>12,000원</td>
                     <td><div class="as-toggle as-sale-type-toggle on"><div class="knob"></div></div></td>
-                    <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 9,900원</span><span class="as-mem-badge">멤버십 2 · 8,900원</span><span class="as-mem-badge">멤버십 3 · 7,900원</span></td>
+                    <td><div class="as-input-suffix"><input class="as-input" type="text" value="9,900" disabled><span class="as-suffix">원</span></div></td>
                     <td>2026.03.02</td><td>214건</td>
-                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 기획 선물세트" data-code="FXG-1004">
                     <td>4</td><td><div class="as-thumb">🎁</div></td><td>FXG-1004</td>
                     <td>플렉스지 기획 선물세트<span class="as-exclusive-badge" hidden>전용</span></td><td>58,000원</td>
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
-                    <td class="as-mem-badges"><span class="as-mem-badge">멤버십 1 · 45,000원</span></td>
+                    <td><div class="as-input-suffix"><input class="as-input" type="text" value="45,000" disabled><span class="as-suffix">원</span></div></td>
                     <td>2026.03.15</td><td>41건</td>
-                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 핸드크림" data-code="FXG-1005">
                     <td>5</td><td><div class="as-thumb">🧴</div></td><td>FXG-1005</td>
                     <td>플렉스지 핸드크림<span class="as-exclusive-badge" hidden>전용</span></td><td>8,000원</td>
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
-                    <td class="as-mem-badges"><span class="as-mem-badge">멤버십 2 · 5,900원</span></td>
+                    <td><div class="as-input-suffix"><input class="as-input" type="text" value="5,900" disabled><span class="as-suffix">원</span></div></td>
                     <td>2026.04.01</td><td>67건</td>
-                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 바디워시 500ml" data-code="FXG-1006">
                     <td>6</td><td><div class="as-thumb">🧴</div></td><td>FXG-1006</td>
                     <td>플렉스지 바디워시 500ml<span class="as-exclusive-badge" hidden>전용</span></td><td>15,000원</td>
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
-                    <td class="as-mem-badges"><span class="as-mem-badge">멤버십 2 · 11,500원</span></td>
+                    <td><div class="as-input-suffix"><input class="as-input" type="text" value="11,500" disabled><span class="as-suffix">원</span></div></td>
                     <td>2026.04.01</td><td>88건</td>
-                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
                   <tr data-product="플렉스지 헤어 트리트먼트" data-code="FXG-1007">
                     <td>7</td><td><div class="as-thumb">🧴</div></td><td>FXG-1007</td>
                     <td>플렉스지 헤어 트리트먼트<span class="as-exclusive-badge" hidden>전용</span></td><td>21,000원</td>
                     <td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>
-                    <td class="as-mem-badges"><span class="as-mem-badge">멤버십 2 · 16,900원</span></td>
+                    <td><div class="as-input-suffix"><input class="as-input" type="text" value="16,900" disabled><span class="as-suffix">원</span></div></td>
                     <td>2026.05.20</td><td>33건</td>
-                    <td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>
                   </tr>
-                  <tr id="productListNoResults" hidden><td colspan="10" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>
+                  <tr id="productListNoResults" hidden><td colspan="9" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>
                 </tbody>
               </table>
+            </div>
+
+            <div class="as-actions right" style="margin-top:16px;">
+              <button class="as-btn as-btn-primary">저장</button>
             </div>
 
             <div class="as-pagination">
@@ -1314,17 +1081,6 @@
                 <div class="as-field-group">
                   <div class="as-label">아이디 검색</div>
                   <div class="as-field"><input class="as-input" type="text" placeholder="아이디 입력" disabled></div>
-                </div>
-                <div class="as-field-group">
-                  <div class="as-label">멤버십</div>
-                  <div class="as-field">
-                    <select class="as-input" disabled>
-                      <option>전체</option>
-                      <option>멤버십 1</option>
-                      <option>멤버십 2</option>
-                      <option>멤버십 3</option>
-                    </select>
-                  </div>
                 </div>
               </div>
               <div class="as-row-pair">
@@ -1380,50 +1136,50 @@
               <table class="as-table" style="min-width:1080px;">
                 <thead>
                   <tr>
-                    <th>No.</th><th>아이디</th><th>멤버십</th><th>가입일</th><th>결제상태</th><th>이용상태</th>
+                    <th>No.</th><th>아이디</th><th>가입일</th><th>결제상태</th><th>이용상태</th>
                     <th>결제차수</th><th>정기결제 금액</th><th>누적 결제금액</th><th>다음 결제예정일</th>
                     <th>최근 로그인</th><th>관리</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td><td>flexg_user01</td><td>멤버십 1</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
+                    <td>1</td><td>flexg_user01</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
                     <td>7회차</td><td>9,900원</td><td>69,300원</td><td>2026.10.14</td>
                     <td>2026.09.09 14:22</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm as-sub-cancel-btn">해지</button></td>
                   </tr>
                   <tr>
-                    <td>2</td><td>weed_min22</td><td>멤버십 2</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status ended">해지완료</span></td>
+                    <td>2</td><td>weed_min22</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status ended">해지완료</span></td>
                     <td>6회차</td><td>19,900원</td><td>119,400원</td><td>2026.09.02</td>
                     <td>2026.09.10 09:03</td>
                     <td class="as-td-actions">-</td>
                   </tr>
                   <tr>
-                    <td>3</td><td>subin_kim</td><td>멤버십 1</td><td>2026.04.19</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
+                    <td>3</td><td>subin_kim</td><td>2026.04.19</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
                     <td>5회차</td><td>9,900원</td><td>49,500원</td><td>2026.10.19</td>
                     <td>2026.08.30 21:47</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm as-sub-cancel-btn">해지</button></td>
                   </tr>
                   <tr>
-                    <td>4</td><td>hyesun_choi</td><td>멤버십 2</td><td>2026.05.27</td><td><span class="as-status retry" data-fail-reason="카드 한도초과" data-fail-at="2026.09.10 14:32" data-retry-at="2026.09.11 14:32">재시도중<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status active">이용중</span></td>
+                    <td>4</td><td>hyesun_choi</td><td>2026.05.27</td><td><span class="as-status retry" data-fail-reason="카드 한도초과" data-fail-at="2026.09.10 14:32" data-retry-at="2026.09.11 14:32">재시도중<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status active">이용중</span></td>
                     <td>4회차</td><td>19,900원</td><td>59,700원</td><td>2026.10.27</td>
                     <td>2026.09.01 11:15</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm as-sub-cancel-btn">해지</button></td>
                   </tr>
                   <tr>
-                    <td>5</td><td>flexg_biz03</td><td>멤버십 1</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status endsoon">해지예정</span></td>
+                    <td>5</td><td>flexg_biz03</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status endsoon">해지예정</span></td>
                     <td>3회차</td><td>9,900원</td><td>29,700원</td><td>2026.10.30</td>
                     <td>2026.09.10 08:40</td>
                     <td class="as-td-actions">-</td>
                   </tr>
                   <tr>
-                    <td>6</td><td>flexg_dev99</td><td>멤버십 2</td><td>2026.07.11</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
+                    <td>6</td><td>flexg_dev99</td><td>2026.07.11</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
                     <td>2회차</td><td>19,900원</td><td>39,800원</td><td>2026.10.11</td>
                     <td>2026.09.08 19:02</td>
                     <td class="as-td-actions"><button class="as-btn as-btn-warn as-btn-sm as-sub-cancel-btn">해지</button></td>
                   </tr>
                   <tr>
-                    <td>7</td><td>flexg_test01</td><td>멤버십 1</td><td>2026.03.05</td><td><span class="as-status finalfail" data-fail-reason="카드 한도초과" data-fail-at="2026.09.05 10:15">최종실패<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status ended">해지완료</span></td>
+                    <td>7</td><td>flexg_test01</td><td>2026.03.05</td><td><span class="as-status finalfail" data-fail-reason="카드 한도초과" data-fail-at="2026.09.05 10:15">최종실패<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status ended">해지완료</span></td>
                     <td>6회차</td><td>9,900원</td><td>49,500원</td><td>2026.10.05</td>
                     <td>2026.08.28 16:40</td>
                     <td class="as-td-actions">-</td>
@@ -1479,15 +1235,6 @@
                       <div class="as-date-quick-btn">전체</div>
                     </div>
                   </div>
-                </div>
-                <div class="as-field-group" style="flex:0 0 220px;">
-                  <div class="as-label">멤버십</div>
-                  <select class="as-input" disabled>
-                    <option>전체</option>
-                    <option>멤버십 1</option>
-                    <option>멤버십 2</option>
-                    <option>멤버십 3</option>
-                  </select>
                 </div>
               </div>
               <div class="as-actions center">
@@ -1559,13 +1306,13 @@
               </div>
               <p class="as-desc" style="margin:-6px 0 12px; font-size:11px;">신규가입·해지 수치를 클릭하면 해당 회원 목록을 확인할 수 있습니다.</p>
               <table class="as-table" style="max-width:720px;">
-                <thead><tr><th>월</th><th>멤버십</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
+                <thead><tr><th>월</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
                 <tbody>
-                  <tr><td>2026.05</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.05">72</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.05">14</span></td><td>1,041</td></tr>
-                  <tr><td>2026.06</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.06">84</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.06">19</span></td><td>1,106</td></tr>
-                  <tr><td>2026.07</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.07">65</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.07">17</span></td><td>1,154</td></tr>
-                  <tr><td>2026.08</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.08">90</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.08">25</span></td><td>1,219</td></tr>
-                  <tr><td>2026.09</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09">96</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09">21</span></td><td>1,284</td></tr>
+                  <tr><td>2026.05</td><td><span class="as-link-num" data-type="new" data-period="2026.05">72</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.05">14</span></td><td>1,041</td></tr>
+                  <tr><td>2026.06</td><td><span class="as-link-num" data-type="new" data-period="2026.06">84</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.06">19</span></td><td>1,106</td></tr>
+                  <tr><td>2026.07</td><td><span class="as-link-num" data-type="new" data-period="2026.07">65</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.07">17</span></td><td>1,154</td></tr>
+                  <tr><td>2026.08</td><td><span class="as-link-num" data-type="new" data-period="2026.08">90</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.08">25</span></td><td>1,219</td></tr>
+                  <tr><td>2026.09</td><td><span class="as-link-num" data-type="new" data-period="2026.09">96</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09">21</span></td><td>1,284</td></tr>
                 </tbody>
               </table>
 
@@ -1574,15 +1321,15 @@
                 <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
               </div>
               <table class="as-table" style="max-width:720px;">
-                <thead><tr><th>날짜</th><th>멤버십</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
+                <thead><tr><th>날짜</th><th>신규가입</th><th>해지</th><th>누적가입자</th></tr></thead>
                 <tbody>
-                  <tr><td>2026.09.04</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.04">11</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.04">2</span></td><td>1,258</td></tr>
-                  <tr><td>2026.09.05</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.09.05">9</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.05">3</span></td><td>1,264</td></tr>
-                  <tr><td>2026.09.06</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.06">14</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.06">4</span></td><td>1,274</td></tr>
-                  <tr><td>2026.09.07</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.09.07">8</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.07">1</span></td><td>1,281</td></tr>
-                  <tr><td>2026.09.08</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.08">6</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.08">2</span></td><td>1,285</td></tr>
-                  <tr><td>2026.09.09</td><td>멤버십 2</td><td><span class="as-link-num" data-type="new" data-period="2026.09.09">10</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.09">3</span></td><td>1,292</td></tr>
-                  <tr><td>2026.09.10</td><td>멤버십 1</td><td><span class="as-link-num" data-type="new" data-period="2026.09.10">13</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.10">6</span></td><td>1,299</td></tr>
+                  <tr><td>2026.09.04</td><td><span class="as-link-num" data-type="new" data-period="2026.09.04">11</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.04">2</span></td><td>1,258</td></tr>
+                  <tr><td>2026.09.05</td><td><span class="as-link-num" data-type="new" data-period="2026.09.05">9</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.05">3</span></td><td>1,264</td></tr>
+                  <tr><td>2026.09.06</td><td><span class="as-link-num" data-type="new" data-period="2026.09.06">14</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.06">4</span></td><td>1,274</td></tr>
+                  <tr><td>2026.09.07</td><td><span class="as-link-num" data-type="new" data-period="2026.09.07">8</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.07">1</span></td><td>1,281</td></tr>
+                  <tr><td>2026.09.08</td><td><span class="as-link-num" data-type="new" data-period="2026.09.08">6</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.08">2</span></td><td>1,285</td></tr>
+                  <tr><td>2026.09.09</td><td><span class="as-link-num" data-type="new" data-period="2026.09.09">10</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.09">3</span></td><td>1,292</td></tr>
+                  <tr><td>2026.09.10</td><td><span class="as-link-num" data-type="new" data-period="2026.09.10">13</span></td><td><span class="as-link-num" data-type="cancel" data-period="2026.09.10">6</span></td><td>1,299</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1721,7 +1468,7 @@
           </div>
           <div class="as-coupon-table-wrap">
             <table class="as-table" id="memberListTable">
-              <thead><tr><th>아이디</th><th>이름</th><th>멤버십</th><th>일자</th></tr></thead>
+              <thead><tr><th>아이디</th><th>이름</th><th>일자</th></tr></thead>
               <tbody id="memberListTableBody"></tbody>
             </table>
           </div>
@@ -1743,37 +1490,6 @@
               <thead><tr><th>썸네일</th><th>상품명</th><th>정가</th><th></th></tr></thead>
               <tbody id="testProductCatalogBody"></tbody>
             </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="as-modal-overlay" id="asMemPriceModalOverlay" hidden>
-        <div class="as-modal" style="width:420px;">
-          <div class="as-modal-head">
-            <div class="as-modal-title" id="memPriceModalTitle">멤버십별 가격 설정</div>
-            <div class="as-modal-close" id="memPriceModalClose">✕</div>
-          </div>
-          <div class="as-coupon-note">· 이 상품을 적용할 멤버십을 켜고 전용가를 입력합니다.</div>
-          <div id="memPriceRows">
-            <div class="as-mem-price-row" data-mem="1">
-              <div class="as-toggle" data-mem-toggle="1"><div class="knob"></div></div>
-              <div class="mem-name">멤버십 1</div>
-              <div class="as-input-suffix"><input class="as-input" type="text" placeholder="전용가 입력" data-mem-price="1" disabled><span class="as-suffix">원</span></div>
-            </div>
-            <div class="as-mem-price-row" data-mem="2">
-              <div class="as-toggle" data-mem-toggle="2"><div class="knob"></div></div>
-              <div class="mem-name">멤버십 2</div>
-              <div class="as-input-suffix"><input class="as-input" type="text" placeholder="전용가 입력" data-mem-price="2" disabled><span class="as-suffix">원</span></div>
-            </div>
-            <div class="as-mem-price-row" data-mem="3">
-              <div class="as-toggle" data-mem-toggle="3"><div class="knob"></div></div>
-              <div class="mem-name">멤버십 3</div>
-              <div class="as-input-suffix"><input class="as-input" type="text" placeholder="전용가 입력" data-mem-price="3" disabled><span class="as-suffix">원</span></div>
-            </div>
-          </div>
-          <div class="as-actions" style="margin-top:18px;">
-            <button class="as-btn as-btn-secondary" id="memPriceCancelBtn">취소</button>
-            <button class="as-btn as-btn-primary" id="memPriceSaveBtn">적용</button>
           </div>
         </div>
       </div>
@@ -1832,36 +1548,10 @@
         </div>
       </div>
 
-      <div class="as-modal-overlay" id="asMemDeleteModalOverlay" hidden>
-        <div class="as-modal" style="width:400px;">
-          <div class="as-modal-head">
-            <div class="as-modal-title">이 멤버십을 삭제하시겠습니까?</div>
-            <div class="as-modal-close" id="memDeleteModalClose">✕</div>
-          </div>
-          <div class="as-actions right" style="margin-top:4px;">
-            <button class="as-btn as-btn-secondary" id="memDeleteCancelBtn">취소</button>
-            <button class="as-btn as-btn-warn" id="memDeleteConfirmBtn">삭제하기</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="as-modal-overlay" id="asMemDeleteBlockedModalOverlay" hidden>
-        <div class="as-modal" style="width:400px;">
-          <div class="as-modal-head">
-            <div class="as-modal-title">가입자가 있어 삭제할 수 없습니다</div>
-            <div class="as-modal-close" id="memDeleteBlockedModalClose">✕</div>
-          </div>
-          <div class="modal-desc" style="margin:0 0 20px;">이 멤버십에는 현재 가입자가 있어 바로 삭제할 수 없습니다. 먼저 '멤버십 사용 여부'를 꺼서 신규 가입을 중단해 주세요. 모든 가입자의 이용이 종료된 이후에는 삭제할 수 있습니다.</div>
-          <div class="as-actions right">
-            <button class="as-btn as-btn-primary" id="memDeleteBlockedOkBtn">확인</button>
-          </div>
-        </div>
-      </div>
-
       <div class="as-modal-overlay" id="asMemActiveModalOverlay" hidden>
         <div class="as-modal" style="width:400px;">
           <div class="as-modal-head">
-            <div class="as-modal-title" id="memActiveModalTitle">멤버십 1을 사용 중지하시겠습니까?</div>
+            <div class="as-modal-title" id="memActiveModalTitle">멤버십을 사용 중지하시겠습니까?</div>
             <div class="as-modal-close" id="memActiveModalClose">✕</div>
           </div>
           <div class="modal-desc" style="margin:0 0 20px;">신규 가입이 중단되고, 기존 가입자는 이미 결제된 기간까지만 이용할 수 있습니다.</div>
@@ -1943,7 +1633,6 @@
           <li>해지 후 재이용은 재가입으로만 가능하며, 첫 달 프로모션 등 별도 혜택은 제공하지 않습니다.</li>
           <li>해지 시 환불은 불가합니다.</li>
           <li>일시정지 기능은 제공하지 않습니다.</li>
-          <li>멤버십 등급 변경(업/다운그레이드) 기능은 제공하지 않습니다.</li>
         </ul>
       </div>
 
@@ -1968,12 +1657,11 @@
       <div class="as-subhead">7. 기타 정책</div>
       <div class="as-usage-note">
         <ul>
-          <li>한 회원은 동시에 하나의 멤버십에만 가입할 수 있습니다.</li>
+          <li>멤버십은 판매자당 하나만 설정할 수 있는 단일 멤버십 구조이며, 여러 등급을 추가로 만들 수 없습니다.</li>
           <li>회원이 쇼핑몰을 탈퇴하면 가입 중인 멤버십은 자동으로 해지됩니다.</li>
-          <li>멤버십 사용 여부(개별 등급)를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
+          <li>멤버십 사용 여부를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
           <li>알림톡 기능은 제공하지 않습니다(보류).</li>
           <li>정산은 별도 화면 없이 기존 매출 탭에 합산되어 반영됩니다.</li>
-          <li>가입자가 있는 멤버십은 삭제할 수 없으며, 먼저 멤버십 사용 여부를 꺼서 신규 가입을 중단해야 합니다. 모든 가입자의 이용이 종료된 이후에만 삭제가 가능합니다.</li>
         </ul>
       </div>
     </div>
@@ -2026,11 +1714,11 @@
     },
     'membership-basic': {
       number:'09', label:'정기멤버십 기본 설정', kind:'어드민 화면', admin:'basic',
-      policy:'PG/빌링키 연동은 "숨김" 상태의 테스트 상품 1개를 선택해야 심사가 가능하고, 선택 전에는 연동하기 버튼이 비활성화돼요. 멤버십은 개수 제한 없이 등록할 수 있고, 각 멤버십은 사용 여부를 개별로 켜고 끌 수 있어요. 혜택(포인트 지급·즉시 할인·배송비·쿠폰)은 멤버십마다 다르게 설정할 수 있고, 쿠폰 지급은 발급 수량 제한과 무관하게 관리자가 무제한으로 지급할 수 있어요.'
+      policy:'PG/빌링키 연동은 "숨김" 상태의 테스트 상품 1개를 선택해야 심사가 가능하고, 선택 전에는 연동하기 버튼이 비활성화돼요. 멤버십은 판매자당 하나만 설정할 수 있는 단일 구조이고, 사용 여부를 켜고 끌 수 있어요. 혜택(포인트 지급·즉시 할인·배송비·쿠폰)을 설정할 수 있고, 쿠폰 지급은 발급 수량 제한과 무관하게 관리자가 무제한으로 지급할 수 있어요.'
     },
     'membership-products': {
       number:'10', label:'정기멤버십 전용 상품 관리', kind:'어드민 화면', admin:'products',
-      policy:'상품은 기본적으로 "공통판매"(비회원도 조회 가능, 회원에게만 차등가 적용)이고, "멤버십 전용"으로 전환하면 비회원 노출이 제한되고 멤버십 가입 유도 팝업으로 연결돼요. 한 상품에 여러 멤버십을 동시에 연결해 멤버십별로 다른 전용가를 매길 수 있어요.'
+      policy:'상품은 기본적으로 "공통판매"(비회원도 조회 가능, 회원에게만 차등가 적용)이고, "멤버십 전용"으로 전환하면 비회원 노출이 제한되고 멤버십 가입 유도 팝업으로 연결돼요. 멤버십이 하나뿐이라 상품마다 전용가도 하나만 설정하면 돼요.'
     },
     'membership-subscribers': {
       number:'11', label:'정기멤버십 가입자 관리', kind:'어드민 화면', admin:'subscribers',
@@ -2038,7 +1726,7 @@
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
-      policy:'"전체 현황" 지표는 조회 조건과 무관하게 항상 누적 전체 값을 보여주고, "선택 기간 현황"의 지표·순위·추이는 조회 기간과 멤버십 선택에 따라 값이 달라져요. 해지율은 해지자 수를 전체 가입자 수로 나눈 값이에요.'
+      policy:'"전체 현황" 지표는 조회 조건과 무관하게 항상 누적 전체 값을 보여주고, "선택 기간 현황"의 지표·순위·추이는 조회 기간에 따라 값이 달라져요. 해지율은 해지자 수를 전체 가입자 수로 나눈 값이에요.'
     },
     'membership-intro': {
       number:'13', label:'정기멤버십 소개 페이지 및 약관 관리', kind:'어드민 화면', admin:'intro',
@@ -2115,129 +1803,6 @@
     el.addEventListener('click', function(){ selectScreen(el.getAttribute('data-screen')); });
   });
 
-  function selectMemTab(mem){
-    document.querySelectorAll('.as-tab[data-mem]').forEach(function(t){
-      t.classList.toggle('active', t.getAttribute('data-mem') === mem);
-    });
-    document.querySelectorAll('.as-mem-panel').forEach(function(p){
-      p.hidden = p.getAttribute('data-mem') !== mem;
-    });
-  }
-
-  function bindTabSelect(el){
-    el.addEventListener('click', function(){ selectMemTab(el.getAttribute('data-mem')); });
-  }
-
-  function updateTabDeleteVisibility(){
-    var visibleTabs = document.querySelectorAll('.as-tab[data-mem]:not([hidden])');
-    var onlyOne = visibleTabs.length <= 1;
-    visibleTabs.forEach(function(t){
-      var del = t.querySelector('.as-tab-del');
-      if(del) del.hidden = onlyOne;
-    });
-  }
-
-  function deleteMemTab(mem){
-    var remaining = document.querySelectorAll('.as-tab[data-mem]:not([hidden])').length;
-    if(remaining <= 1) return;
-    var tab = document.querySelector('.as-tab[data-mem="' + mem + '"]:not([hidden])');
-    var panel = document.querySelector('.as-mem-panel[data-mem="' + mem + '"]');
-    if(!tab) return;
-    var wasActive = tab.classList.contains('active');
-    tab.remove();
-    if(panel) panel.remove();
-    if(wasActive){
-      var firstTab = document.querySelector('.as-tab[data-mem]:not([hidden])');
-      if(firstTab) selectMemTab(firstTab.getAttribute('data-mem'));
-    }
-    updateTabDeleteVisibility();
-  }
-
-  var asMemDeleteModalOverlay = document.getElementById('asMemDeleteModalOverlay');
-  var memDeleteModalClose = document.getElementById('memDeleteModalClose');
-  var memDeleteCancelBtn = document.getElementById('memDeleteCancelBtn');
-  var memDeleteConfirmBtn = document.getElementById('memDeleteConfirmBtn');
-  var pendingDeleteMem = null;
-
-  function closeMemDeleteModal(){ asMemDeleteModalOverlay.hidden = true; pendingDeleteMem = null; }
-  if(memDeleteModalClose) memDeleteModalClose.addEventListener('click', closeMemDeleteModal);
-  if(memDeleteCancelBtn) memDeleteCancelBtn.addEventListener('click', closeMemDeleteModal);
-  if(asMemDeleteModalOverlay){
-    asMemDeleteModalOverlay.addEventListener('click', function(e){
-      if(e.target === asMemDeleteModalOverlay) closeMemDeleteModal();
-    });
-  }
-  if(memDeleteConfirmBtn){
-    memDeleteConfirmBtn.addEventListener('click', function(){
-      if(pendingDeleteMem) deleteMemTab(pendingDeleteMem);
-      closeMemDeleteModal();
-    });
-  }
-
-  var asMemDeleteBlockedModalOverlay = document.getElementById('asMemDeleteBlockedModalOverlay');
-  var memDeleteBlockedModalClose = document.getElementById('memDeleteBlockedModalClose');
-  var memDeleteBlockedOkBtn = document.getElementById('memDeleteBlockedOkBtn');
-
-  function closeMemDeleteBlockedModal(){ asMemDeleteBlockedModalOverlay.hidden = true; }
-  if(memDeleteBlockedModalClose) memDeleteBlockedModalClose.addEventListener('click', closeMemDeleteBlockedModal);
-  if(memDeleteBlockedOkBtn) memDeleteBlockedOkBtn.addEventListener('click', closeMemDeleteBlockedModal);
-  if(asMemDeleteBlockedModalOverlay){
-    asMemDeleteBlockedModalOverlay.addEventListener('click', function(e){
-      if(e.target === asMemDeleteBlockedModalOverlay) closeMemDeleteBlockedModal();
-    });
-  }
-
-  function bindTabDelete(el){
-    el.addEventListener('click', function(e){
-      e.stopPropagation();
-      var mem = el.getAttribute('data-mem');
-      var tab = document.querySelector('.as-tab[data-mem="' + mem + '"]:not([hidden])');
-      var hasSubscribers = tab && tab.getAttribute('data-has-subscribers') === 'true';
-      if(hasSubscribers){
-        asMemDeleteBlockedModalOverlay.hidden = false;
-      } else {
-        pendingDeleteMem = mem;
-        asMemDeleteModalOverlay.hidden = false;
-      }
-    });
-  }
-
-  document.querySelectorAll('.as-tab[data-mem]').forEach(bindTabSelect);
-  document.querySelectorAll('.as-tab-del').forEach(bindTabDelete);
-  updateTabDeleteVisibility();
-
-  var memCount = document.querySelectorAll('.as-tab[data-mem]:not([hidden])').length;
-  var memTemplatePanel = document.querySelector('.as-mem-panel[data-mem="3"]');
-  var memTemplateTab = document.querySelector('.as-tab[data-mem="3"]');
-  var memAddBtn = document.getElementById('memAddBtn');
-
-  if(memAddBtn){
-    memAddBtn.addEventListener('click', function(){
-      memCount++;
-      var mem = String(memCount);
-
-      var tab = memTemplateTab.cloneNode(true);
-      tab.removeAttribute('hidden');
-      tab.setAttribute('data-mem', mem);
-      memTemplateTab.parentNode.insertBefore(tab, memAddBtn);
-
-      var panel = memTemplatePanel.cloneNode(true);
-      panel.setAttribute('data-mem', mem);
-      panel.hidden = true;
-      memTemplatePanel.parentNode.appendChild(panel);
-
-      tab.querySelector('.as-tab-label').textContent = '멤버십 ' + mem;
-      tab.querySelector('.as-tab-del').setAttribute('data-mem', mem);
-      bindTabSelect(tab);
-      bindTabDelete(tab.querySelector('.as-tab-del'));
-      bindCouponOpenButtons(panel);
-      bindMemActiveToggle(panel);
-
-      selectMemTab(mem);
-      updateTabDeleteVisibility();
-    });
-  }
-
   var asMemActiveModalOverlay = document.getElementById('asMemActiveModalOverlay');
   var memActiveModalTitle = document.getElementById('memActiveModalTitle');
   var memActiveModalClose = document.getElementById('memActiveModalClose');
@@ -2254,11 +1819,9 @@
           toggle.classList.add('on');
           return;
         }
-        var panel = toggle.closest('.as-mem-panel');
-        var mem = panel.getAttribute('data-mem');
-        var nameInput = panel.querySelector('.as-row-pair .as-field-group input.as-input');
-        var tabLabel = document.querySelector('.as-tab[data-mem="' + mem + '"] .as-tab-label');
-        var name = (nameInput && nameInput.value.trim()) || (tabLabel ? tabLabel.textContent.trim() : '멤버십');
+        var panel = toggle.closest('.as-panel');
+        var nameInput = panel ? panel.querySelector('.as-row-pair .as-field-group input.as-input') : null;
+        var name = (nameInput && nameInput.value.trim()) || '멤버십';
         memActiveModalTitle.textContent = name + '을 사용 중지하시겠습니까?';
         pendingMemActiveToggle = toggle;
         asMemActiveModalOverlay.hidden = false;
@@ -2395,15 +1958,13 @@
     tr.innerHTML = '<td>' + nextNo + '</td><td><div class="as-thumb">' + (product.thumb || '📦') + '</div></td><td>' + (product.code || '-') + '</td>' +
       '<td>' + product.name + '<span class="as-exclusive-badge" hidden>전용</span></td><td>' + product.price + '</td>' +
       '<td><div class="as-toggle as-sale-type-toggle"><div class="knob"></div></div></td>' +
-      '<td class="as-mem-badges"></td>' +
-      '<td>2026.09.10</td><td>0건</td>' +
-      '<td><button class="as-btn as-btn-warn as-btn-sm as-mem-setting-btn">멤버십 설정</button></td>';
+      '<td><div class="as-input-suffix"><input class="as-input" type="text" placeholder="전용가 입력" disabled><span class="as-suffix">원</span></div></td>' +
+      '<td>2026.09.10</td><td>0건</td>';
     if(productListNoResults){
       productTableBody.insertBefore(tr, productListNoResults);
     } else {
       productTableBody.appendChild(tr);
     }
-    bindMemSettingBtn(tr.querySelector('.as-mem-setting-btn'));
     bindSaleTypeToggle(tr.querySelector('.as-sale-type-toggle'));
   }
 
@@ -2468,51 +2029,6 @@
     });
   }
 
-  var asMemPriceModalOverlay = document.getElementById('asMemPriceModalOverlay');
-  var memPriceModalTitle = document.getElementById('memPriceModalTitle');
-  var memPriceModalClose = document.getElementById('memPriceModalClose');
-  var memPriceCancelBtn = document.getElementById('memPriceCancelBtn');
-  var memPriceSaveBtn = document.getElementById('memPriceSaveBtn');
-  var currentMemPriceRow = null;
-
-  document.querySelectorAll('[data-mem-toggle]').forEach(function(toggle){
-    toggle.addEventListener('click', function(){
-      var isOn = toggle.classList.toggle('on');
-      var mem = toggle.getAttribute('data-mem-toggle');
-      var input = document.querySelector('[data-mem-price="' + mem + '"]');
-      input.disabled = !isOn;
-      if(!isOn) input.value = '';
-    });
-  });
-
-  function resetMemPriceModal(){
-    document.querySelectorAll('[data-mem-toggle]').forEach(function(t){ t.classList.remove('on'); });
-    document.querySelectorAll('[data-mem-price]').forEach(function(i){ i.disabled = true; i.value = ''; });
-  }
-
-  function bindMemSettingBtn(btn){
-    if(!btn) return;
-    btn.addEventListener('click', function(){
-      var row = btn.closest('tr');
-      currentMemPriceRow = row;
-      memPriceModalTitle.textContent = '멤버십별 가격 설정 · ' + row.getAttribute('data-product');
-      resetMemPriceModal();
-      row.querySelectorAll('.as-mem-badge').forEach(function(badge){
-        var match = badge.textContent.match(/멤버십 (\d) · ([\d,]+)원/);
-        if(!match) return;
-        var mem = match[1];
-        var price = match[2];
-        var toggle = document.querySelector('[data-mem-toggle="' + mem + '"]');
-        var input = document.querySelector('[data-mem-price="' + mem + '"]');
-        toggle.classList.add('on');
-        input.disabled = false;
-        input.value = price;
-      });
-      asMemPriceModalOverlay.hidden = false;
-    });
-  }
-  document.querySelectorAll('.as-mem-setting-btn').forEach(bindMemSettingBtn);
-
   function bindSaleTypeToggle(toggle){
     if(!toggle) return;
     toggle.addEventListener('click', function(){
@@ -2523,31 +2039,6 @@
     });
   }
   document.querySelectorAll('.as-sale-type-toggle').forEach(bindSaleTypeToggle);
-
-  function closeMemPriceModal(){ asMemPriceModalOverlay.hidden = true; }
-
-  if(memPriceSaveBtn){
-    memPriceSaveBtn.addEventListener('click', function(){
-      if(!currentMemPriceRow) return;
-      var badgesHtml = '';
-      ['1','2','3'].forEach(function(mem){
-        var toggle = document.querySelector('[data-mem-toggle="' + mem + '"]');
-        var input = document.querySelector('[data-mem-price="' + mem + '"]');
-        if(toggle.classList.contains('on') && input.value.trim()){
-          badgesHtml += '<span class="as-mem-badge">멤버십 ' + mem + ' · ' + input.value.trim() + '원</span>';
-        }
-      });
-      currentMemPriceRow.querySelector('.as-mem-badges').innerHTML = badgesHtml;
-      closeMemPriceModal();
-    });
-  }
-  if(memPriceCancelBtn){ memPriceCancelBtn.addEventListener('click', closeMemPriceModal); }
-  if(memPriceModalClose){ memPriceModalClose.addEventListener('click', closeMemPriceModal); }
-  if(asMemPriceModalOverlay){
-    asMemPriceModalOverlay.addEventListener('click', function(e){
-      if(e.target === asMemPriceModalOverlay) closeMemPriceModal();
-    });
-  }
 
   var TEST_PRODUCT_CATALOG = [
     { name:'플렉스지 프리미엄 세트', price:'39,000원', thumb:'🎁' },
@@ -2635,17 +2126,17 @@
   }
 
   var NEW_MEMBER_LIST = [
-    { id:'flexg_user01', name:'김지훈', mem:'멤버십 1' },
-    { id:'weed_min22', name:'민서연', mem:'멤버십 2' },
-    { id:'subin_kim', name:'김수빈', mem:'멤버십 1' },
-    { id:'hyesun_choi', name:'최혜선', mem:'멤버십 2' },
-    { id:'flexg_biz03', name:'박도윤', mem:'멤버십 1' },
-    { id:'flexg_dev99', name:'이하은', mem:'멤버십 2' }
+    { id:'flexg_user01', name:'김지훈' },
+    { id:'weed_min22', name:'민서연' },
+    { id:'subin_kim', name:'김수빈' },
+    { id:'hyesun_choi', name:'최혜선' },
+    { id:'flexg_biz03', name:'박도윤' },
+    { id:'flexg_dev99', name:'이하은' }
   ];
   var CANCEL_MEMBER_LIST = [
-    { id:'flexg_old12', name:'정우진', mem:'멤버십 1' },
-    { id:'weed_bye07', name:'한소율', mem:'멤버십 2' },
-    { id:'subin_out', name:'오태민', mem:'멤버십 1' }
+    { id:'flexg_old12', name:'정우진' },
+    { id:'weed_bye07', name:'한소율' },
+    { id:'subin_out', name:'오태민' }
   ];
 
   var asMemberListModalOverlay = document.getElementById('asMemberListModalOverlay');
@@ -2666,12 +2157,12 @@
 
     memberListTableBody.innerHTML = '';
     if(list.length === 0){
-      memberListTableBody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>';
+      memberListTableBody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>';
       return;
     }
     list.forEach(function(m){
       var tr = document.createElement('tr');
-      tr.innerHTML = '<td>' + m.id + '</td><td>' + m.name + '</td><td>' + m.mem + '</td><td>' + currentMemberListPeriod + '</td>';
+      tr.innerHTML = '<td>' + m.id + '</td><td>' + m.name + '</td><td>' + currentMemberListPeriod + '</td>';
       memberListTableBody.appendChild(tr);
     });
   }
