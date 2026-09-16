@@ -670,6 +670,8 @@
   .plist-card .meta{ display:flex; align-items:center; gap:8px; margin-top:8px; font-size:10.5px; color:var(--ink-faint); }
   .plist-card .meta .buying{ color:#FF4D4F; font-weight:700; }
 
+  .pm-badge{ display:inline-block; font-size:9px; font-weight:700; color:#fff; padding:2px 6px; border-radius:3px; margin:1px 2px 1px 0; white-space:nowrap; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -698,15 +700,16 @@
     <li class="nav-item" data-screen="member-detail"><div class="num">15</div><div class="tx"><div class="name">회원 상세</div><div class="kind">팝업</div></div></li>
     <li class="nav-item" data-screen="icon-settings"><div class="num">16</div><div class="tx"><div class="name">아이콘</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="member-list"><div class="num">17</div><div class="tx"><div class="name">회원목록</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="admin-product-list"><div class="num">18</div><div class="tx"><div class="name">상품목록</div><div class="kind">어드민 화면</div></div></li>
 
     <li class="nav-section-label">shop</li>
-    <li class="nav-item" data-screen="tabbar"><div class="num">18</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="fullmenu"><div class="num">19</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-cancel"><div class="num">20</div><div class="tx"><div class="name">정기멤버십 이용현황·해지</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-cancel-done"><div class="num">21</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-landing"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-guard-popup"><div class="num">23</div><div class="tx"><div class="name">멤버십 전용 상품 안내 팝업</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-product-list"><div class="num">24</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="tabbar"><div class="num">19</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="fullmenu"><div class="num">20</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-cancel"><div class="num">21</div><div class="tx"><div class="name">정기멤버십 이용현황·해지</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-cancel-done"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-landing"><div class="num">23</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-guard-popup"><div class="num">24</div><div class="tx"><div class="name">멤버십 전용 상품 안내 팝업</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-product-list"><div class="num">25</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -1124,7 +1127,7 @@
             <div class="as-list-toolbar">
               <div class="as-list-count"><span class="as-list-heading">상품 목록</span>전체 <b>7</b>개</div>
             </div>
-            <div class="as-warn-box">· 멤버십 전용으로 설정한 상품은 비회원이 shop에서 클릭하면 "멤버십 가입 후 구매 가능한 전용 상품입니다" 안내 팝업과 함께 멤버십 가입하기로 유도됩니다.</div>
+            <div class="as-warn-box">· 멤버십 전용으로 설정한 상품은 비회원이 shop에서 클릭하면 "멤버십 가입 후 구매 가능한 전용 상품입니다" 안내 팝업과 함께 멤버십 가입하기로 유도됩니다. 멤버십 전용이 아닌 상품은 멤버십 회원의 경우 혜택이 적용된 가격으로 구매할 수 있으며, 일반 고객도 구매할 수 있습니다.</div>
             <div style="display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-bottom:12px;">
               <button class="as-btn as-btn-primary as-btn-sm" id="productSearchBtn">상품 불러오기</button>
               <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
@@ -2598,6 +2601,299 @@
       </div>
     </div>
 
+    <div class="admin-shell" id="adminProductListShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item active">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">상품</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item active">상품목록</li>
+            <li class="as-lnb-item">상품등록<span class="as-lnb-n">N</span></li>
+            <li class="as-lnb-item">상품 카테고리</li>
+            <li class="as-lnb-item">상품 태그</li>
+            <li class="as-lnb-item">상품 추적코드</li>
+            <li class="as-lnb-item">상품 예약 작업</li>
+            <li class="as-lnb-item">상품 판매 알림 신청</li>
+            <li class="as-lnb-item">묶음상품 그룹</li>
+            <li class="as-lnb-item">추천상품 그룹</li>
+            <li class="as-lnb-item">이벤트 관리</li>
+            <li class="as-lnb-item">단축URL 관리</li>
+            <li class="as-lnb-item">상품문의50</li>
+            <li class="as-lnb-item">1:1문의46</li>
+            <li class="as-lnb-item">구매후기</li>
+            <li class="as-lnb-item">공급사 관리</li>
+            <li class="as-lnb-item">상품고시정보 관리</li>
+            <li class="as-lnb-item">삭제 보관함</li>
+          </ul>
+        </div>
+
+        <div class="as-content">
+          <h1>상품 검색</h1>
+
+          <div class="as-panel" style="max-width:none;">
+            <div class="as-row-pair">
+              <div class="as-field-group">
+                <div class="as-label">상품 검색</div>
+                <div class="as-field" style="display:flex; gap:6px;">
+                  <select class="as-input" style="max-width:110px;" disabled><option>상품명</option></select>
+                  <input class="as-input" type="text" placeholder="검색내용을 입력해주세요." disabled>
+                </div>
+              </div>
+              <div class="as-field-group">
+                <div class="as-label">상품 금액</div>
+                <div class="as-field" style="display:flex; align-items:center; gap:6px;">
+                  <input class="as-input" type="text" placeholder="금액 입력" disabled>
+                  <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                  <input class="as-input" type="text" placeholder="금액 입력" disabled>
+                  <span style="color:var(--ink-soft); font-size:12px;">원</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-row-pair">
+              <div class="as-field-group" style="flex:2 1 340px;">
+                <div class="as-label">상품 등록일</div>
+                <div class="as-field" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <input class="as-input" type="text" placeholder="날짜 입력" disabled style="max-width:130px;">
+                  <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                  <input class="as-input" type="text" placeholder="날짜 입력" disabled style="max-width:130px;">
+                  <div class="as-date-quick">
+                    <div class="as-date-quick-btn">오늘</div>
+                    <div class="as-date-quick-btn">일주일</div>
+                    <div class="as-date-quick-btn">15일</div>
+                    <div class="as-date-quick-btn">한달</div>
+                    <div class="as-date-quick-btn">두달</div>
+                    <div class="as-date-quick-btn">전체</div>
+                  </div>
+                </div>
+              </div>
+              <div class="as-field-group">
+                <div class="as-label">과세구분</div>
+                <div class="as-field">
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); margin-right:14px;"><input type="checkbox" checked disabled>전체</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); margin-right:14px;"><input type="checkbox" disabled>과세</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); margin-right:14px;"><input type="checkbox" disabled>면세</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink);"><input type="checkbox" disabled>영세</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-row-pair">
+              <div class="as-field-group">
+                <div class="as-label">판매 상태</div>
+                <div class="as-field">
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); margin-right:14px;"><input type="checkbox" checked disabled>전체</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); margin-right:14px;"><input type="checkbox" disabled>준비중</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); margin-right:14px;"><input type="checkbox" disabled>판매중</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink); margin-right:14px;"><input type="checkbox" disabled>일시품절</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--ink);"><input type="checkbox" disabled>완전품절</label>
+                </div>
+              </div>
+              <div class="as-field-group">
+                <div class="as-label">상품목록 노출</div>
+                <div class="as-field">
+                  <div class="as-radio-row">
+                    <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                    <div class="as-radio-opt"><div class="as-radio-dot"></div>보임</div>
+                    <div class="as-radio-opt"><div class="as-radio-dot"></div>숨김</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-row-pair">
+              <div class="as-field-group">
+                <div class="as-label">묶음상품 그룹</div>
+                <div class="as-field"><select class="as-input" disabled><option>선택</option></select></div>
+              </div>
+              <div class="as-field-group">
+                <div class="as-label">묶음배송</div>
+                <div class="as-field">
+                  <div class="as-radio-row">
+                    <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                    <div class="as-radio-opt"><div class="as-radio-dot"></div>묶음배송 상품</div>
+                    <div class="as-radio-opt"><div class="as-radio-dot"></div>묶음배송 상품 제외</div>
+                  </div>
+                </div>
+              </div>
+              <div class="as-field-group">
+                <div class="as-label">주문자 유형</div>
+                <div class="as-field">
+                  <div class="as-radio-row">
+                    <div class="as-radio-opt"><div class="as-radio-dot on"></div>전체</div>
+                    <div class="as-radio-opt"><div class="as-radio-dot"></div>회원</div>
+                    <div class="as-radio-opt"><div class="as-radio-dot"></div>비회원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-row-pair">
+              <div class="as-field-group">
+                <div class="as-label">카테고리 검색</div>
+                <div class="as-field"><button class="as-btn as-btn-secondary as-btn-sm">카테고리 선택 &gt;</button></div>
+              </div>
+              <div class="as-field-group">
+                <div class="as-label">태그검색</div>
+                <div class="as-field"><button class="as-btn as-btn-secondary as-btn-sm">태그 선택 &gt;</button></div>
+              </div>
+            </div>
+
+            <div class="as-row-pair">
+              <div class="as-field-group">
+                <div class="as-label">상품 공급사</div>
+                <div class="as-field" style="display:flex; align-items:center; gap:10px;">
+                  <select class="as-input" style="max-width:160px;" disabled><option>선택</option></select>
+                  <span style="color:var(--ink-faint); font-size:11px;">or</span>
+                  <button class="as-btn as-btn-secondary as-btn-sm">업체찾기 &gt;</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-row-pair">
+              <div class="as-field-group" style="flex:1 1 100%;">
+                <div class="as-label">해당 상품만 보기</div>
+                <div class="as-field" style="display:flex; flex-wrap:wrap; gap:6px 18px; font-size:12px; color:var(--ink);">
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>APP 구매</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>동시 구매 불가</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>상단 진열 상품</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>포인트 개별정책 상품</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>즉시할인 개별정책 상품</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>재고 수량 노출 상품</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>셀러 판매 전용 상품</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>타임 세일</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>네이버 쇼핑</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px;"><input type="checkbox" disabled>선물하기</label>
+                  <label style="display:inline-flex; align-items:center; gap:5px; color:var(--warn); font-weight:700; border:1.5px solid var(--warn); background:var(--warn-tint); border-radius:6px; padding:3px 8px;"><input type="checkbox" disabled>정기멤버십 상품</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="as-actions center" style="margin-top:6px;">
+              <button class="as-btn as-btn-secondary">초기화</button>
+              <button class="as-btn as-btn-primary">검색</button>
+            </div>
+          </div>
+
+          <div class="as-list-toolbar" style="margin-top:26px;">
+            <div class="as-list-count"><span class="as-list-heading">상품 리스트</span>전체 <b>773</b>개 (페이지 1/8)</div>
+          </div>
+          <div class="as-list-note">
+            · 전체 상품 순서를 역순으로 재정렬하실 때 진행해주세요. <span style="color:var(--brand-dark); font-weight:700; text-decoration:underline;">역순으로 재정렬하기</span><br>
+            · 2인 이상 동시 접속해서 수정하는 것을 권장하지 않습니다. 문제가 생겼을 경우에는 순서 재정렬을 진행해주세요. <span style="color:var(--brand-dark); font-weight:700; text-decoration:underline;">순서 재정렬하기</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span style="font-size:12px; color:var(--ink-soft); font-weight:700;">선택 상품</span>
+              <select class="as-input as-btn-sm" style="width:auto;" disabled><option>상태변경</option></select>
+              <button class="as-btn as-btn-secondary as-btn-sm">적용</button>
+              <button class="as-btn as-btn-secondary as-btn-sm">상품전송</button>
+              <button class="as-btn as-btn-secondary as-btn-sm">상품복사</button>
+              <button class="as-btn as-btn-secondary as-btn-sm">공급사 변경</button>
+              <select class="as-input as-btn-sm" style="width:auto;" disabled><option>일괄변경 선택</option></select>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <button class="as-btn as-btn-primary as-btn-sm">상품정보 ⭱</button>
+              <button class="as-btn as-btn-primary as-btn-sm">샘플엑셀 ⭱</button>
+              <select class="as-input as-btn-sm" style="width:auto;" disabled><option>최근 등록순</option></select>
+              <select class="as-input as-btn-sm" style="width:auto;" disabled><option>100개씩 보기</option></select>
+            </div>
+          </div>
+
+          <div class="as-table-wrap">
+            <table class="as-table" style="min-width:1320px;">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" disabled></th>
+                  <th>순서</th>
+                  <th>결제수단</th>
+                  <th>상품이미지</th>
+                  <th>상품정보<br>상품코드<br>공급사</th>
+                  <th>주문수<br>찜하기 수</th>
+                  <th>재고<br>미입금포함 재고</th>
+                  <th>공급가격<br>이전가격<br>판매가격<br>마진율</th>
+                  <th>판매상태<br>상품목록노출<br>진열기간</th>
+                  <th>상품 URL</th>
+                  <th>등록일<br>수정일</th>
+                  <th>관리</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" disabled></td>
+                  <td>773</td>
+                  <td>
+                    <span class="pm-badge" style="background:#8892A6;">무통장</span><span class="pm-badge" style="background:#3B5FE0;">신용카드</span><span class="pm-badge" style="background:#0F9E8E;">가상계좌</span><br>
+                    <span class="pm-badge" style="background:#FFC738; color:#3A2E00;">카카오페이</span><span class="pm-badge" style="background:#E6432E;">페이코</span><span class="pm-badge" style="background:#2BC15A;">네이버페이</span><br>
+                    <span class="pm-badge" style="background:#111;">애플페이</span><span class="pm-badge" style="background:#8B5CF6;">페이유</span><span class="pm-badge" style="background:#1E88FF;">토스페이</span><br>
+                    <span class="pm-badge" style="background:#5B6B85;">내통장결제</span>
+                  </td>
+                  <td><div class="as-thumb">🧴</div></td>
+                  <td>
+                    <span class="as-status paid" style="margin-bottom:4px; display:inline-block;">무료배송</span><br>
+                    솔 재고옵션1개(이미지)
+                    <div class="as-td-sub">SWE31285501</div>
+                  </td>
+                  <td>0개<div class="as-td-sub">0개</div></td>
+                  <td>19,997<div class="as-td-sub">/ 19,997개</div><span style="color:var(--brand-dark); font-weight:700; text-decoration:underline; font-size:11px;">재고 변경 &gt;</span></td>
+                  <td>0원<div class="as-td-sub">0원</div>1,000원[과세]<div class="as-td-sub">100%</div></td>
+                  <td>
+                    <select class="as-input" style="max-width:100px; padding:5px 6px;" disabled><option>판매중</option></select>
+                    <div class="as-td-sub">
+                      <label style="display:inline-flex; align-items:center; gap:3px;"><input type="radio" name="plistvis773" checked disabled>보임</label>
+                      <label style="display:inline-flex; align-items:center; gap:3px;"><input type="radio" name="plistvis773" disabled>숨김</label>
+                    </div>
+                    <span style="color:var(--brand-dark); font-weight:700; text-decoration:underline; font-size:11px;">적용</span>
+                  </td>
+                  <td>
+                    <button class="as-btn as-btn-secondary as-btn-sm">상품URL 발송 &gt;</button> <button class="as-btn as-btn-secondary as-btn-sm">복사</button><br>
+                    <button class="as-btn as-btn-secondary as-btn-sm" style="margin-top:4px;">원본 URL복사</button><br>
+                    <button class="as-btn as-btn-secondary as-btn-sm" style="margin-top:4px;">딥링크 생성</button><br>
+                    <button class="as-btn as-btn-secondary as-btn-sm" style="margin-top:4px;">채널별URL관리 &gt;</button>
+                  </td>
+                  <td>2026-09-04<div class="as-td-sub">2026-09-04</div></td>
+                  <td>
+                    <button class="as-btn as-btn-secondary as-btn-sm">수정</button>
+                    <button class="as-btn as-btn-secondary as-btn-sm" style="margin-top:4px;">복사</button>
+                    <button class="as-btn as-btn-warn as-btn-sm" style="margin-top:4px;">삭제</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="as-pagination">
+            <div class="as-page-btn">‹</div>
+            <div class="as-page-btn active">1</div>
+            <div class="as-page-btn">2</div>
+            <div class="as-page-btn">3</div>
+            <div class="as-page-btn">›</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="admin-shell" id="cancelShell" hidden>
       <div class="as-content" style="flex:1; height:100%;">
       <h1>정기멤버십 이용현황·해지</h1>
@@ -2944,32 +3240,36 @@
       number:'17', label:'회원목록', kind:'어드민 화면', admin:'memberlist',
       policy:'기존 회원 검색 화면에 "멤버십 여부" 검색 조건과 회원 리스트의 "멤버십" 컬럼이 추가돼요. 다른 검색 조건과 마찬가지로 전체/가입/미가입 중 하나를 골라 조회할 수 있고, 리스트의 멤버십 컬럼은 해당 회원이 정기멤버십에 가입되어 있는지를 바로 보여줘요.'
     },
+    'admin-product-list': {
+      number:'18', label:'상품목록', kind:'어드민 화면', plistAdmin:true,
+      policy:'기존 상품 검색/목록 화면의 "해당 상품만 보기" 체크박스 목록에 "정기멤버십 상품" 항목 하나만 추가했어요. 나머지 검색 조건과 상품 리스트 테이블은 그대로 유지돼요.'
+    },
     'tabbar': {
-      number:'18', label:'탭바', kind:'모바일 화면', mobile:true,
+      number:'19', label:'탭바', kind:'모바일 화면', mobile:true,
       policy:'shop 하단 탭바 가장 우측의 마이페이지 아이콘을 없애고, 가장 중앙에 멤버십 아이콘을 강조 색상의 원형 배지로 추가해요. 전체메뉴·홈·쇼핑백·배송조회 아이콘의 위치와 기능은 그대로 유지돼요.'
     },
     'fullmenu': {
-      number:'19', label:'전체메뉴', kind:'모바일 화면', menu:true,
+      number:'20', label:'전체메뉴', kind:'모바일 화면', menu:true,
       policy:'정기멤버십이 사용중인 경우에는 가장 하단에 정기멤버십 영역이 생성됩니다. 게시판 리스트 바로 아래, 배너가 아닌 게시판과 같은 리스트 스타일로 노출되며, 정기멤버십 바로가기(가입)·해지·전용상품 3개 항목으로 구성됩니다. 판매자가 정기멤버십을 사용하지 않는 경우에는 이 영역 자체가 노출되지 않습니다.'
     },
     'membership-cancel': {
-      number:'20', label:'정기멤버십 이용현황·해지', kind:'모바일 화면', cancel:true,
+      number:'21', label:'정기멤버십 이용현황·해지', kind:'모바일 화면', cancel:true,
       policy:'이용현황과 해지 신청을 한 화면으로 통합했습니다. 상단에는 이용 중인 멤버십의 이용현황(멤버십명·정기결제 금액·다음 결제예정일·이용상태)을 보여주고, 하단에는 해지 안내와 해지하기 버튼을 배치했습니다. 해지하더라도 다음 결제일까지는 이용이 유지되며, 환불은 불가하고, 해지취소 기능은 제공하지 않습니다(정책과 동일).'
     },
     'membership-cancel-done': {
-      number:'21', label:'정기멤버십 해지완료', kind:'모바일 화면', cancelDone:true,
-      policy:'화면 20에서 해지를 접수(해지예정)한 뒤, 다음 결제일이 지나 이용이 실제로 종료되면 노출되는 화면이에요. 혜택은 더 이상 적용되지 않으며, 재이용하려면 재가입해야 해요(첫 달 프로모션 등 별도 혜택 없음).'
+      number:'22', label:'정기멤버십 해지완료', kind:'모바일 화면', cancelDone:true,
+      policy:'화면 21에서 해지를 접수(해지예정)한 뒤, 다음 결제일이 지나 이용이 실제로 종료되면 노출되는 화면이에요. 혜택은 더 이상 적용되지 않으며, 재이용하려면 재가입해야 해요(첫 달 프로모션 등 별도 혜택 없음).'
     },
     'membership-landing': {
-      number:'22', label:'정기멤버십 소개 페이지', kind:'모바일 화면', landing:true,
-      policy:'화면 19(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지예요. 화면 13(정기멤버십 소개 페이지 및 약관 관리)에서 판매자가 입력한 멤버십명·혜택·유의사항·약관 동의 항목이 그대로 반영돼요.'
+      number:'23', label:'정기멤버십 소개 페이지', kind:'모바일 화면', landing:true,
+      policy:'화면 20(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지예요. 화면 13(정기멤버십 소개 페이지 및 약관 관리)에서 판매자가 입력한 멤버십명·혜택·유의사항·약관 동의 항목이 그대로 반영돼요.'
     },
     'membership-guard-popup': {
-      number:'23', label:'멤버십 전용 상품 안내 팝업', kind:'모바일 화면', guard:true,
-      policy:'화면 10(정기멤버십 전용 상품 관리)에서 안내한 대로, 멤버십 전용으로 설정된 상품을 비회원 또는 멤버십 미가입 회원이 클릭하면 상품 상세 대신 이 안내 팝업이 노출돼요. "멤버십 가입하기"를 누르면 화면 22(정기멤버십 소개 페이지)로 연결돼요.'
+      number:'24', label:'멤버십 전용 상품 안내 팝업', kind:'모바일 화면', guard:true,
+      policy:'화면 10(정기멤버십 전용 상품 관리)에서 안내한 대로, 멤버십 전용으로 설정된 상품을 비회원 또는 멤버십 미가입 회원이 클릭하면 상품 상세 대신 이 안내 팝업이 노출돼요. "멤버십 가입하기"를 누르면 화면 23(정기멤버십 소개 페이지)로 연결돼요.'
     },
     'membership-product-list': {
-      number:'24', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
+      number:'25', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
       policy:'화면 10에서 멤버십 전용으로 지정한 상품들을 모아 보여주는 목록 화면이에요. 카테고리 탭은 제외하고, 상단 뒤로가기·홈·장바구니와 상품 개수·정렬 기준은 기존 상품 목록 화면과 동일하게 유지돼요.'
     }
   };
@@ -2990,6 +3290,7 @@
   var landingShell = document.getElementById('landingShell');
   var guardShell = document.getElementById('guardShell');
   var plistShell = document.getElementById('plistShell');
+  var adminProductListShell = document.getElementById('adminProductListShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -3012,7 +3313,8 @@
     var isLanding = !!s.landing;
     var isGuard = !!s.guard;
     var isPlist = !!s.plist;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isGuard || isPlist;
+    var isPlistAdmin = !!s.plistAdmin;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isGuard || isPlist || isPlistAdmin;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -3025,9 +3327,14 @@
     landingShell.hidden = !isLanding;
     guardShell.hidden = !isGuard;
     plistShell.hidden = !isPlist;
-    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon);
+    adminProductListShell.hidden = !isPlistAdmin;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isPlistAdmin);
 
-    if(isPlist){
+    if(isPlistAdmin){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isPlist){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
