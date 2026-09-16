@@ -679,6 +679,7 @@
     <li class="nav-item" data-screen="fullmenu"><div class="num">19</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-cancel"><div class="num">20</div><div class="tx"><div class="name">정기멤버십 해지</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-cancel-done"><div class="num">21</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-landing"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -2122,7 +2123,7 @@
 
               <div style="border:1.5px solid var(--warn); border-radius:10px; margin:12px 10px 14px; overflow:hidden; background:var(--warn-tint);">
                 <div class="menu-list-head" style="border-bottom-color:var(--warn);">정기멤버십</div>
-                <div class="menu-plain-row"><span>정기멤버십 바로가기</span><span class="chev">›</span></div>
+                <div class="menu-plain-row" id="menuMembershipLandingLink" style="cursor:pointer;"><span>정기멤버십 바로가기</span><span class="chev">›</span></div>
                 <div class="menu-plain-row"><span>정기멤버십 해지</span><span class="chev">›</span></div>
                 <div class="menu-plain-row" style="border-bottom:none;"><span>정기멤버십 전용상품</span><span class="chev">›</span></div>
               </div>
@@ -2667,6 +2668,62 @@
       </div>
       </div>
     </div>
+
+    <div class="admin-shell" id="landingShell" hidden>
+      <div class="as-content" style="flex:1; height:100%;">
+      <h1>정기멤버십 소개 페이지</h1>
+      <p class="as-desc">화면 19(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지입니다. 화면 13에서 판매자가 입력한 내용이 그대로 반영됩니다.</p>
+
+      <div class="as-intro-layout" style="align-items:flex-start;">
+        <div class="as-intro-preview">
+          <div class="as-intro-phone" style="height:660px;">
+            <div class="as-intro-phone-header">멤버십</div>
+            <div class="as-intro-phone-body">
+              <div class="as-intro-hero">
+                <svg class="as-intro-hero-blob-1" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#fff" opacity=".08"/></svg>
+                <svg class="as-intro-hero-blob-2" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="100" fill="#fff" opacity=".06"/></svg>
+                <svg class="as-intro-hero-icon" viewBox="0 0 48 48" aria-hidden="true">
+                  <path d="M24 4l4.5 9.6L39 15l-7.5 7.2L33.5 33 24 27.6 14.5 33l2-10.8L9 15l10.5-1.4L24 4z" fill="#FFD873"/>
+                  <circle cx="24" cy="24" r="22.5" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="1.5"/>
+                </svg>
+                <div class="as-intro-hero-eyebrow">정기멤버십</div>
+                <div class="as-intro-card-title">FLEXG 프리미엄 멤버십</div>
+              </div>
+              <div class="as-intro-benefits">
+                <div class="as-intro-benefits-head">이런 혜택을 받아요</div>
+                <div class="as-intro-benefit-row"><span class="check">✓</span><span>10,000원 이상 구매 시 5% 적립금 지급</span></div>
+                <div class="as-intro-benefit-row"><span class="check">✓</span><span>20,000원 이상 구매 시 10% 즉시 할인</span></div>
+                <div class="as-intro-benefit-row"><span class="check">✓</span><span>전 상품 무료배송</span></div>
+                <div class="as-intro-benefit-row"><span class="check">✓</span><span>정기멤버십 전용 쿠폰 지급</span></div>
+              </div>
+
+              <div class="as-intro-notice">
+                <div class="as-intro-notice-head">유의사항</div>
+                <div class="as-intro-notice-body">해지 시 환불이 불가능하며 종료 예정일까지 혜택이 유지됩니다.
+결제 수단 정보가 만료되거나 결제에 실패할 경우 혜택이 일시 중단될 수 있습니다.</div>
+              </div>
+
+              <div class="as-intro-consent">
+                <div class="as-intro-consent-item"><span class="check">✓</span><span class="label">정기멤버십 서비스 이용약관 동의</span><span class="view">보기</span></div>
+                <div class="as-intro-consent-note">위 내용을 확인하였으며 자동결제 동의합니다.</div>
+              </div>
+            </div>
+            <div class="as-intro-phone-footer">
+              <button class="as-intro-btn-skip">다음에</button>
+              <button class="as-intro-btn-join">멤버십 가입</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="as-usage-note" style="margin-top:22px;">
+        <ul>
+          <li>화면 13(정기멤버십 소개 페이지 및 약관 관리)에서 설정한 멤버십명·혜택·유의사항·약관 동의 항목을 그대로 반영합니다.</li>
+          <li>"멤버십 가입" 버튼을 누르면 정기결제 동의 후 가입이 진행됩니다.</li>
+        </ul>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2768,6 +2825,10 @@
     'membership-cancel-done': {
       number:'21', label:'정기멤버십 해지완료', kind:'모바일 화면', cancelDone:true,
       policy:'화면 20에서 해지를 접수(해지예정)한 뒤, 다음 결제일이 지나 이용이 실제로 종료되면 노출되는 화면이에요. 혜택은 더 이상 적용되지 않으며, 재이용하려면 재가입해야 해요(첫 달 프로모션 등 별도 혜택 없음).'
+    },
+    'membership-landing': {
+      number:'22', label:'정기멤버십 소개 페이지', kind:'모바일 화면', landing:true,
+      policy:'화면 19(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지예요. 화면 13(정기멤버십 소개 페이지 및 약관 관리)에서 판매자가 입력한 멤버십명·혜택·유의사항·약관 동의 항목이 그대로 반영돼요.'
     }
   };
 
@@ -2784,6 +2845,7 @@
   var iconShell = document.getElementById('iconShell');
   var cancelShell = document.getElementById('cancelShell');
   var cancelDoneShell = document.getElementById('cancelDoneShell');
+  var landingShell = document.getElementById('landingShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -2803,7 +2865,8 @@
     var isIcon = !!s.icon;
     var isCancel = !!s.cancel;
     var isCancelDone = !!s.cancelDone;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone;
+    var isLanding = !!s.landing;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -2813,9 +2876,14 @@
     iconShell.hidden = !isIcon;
     cancelShell.hidden = !isCancel;
     cancelDoneShell.hidden = !isCancelDone;
+    landingShell.hidden = !isLanding;
     stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon);
 
-    if(isCancelDone){
+    if(isLanding){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isCancelDone){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
@@ -3440,6 +3508,11 @@
       mdMemStatusTag.textContent = '해지예정';
       mdCancelBtn.disabled = true;
     });
+  }
+
+  var menuMembershipLandingLink = document.getElementById('menuMembershipLandingLink');
+  if(menuMembershipLandingLink){
+    menuMembershipLandingLink.addEventListener('click', function(){ selectScreen('membership-landing'); });
   }
 
   selectScreen('membership-basic');
