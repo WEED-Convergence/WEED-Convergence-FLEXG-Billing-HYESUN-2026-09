@@ -678,6 +678,7 @@
     <li class="nav-item" data-screen="tabbar"><div class="num">18</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="fullmenu"><div class="num">19</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-cancel"><div class="num">20</div><div class="tx"><div class="name">정기멤버십 해지</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-cancel-done"><div class="num">21</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -2618,6 +2619,40 @@
       </div>
       </div>
     </div>
+
+    <div class="admin-shell" id="cancelDoneShell" hidden>
+      <div class="as-content" style="flex:1; height:100%;">
+      <h1>정기멤버십 해지완료</h1>
+      <p class="as-desc">해지 접수 후 다음 결제일이 지나 이용이 실제로 종료된 상태의 화면입니다.</p>
+
+      <div class="as-intro-layout" style="align-items:flex-start;">
+        <div class="as-intro-preview">
+          <div class="as-intro-phone" style="height:640px;">
+            <div class="as-intro-phone-header">정기멤버십</div>
+            <div class="as-intro-phone-body" style="background:#fff; padding:40px 24px; display:flex; flex-direction:column; align-items:center; text-align:center;">
+              <div style="width:56px; height:56px; border-radius:50%; background:#EDEFF3; display:flex; align-items:center; justify-content:center; font-size:26px; margin-bottom:18px;">📭</div>
+              <div style="font-size:16px; font-weight:800; color:var(--ink); line-height:1.4; margin-bottom:8px;">정기멤버십 이용이<br>종료됐어요</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.7; margin-bottom:26px;">가입 시 제공되던 혜택은<br>더 이상 적용되지 않아요.</div>
+
+              <div style="width:100%; background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:26px; text-align:left;">
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); padding:5px 0;"><span>이용했던 멤버십</span><span style="color:var(--ink); font-weight:700;">FLEXG 프리미엄 멤버십</span></div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); padding:5px 0;"><span>이용 종료일</span><span style="color:var(--ink); font-weight:700;">2026.10.14</span></div>
+              </div>
+
+              <button class="as-btn as-btn-primary" style="width:100%; padding:13px;">정기멤버십 다시 가입하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="as-usage-note" style="margin-top:22px;">
+        <ul>
+          <li>해지 접수(화면 20, 해지예정) 후 다음 결제일이 지나 자동으로 이용이 종료되면 노출되는 화면입니다.</li>
+          <li>재이용은 재가입으로만 가능하며, 첫 달 프로모션 등 별도 혜택은 제공하지 않습니다.</li>
+        </ul>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2715,6 +2750,10 @@
     'membership-cancel': {
       number:'20', label:'정기멤버십 해지', kind:'모바일 화면', cancel:true,
       policy:'필수 흐름만 담았어요: 이용 중인 멤버십 정보 확인 → 해지하기 → 해지 확인 팝업 → 해지 접수. 해지해도 다음 결제일까지는 이용이 유지되고, 환불은 불가하며, 해지취소 기능은 제공하지 않아요(정책과 동일).'
+    },
+    'membership-cancel-done': {
+      number:'21', label:'정기멤버십 해지완료', kind:'모바일 화면', cancelDone:true,
+      policy:'화면 20에서 해지를 접수(해지예정)한 뒤, 다음 결제일이 지나 이용이 실제로 종료되면 노출되는 화면이에요. 혜택은 더 이상 적용되지 않으며, 재이용하려면 재가입해야 해요(첫 달 프로모션 등 별도 혜택 없음).'
     }
   };
 
@@ -2730,6 +2769,7 @@
   var memberDetailShell = document.getElementById('memberDetailShell');
   var iconShell = document.getElementById('iconShell');
   var cancelShell = document.getElementById('cancelShell');
+  var cancelDoneShell = document.getElementById('cancelDoneShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -2748,7 +2788,8 @@
     var isMember = !!s.member;
     var isIcon = !!s.icon;
     var isCancel = !!s.cancel;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel;
+    var isCancelDone = !!s.cancelDone;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -2757,9 +2798,14 @@
     memberDetailShell.hidden = !isMember;
     iconShell.hidden = !isIcon;
     cancelShell.hidden = !isCancel;
+    cancelDoneShell.hidden = !isCancelDone;
     stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon);
 
-    if(isCancel){
+    if(isCancelDone){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isCancel){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
