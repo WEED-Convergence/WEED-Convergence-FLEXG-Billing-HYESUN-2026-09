@@ -969,7 +969,7 @@
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">연동 상태</div>
-                  <div class="as-field"><span class="as-status pending" id="pgStatusBadge">미연동</span></div>
+                  <div class="as-field"><span class="as-status ended" id="pgStatusBadge">미연동</span></div>
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">PG사</div>
@@ -988,7 +988,7 @@
               </div>
             </div>
             <div class="as-actions">
-              <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
+              <button class="as-btn as-btn-primary" id="pgConnectBtn" disabled>연동하기</button>
               <button class="as-btn as-btn-secondary" id="pgDisconnectBtn">연동 해제</button>
             </div>
 
@@ -2036,6 +2036,7 @@
       <div class="as-usage-note">
         <ul>
           <li>PG 심사를 위해 실제 판매 중인 상품 1개를 테스트 상품으로 등록해야 합니다.</li>
+          <li>연동하기를 눌러도 즉시 연동되지 않으며, PG사 심사가 진행되는 동안 연동 상태는 "심사중"으로 표시됩니다.</li>
           <li>PG 연동을 해제하면 신규 가입이 중단되고, 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
           <li>연동 해제 후 재연동하면 기존 멤버십 설정(가격, 혜택 등)이 초기화되며, 이때 확인 팝업이 노출됩니다.</li>
         </ul>
@@ -3296,7 +3297,7 @@
     },
     'membership-basic': {
       number:'09', label:'정기멤버십 기본 설정', kind:'어드민 화면', admin:'basic',
-      policy:'PG/빌링키 연동은 "숨김" 상태의 테스트 상품 1개를 선택해야 심사가 가능하고, 선택 전에는 연동하기 버튼이 비활성화돼요. 멤버십은 판매자당 하나만 설정할 수 있는 단일 구조이고, 사용 여부를 켜고 끌 수 있어요. 혜택(포인트 지급·즉시 할인·배송비·쿠폰)을 설정할 수 있고, 쿠폰 지급은 발급 수량 제한과 무관하게 관리자가 무제한으로 지급할 수 있어요.'
+      policy:'PG/빌링키 연동은 "숨김" 상태의 테스트 상품 1개를 선택해야 심사가 가능하고, 선택 전에는 연동하기 버튼이 비활성화돼요. 연동하기를 누르면 즉시 연동되지 않고 PG사 심사 절차에 따라 연동 상태가 "심사중"으로 바뀌어요. 멤버십은 판매자당 하나만 설정할 수 있는 단일 구조이고, 사용 여부를 켜고 끌 수 있어요. 혜택(포인트 지급·즉시 할인·배송비·쿠폰)을 설정할 수 있고, 쿠폰 지급은 발급 수량 제한과 무관하게 관리자가 무제한으로 지급할 수 있어요.'
     },
     'membership-products': {
       number:'10', label:'정기멤버십 전용 상품 관리', kind:'어드민 화면', admin:'products',
@@ -3833,6 +3834,14 @@
   document.querySelectorAll('.as-sale-type-toggle').forEach(bindSaleTypeToggle);
 
   var pgConnectBtn = document.getElementById('pgConnectBtn');
+  if(pgConnectBtn){
+    pgConnectBtn.addEventListener('click', function(){
+      if(pgConnectBtn.disabled) return;
+      pgStatusBadge.className = 'as-status pending';
+      pgStatusBadge.textContent = '심사중';
+      pgConnectBtn.disabled = true;
+    });
+  }
 
   var pgDisconnectBtn = document.getElementById('pgDisconnectBtn');
   var pgStatusBadge = document.getElementById('pgStatusBadge');
@@ -3854,8 +3863,9 @@
   }
   if(pgDisconnectConfirmBtn){
     pgDisconnectConfirmBtn.addEventListener('click', function(){
-      pgStatusBadge.className = 'as-status pending';
+      pgStatusBadge.className = 'as-status ended';
       pgStatusBadge.textContent = '미연동';
+      if(pgConnectBtn) pgConnectBtn.disabled = true;
       closePgDisconnectModal();
     });
   }
