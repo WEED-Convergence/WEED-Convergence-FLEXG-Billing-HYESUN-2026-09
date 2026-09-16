@@ -1892,17 +1892,29 @@
       </div>
 
       <div class="as-modal-overlay" id="asProductModalOverlay" hidden>
-        <div class="as-modal" style="width:520px;">
-          <div class="as-modal-head">
-            <div class="as-modal-title">상품 불러오기</div>
-            <div class="as-modal-close" id="asProductModalClose">✕</div>
+        <div class="as-modal" style="width:560px; padding:0; overflow:hidden;">
+          <div class="popup-titlebar" style="border-radius:14px 14px 0 0;">
+            <span class="popup-icon">🗂</span>
+            <span>상품 찾기</span>
           </div>
-          <div class="as-coupon-note">· 쇼핑몰에 등록된 상품 중 정기멤버십 전용 상품으로 추가할 상품을 선택합니다.</div>
-          <div class="as-coupon-table-wrap">
+          <div style="padding:22px 24px 0;">
+            <div class="as-coupon-note" style="margin-bottom:12px;">· 쇼핑몰에 등록된 상품 중 정기멤버십 전용 상품으로 추가할 상품을 체크해 주세요.</div>
+            <div class="as-search-row" style="max-width:none;">
+              <select class="as-input" style="max-width:110px; flex:0 0 auto;" disabled><option>상품명</option></select>
+              <input class="as-input" type="text" id="productCatalogSearchInput" placeholder="검색내용 입력">
+              <button class="as-btn as-btn-secondary as-btn-sm" id="productCatalogSearchBtn">검색</button>
+              <button class="as-btn as-btn-secondary as-btn-sm" id="productCatalogResetBtn">초기화</button>
+            </div>
+          </div>
+          <div class="as-coupon-table-wrap" style="padding:0 24px; max-height:340px; margin-top:14px;">
             <table class="as-table" id="productCatalogTable">
-              <thead><tr><th>상품명</th><th>판매가</th><th></th></tr></thead>
+              <thead><tr><th style="width:36px;"></th><th>상품명</th><th>상품코드</th></tr></thead>
               <tbody id="productCatalogBody"></tbody>
             </table>
+          </div>
+          <div class="md-footer" style="margin-top:18px;">
+            <button class="as-btn as-btn-secondary" id="asProductModalCancelBtn">취소</button>
+            <button class="as-btn as-btn-primary" id="productCatalogSelectBtn">선택</button>
           </div>
         </div>
       </div>
@@ -3628,8 +3640,12 @@
   ];
 
   var asProductModalOverlay = document.getElementById('asProductModalOverlay');
-  var asProductModalClose = document.getElementById('asProductModalClose');
+  var asProductModalCancelBtn = document.getElementById('asProductModalCancelBtn');
   var productCatalogBody = document.getElementById('productCatalogBody');
+  var productCatalogSearchInput = document.getElementById('productCatalogSearchInput');
+  var productCatalogSearchBtn = document.getElementById('productCatalogSearchBtn');
+  var productCatalogResetBtn = document.getElementById('productCatalogResetBtn');
+  var productCatalogSelectBtn = document.getElementById('productCatalogSelectBtn');
   var productSearchBtn = document.getElementById('productSearchBtn');
   var productTableBody = document.getElementById('productTableBody');
   var productListSearchInput = document.getElementById('productListSearchInput');
@@ -3660,24 +3676,51 @@
   }
 
   function renderProductCatalog(){
+    var keyword = productCatalogSearchInput ? productCatalogSearchInput.value.trim().toLowerCase() : '';
+    var list = keyword
+      ? PRODUCT_CATALOG.filter(function(p){ return p.name.toLowerCase().indexOf(keyword) !== -1 || p.code.toLowerCase().indexOf(keyword) !== -1; })
+      : PRODUCT_CATALOG;
+
     productCatalogBody.innerHTML = '';
-    if(PRODUCT_CATALOG.length === 0){
+    if(list.length === 0){
       productCatalogBody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--ink-soft);">검색 결과가 없습니다.</td></tr>';
       return;
     }
-    PRODUCT_CATALOG.forEach(function(p){
+    list.forEach(function(p){
       var added = isProductAdded(p.name);
       var tr = document.createElement('tr');
-      tr.innerHTML = '<td>' + p.name + ' <span style="color:var(--ink-faint);font-size:10.5px;">(' + p.code + ')</span></td><td>' + p.price + '</td>' +
-        '<td class="as-td-actions"><button class="as-btn ' + (added ? 'as-btn-secondary' : 'as-btn-primary') + ' as-btn-sm" ' + (added ? 'disabled' : '') + '>' + (added ? '담김' : '추가') + '</button></td>';
-      if(!added){
-        tr.querySelector('button').addEventListener('click', function(){
-          addProductRow(p);
-          renderProductCatalog();
-        });
-      }
+      tr.innerHTML = '<td><input type="checkbox" class="pc-check" data-name="' + p.name + '"' + (added ? ' disabled' : '') + '></td>' +
+        '<td><div style="display:flex; align-items:center; gap:8px;"><div class="as-thumb">' + (p.thumb || '📦') + '</div><span>' + p.name + (added ? ' <span style="color:var(--ink-faint); font-size:10.5px;">(담김)</span>' : '') + '</span></div></td>' +
+        '<td>' + p.code + '</td>';
       productCatalogBody.appendChild(tr);
     });
+  }
+
+  if(productCatalogSelectBtn){
+    productCatalogSelectBtn.addEventListener('click', function(){
+      var checked = productCatalogBody.querySelectorAll('.pc-check:checked:not(:disabled)');
+      checked.forEach(function(cb){
+        var name = cb.getAttribute('data-name');
+        var product = PRODUCT_CATALOG.filter(function(p){ return p.name === name; })[0];
+        if(product) addProductRow(product);
+      });
+      asProductModalOverlay.hidden = true;
+    });
+  }
+  if(productCatalogSearchInput){
+    productCatalogSearchInput.addEventListener('input', renderProductCatalog);
+  }
+  if(productCatalogSearchBtn){
+    productCatalogSearchBtn.addEventListener('click', renderProductCatalog);
+  }
+  if(productCatalogResetBtn){
+    productCatalogResetBtn.addEventListener('click', function(){
+      productCatalogSearchInput.value = '';
+      renderProductCatalog();
+    });
+  }
+  if(asProductModalCancelBtn){
+    asProductModalCancelBtn.addEventListener('click', function(){ asProductModalOverlay.hidden = true; });
   }
 
   function filterProductList(){
@@ -3710,9 +3753,6 @@
       productListSearchInput.value = '';
       filterProductList();
     });
-  }
-  if(asProductModalClose){
-    asProductModalClose.addEventListener('click', function(){ asProductModalOverlay.hidden = true; });
   }
   if(asProductModalOverlay){
     asProductModalOverlay.addEventListener('click', function(e){
