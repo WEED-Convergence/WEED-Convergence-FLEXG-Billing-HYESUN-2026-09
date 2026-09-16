@@ -260,7 +260,7 @@
   .desc-block{ margin-bottom:20px; }
   .desc-block:last-child{ margin-bottom:0; }
   .desc-block .k{ font-size:11px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; }
-  .desc-block .v{ font-size:13px; color:var(--ink); line-height:1.7; }
+  .desc-block .v{ font-size:13px; color:var(--ink); line-height:1.7; white-space:pre-line; }
 
   /* ============ ADMIN SHELL (정기멤버십 screens) ============ */
   .stage-frame.wide{ width:1280px; }
@@ -3284,7 +3284,7 @@
     },
     'membership-subscribers': {
       number:'11', label:'정기멤버십 가입자 관리', kind:'어드민 화면', admin:'subscribers',
-      policy:'정기결제는 자동결제라 결제 시점에 완료 또는 실패로 즉시 확정되고, 결제 대기 상태는 존재하지 않아요. 결제가 실패하면 1일 후 1회 자동으로 재시도되며(재시도중), 이때도 실패하면 추가 재시도 없이 최종실패로 처리돼요. 실패해도 멤버십은 자동으로 해지되지 않아요. 관리자가 해지를 처리하면 다음 결제만 중단되고, 이미 결제한 이번 주기 혜택은 종료 예정일까지 유지되며 환불은 발생하지 않아요.'
+      policy:'결제상태: 결제완료(정상 결제) · 재시도중(1차 실패 후 재시도 대기) · 최종실패(재시도도 실패).\n이용상태: 이용중(정상 이용) · 해지예정(해지 신청, 다음 결제일까지 이용) · 해지완료(이용 종료).'
     },
     'membership-stats': {
       number:'12', label:'정기멤버십 통계/현황', kind:'어드민 화면', admin:'stats',
