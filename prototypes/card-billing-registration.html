@@ -594,6 +594,36 @@
   .md-panel[hidden]{ display:none; }
   .md-footer{ background:#F3F5F8; border-top:1px solid var(--line); padding:16px 28px; display:flex; justify-content:center; gap:10px; flex:0 0 auto; }
 
+  .menu-header{ display:flex; align-items:center; justify-content:space-between; padding:18px; border-bottom:1px solid var(--line); }
+  .menu-header .t{ font-size:15px; font-weight:800; color:var(--ink); }
+  .menu-header .x{ font-size:17px; color:var(--ink-soft); }
+  .menu-icon-grid{ display:grid; grid-template-columns:repeat(4,1fr); border-bottom:8px solid #F5F6F9; }
+  .menu-icon-cell{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:18px 4px; border-bottom:1px solid var(--line); }
+  .menu-icon-cell:not(:nth-child(4n)){ border-right:1px solid var(--line); }
+  .menu-icon-cell .ic{ width:38px; height:38px; border-radius:50%; border:1.5px solid #D9DCE3; display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--ink-soft); }
+  .menu-icon-cell .t{ font-size:10.5px; color:var(--ink-soft); font-weight:600; }
+  .menu-event-banner{ background:var(--brand); color:#fff; text-align:center; font-size:13px; font-weight:800; padding:14px; }
+  .menu-hero{ position:relative; height:160px; background:linear-gradient(160deg,#4B4B4B,#1C1C1C); overflow:hidden; }
+  .menu-hero .cap{ position:absolute; left:16px; bottom:14px; color:#fff; font-size:14.5px; font-weight:800; letter-spacing:.01em; }
+  .menu-hero .nav{ position:absolute; top:50%; transform:translateY(-50%); width:24px; height:24px; border-radius:50%; background:rgba(255,255,255,.85); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:12px; }
+  .menu-hero .nav.l{ left:10px; }
+  .menu-hero .nav.r{ right:10px; }
+  .menu-cat-row{ display:flex; align-items:center; gap:12px; padding:12px 18px; border-bottom:1px solid var(--line); }
+  .menu-cat-row .av{ width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#D9C9B0,#8A7A63); flex:0 0 auto; }
+  .menu-cat-row .n{ flex:1; font-size:13px; font-weight:700; color:var(--ink-soft); }
+  .menu-cat-row .plus{ font-size:15px; color:var(--ink-faint); font-weight:300; }
+  .menu-list-head{ font-size:14px; font-weight:800; color:var(--ink); padding:20px 18px 10px; border-bottom:1.5px solid var(--ink); }
+  .menu-plain-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--line); font-size:13px; font-weight:600; color:var(--ink-soft); }
+  .menu-plain-row .plus{ font-size:15px; color:var(--ink-faint); font-weight:300; }
+  .menu-plain-row .chev{ font-size:13px; color:var(--ink-faint); }
+  .menu-footer{ padding:26px 18px 24px; text-align:center; }
+  .menu-footer h4{ font-size:13px; font-weight:800; color:var(--ink); margin:0 0 10px; }
+  .menu-footer .acct{ font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:18px; }
+  .menu-footer .cs{ font-size:14px; font-weight:800; color:var(--ink); margin-bottom:6px; }
+  .menu-footer .hours{ font-size:11px; color:var(--ink-soft); line-height:1.7; margin-bottom:16px; }
+  .menu-footer .call-btn{ display:inline-flex; align-items:center; gap:6px; background:#222; color:#fff; font-size:12px; font-weight:700; padding:10px 20px; border-radius:20px; }
+  .menu-footer .copy{ font-size:10px; color:var(--ink-faint); margin-top:22px; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -624,6 +654,7 @@
 
     <li class="nav-section-label">shop</li>
     <li class="nav-item" data-screen="tabbar"><div class="num">17</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="fullmenu"><div class="num">18</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -2013,6 +2044,93 @@
       </div>
     </div>
 
+    <div class="admin-shell" id="menuShell" hidden>
+      <div class="as-content" style="flex:1; height:100%;">
+      <h1>전체메뉴</h1>
+      <p class="as-desc">shop 모바일 전체메뉴(햄버거 메뉴) 화면입니다. 게시판 리스트 아래에 배너가 아닌 게시판과 같은 리스트 스타일로 정기멤버십 영역을 추가합니다.</p>
+
+      <div class="as-intro-layout" style="align-items:flex-start;">
+        <div class="as-intro-preview">
+          <div class="as-intro-phone" style="height:700px;">
+            <div class="as-intro-phone-body" style="background:#fff;">
+
+              <div class="menu-header">
+                <span class="t">로그인 · 회원가입</span>
+                <span class="x">✕</span>
+              </div>
+
+              <div class="menu-icon-grid">
+                <div class="menu-icon-cell"><div class="ic">👤</div><div class="t">마이페이지</div></div>
+                <div class="menu-icon-cell"><div class="ic">%</div><div class="t">내 쿠폰</div></div>
+                <div class="menu-icon-cell"><div class="ic">W</div><div class="t">포인트</div></div>
+                <div class="menu-icon-cell"><div class="ic">🛍</div><div class="t">장바구니</div></div>
+                <div class="menu-icon-cell"><div class="ic">🛵</div><div class="t">주문·배송</div></div>
+                <div class="menu-icon-cell"><div class="ic">♡</div><div class="t">찜한 상품</div></div>
+                <div class="menu-icon-cell"><div class="ic">◔</div><div class="t">최근 본 상품</div></div>
+                <div class="menu-icon-cell"><div class="ic">💬</div><div class="t">1:1문의</div></div>
+              </div>
+
+              <div class="menu-event-banner">추첨 이벤트</div>
+
+              <div class="menu-hero">
+                <div class="nav l">‹</div>
+                <div class="nav r">›</div>
+                <div class="cap">21SS MAIN WOMEN COLLECTION</div>
+              </div>
+
+              <div class="menu-cat-row"><div class="av"></div><div class="n">J.FLA (re)</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">DESIGN (re)</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">CELLEB (re)</div></div>
+
+              <div class="menu-cat-row"><div class="av"></div><div class="n">PANTS</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">MADE-JOY</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">OPS/SKIRT</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">KNIT</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">BIBI SIZE</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">50% OFF</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">BEST 100</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">ETC</div><div class="plus">+</div></div>
+              <div class="menu-cat-row"><div class="av"></div><div class="n">NEW</div><div class="plus">+</div></div>
+
+              <div class="menu-list-head">게시판</div>
+              <div class="menu-plain-row"><span>Sample Category</span><span class="plus">+</span></div>
+              <div class="menu-plain-row"><span>홍두메</span></div>
+
+              <div class="menu-list-head">정기멤버십</div>
+              <div class="menu-plain-row"><span>정기멤버십 바로가기</span><span class="chev">›</span></div>
+              <div class="menu-plain-row"><span>정기멤버십 해지</span><span class="chev">›</span></div>
+              <div class="menu-plain-row"><span>정기멤버십 전용상품</span><span class="chev">›</span></div>
+
+              <div class="menu-footer">
+                <h4>무통장입금 계좌</h4>
+                <div class="acct">
+                  신한은행 플렉스지 1234567890<br>
+                  국민은행 홍길동동 1234567890
+                </div>
+                <div class="cs">고객센터 02-1234-5678</div>
+                <div class="hours">
+                  평일 AM 09:00 ~ PM 06:00<br>
+                  점심 AM 12:00 ~ PM 01:00<br>
+                  주말 및 공휴일 휴무
+                </div>
+                <div class="call-btn">전화 문의 →</div>
+                <div class="copy">© (주)위드소프트. All rights reserved.</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="as-usage-note" style="margin-top:22px;">
+        <ul>
+          <li>게시판 리스트 바로 아래에 배너가 아닌 게시판과 동일한 리스트 스타일로 "정기멤버십" 영역을 추가합니다.</li>
+          <li>정기멤버십 바로가기(가입), 정기멤버십 해지, 정기멤버십 전용상품 3개 경로를 리스트 항목으로 제공합니다.</li>
+        </ul>
+      </div>
+      </div>
+    </div>
+
     <div class="admin-shell" id="alimtalkShell" hidden>
       <div class="as-gnb">
         <div class="as-gnb-home">⌂</div>
@@ -2371,6 +2489,10 @@
     'tabbar': {
       number:'17', label:'탭바', kind:'모바일 화면', mobile:true,
       policy:'shop 하단 탭바 가장 우측의 마이페이지 아이콘을 없애고, 가장 중앙에 멤버십 아이콘을 강조 색상의 원형 배지로 추가해요. 전체메뉴·홈·쇼핑백·배송조회 아이콘의 위치와 기능은 그대로 유지돼요.'
+    },
+    'fullmenu': {
+      number:'18', label:'전체메뉴', kind:'모바일 화면', menu:true,
+      policy:'게시판 리스트 바로 아래에 배너가 아닌 게시판과 같은 리스트 스타일로 "정기멤버십" 영역을 추가했어요. 정기멤버십 바로가기(가입), 정기멤버십 해지, 정기멤버십 전용상품 3개 경로를 리스트 항목으로 제공해요.'
     }
   };
 
@@ -2381,6 +2503,7 @@
   var adminShell = document.getElementById('adminShell');
   var policyShell = document.getElementById('policyShell');
   var tabbarShell = document.getElementById('tabbarShell');
+  var menuShell = document.getElementById('menuShell');
   var alimtalkShell = document.getElementById('alimtalkShell');
   var memberDetailShell = document.getElementById('memberDetailShell');
   var stageFrame = document.getElementById('stageFrame');
@@ -2396,12 +2519,14 @@
     var isAdmin = !!s.admin;
     var isDoc = !!s.doc;
     var isMobile = !!s.mobile;
+    var isMenu = !!s.menu;
     var isMsg = !!s.msg;
     var isMember = !!s.member;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMsg || isMember;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
+    menuShell.hidden = !isMenu;
     alimtalkShell.hidden = !isMsg;
     memberDetailShell.hidden = !isMember;
     stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg);
@@ -2411,6 +2536,10 @@
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
     } else if(isMsg){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isMenu){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
