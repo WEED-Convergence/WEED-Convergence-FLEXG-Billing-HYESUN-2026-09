@@ -588,6 +588,13 @@
   .at-btn{ margin:0; padding:11px; text-align:center; font-size:11.5px; font-weight:700; color:var(--ink-soft); background:#F1F3F6; border-top:1px solid var(--line); }
   .at-new-tag{ display:inline-block; font-size:9.5px; font-weight:800; color:#fff; background:var(--brand); border-radius:8px; padding:2px 7px; margin-left:6px; }
 
+  .md-tabs{ display:flex; background:#D9DBDD; padding:0 4px; gap:2px; flex:0 0 auto; }
+  .md-tab{ padding:11px 18px; font-size:12.5px; font-weight:700; color:var(--ink-soft); background:#C7CAD1; cursor:pointer; white-space:nowrap; }
+  .md-tab.active{ background:#fff; color:var(--ink); }
+  .md-body{ flex:1; overflow-y:auto; background:#fff; padding:28px 30px; }
+  .md-panel[hidden]{ display:none; }
+  .md-footer{ background:#F3F5F8; border-top:1px solid var(--line); padding:16px 28px; display:flex; justify-content:center; gap:10px; flex:0 0 auto; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -613,10 +620,11 @@
     <li class="nav-item" data-screen="membership-stats"><div class="num">12</div><div class="tx"><div class="name">정기멤버십 통계/현황</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-intro"><div class="num">13</div><div class="tx"><div class="name">정기멤버십 소개 페이지 및 약관 관리</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="membership-alimtalk"><div class="num">14</div><div class="tx"><div class="name">알림톡 설정</div><div class="kind">어드민 화면</div></div></li>
-    <li class="nav-item" data-screen="member-list"><div class="num">15</div><div class="tx"><div class="name">회원목록</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="member-detail"><div class="num">15</div><div class="tx"><div class="name">회원 상세</div><div class="kind">팝업</div></div></li>
+    <li class="nav-item" data-screen="member-list"><div class="num">16</div><div class="tx"><div class="name">회원목록</div><div class="kind">어드민 화면</div></div></li>
 
     <li class="nav-section-label">shop</li>
-    <li class="nav-item" data-screen="tabbar"><div class="num">16</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="tabbar"><div class="num">17</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -2174,6 +2182,126 @@
         </div>
       </div>
     </div>
+
+    <div class="admin-shell" id="memberDetailShell" hidden style="height:auto; max-width:760px; margin:0 auto;">
+      <div class="popup-titlebar" style="justify-content:space-between;">
+        <span>[브론즈3] 현대근 (1787) 회원 상세관리</span>
+        <div style="display:flex; gap:8px;">
+          <button class="as-btn as-btn-sm" style="background:#2A344A; color:#fff;">사용중지</button>
+          <button class="as-btn as-btn-warn as-btn-sm">삭제</button>
+        </div>
+      </div>
+
+      <div class="md-tabs" id="mdTabs">
+        <div class="md-tab" data-tab="orders">주문내역</div>
+        <div class="md-tab" data-tab="points">포인트 사용내역</div>
+        <div class="md-tab" data-tab="coupons">쿠폰 사용내역</div>
+        <div class="md-tab active" data-tab="edit">회원 정보 수정</div>
+        <div class="md-tab" data-tab="fandom">팬덤 히스토리</div>
+        <div class="md-tab" data-tab="membership">멤버십<span style="font-size:9px; font-weight:800; color:#fff; background:var(--brand); border-radius:7px; padding:1px 5px; margin-left:6px;">NEW</span></div>
+      </div>
+
+      <div class="md-body">
+        <div class="md-panel" data-tab="orders" hidden><p class="as-desc" style="margin:0;">준비 중인 화면입니다.</p></div>
+        <div class="md-panel" data-tab="points" hidden><p class="as-desc" style="margin:0;">준비 중인 화면입니다.</p></div>
+        <div class="md-panel" data-tab="coupons" hidden><p class="as-desc" style="margin:0;">준비 중인 화면입니다.</p></div>
+
+        <div class="md-panel" data-tab="edit">
+          <div class="as-panel" style="max-width:560px; margin:0; box-shadow:none; border:none; padding:0;">
+            <div class="as-row">
+              <div class="as-label">가입유형</div>
+              <div class="as-field"><input class="as-input" type="text" value="네이버 [NAVER_wvscuMghrwVH6pfODbmFo7YKgNwTm7V-AHHMzFzZ" disabled style="background:#F1F3F6; color:var(--ink-faint);"></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">회원등급</div>
+              <div class="as-field"><select class="as-input" disabled><option>브론즈3</option></select></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">고객이름</div>
+              <div class="as-field"><input class="as-input" type="text" value="현대근" disabled></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">전화번호</div>
+              <div class="as-field" style="display:flex; align-items:center; gap:6px;">
+                <input class="as-input" type="text" value="010" disabled style="max-width:80px; text-align:center;">
+                <span style="color:var(--ink-soft);">-</span>
+                <input class="as-input" type="text" value="9318" disabled style="max-width:80px; text-align:center;">
+                <span style="color:var(--ink-soft);">-</span>
+                <input class="as-input" type="text" value="2190" disabled style="max-width:80px; text-align:center;">
+              </div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">이메일 주소</div>
+              <div class="as-field"><input class="as-input" type="text" value="hdg2190@naver.com" disabled></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">생년월일</div>
+              <div class="as-field" style="display:flex; align-items:center; gap:6px;">
+                <input class="as-input" type="text" value="1986" disabled style="max-width:80px; text-align:center;">
+                <input class="as-input" type="text" value="01" disabled style="max-width:60px; text-align:center;">
+                <input class="as-input" type="text" value="25" disabled style="max-width:60px; text-align:center;">
+              </div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">성별</div>
+              <div class="as-field"><select class="as-input" disabled><option>남자</option></select></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">키 (cm)</div>
+              <div class="as-field"><input class="as-input" type="text" disabled></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">발사이즈 (mm)</div>
+              <div class="as-field"><input class="as-input" type="text" disabled></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">머리둘레 (inch)</div>
+              <div class="as-field"><input class="as-input" type="text" disabled></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md-panel" data-tab="fandom" hidden><p class="as-desc" style="margin:0;">준비 중인 화면입니다.</p></div>
+
+        <div class="md-panel" data-tab="membership" hidden>
+          <div class="as-panel" style="max-width:560px; margin:0; box-shadow:none; border:none; padding:0;">
+            <div class="as-row">
+              <div class="as-label">멤버십 여부</div>
+              <div class="as-field"><span class="as-status paid">가입</span></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">이용상태</div>
+              <div class="as-field"><span class="as-status active">이용중</span></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">결제상태</div>
+              <div class="as-field"><span class="as-status paid">결제완료</span></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">결제차수</div>
+              <div class="as-field"><input class="as-input" type="text" value="7회차" disabled></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">정기결제 금액</div>
+              <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" value="9,900" disabled><span class="as-suffix">원</span></div></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">누적 결제금액</div>
+              <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" value="69,300" disabled><span class="as-suffix">원</span></div></div>
+            </div>
+            <div class="as-row">
+              <div class="as-label">다음 결제예정일</div>
+              <div class="as-field"><input class="as-input" type="text" value="2026-10-14" disabled></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md-footer">
+        <button class="as-btn as-btn-secondary">취소</button>
+        <button class="as-btn as-btn-primary">적용</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2248,12 +2376,16 @@
       number:'14', label:'알림톡 설정', kind:'어드민 화면', msg:true,
       policy:'메시지 &gt; 알림톡 설정 화면에 정기멤버십용 알림톡 템플릿 3개(가입완료·해지·쿠폰 발송)가 추가돼요. 기존 세컨찬스·선물하기 알림톡과 같은 카드 형태로 노출되고, 각 카드는 발송 조건과 예시 문구, 사용 가능한 치환 태그를 보여줘요.'
     },
+    'member-detail': {
+      number:'15', label:'회원 상세', kind:'팝업', member:true,
+      policy:'회원목록에서 "회원상세" 버튼을 누르면 열리는 상세관리 팝업이에요. 기존 탭(주문내역·포인트 사용내역·쿠폰 사용내역·회원 정보 수정·팬덤 히스토리)에 "멤버십" 탭을 새로 추가해서, 멤버십 여부·이용상태·결제상태·결제차수·정기결제 금액·누적 결제금액·다음 결제예정일을 한 탭에서 확인할 수 있어요.'
+    },
     'member-list': {
-      number:'15', label:'회원목록', kind:'어드민 화면', admin:'memberlist',
+      number:'16', label:'회원목록', kind:'어드민 화면', admin:'memberlist',
       policy:'기존 회원 검색 화면에 "멤버십 여부" 검색 조건과 회원 리스트의 "멤버십" 컬럼이 추가돼요. 다른 검색 조건과 마찬가지로 전체/가입/미가입 중 하나를 골라 조회할 수 있고, 리스트의 멤버십 컬럼은 해당 회원이 정기멤버십에 가입되어 있는지를 바로 보여줘요.'
     },
     'tabbar': {
-      number:'16', label:'탭바', kind:'모바일 화면', mobile:true,
+      number:'17', label:'탭바', kind:'모바일 화면', mobile:true,
       policy:'shop 하단 탭바 가장 우측의 마이페이지 아이콘을 없애고, 가장 중앙에 멤버십 아이콘을 강조 색상의 원형 배지로 추가해요. 전체메뉴·홈·쇼핑백·배송조회 아이콘의 위치와 기능은 그대로 유지돼요.'
     }
   };
@@ -2266,6 +2398,7 @@
   var policyShell = document.getElementById('policyShell');
   var tabbarShell = document.getElementById('tabbarShell');
   var alimtalkShell = document.getElementById('alimtalkShell');
+  var memberDetailShell = document.getElementById('memberDetailShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -2280,14 +2413,20 @@
     var isDoc = !!s.doc;
     var isMobile = !!s.mobile;
     var isMsg = !!s.msg;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMsg;
+    var isMember = !!s.member;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMsg || isMember;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
     alimtalkShell.hidden = !isMsg;
+    memberDetailShell.hidden = !isMember;
     stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg);
 
-    if(isMsg){
+    if(isMember){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isMsg){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
@@ -2830,6 +2969,14 @@
     document.getElementById('personalFields').hidden = !isPersonal;
     document.getElementById('corporateFields').hidden = isPersonal;
   }
+
+  document.querySelectorAll('.md-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.md-tab').forEach(function(t){ t.classList.toggle('active', t === tab); });
+      var key = tab.getAttribute('data-tab');
+      document.querySelectorAll('.md-panel').forEach(function(p){ p.hidden = p.getAttribute('data-tab') !== key; });
+    });
+  });
 
   selectScreen('membership-basic');
 </script>
