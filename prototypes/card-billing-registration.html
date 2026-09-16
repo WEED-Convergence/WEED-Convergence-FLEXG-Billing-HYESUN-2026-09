@@ -2399,7 +2399,10 @@
             </div>
             <div class="as-row">
               <div class="as-label">이용상태</div>
-              <div class="as-field"><span class="as-status active">이용중</span></div>
+              <div class="as-field" style="display:flex; align-items:center; gap:10px;">
+                <span class="as-status active" id="mdMemStatusTag">이용중</span>
+                <button class="as-btn as-btn-warn as-btn-sm" id="mdCancelBtn">해지</button>
+              </div>
             </div>
             <div class="as-row">
               <div class="as-label">결제상태</div>
@@ -2428,6 +2431,17 @@
       <div class="md-footer">
         <button class="as-btn as-btn-secondary">취소</button>
         <button class="as-btn as-btn-primary">적용</button>
+      </div>
+
+      <div class="as-modal-overlay" id="mdCancelConfirmOverlay" hidden>
+        <div class="as-modal" style="width:360px;">
+          <div class="as-modal-title">이 회원의 정기멤버십을 해지하시겠습니까?</div>
+          <div class="modal-desc" style="margin:0 0 20px;">해지 처리 후에는 취소할 수 없습니다. 다음 결제일까지는 이용이 유지되며, 이후 자동으로 해지됩니다.</div>
+          <div class="as-actions right">
+            <button class="as-btn as-btn-secondary" id="mdCancelCancelBtn">취소</button>
+            <button class="as-btn as-btn-warn" id="mdCancelConfirmBtn">해지하기</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -3399,6 +3413,32 @@
       cancelBtn.disabled = true;
       cancelBtn.textContent = '해지 접수완료';
       cancelDoneNote.hidden = false;
+    });
+  }
+
+  var mdCancelBtn = document.getElementById('mdCancelBtn');
+  var mdCancelConfirmOverlay = document.getElementById('mdCancelConfirmOverlay');
+  var mdCancelCancelBtn = document.getElementById('mdCancelCancelBtn');
+  var mdCancelConfirmBtn = document.getElementById('mdCancelConfirmBtn');
+  var mdMemStatusTag = document.getElementById('mdMemStatusTag');
+
+  if(mdCancelBtn){
+    mdCancelBtn.addEventListener('click', function(){ mdCancelConfirmOverlay.hidden = false; });
+  }
+  if(mdCancelCancelBtn){
+    mdCancelCancelBtn.addEventListener('click', function(){ mdCancelConfirmOverlay.hidden = true; });
+  }
+  if(mdCancelConfirmOverlay){
+    mdCancelConfirmOverlay.addEventListener('click', function(e){
+      if(e.target === mdCancelConfirmOverlay) mdCancelConfirmOverlay.hidden = true;
+    });
+  }
+  if(mdCancelConfirmBtn){
+    mdCancelConfirmBtn.addEventListener('click', function(){
+      mdCancelConfirmOverlay.hidden = true;
+      mdMemStatusTag.className = 'as-status endsoon';
+      mdMemStatusTag.textContent = '해지예정';
+      mdCancelBtn.disabled = true;
     });
   }
 
