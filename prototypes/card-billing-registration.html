@@ -650,6 +650,26 @@
   .icon-section-note{ font-size:11px; color:var(--ink-soft); margin-top:14px; line-height:1.7; }
   .icon-section-note .lnk{ color:var(--brand-dark); font-weight:700; text-decoration:underline; }
 
+  .plist-topbar{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--line); flex:0 0 auto; }
+  .plist-topbar .back{ font-size:16px; color:var(--ink); flex:0 0 auto; }
+  .plist-topbar .title{ font-size:14px; font-weight:800; color:var(--ink); flex:1; text-align:center; }
+  .plist-topbar .right{ display:flex; gap:14px; font-size:15px; color:var(--ink); flex:0 0 auto; }
+  .plist-summary{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px 10px; font-size:12px; color:var(--ink-soft); }
+  .plist-summary b{ color:var(--brand); font-weight:800; }
+  .plist-summary .sort{ display:flex; align-items:center; gap:4px; color:var(--ink-soft); font-weight:600; }
+  .plist-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
+  .plist-card{ background:#fff; padding:0 0 14px; }
+  .plist-card .img{ position:relative; aspect-ratio:1/1; background:linear-gradient(160deg,#EAD9C2,#C9AE87); }
+  .plist-card .img .bagic{ position:absolute; right:8px; bottom:8px; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center; font-size:12px; }
+  .plist-card .info{ padding:10px 12px 0; }
+  .plist-card .name{ font-size:12px; font-weight:700; color:var(--ink); line-height:1.4; margin-bottom:8px; }
+  .plist-card .price-row{ display:flex; align-items:baseline; gap:6px; flex-wrap:wrap; }
+  .plist-card .orig{ font-size:11px; color:var(--ink-faint); text-decoration:line-through; }
+  .plist-card .now{ font-size:14px; font-weight:800; color:var(--ink); }
+  .plist-card .pct{ font-size:13px; font-weight:800; color:#FF4D4F; }
+  .plist-card .meta{ display:flex; align-items:center; gap:8px; margin-top:8px; font-size:10.5px; color:var(--ink-faint); }
+  .plist-card .meta .buying{ color:#FF4D4F; font-weight:700; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -686,6 +706,7 @@
     <li class="nav-item" data-screen="membership-cancel-done"><div class="num">21</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-landing"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-guard-popup"><div class="num">23</div><div class="tx"><div class="name">멤버십 전용 상품 안내 팝업</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-product-list"><div class="num">24</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -2767,6 +2788,76 @@
       </div>
       </div>
     </div>
+
+    <div class="admin-shell" id="plistShell" hidden>
+      <div class="as-content" style="flex:1; height:100%;">
+      <h1>멤버십 전용상품 리스트</h1>
+      <p class="as-desc">멤버십 전용으로 지정된 상품을 모아 보여주는 목록 화면입니다. 카테고리 탭은 제외하고, 상단 내비게이션과 상품 개수·정렬 기준은 기존 상품 목록 화면과 동일하게 유지합니다.</p>
+
+      <div class="as-intro-layout" style="align-items:flex-start;">
+        <div class="as-intro-preview">
+          <div class="as-intro-phone" style="height:680px;">
+            <div class="plist-topbar">
+              <span class="back">←</span>
+              <span class="title">멤버십 전용상품</span>
+              <span class="right"><span>🏠</span><span>🛍</span></span>
+            </div>
+            <div class="as-intro-phone-body">
+              <div class="plist-summary">
+                <span>총 <b>4</b>개의 상품</span>
+                <span class="sort">최신순 ↓</span>
+              </div>
+              <div class="plist-grid">
+                <div class="plist-card">
+                  <div class="img"><div class="bagic">🛍</div></div>
+                  <div class="info">
+                    <div class="name">플렉스지 프리미엄 세트</div>
+                    <div class="price-row"><span class="orig">39,000원</span></div>
+                    <div class="price-row"><span class="now">29,000원</span><span class="pct">26%</span></div>
+                    <div class="meta"><span class="buying">48개 구매중</span><span>💬 2</span></div>
+                  </div>
+                </div>
+                <div class="plist-card">
+                  <div class="img"><div class="bagic">🛍</div></div>
+                  <div class="info">
+                    <div class="name">플렉스지 데일리 케어 3종</div>
+                    <div class="price-row"><span class="orig">24,000원</span></div>
+                    <div class="price-row"><span class="now">18,900원</span><span class="pct">21%</span></div>
+                    <div class="meta"><span class="buying">16개 구매중</span><span>💬 1</span></div>
+                  </div>
+                </div>
+                <div class="plist-card">
+                  <div class="img"><div class="bagic">🛍</div></div>
+                  <div class="info">
+                    <div class="name">플렉스지 리필 파우치</div>
+                    <div class="price-row"><span class="orig">12,000원</span></div>
+                    <div class="price-row"><span class="now">9,900원</span><span class="pct">18%</span></div>
+                    <div class="meta"><span class="buying">214개 구매중</span><span>💬 6</span></div>
+                  </div>
+                </div>
+                <div class="plist-card">
+                  <div class="img"><div class="bagic">🛍</div></div>
+                  <div class="info">
+                    <div class="name">플렉스지 기획 선물세트</div>
+                    <div class="price-row"><span class="orig">58,000원</span></div>
+                    <div class="price-row"><span class="now">45,000원</span><span class="pct">22%</span></div>
+                    <div class="meta"><span class="buying">41개 구매중</span><span>💬 3</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="as-usage-note" style="margin-top:22px;">
+        <ul>
+          <li>카테고리 탭(전체·지갑·숄더백 등)은 제외했습니다.</li>
+          <li>뒤로가기·홈·장바구니, 상품 개수, 정렬 기준(최신순)은 기존 상품 목록 화면과 동일하게 유지했습니다.</li>
+        </ul>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2876,6 +2967,10 @@
     'membership-guard-popup': {
       number:'23', label:'멤버십 전용 상품 안내 팝업', kind:'모바일 화면', guard:true,
       policy:'화면 10(정기멤버십 전용 상품 관리)에서 안내한 대로, 멤버십 전용으로 설정된 상품을 비회원 또는 멤버십 미가입 회원이 클릭하면 상품 상세 대신 이 안내 팝업이 노출돼요. "멤버십 가입하기"를 누르면 화면 22(정기멤버십 소개 페이지)로 연결돼요.'
+    },
+    'membership-product-list': {
+      number:'24', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
+      policy:'화면 10에서 멤버십 전용으로 지정한 상품들을 모아 보여주는 목록 화면이에요. 카테고리 탭은 제외하고, 상단 뒤로가기·홈·장바구니와 상품 개수·정렬 기준은 기존 상품 목록 화면과 동일하게 유지돼요.'
     }
   };
 
@@ -2894,6 +2989,7 @@
   var cancelDoneShell = document.getElementById('cancelDoneShell');
   var landingShell = document.getElementById('landingShell');
   var guardShell = document.getElementById('guardShell');
+  var plistShell = document.getElementById('plistShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -2915,7 +3011,8 @@
     var isCancelDone = !!s.cancelDone;
     var isLanding = !!s.landing;
     var isGuard = !!s.guard;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isGuard;
+    var isPlist = !!s.plist;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isGuard || isPlist;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -2927,9 +3024,14 @@
     cancelDoneShell.hidden = !isCancelDone;
     landingShell.hidden = !isLanding;
     guardShell.hidden = !isGuard;
+    plistShell.hidden = !isPlist;
     stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon);
 
-    if(isGuard){
+    if(isPlist){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isGuard){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
