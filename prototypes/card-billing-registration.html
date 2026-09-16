@@ -1104,8 +1104,13 @@
             <div class="as-panel" style="max-width:none; margin-bottom:22px;">
               <div class="as-row-pair">
                 <div class="as-field-group">
-                  <div class="as-label">상품 검색</div>
-                  <div class="as-field"><input class="as-input" type="text" id="productListSearchInput" placeholder="상품명 또는 상품코드로 검색"></div>
+                  <div class="as-label">상품검색</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:8px;">
+                    <select class="as-input" style="max-width:110px; flex:0 0 auto;" disabled><option>상품코드</option></select>
+                    <input class="as-input" type="text" id="productListSearchInput" placeholder="검색내용을 입력해주세요.">
+                    <span style="color:var(--ink-faint); font-size:11px; flex:0 0 auto;">or</span>
+                    <button class="as-btn as-btn-primary as-btn-sm" id="productFindBtn" style="flex:0 0 auto;">상품 찾기</button>
+                  </div>
                 </div>
               </div>
               <div class="as-row-pair">
@@ -3736,6 +3741,13 @@
     if(productListNoResults) productListNoResults.hidden = visibleCount !== 0;
   }
 
+  var productFindBtn = document.getElementById('productFindBtn');
+  if(productFindBtn){
+    productFindBtn.addEventListener('click', function(){
+      renderProductCatalog();
+      asProductModalOverlay.hidden = false;
+    });
+  }
   if(productSearchBtn){
     productSearchBtn.addEventListener('click', function(){
       renderProductCatalog();
