@@ -1121,10 +1121,10 @@
             <div class="as-subhead" style="margin-top:0;">1. 결제 정책</div>
             <div class="as-usage-note">
               <ul>
-                <li>결제 주기: 매월 자동 결제되며, 가입일 기준으로 고정됩니다.</li>
-                <li>결제 실패 시: 1일 후 1회만 자동으로 재시도합니다.</li>
-                <li>결제 금액 변경 시: 기존 가입자는 기존 금액을 유지하며, 변경된 금액은 신규 가입자부터 적용됩니다.</li>
-                <li>가입 시 정기결제 동의(카드 등록·인증)가 카드사 거절 등으로 실패하면 가입이 완료되지 않으며, 실패 사유를 보여주고 다시 시도하거나 가입 없이 종료할 수 있습니다.</li>
+                <li>시스템은 매월 자동으로 정기결제를 진행하며, 결제일은 가입일 기준으로 고정됩니다.</li>
+                <li>결제에 실패하면 시스템이 1일 후 1회만 자동으로 재시도합니다.</li>
+                <li>판매자가 결제 금액을 변경하면, 기존 가입자는 기존 금액을 유지하며 변경된 금액은 신규 가입자부터 적용됩니다.</li>
+                <li>회원이 가입 시 정기결제 동의(카드 등록·인증)를 진행하는 중 카드사 거절 등으로 실패하면 가입이 완료되지 않으며, 화면은 실패 사유를 보여주고 회원은 다시 시도하거나 가입 없이 종료할 수 있습니다.</li>
               </ul>
             </div>
 
@@ -1151,43 +1151,41 @@
             <div class="as-subhead">4. 해지 정책</div>
             <div class="as-usage-note">
               <ul>
-                <li>해지를 신청해도 즉시 해지되지 않으며, 다음 결제일까지 이용이 유지된 후 자동으로 해지됩니다.</li>
-                <li>해지 시 환불은 불가합니다.</li>
-                <li>일시정지 기능은 제공하지 않습니다.</li>
+                <li>회원이 해지를 신청해도 즉시 해지되지 않으며, 다음 결제일까지 이용이 유지된 후 자동으로 해지됩니다.</li>
+                <li>회원이 해지하더라도 환불은 불가합니다.</li>
+                <li>판매자는 일시정지 기능을 제공하지 않습니다.</li>
               </ul>
             </div>
 
             <div class="as-subhead">5. PG 연동 관련</div>
             <div class="as-usage-note">
               <ul>
-                <li>PG 심사를 위해 "숨김" 상태의 테스트 상품 1개를 등록해야 하며, 등록 전에는 연동하기 버튼이 비활성화됩니다.</li>
-                <li>연동하기를 눌러도 즉시 연동되지 않으며, PG사 심사가 진행되는 동안 연동 상태는 "심사중"으로 표시됩니다.</li>
-                <li>연동 상태는 미연동 · 심사중 · 반려 · 연동완료 4단계로 관리됩니다. 반려되면 반려 사유가 함께 노출되고, 연동하기를 다시 눌러 재심사를 요청할 수 있습니다.</li>
-                <li>PG 연동을 해제하면 신규 가입이 중단되고, 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
-                <li>연동 해제 후 재연동하면 기존 멤버십 설정(가격, 혜택 등)이 초기화되며, 이때 확인 팝업이 노출됩니다.</li>
+                <li>판매자는 PG 심사를 위해 "숨김" 상태의 테스트 상품 1개를 등록해야 하며, 등록 전에는 연동하기 버튼이 비활성화됩니다.</li>
+                <li>판매자가 PG 연동을 해제하면 신규 가입이 중단되고, 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
+                <li>판매자가 연동 해제 후 재연동하면 기존 멤버십 설정(가격, 혜택 등)이 초기화되며, 이때 확인 팝업이 노출됩니다.</li>
               </ul>
             </div>
 
             <div class="as-subhead">6. 혜택/상품 정책</div>
             <div class="as-usage-note">
               <ul>
-                <li>혜택은 정기멤버십 전용 상품으로 지정된 상품에만 적용되며, 지정된 상품이 없으면 혜택이 적용되지 않습니다.</li>
-                <li>전용 상품을 삭제하면 전용 상품 목록에서도 함께 삭제됩니다.</li>
-                <li>전용 상품 유형은 공통판매(전체 노출)와 멤버십 전용(비회원 구매 불가) 두 가지이며, 상품별 전용가는 별도로 설정하지 않습니다.</li>
-                <li>정기멤버십 전용상품 지정은 상품 등록/수정 화면(개별 지정)과 정기멤버십 전용 상품 관리 화면(일괄 지정 및 전체 현황 확인) 양쪽에서 가능하며, 두 화면은 동일한 값을 공유합니다.</li>
+                <li>판매자가 정기멤버십 전용 상품으로 지정한 상품에만 혜택이 적용되며, 지정된 상품이 없으면 혜택은 적용되지 않습니다.</li>
+                <li>판매자가 전용 상품을 삭제하면 전용 상품 목록에서도 함께 삭제됩니다.</li>
+                <li>전용 상품 유형은 공통판매(전체 노출)와 멤버십 전용(비회원 구매 불가) 두 가지이며, 판매자는 상품별 전용가를 별도로 설정하지 않습니다.</li>
+                <li>판매자는 정기멤버십 전용상품 지정을 상품 등록/수정 화면(개별 지정)과 정기멤버십 전용 상품 관리 화면(일괄 지정 및 전체 현황 확인) 양쪽에서 할 수 있으며, 두 화면은 동일한 값을 공유합니다.</li>
                 <li>비회원 또는 멤버십 미가입 회원이 멤버십 전용 상품을 클릭하면 상품 상세 대신 안내 팝업이 노출되며, 정기멤버십 가입 화면으로 연결됩니다.</li>
-                <li>지정된 전용 상품이 하나도 없으면 정기멤버십 전용 상품 관리 화면과 멤버십 전용상품 리스트 화면 모두 목록 대신 빈 상태 안내가 노출됩니다.</li>
+                <li>판매자가 지정한 전용 상품이 하나도 없으면 정기멤버십 전용 상품 관리 화면과 멤버십 전용상품 리스트 화면 모두 목록 대신 빈 상태 안내가 노출됩니다.</li>
               </ul>
             </div>
 
             <div class="as-subhead">7. 기타 정책</div>
             <div class="as-usage-note">
               <ul>
-                <li>멤버십은 판매자당 하나만 설정할 수 있는 단일 멤버십 구조이며, 여러 등급을 추가로 만들 수 없습니다.</li>
+                <li>정기멤버십은 판매자당 하나만 설정할 수 있는 단일 멤버십 구조이며, 판매자는 여러 등급을 추가로 만들 수 없습니다.</li>
                 <li>회원이 쇼핑몰을 탈퇴하면 가입 중인 멤버십은 자동으로 해지됩니다.</li>
-                <li>멤버십 사용 여부를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
-                <li>정기멤버십 가입완료·해지·결제 최종실패 시 알림톡이 자동으로 발송되며, 메시지 &gt; 알림톡 설정에서 템플릿을 관리합니다.</li>
-                <li>정산은 별도 화면 없이 기존 매출 탭에 합산되어 반영됩니다.</li>
+                <li>판매자가 멤버십 사용 여부를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
+                <li>회원의 정기멤버십 가입완료·해지·결제 최종실패 시 알림톡이 자동으로 발송되며, 판매자는 메시지 &gt; 알림톡 설정에서 템플릿을 관리합니다.</li>
+                <li>정기멤버십 정산은 별도 화면 없이 기존 매출 탭에 합산되어 반영됩니다.</li>
                 <li>이미 가입한 회원이 정기멤버십 소개 페이지에 재진입하면 가입 버튼과 약관 동의 영역 대신 이용 중 안내 문구가 노출됩니다.</li>
               </ul>
             </div>
@@ -1253,7 +1251,6 @@
               </div>
             </div>
 
-            <div style="margin-top:24px; font-size:11px; color:var(--ink-faint);">이 내용은 '정책' 화면과 동일하며, 실제 개발 시 하나의 데이터 소스를 공유합니다.</div>
             </div>
           </section>
 
@@ -3410,7 +3407,7 @@
 
               <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:16px; text-align:center;">
                 <div style="font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:6px;">해지가 예약되어 있어요</div>
-                <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.7;">다음 결제일(2026.10.14)까지 혜택이 유지되며, 이후 자동으로 종료돼요.</div>
+                <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.7;">다음 결제일(2026.10.14)까지 혜택이 유지되며, 이후 자동으로 종료됩니다.</div>
               </div>
             </div>
           </div>
@@ -3620,7 +3617,7 @@
             <div class="as-intro-phone-body" style="background:#fff; padding:40px 24px; display:flex; flex-direction:column; align-items:center; text-align:center;">
               <div style="width:56px; height:56px; border-radius:50%; background:var(--brand-tint); display:flex; align-items:center; justify-content:center; font-size:26px; margin-bottom:18px;">🎉</div>
               <div style="font-size:16px; font-weight:800; color:var(--ink); line-height:1.4; margin-bottom:8px;">정기멤버십 가입이<br>완료됐어요!</div>
-              <div style="font-size:12px; color:var(--ink-soft); line-height:1.7; margin-bottom:26px;">이제부터 멤버십 혜택을<br>바로 이용하실 수 있어요.</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.7; margin-bottom:26px;">이제부터 멤버십 혜택을<br>바로 이용하실 수 있습니다.</div>
 
               <div style="width:100%; background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:26px; text-align:left;">
                 <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); padding:5px 0;"><span>가입한 멤버십</span><span style="color:var(--ink); font-weight:700;">FLEXG 프리미엄 멤버십</span></div>
@@ -3646,7 +3643,7 @@
             <div class="as-intro-phone-body" style="background:#fff; padding:40px 24px; display:flex; flex-direction:column; align-items:center; text-align:center;">
               <div class="icon-circle no" style="margin-bottom:18px;">!</div>
               <div style="font-size:16px; font-weight:800; color:var(--ink); line-height:1.4; margin-bottom:8px;">정기멤버십 가입에<br>실패했어요</div>
-              <div style="font-size:12px; color:var(--ink-soft); line-height:1.7; margin-bottom:26px;">다른 카드로 다시 시도해주세요.</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.7; margin-bottom:26px;">다른 카드로 다시 시도해 주세요.</div>
 
               <div style="width:100%; background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:26px; text-align:left;">
                 <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); padding:5px 0;"><span>실패 사유</span><span style="color:var(--warn); font-weight:700;">카드 한도초과</span></div>
