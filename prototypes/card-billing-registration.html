@@ -499,12 +499,13 @@
   }
   .as-intro-mode-tab.active{ background:var(--brand); color:#fff; }
 
-  .as-basic-tabs{ display:flex; gap:6px; margin:2px 0 18px; }
+  .as-basic-tabs{ display:flex; gap:4px; margin:4px 0 24px; border-bottom:2px solid var(--line); }
   .as-basic-tab{
-    padding:8px 16px; border-radius:16px; font-size:12px; font-weight:700;
-    color:var(--ink-soft); background:#EDEFF3; cursor:pointer;
+    padding:13px 26px; font-size:15px; font-weight:800;
+    color:var(--ink-soft); background:none; cursor:pointer;
+    border-bottom:3px solid transparent; margin-bottom:-2px;
   }
-  .as-basic-tab.active{ background:var(--brand); color:#fff; }
+  .as-basic-tab.active{ color:var(--brand-dark); border-bottom-color:var(--brand); }
   .as-basic-guide .as-subhead{ padding-bottom:8px; border-bottom:1px solid var(--line); }
   .as-basic-guide .as-usage-note ul{ font-size:12.5px; line-height:2; }
   .as-basic-guide .as-table th, .as-basic-guide .as-table td{ font-size:12.5px; padding-top:12px; padding-bottom:12px; }
@@ -1017,21 +1018,10 @@
                   <div class="as-field"><input class="as-input" type="password" placeholder="연동 후 자동으로 입력됩니다" disabled></div>
                 </div>
               </div>
-            </div>
-            <div class="as-actions">
-              <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
-              <button class="as-btn as-btn-secondary" id="pgDisconnectBtn">연동 해제</button>
-            </div>
-
-            <div class="as-subhead" style="margin-top:20px;">이용안내</div>
-            <div class="as-usage-note">
-              <ul>
-                <li>회원이 결제한 정기멤버십 구독료는 매월 자동으로 결제되며, 결제에 실패하면 시스템이 1일 후 한 번 더 재시도합니다. 재시도까지 실패하면 해당 회원의 결제는 최종 실패로 처리됩니다.</li>
-                <li>회원이 멤버십 해지를 신청해도 다음 결제일까지는 이용이 계속되며, 해지 완료 후 다시 이용하려면 회원이 재가입해야 합니다.</li>
-                <li>판매자가 설정한 혜택은 정기멤버십 전용 상품으로 지정된 상품에만 적용되며, 지정된 상품이 없으면 혜택이 적용되지 않습니다.</li>
-                <li>판매자가 PG 연동을 해제하거나 멤버십 사용 여부를 끄면, 신규 가입은 중단되고 기존 회원은 이미 결제된 기간까지만 이용할 수 있습니다.</li>
-                <li>회원이 쇼핑몰을 탈퇴하면, 가입 중인 정기멤버십도 함께 자동으로 해지됩니다.</li>
-              </ul>
+              <div class="as-actions" style="margin-top:16px; padding-top:16px; border-top:1px solid var(--line);">
+                <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
+                <button class="as-btn as-btn-secondary" id="pgDisconnectBtn">연동 해제</button>
+              </div>
             </div>
 
             <div class="as-subhead">멤버십 설정</div>
