@@ -1251,7 +1251,7 @@
             </div>
 
             <div style="display:flex; align-items:center; justify-content:flex-end; gap:8px; margin-bottom:12px;">
-              <button class="as-btn as-btn-primary as-btn-sm">상품 불러오기</button>
+              <button class="as-btn as-btn-primary as-btn-sm" id="productSearchBtnEmpty">상품 불러오기</button>
             </div>
 
             <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; background:#FAFAFB; border:1px solid var(--line); border-radius:10px;">
@@ -4258,6 +4258,15 @@
   }
   if(productSearchBtn){
     productSearchBtn.addEventListener('click', function(){
+      productModalMode = 'exclusive';
+      if(productModalNote) productModalNote.textContent = PRODUCT_MODAL_DEFAULT_NOTE;
+      renderProductCatalog();
+      asProductModalOverlay.hidden = false;
+    });
+  }
+  var productSearchBtnEmpty = document.getElementById('productSearchBtnEmpty');
+  if(productSearchBtnEmpty){
+    productSearchBtnEmpty.addEventListener('click', function(){
       productModalMode = 'exclusive';
       if(productModalNote) productModalNote.textContent = PRODUCT_MODAL_DEFAULT_NOTE;
       renderProductCatalog();
