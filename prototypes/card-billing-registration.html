@@ -713,12 +713,14 @@
     <li class="nav-section-label">shop</li>
     <li class="nav-item" data-screen="tabbar"><div class="num">20</div><div class="tx"><div class="name">탭바</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="fullmenu"><div class="num">21</div><div class="tx"><div class="name">전체메뉴</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-cancel"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 이용현황·해지</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-cancel"><div class="num">22</div><div class="tx"><div class="name">정기멤버십 이용현황</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-cancel-done"><div class="num">23</div><div class="tx"><div class="name">정기멤버십 해지완료</div><div class="kind">모바일 화면</div></div></li>
     <li class="nav-item" data-screen="membership-landing"><div class="num">24</div><div class="tx"><div class="name">정기멤버십 소개 페이지</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-join-done"><div class="num">25</div><div class="tx"><div class="name">정기멤버십 가입완료</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-guard-popup"><div class="num">26</div><div class="tx"><div class="name">멤버십 전용 상품 안내 팝업</div><div class="kind">모바일 화면</div></div></li>
-    <li class="nav-item" data-screen="membership-product-list"><div class="num">27</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-terms"><div class="num">25</div><div class="tx"><div class="name">정기멤버십 서비스 이용약관</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-join-done"><div class="num">26</div><div class="tx"><div class="name">정기멤버십 가입완료</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-join-fail"><div class="num">27</div><div class="tx"><div class="name">정기멤버십 가입실패</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-guard-popup"><div class="num">28</div><div class="tx"><div class="name">멤버십 전용 상품 안내 팝업</div><div class="kind">모바일 화면</div></div></li>
+    <li class="nav-item" data-screen="membership-product-list"><div class="num">29</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
   </ul>
 </div>
 
@@ -1133,7 +1135,10 @@
             <div class="as-list-toolbar">
               <div class="as-list-count"><span class="as-list-heading">상품 목록</span>전체 <b>7</b>개</div>
             </div>
-            <div class="as-warn-box">· 멤버십 전용으로 설정한 상품은 비회원이 shop에서 클릭하면 "멤버십 가입 후 구매 가능한 전용 상품입니다" 안내 팝업과 함께 멤버십 가입하기로 유도됩니다. 멤버십 전용이 아닌 상품은 멤버십 회원의 경우 혜택이 적용된 가격으로 구매할 수 있으며, 일반 고객도 구매할 수 있습니다.</div>
+            <div class="as-warn-box">
+              <div>· 멤버십 전용으로 설정한 상품은 비회원이 shop에서 클릭하면 "멤버십 가입 후 구매 가능한 전용 상품입니다" 안내 팝업과 함께 멤버십 가입하기로 유도됩니다.<span class="as-status-info-icon" id="guardPopupPreviewIcon" style="cursor:pointer;">ⓘ</span></div>
+              <div>· 멤버십 전용이 아닌 상품은 멤버십 회원의 경우 혜택이 적용된 가격으로 구매할 수 있으며, 일반 고객도 구매할 수 있습니다.</div>
+            </div>
             <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
               <span style="font-size:11px; color:var(--ink-faint);">ⓘ 여러 상품을 한 번에 전용 상품으로 지정할 때 "상품 불러오기"를 이용해 주세요. 개별 지정은 상품 등록/수정 화면에서도 가능합니다.</span>
               <div style="display:flex; gap:8px; align-items:center;">
@@ -1984,6 +1989,33 @@
         </div>
       </div>
 
+      <div class="as-modal-overlay" id="guardPopupPreviewOverlay" hidden>
+        <div class="as-modal" style="width:auto; padding:0; background:none; box-shadow:none;">
+          <div class="as-intro-phone" style="width:280px; height:420px; position:relative;">
+            <div class="as-intro-phone-header">상품 상세</div>
+            <div class="as-intro-phone-body" style="padding:0; filter:blur(2px); opacity:.5;">
+              <div style="height:180px; background:linear-gradient(160deg,#EAD9C2,#C9AE87); display:flex; align-items:center; justify-content:center; color:rgba(21,34,56,.4); font-size:12px; font-weight:700;">상품 이미지</div>
+              <div style="padding:18px;">
+                <div style="font-size:14px; font-weight:800; color:var(--ink); margin-bottom:6px;">플렉스지 리필 파우치</div>
+                <div style="font-size:15px; font-weight:800; color:var(--brand-dark);">9,900원</div>
+              </div>
+            </div>
+            <div class="as-modal-overlay" style="position:absolute;">
+              <div class="as-modal" style="width:230px; text-align:center; padding:26px 20px 20px; position:relative;">
+                <div class="as-modal-close" id="guardPopupPreviewClose" style="position:absolute; top:8px; right:10px;">✕</div>
+                <div style="font-size:26px; margin-bottom:12px;">🔒</div>
+                <div class="as-modal-title" style="font-size:14px; margin-bottom:8px;">멤버십 전용 상품입니다</div>
+                <div class="modal-desc" style="margin:0; font-size:11.5px;">멤버십 가입 후 구매 가능한 전용 상품입니다.</div>
+                <div class="btn-stack">
+                  <button class="as-btn as-btn-primary">멤버십 가입하기</button>
+                  <button class="as-btn as-btn-secondary">닫기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="admin-shell" id="policyShell" hidden>
@@ -2059,7 +2091,7 @@
           <li>멤버십은 판매자당 하나만 설정할 수 있는 단일 멤버십 구조이며, 여러 등급을 추가로 만들 수 없습니다.</li>
           <li>회원이 쇼핑몰을 탈퇴하면 가입 중인 멤버십은 자동으로 해지됩니다.</li>
           <li>멤버십 사용 여부를 끄면 PG 연동 해제와 동일하게 처리되며, 이때 확인 팝업이 노출됩니다.</li>
-          <li>정기멤버십 가입완료·해지·쿠폰 발송 시 알림톡이 자동으로 발송되며, 메시지 &gt; 알림톡 설정에서 템플릿을 관리합니다.</li>
+          <li>정기멤버십 가입완료·해지·결제 최종실패 시 알림톡이 자동으로 발송되며, 메시지 &gt; 알림톡 설정에서 템플릿을 관리합니다.</li>
           <li>정산은 별도 화면 없이 기존 매출 탭에 합산되어 반영됩니다.</li>
         </ul>
       </div>
@@ -2216,7 +2248,7 @@
         </div>
         <div class="as-content">
           <h1>알림톡 설정</h1>
-          <p class="as-desc">카카오 알림톡으로 발송되는 메시지 템플릿을 관리합니다. 정기멤버십 가입완료·해지·쿠폰 발송 시에도 아래 알림톡이 자동으로 발송됩니다.</p>
+          <p class="as-desc">카카오 알림톡으로 발송되는 메시지 템플릿을 관리합니다. 정기멤버십 가입완료·해지·결제 최종실패 시에도 아래 알림톡이 자동으로 발송됩니다.</p>
 
           <div class="at-grid">
             <div class="at-card">
@@ -2311,16 +2343,16 @@
             </div>
 
             <div class="at-card new">
-              <div class="at-head"><span class="talk-ic">talk</span>정기멤버십 쿠폰 발송 안내<span class="at-new-tag">NEW</span></div>
+              <div class="at-head"><span class="talk-ic">talk</span>정기멤버십 결제 최종실패 안내<span class="at-new-tag">NEW</span></div>
               <div class="at-body">
-                <div class="at-icon">🎟️</div>
-                <div class="at-title">정기멤버십 쿠폰이
-발송됐어요!</div>
+                <div class="at-icon">🚫</div>
+                <div class="at-title">정기멤버십 결제가 최종 실패해
+이용이 종료됐어요</div>
                 <div class="at-sender">[판매자: 불티나게, 플렉스지]</div>
-                <div class="at-lines">#{회원명}님께 정기멤버십 쿠폰이 발송됐어요.<br>▶ 멤버십: #{멤버십명}<br>▶ 쿠폰: #{쿠폰명}<br>▶ 사용기한: #{쿠폰만료일자}</div>
-                <div class="at-note">※ 정기멤버십 발송 조건: 정기멤버십 혜택 쿠폰 발송 시점</div>
+                <div class="at-lines">#{회원명}님의 정기멤버십 결제가 재시도까지 실패해 이용이 종료됐어요.<br>▶ 멤버십: #{멤버십명}<br>▶ 실패 사유: #{실패사유}<br>▶ 이용 종료일: #{이용종료일자}</div>
+                <div class="at-note">※ 정기멤버십 발송 조건: 결제 재시도까지 실패(최종실패) 처리 시점</div>
               </div>
-              <div class="at-btn">쿠폰 확인하기</div>
+              <div class="at-btn">멤버십 다시 가입하기</div>
             </div>
           </div>
         </div>
@@ -2995,13 +3027,13 @@
 
     <div class="admin-shell" id="cancelShell" hidden>
       <div class="as-content" style="flex:1; height:100%;">
-      <h1>정기멤버십 이용현황·해지</h1>
+      <h1>정기멤버십 이용현황</h1>
       <p class="as-desc">shop 구매자 화면에서 이용현황 확인과 해지 신청을 한 화면에서 처리할 수 있도록 구성했습니다.</p>
 
       <div class="as-intro-layout" style="align-items:flex-start;">
         <div class="as-intro-preview">
           <div class="as-intro-phone" style="height:640px; position:relative;">
-            <div class="as-intro-phone-header">정기멤버십 이용현황·해지</div>
+            <div class="as-intro-phone-header">정기멤버십 이용현황</div>
             <div class="as-intro-phone-body" style="background:#fff; padding:20px 18px;">
 
               <div style="font-size:11px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; margin-bottom:8px;">이용현황</div>
@@ -3017,6 +3049,11 @@
                 <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; padding:7px 0;">
                   <span style="opacity:.85;">이용상태</span><span id="cancelStatusTag" style="font-weight:800; color:#8CF5C8;">이용중</span>
                 </div>
+              </div>
+
+              <div style="display:flex; align-items:center; justify-content:space-between; background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-bottom:18px;">
+                <div style="font-size:12px; color:var(--ink);">국민카드 •• 4417</div>
+                <span style="font-size:11.5px; color:var(--ink-soft); text-decoration:underline; cursor:pointer;">결제수단 변경</span>
               </div>
 
               <div style="font-size:11px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; margin-bottom:8px;">해지</div>
@@ -3055,7 +3092,7 @@
       <div class="as-intro-layout" style="align-items:flex-start;">
         <div class="as-intro-preview">
           <div class="as-intro-phone" style="height:640px;">
-            <div class="as-intro-phone-header">정기멤버십 이용현황·해지</div>
+            <div class="as-intro-phone-header">정기멤버십 이용현황</div>
             <div class="as-intro-phone-body" style="background:#fff; padding:40px 24px; display:flex; flex-direction:column; align-items:center; text-align:center;">
               <div style="width:56px; height:56px; border-radius:50%; background:#EDEFF3; display:flex; align-items:center; justify-content:center; font-size:26px; margin-bottom:18px;">📭</div>
               <div style="font-size:16px; font-weight:800; color:var(--ink); line-height:1.4; margin-bottom:8px;">정기멤버십 이용이<br>종료됐어요</div>
@@ -3110,7 +3147,7 @@
               </div>
 
               <div class="as-intro-consent">
-                <div class="as-intro-consent-item"><span class="check"></span><span class="label">정기멤버십 서비스 이용약관 동의</span><span class="view">보기</span></div>
+                <div class="as-intro-consent-item"><span class="check"></span><span class="label">정기멤버십 서비스 이용약관 동의</span><span class="view" id="termsViewBtn" style="cursor:pointer;">보기</span></div>
                 <div class="as-intro-consent-note">위 내용을 확인하였으며 자동결제 동의합니다.</div>
               </div>
             </div>
@@ -3122,6 +3159,31 @@
         </div>
       </div>
 
+      </div>
+    </div>
+
+    <div class="admin-shell" id="termsShell" hidden>
+      <div class="as-content" style="flex:1; height:100%;">
+      <h1>정기멤버십 서비스 이용약관</h1>
+      <p class="as-desc">화면 24(정기멤버십 소개 페이지)의 "정기멤버십 서비스 이용약관 동의" 항목에서 "보기"를 누르면 노출되는 약관 레이어입니다.</p>
+
+      <div class="as-intro-layout" style="align-items:flex-start;">
+        <div class="as-intro-preview">
+          <div class="as-intro-phone" style="height:640px;">
+            <div class="as-intro-phone-header">정기멤버십 서비스 이용약관</div>
+            <div class="as-intro-phone-body" style="background:#fff; padding:24px; display:flex; flex-direction:column;">
+              <div style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center;">
+                <div>
+                  <div style="font-size:13px; font-weight:800; color:var(--ink); margin-bottom:8px;">법률검토중</div>
+                  <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.7;">정기멤버십 서비스 이용약관은<br>현재 법무 검토가 진행 중입니다.<br>검토 완료 후 게재됩니다.</div>
+                  <div style="font-size:10.5px; color:var(--ink-faint); margin-top:14px;">2026.9.16 기준</div>
+                </div>
+              </div>
+              <button class="as-btn as-btn-secondary" style="width:100%; padding:12px;" id="termsCloseBtn">닫기</button>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
 
@@ -3145,6 +3207,36 @@
               </div>
 
               <button class="as-btn as-btn-primary" style="width:100%; padding:13px;">쇼핑 시작하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="admin-shell" id="joinFailShell" hidden>
+      <div class="as-content" style="flex:1; height:100%;">
+      <h1>정기멤버십 가입실패</h1>
+      <p class="as-desc">화면 24(정기멤버십 소개 페이지)에서 가입을 진행하는 중 정기결제 동의(카드 등록·인증)가 실패하면 노출되는 화면입니다.</p>
+
+      <div class="as-intro-layout" style="align-items:flex-start;">
+        <div class="as-intro-preview">
+          <div class="as-intro-phone" style="height:640px;">
+            <div class="as-intro-phone-header">정기멤버십</div>
+            <div class="as-intro-phone-body" style="background:#fff; padding:40px 24px; display:flex; flex-direction:column; align-items:center; text-align:center;">
+              <div class="icon-circle no" style="margin-bottom:18px;">!</div>
+              <div style="font-size:16px; font-weight:800; color:var(--ink); line-height:1.4; margin-bottom:8px;">정기멤버십 가입에<br>실패했어요</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.7; margin-bottom:26px;">카드사에서 결제를 거절했어요.<br>다른 카드로 다시 시도해주세요.</div>
+
+              <div style="width:100%; background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:26px; text-align:left;">
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); padding:5px 0;"><span>실패 사유</span><span style="color:var(--warn); font-weight:700;">카드 한도초과</span></div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); padding:5px 0;"><span>에러 코드</span><span style="color:var(--ink); font-weight:700;">REJECT_CARD_LIMIT</span></div>
+              </div>
+
+              <div class="btn-stack" style="width:100%; margin-top:0;">
+                <button class="as-btn as-btn-primary" style="width:100%; padding:13px;">다시 시도하기</button>
+                <button class="as-btn as-btn-secondary" style="width:100%; padding:13px;">쇼핑 계속하기</button>
+              </div>
             </div>
           </div>
         </div>
@@ -3352,7 +3444,7 @@
       policy:'정기멤버십이 사용중인 경우에는 가장 하단에 정기멤버십 영역이 생성됩니다. 게시판 리스트 바로 아래, 배너가 아닌 게시판과 같은 리스트 스타일로 노출되며, 정기멤버십 바로가기(가입)·해지·전용상품 3개 항목으로 구성됩니다. 판매자가 정기멤버십을 사용하지 않는 경우에는 이 영역 자체가 노출되지 않습니다.'
     },
     'membership-cancel': {
-      number:'22', label:'정기멤버십 이용현황·해지', kind:'모바일 화면', cancel:true,
+      number:'22', label:'정기멤버십 이용현황', kind:'모바일 화면', cancel:true,
       policy:'이용현황과 해지 신청을 한 화면으로 통합했습니다. 상단에는 이용 중인 멤버십의 이용현황(멤버십명·정기결제 금액·다음 결제예정일·이용상태)을 보여주고, 하단에는 해지 안내와 해지하기 버튼을 배치했습니다. 해지하더라도 다음 결제일까지는 이용이 유지되며, 환불은 불가하고, 해지취소 기능은 제공하지 않습니다(정책과 동일).'
     },
     'membership-cancel-done': {
@@ -3363,16 +3455,24 @@
       number:'24', label:'정기멤버십 소개 페이지', kind:'모바일 화면', landing:true,
       policy:'화면 21(전체메뉴)의 "정기멤버십 바로가기"를 누르면 열리는 구매자용 소개 페이지예요. 화면 13(정기멤버십 소개 페이지 및 약관 관리)에서 판매자가 입력한 멤버십명·혜택·유의사항·약관 동의 항목이 그대로 반영돼요.'
     },
+    'membership-terms': {
+      number:'25', label:'정기멤버십 서비스 이용약관', kind:'모바일 화면', terms:true,
+      policy:'화면 24(정기멤버십 소개 페이지)의 "정기멤버십 서비스 이용약관 동의" 항목에서 "보기"를 누르면 노출되는 약관 레이어예요. 약관 내용은 법률검토중(2026.9.16)이며, 검토가 끝나는 대로 실제 약관 내용으로 교체돼요.'
+    },
     'membership-join-done': {
-      number:'25', label:'정기멤버십 가입완료', kind:'모바일 화면', joinDone:true,
+      number:'26', label:'정기멤버십 가입완료', kind:'모바일 화면', joinDone:true,
       policy:'화면 24(정기멤버십 소개 페이지)에서 "멤버십 가입"을 누르고 정기결제 동의를 마치면 노출되는 가입 완료 화면이에요. 가입한 멤버십명과 다음 결제예정일을 보여주고, 바로 쇼핑을 시작할 수 있는 버튼을 제공해요.'
     },
+    'membership-join-fail': {
+      number:'27', label:'정기멤버십 가입실패', kind:'모바일 화면', joinFail:true,
+      policy:'화면 24(정기멤버십 소개 페이지)에서 "멤버십 가입"을 누르고 정기결제 동의를 진행하는 중 카드사가 결제를 거절하면 노출되는 가입 실패 화면이에요. 실패 사유와 에러 코드를 보여주고, 다시 시도하거나 가입 없이 쇼핑을 계속할 수 있어요.'
+    },
     'membership-guard-popup': {
-      number:'26', label:'멤버십 전용 상품 안내 팝업', kind:'모바일 화면', guard:true,
+      number:'28', label:'멤버십 전용 상품 안내 팝업', kind:'모바일 화면', guard:true,
       policy:'화면 10(정기멤버십 전용 상품 관리)에서 안내한 대로, 멤버십 전용으로 설정된 상품을 비회원 또는 멤버십 미가입 회원이 클릭하면 상품 상세 대신 이 안내 팝업이 노출돼요. "멤버십 가입하기"를 누르면 화면 24(정기멤버십 소개 페이지)로 연결돼요.'
     },
     'membership-product-list': {
-      number:'27', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
+      number:'29', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
       policy:'화면 10에서 멤버십 전용으로 지정한 상품들을 모아 보여주는 목록 화면이에요. 카테고리 탭은 제외하고, 상단 뒤로가기·홈·장바구니와 상품 개수·정렬 기준은 기존 상품 목록 화면과 동일하게 유지돼요.'
     }
   };
@@ -3391,7 +3491,9 @@
   var cancelShell = document.getElementById('cancelShell');
   var cancelDoneShell = document.getElementById('cancelDoneShell');
   var landingShell = document.getElementById('landingShell');
+  var termsShell = document.getElementById('termsShell');
   var joinDoneShell = document.getElementById('joinDoneShell');
+  var joinFailShell = document.getElementById('joinFailShell');
   var guardShell = document.getElementById('guardShell');
   var plistShell = document.getElementById('plistShell');
   var adminProductListShell = document.getElementById('adminProductListShell');
@@ -3416,12 +3518,14 @@
     var isCancel = !!s.cancel;
     var isCancelDone = !!s.cancelDone;
     var isLanding = !!s.landing;
+    var isTerms = !!s.terms;
     var isJoinDone = !!s.joinDone;
+    var isJoinFail = !!s.joinFail;
     var isGuard = !!s.guard;
     var isPlist = !!s.plist;
     var isPlistAdmin = !!s.plistAdmin;
     var isPurchaseLimit = !!s.purchaseLimit;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isJoinDone || isGuard || isPlist || isPlistAdmin || isPurchaseLimit;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isCancel || isCancelDone || isLanding || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -3432,7 +3536,9 @@
     cancelShell.hidden = !isCancel;
     cancelDoneShell.hidden = !isCancelDone;
     landingShell.hidden = !isLanding;
+    termsShell.hidden = !isTerms;
     joinDoneShell.hidden = !isJoinDone;
+    joinFailShell.hidden = !isJoinFail;
     guardShell.hidden = !isGuard;
     plistShell.hidden = !isPlist;
     adminProductListShell.hidden = !isPlistAdmin;
@@ -3459,7 +3565,15 @@
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
+    } else if(isJoinFail){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
     } else if(isLanding){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isTerms){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
@@ -3618,6 +3732,21 @@
   if(asFailReasonModalOverlay){
     asFailReasonModalOverlay.addEventListener('click', function(e){
       if(e.target === asFailReasonModalOverlay) asFailReasonModalOverlay.hidden = true;
+    });
+  }
+
+  var guardPopupPreviewIcon = document.getElementById('guardPopupPreviewIcon');
+  var guardPopupPreviewOverlay = document.getElementById('guardPopupPreviewOverlay');
+  var guardPopupPreviewClose = document.getElementById('guardPopupPreviewClose');
+  if(guardPopupPreviewIcon){
+    guardPopupPreviewIcon.addEventListener('click', function(){ guardPopupPreviewOverlay.hidden = false; });
+  }
+  if(guardPopupPreviewClose){
+    guardPopupPreviewClose.addEventListener('click', function(){ guardPopupPreviewOverlay.hidden = true; });
+  }
+  if(guardPopupPreviewOverlay){
+    guardPopupPreviewOverlay.addEventListener('click', function(e){
+      if(e.target === guardPopupPreviewOverlay) guardPopupPreviewOverlay.hidden = true;
     });
   }
 
@@ -4125,6 +4254,16 @@
   var guardJoinBtn = document.getElementById('guardJoinBtn');
   if(guardJoinBtn){
     guardJoinBtn.addEventListener('click', function(){ selectScreen('membership-landing'); });
+  }
+
+  var termsViewBtn = document.getElementById('termsViewBtn');
+  if(termsViewBtn){
+    termsViewBtn.addEventListener('click', function(){ selectScreen('membership-terms'); });
+  }
+
+  var termsCloseBtn = document.getElementById('termsCloseBtn');
+  if(termsCloseBtn){
+    termsCloseBtn.addEventListener('click', function(){ selectScreen('membership-landing'); });
   }
 
   selectScreen('membership-basic');
