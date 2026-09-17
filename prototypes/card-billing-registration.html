@@ -2202,7 +2202,7 @@
           </div>
           <div class="as-coupon-table-wrap" style="padding:0 24px; max-height:340px; margin-top:14px;">
             <table class="as-table" id="productCatalogTable">
-              <thead><tr><th style="width:36px;"></th><th>상품명</th><th>상품코드</th></tr></thead>
+              <thead id="productCatalogHead"><tr><th style="width:36px;"></th><th>상품명</th><th>상품코드</th></tr></thead>
               <tbody id="productCatalogBody"></tbody>
             </table>
           </div>
@@ -4263,6 +4263,7 @@
   var productModalMode = 'exclusive';
   var PRODUCT_MODAL_DEFAULT_NOTE = '· 쇼핑몰에 등록된 상품 중 정기멤버십 전용 상품으로 추가할 상품을 체크해 주세요.';
   var productCatalogBody = document.getElementById('productCatalogBody');
+  var productCatalogHead = document.getElementById('productCatalogHead');
   var productCatalogSearchInput = document.getElementById('productCatalogSearchInput');
   var productCatalogSearchBtn = document.getElementById('productCatalogSearchBtn');
   var productCatalogResetBtn = document.getElementById('productCatalogResetBtn');
@@ -4296,7 +4297,24 @@
     bindSaleTypeToggle(tr.querySelector('.as-sale-type-toggle'));
   }
 
+  function pickTestProduct(name){
+    var product = PRODUCT_CATALOG.filter(function(p){ return p.name === name; })[0];
+    if(product && testProductSelected){
+      testProductSelected.innerHTML = '선택된 상품: <div class="as-thumb">' + (product.thumb || '📦') + '</div><span class="name">' + product.name + '</span>';
+      if(pgConnectBtn) pgConnectBtn.disabled = false;
+    }
+    asProductModalOverlay.hidden = true;
+  }
+
   function renderProductCatalog(){
+    var isTest = productModalMode === 'test';
+    if(productCatalogSelectBtn) productCatalogSelectBtn.hidden = isTest;
+    if(productCatalogHead){
+      productCatalogHead.innerHTML = isTest
+        ? '<tr><th>상품명</th><th>상품코드</th><th style="width:70px;"></th></tr>'
+        : '<tr><th style="width:36px;"></th><th>상품명</th><th>상품코드</th></tr>';
+    }
+
     var keyword = productCatalogSearchInput ? productCatalogSearchInput.value.trim().toLowerCase() : '';
     var list = keyword
       ? PRODUCT_CATALOG.filter(function(p){ return p.name.toLowerCase().indexOf(keyword) !== -1 || p.code.toLowerCase().indexOf(keyword) !== -1; })
@@ -4308,19 +4326,19 @@
       return;
     }
     list.forEach(function(p){
-      var added = productModalMode === 'exclusive' && isProductAdded(p.name);
       var tr = document.createElement('tr');
-      tr.innerHTML = '<td><input type="checkbox" class="pc-check" data-name="' + p.name + '"' + (added ? ' disabled' : '') + '></td>' +
-        '<td><div style="display:flex; align-items:center; gap:8px;"><div class="as-thumb">' + (p.thumb || '📦') + '</div><span>' + p.name + (added ? ' <span style="color:var(--ink-faint); font-size:10.5px;">(담김)</span>' : '') + '</span></div></td>' +
-        '<td>' + p.code + '</td>';
-      var checkbox = tr.querySelector('.pc-check');
-      if(productModalMode === 'test'){
-        checkbox.addEventListener('change', function(){
-          if(!checkbox.checked) return;
-          productCatalogBody.querySelectorAll('.pc-check').forEach(function(other){
-            if(other !== checkbox) other.checked = false;
-          });
+      if(isTest){
+        tr.innerHTML = '<td><div style="display:flex; align-items:center; gap:8px;"><div class="as-thumb">' + (p.thumb || '📦') + '</div><span>' + p.name + '</span></div></td>' +
+          '<td>' + p.code + '</td>' +
+          '<td style="text-align:right;"><button class="as-btn as-btn-primary as-btn-sm pc-select-btn" data-name="' + p.name + '">선택</button></td>';
+        tr.querySelector('.pc-select-btn').addEventListener('click', function(){
+          pickTestProduct(p.name);
         });
+      } else {
+        var added = isProductAdded(p.name);
+        tr.innerHTML = '<td><input type="checkbox" class="pc-check" data-name="' + p.name + '"' + (added ? ' disabled' : '') + '></td>' +
+          '<td><div style="display:flex; align-items:center; gap:8px;"><div class="as-thumb">' + (p.thumb || '📦') + '</div><span>' + p.name + (added ? ' <span style="color:var(--ink-faint); font-size:10.5px;">(담김)</span>' : '') + '</span></div></td>' +
+          '<td>' + p.code + '</td>';
       }
       productCatalogBody.appendChild(tr);
     });
@@ -4329,19 +4347,6 @@
   if(productCatalogSelectBtn){
     productCatalogSelectBtn.addEventListener('click', function(){
       var checked = productCatalogBody.querySelectorAll('.pc-check:checked:not(:disabled)');
-      if(productModalMode === 'test'){
-        var picked = checked[0];
-        if(picked){
-          var name = picked.getAttribute('data-name');
-          var product = PRODUCT_CATALOG.filter(function(p){ return p.name === name; })[0];
-          if(product && testProductSelected){
-            testProductSelected.innerHTML = '선택된 상품: <div class="as-thumb">' + (product.thumb || '📦') + '</div><span class="name">' + product.name + '</span>';
-            if(pgConnectBtn) pgConnectBtn.disabled = false;
-          }
-        }
-        asProductModalOverlay.hidden = true;
-        return;
-      }
       checked.forEach(function(cb){
         var name = cb.getAttribute('data-name');
         var product = PRODUCT_CATALOG.filter(function(p){ return p.name === name; })[0];
@@ -4505,7 +4510,7 @@
   if(testProductBtn){
     testProductBtn.addEventListener('click', function(){
       productModalMode = 'test';
-      if(productModalNote) productModalNote.textContent = '· PG 심사용으로 등록할 실제 판매 상품 1개를 체크해 주세요.';
+      if(productModalNote) productModalNote.textContent = '· PG 심사용으로 등록할 실제 판매 상품 1개를 선택해 주세요.';
       renderProductCatalog();
       asProductModalOverlay.hidden = false;
     });
