@@ -979,7 +979,7 @@
               <div class="as-row-pair">
                 <div class="as-field-group">
                   <div class="as-label">연동 상태</div>
-                  <div class="as-field"><span class="as-status ended" id="pgStatusBadge">미연동</span></div>
+                  <div class="as-field"><span class="as-status ended" id="pgStatusBadge">미연동</span><span id="pgStatusHint" hidden style="margin-left:8px; font-size:11px; color:var(--ink-faint);">(클릭하여 심사 결과 확인)</span></div>
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">PG사</div>
@@ -999,7 +999,7 @@
               </div>
             </div>
             <div class="as-actions">
-              <button class="as-btn as-btn-primary" id="pgConnectBtn" disabled>연동하기</button>
+              <button class="as-btn as-btn-primary" id="pgConnectBtn">연동하기</button>
               <button class="as-btn as-btn-secondary" id="pgDisconnectBtn">연동 해제</button>
             </div>
 
@@ -4321,17 +4321,20 @@
       pgStatusBadge.textContent = '심사중';
       pgStatusBadge.title = '클릭하면 PG사 심사 결과를 확인할 수 있어요.';
       if(pgRejectReason) pgRejectReason.hidden = true;
+      if(pgStatusHint) pgStatusHint.hidden = false;
       pgConnectBtn.disabled = true;
     });
   }
 
   var pgDisconnectBtn = document.getElementById('pgDisconnectBtn');
   var pgStatusBadge = document.getElementById('pgStatusBadge');
+  var pgStatusHint = document.getElementById('pgStatusHint');
   var pgRejectReason = document.getElementById('pgRejectReason');
   if(pgStatusBadge){
     pgStatusBadge.addEventListener('click', function(){
       if(!pgStatusBadge.classList.contains('pgpending')) return;
       pgReviewCount++;
+      if(pgStatusHint) pgStatusHint.hidden = true;
       if(pgReviewCount === 1){
         pgStatusBadge.className = 'as-status pgrejected';
         pgStatusBadge.textContent = '반려';
@@ -4368,6 +4371,7 @@
       pgStatusBadge.textContent = '미연동';
       pgReviewCount = 0;
       if(pgRejectReason) pgRejectReason.hidden = true;
+      if(pgStatusHint) pgStatusHint.hidden = true;
       if(pgConnectBtn) pgConnectBtn.disabled = true;
       closePgDisconnectModal();
     });
