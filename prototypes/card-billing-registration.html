@@ -3500,21 +3500,21 @@
                 <span style="font-size:11.5px; color:var(--ink-soft); text-decoration:underline; cursor:pointer;">결제수단 변경</span>
               </div>
 
-              <div class="cancel-section-head open" onclick="toggleCancelSection(this)">
+              <div class="cancel-section-head" onclick="toggleCancelSection(this)">
                 <span>해지</span><span class="chev">▾</span>
               </div>
-              <div class="cancel-section-body">
+              <div class="cancel-section-body" hidden>
                 <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:14px;">
                   · 해지하더라도 다음 결제일까지는 혜택이 계속 유지됩니다.<br>
                   · 해지 후 다시 이용하려면 재가입이 필요합니다.
                 </div>
 
-                <div style="display:flex; gap:8px;">
-                  <button class="as-btn as-btn-secondary" style="flex:0 0 auto; padding:13px 18px;">이전</button>
-                  <button class="as-btn as-btn-warn" id="cancelBtn" style="flex:1; padding:13px;">정기멤버십 해지하기</button>
-                </div>
+                <button class="as-btn as-btn-warn" id="cancelBtn" style="width:100%; padding:13px;">정기멤버십 해지하기</button>
                 <div id="cancelDoneNote" hidden style="text-align:center; font-size:11.5px; color:var(--ink-soft); margin-top:10px;">해지가 접수되었습니다. 다음 결제일까지는 계속 이용하실 수 있습니다.</div>
               </div>
+            </div>
+            <div class="as-intro-phone-footer">
+              <button class="as-btn as-btn-secondary" style="flex:1; padding:13px;">이전</button>
             </div>
 
             <div class="as-modal-overlay" id="cancelConfirmOverlay" hidden>
@@ -3603,20 +3603,20 @@
                 </div>
               </div>
 
-              <div class="cancel-section-head open" onclick="toggleCancelSection(this)">
+              <div class="cancel-section-head" onclick="toggleCancelSection(this)">
                 <span>해지</span><span class="chev">▾</span>
               </div>
-              <div class="cancel-section-body">
+              <div class="cancel-section-body" hidden>
                 <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:14px;">
                   · 해지하더라도 다음 결제일까지는 혜택이 계속 유지됩니다.<br>
                   · 해지 후 다시 이용하려면 재가입이 필요합니다.
                 </div>
 
-                <div style="display:flex; gap:8px;">
-                  <button class="as-btn as-btn-secondary" style="flex:0 0 auto; padding:13px 18px;">이전</button>
-                  <button class="as-btn as-btn-warn" style="flex:1; padding:13px;">정기멤버십 해지하기</button>
-                </div>
+                <button class="as-btn as-btn-warn" style="width:100%; padding:13px;">정기멤버십 해지하기</button>
               </div>
+            </div>
+            <div class="as-intro-phone-footer">
+              <button class="as-btn as-btn-secondary" style="flex:1; padding:13px;">이전</button>
             </div>
           </div>
         </div>
