@@ -2842,11 +2842,11 @@
       </div>
 
       <div class="md-tabs" id="mdTabs">
-        <div class="md-tab" data-tab="orders">주문내역</div>
-        <div class="md-tab" data-tab="points">포인트 사용내역</div>
-        <div class="md-tab" data-tab="coupons">쿠폰 사용내역</div>
-        <div class="md-tab" data-tab="edit">회원 정보 수정</div>
-        <div class="md-tab" data-tab="fandom">팬덤 히스토리</div>
+        <div class="md-tab" data-tab="orders" style="cursor:default; opacity:.5;">주문내역</div>
+        <div class="md-tab" data-tab="points" style="cursor:default; opacity:.5;">포인트 사용내역</div>
+        <div class="md-tab" data-tab="coupons" style="cursor:default; opacity:.5;">쿠폰 사용내역</div>
+        <div class="md-tab" data-tab="edit" style="cursor:default; opacity:.5;">회원 정보 수정</div>
+        <div class="md-tab" data-tab="fandom" style="cursor:default; opacity:.5;">팬덤 히스토리</div>
         <div class="md-tab active" data-tab="membership">멤버십</div>
       </div>
 
@@ -5017,7 +5017,7 @@
     document.getElementById('corporateFields').hidden = isPersonal;
   }
 
-  document.querySelectorAll('.md-tab').forEach(function(tab){
+  document.querySelectorAll('.md-tab[data-tab="membership"]').forEach(function(tab){
     tab.addEventListener('click', function(){
       document.querySelectorAll('.md-tab').forEach(function(t){ t.classList.toggle('active', t === tab); });
       var key = tab.getAttribute('data-tab');
