@@ -668,6 +668,8 @@
   .uilabel-badge{ position:relative; width:80px; height:80px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:30px; color:#fff; }
   .uilabel-badge-x{ position:absolute; top:-6px; right:-6px; width:18px; height:18px; border-radius:50%; color:#fff; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; border:2px solid #fff; }
   .uilabel-toggle{ display:flex; align-items:center; gap:6px; font-size:10px; color:var(--ink-faint); font-weight:700; }
+  .uilabel-cell.new{ border:1.5px solid var(--warn); border-radius:10px; background:var(--warn-tint); padding:10px 8px 12px; }
+  .uilabel-cell.new .uilabel-name{ color:var(--warn); }
 
   .plist-topbar{ display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--line); flex:0 0 auto; }
   .plist-topbar .back{ font-size:16px; color:var(--ink); flex:0 0 auto; }
@@ -3012,7 +3014,7 @@
                   <div class="uilabel-toggle"><span>OFF</span><div class="as-toggle on"><div class="knob"></div></div><span>ON</span></div>
                 </div>
 
-                <div class="uilabel-cell">
+                <div class="uilabel-cell new">
                   <div class="uilabel-name">정기멤버십</div>
                   <div class="uilabel-badge" style="background:var(--brand);">
                     <span>👑</span>
