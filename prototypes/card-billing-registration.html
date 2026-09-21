@@ -3703,7 +3703,8 @@
             </div>
 
             <div class="as-modal-overlay">
-              <div class="as-modal" style="width:260px; padding:24px 20px 20px; display:flex; flex-direction:column;">
+              <div class="as-modal" style="width:260px; height:360px; padding:24px 20px 20px; display:flex; flex-direction:column; position:relative;">
+                <div class="as-modal-close" id="termsCloseX" style="position:absolute; top:8px; right:10px;">✕</div>
                 <div style="flex:1; display:flex; align-items:center; justify-content:center; text-align:center;">
                   <div>
                     <div style="font-size:13px; font-weight:800; color:var(--ink); margin-bottom:8px;">법률검토중</div>
@@ -4902,6 +4903,11 @@
   var termsCloseBtn = document.getElementById('termsCloseBtn');
   if(termsCloseBtn){
     termsCloseBtn.addEventListener('click', function(){ selectScreen('membership-landing'); });
+  }
+
+  var termsCloseX = document.getElementById('termsCloseX');
+  if(termsCloseX){
+    termsCloseX.addEventListener('click', function(){ selectScreen('membership-landing'); });
   }
 
   var paymentAlertChangeBtn = document.getElementById('paymentAlertChangeBtn');
