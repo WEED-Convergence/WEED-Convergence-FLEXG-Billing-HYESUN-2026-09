@@ -3999,7 +3999,7 @@
     },
     'membership-intro': {
       number:'16', label:'정기멤버십 소개 페이지 및 약관 관리', kind:'어드민 화면', admin:'intro',
-      policy:'소개 페이지는 "진열" 상태일 때만 구매자에게 노출되고, 정기멤버십 서비스 이용약관 동의는 가입 시 필수 동의로 노출돼요. 유의사항 노출 여부는 별도로 켜고 끌 수 있고, 해지 시 환불은 불가하지만 이용 종료 예정일까지는 혜택이 유지돼요.'
+      policy:'소개 페이지는 "진열" 상태일 때만 구매자에게 노출되고, 정기멤버십 서비스 이용약관 동의는 가입 시 필수 동의로 노출돼요. 유의사항 노출 여부는 별도로 켜고 끌 수 있고, 해지 시 환불은 불가하지만 이용 종료 예정일까지는 혜택이 유지돼요.\n\n<span style="color:var(--warn);">혜택 소개 : \n"정기멤버십 기본 설정" 화면에서 등록한 혜택 설정값이 기본값으로 자동 반영되어 표시됩니다. 판매자는 이 기본값을 그대로 사용하거나, 필요에 따라 자유롭게 수정하여 소개 문구를 재구성할 수 있습니다.</span>'
     },
     'policy': {
       number:'', label:'정기멤버십 정책', kind:'메모', doc:true,
@@ -4278,7 +4278,7 @@
 
     document.getElementById('descEyebrow').textContent = s.number ? (s.number + ' · ' + s.kind) : s.kind;
     document.getElementById('descTitle').textContent = s.label;
-    document.getElementById('descPolicy').textContent = s.policy;
+    document.getElementById('descPolicy').innerHTML = s.policy;
   }
 
   document.querySelectorAll('.nav-item').forEach(function(el){
