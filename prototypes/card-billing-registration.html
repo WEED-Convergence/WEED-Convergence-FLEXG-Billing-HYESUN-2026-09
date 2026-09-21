@@ -2823,29 +2823,37 @@
             <div class="as-row">
               <div class="as-label">이용상태</div>
               <div class="as-field" style="display:flex; align-items:center; gap:10px;">
-                <span class="as-status active" id="mdMemStatusTag">이용중</span>
+                <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-start;">
+                  <span class="as-status active" id="mdMemStatusTag">이용중</span>
+                  <span class="as-status endsoon">해지예정</span>
+                  <span class="as-status ended">해지완료</span>
+                </div>
                 <button class="as-btn as-btn-warn as-btn-sm" id="mdCancelBtn">해지</button>
               </div>
             </div>
             <div class="as-row">
               <div class="as-label">결제상태</div>
-              <div class="as-field"><span class="as-status paid">결제완료</span></div>
+              <div class="as-field" style="display:flex; flex-direction:column; gap:6px; align-items:flex-start;">
+                <span class="as-status paid">결제완료</span>
+                <span class="as-status retry">재시도중</span>
+                <span class="as-status finalfail">최종실패</span>
+              </div>
             </div>
             <div class="as-row">
               <div class="as-label">결제차수</div>
-              <div class="as-field"><input class="as-input" type="text" value="7회차" disabled></div>
+              <div class="as-field" style="font-size:12.5px; color:var(--ink); padding:9px 0;">7회차</div>
             </div>
             <div class="as-row">
               <div class="as-label">정기결제 금액</div>
-              <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" value="9,900" disabled><span class="as-suffix">원</span></div></div>
+              <div class="as-field" style="font-size:12.5px; color:var(--ink); padding:9px 0;">9,900원</div>
             </div>
             <div class="as-row">
               <div class="as-label">누적 결제금액</div>
-              <div class="as-field"><div class="as-input-suffix"><input class="as-input" type="text" value="69,300" disabled><span class="as-suffix">원</span></div></div>
+              <div class="as-field" style="font-size:12.5px; color:var(--ink); padding:9px 0;">69,300원</div>
             </div>
             <div class="as-row">
               <div class="as-label">다음 결제예정일</div>
-              <div class="as-field"><input class="as-input" type="text" value="2026-10-14" disabled></div>
+              <div class="as-field" style="font-size:12.5px; color:var(--ink); padding:9px 0;">2026-10-14</div>
             </div>
           </div>
         </div>
