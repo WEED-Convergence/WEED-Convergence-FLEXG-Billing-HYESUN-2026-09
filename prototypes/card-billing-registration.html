@@ -124,6 +124,11 @@
   }
   .popup-titlebar .popup-icon{ font-size:15px; }
 
+  .popup-not-designed{
+    background:var(--warn-tint); color:var(--warn); border-bottom:1px solid var(--warn);
+    font-size:12px; font-weight:700; text-align:center; padding:9px 16px;
+  }
+
   .popup-underlay{ position:relative; }
   .popup-dim{ transition:filter .15s ease; }
   .popup-dim.dimmed{ filter:blur(5px) brightness(.94); }
@@ -173,6 +178,14 @@
   .terms-detail{ max-height:0; overflow:hidden; transition:max-height .2s ease; background:#FAFBFC; border-radius:8px; }
   .terms-detail.open{ max-height:130px; margin-top:10px; }
   .terms-detail .inner{ padding:12px 13px; font-size:11.5px; color:var(--ink-soft); line-height:1.7; max-height:106px; overflow-y:auto; }
+
+  .cancel-section-head{
+    display:flex; align-items:center; justify-content:space-between; cursor:pointer;
+    font-size:11px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; margin-bottom:8px;
+  }
+  .cancel-section-head .chev{ font-size:11px; color:var(--ink-faint); transition:transform .15s ease; }
+  .cancel-section-head.open .chev{ transform:rotate(180deg); }
+  .cancel-section-body[hidden]{ display:none; }
 
   .form-btn{ width:100%; margin-top:24px; }
 
@@ -759,6 +772,7 @@
         <span class="popup-icon">💳</span>
         <span>카드 자동결제 관리</span>
       </div>
+      <div class="popup-not-designed">토스페이먼츠 창으로 디자인하지 않음</div>
       <div class="popup-underlay" id="popupUnderlay">
         <div class="popup-dim" id="popupDim">
         <div class="popup-body" id="pageContent">
@@ -2487,7 +2501,7 @@
               <div style="border:1.5px solid var(--warn); border-radius:10px; margin:12px 10px 14px; overflow:hidden; background:var(--warn-tint);">
                 <div class="menu-list-head" style="border-bottom-color:var(--warn);">정기멤버십</div>
                 <div class="menu-plain-row" id="menuMembershipLandingLink" style="cursor:pointer;"><span>정기멤버십 바로가기</span><span class="chev">›</span></div>
-                <div class="menu-plain-row"><span>정기멤버십 해지</span><span class="chev">›</span></div>
+                <div class="menu-plain-row"><span>정기멤버십 이용현황</span><span class="chev">›</span></div>
                 <div class="menu-plain-row" style="border-bottom:none;"><span>정기멤버십 전용상품</span><span class="chev">›</span></div>
               </div>
 
@@ -3457,14 +3471,18 @@
                 <span style="font-size:11.5px; color:var(--ink-soft); text-decoration:underline; cursor:pointer;">결제수단 변경</span>
               </div>
 
-              <div style="font-size:11px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; margin-bottom:8px;">해지</div>
-              <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:14px;">
-                · 해지하더라도 다음 결제일까지는 혜택이 계속 유지됩니다.<br>
-                · 해지 후 다시 이용하려면 재가입이 필요합니다.
+              <div class="cancel-section-head open" onclick="toggleCancelSection(this)">
+                <span>해지</span><span class="chev">▾</span>
               </div>
+              <div class="cancel-section-body">
+                <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:14px;">
+                  · 해지하더라도 다음 결제일까지는 혜택이 계속 유지됩니다.<br>
+                  · 해지 후 다시 이용하려면 재가입이 필요합니다.
+                </div>
 
-              <button class="as-btn as-btn-warn" id="cancelBtn" style="width:100%; padding:13px;">정기멤버십 해지하기</button>
-              <div id="cancelDoneNote" hidden style="text-align:center; font-size:11.5px; color:var(--ink-soft); margin-top:10px;">해지가 접수되었습니다. 다음 결제일까지는 계속 이용하실 수 있습니다.</div>
+                <button class="as-btn as-btn-warn" id="cancelBtn" style="width:100%; padding:13px;">정기멤버십 해지하기</button>
+                <div id="cancelDoneNote" hidden style="text-align:center; font-size:11.5px; color:var(--ink-soft); margin-top:10px;">해지가 접수되었습니다. 다음 결제일까지는 계속 이용하실 수 있습니다.</div>
+              </div>
             </div>
 
             <div class="as-modal-overlay" id="cancelConfirmOverlay" hidden>
@@ -3552,14 +3570,18 @@
                 </div>
               </div>
 
-              <div style="font-size:11px; font-weight:800; color:var(--ink-faint); letter-spacing:.04em; margin-bottom:8px;">해지</div>
-              <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:14px;">
-                · 해지하더라도 다음 결제일까지는 혜택이 계속 유지됩니다.<br>
-                · 해지 시 환불은 불가능합니다.<br>
-                · 해지 후 다시 이용하려면 재가입이 필요합니다.
+              <div class="cancel-section-head open" onclick="toggleCancelSection(this)">
+                <span>해지</span><span class="chev">▾</span>
               </div>
+              <div class="cancel-section-body">
+                <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; margin-bottom:14px;">
+                  · 해지하더라도 다음 결제일까지는 혜택이 계속 유지됩니다.<br>
+                  · 해지 시 환불은 불가능합니다.<br>
+                  · 해지 후 다시 이용하려면 재가입이 필요합니다.
+                </div>
 
-              <button class="as-btn as-btn-warn" style="width:100%; padding:13px;">정기멤버십 해지하기</button>
+                <button class="as-btn as-btn-warn" style="width:100%; padding:13px;">정기멤버십 해지하기</button>
+              </div>
             </div>
           </div>
         </div>
@@ -3986,7 +4008,7 @@
     },
     'fullmenu': {
       number:'25', label:'전체메뉴', kind:'모바일 화면', menu:true,
-      policy:'"정기멤버십" 박스(붉은 테두리 영역) 노출 조건\n· 아래 2가지 조건을 모두 만족할 때만 이 영역 전체가 노출됩니다.\n1. PG 연동 상태가 "연동됨"일 것\n2. 정기멤버십 소개 페이지의 "진열 여부"가 On일 것\n· 두 조건 중 하나라도 충족되지 않으면, 이 영역 전체가 노출되지 않습니다.\n\n개별 메뉴 노출 조건\n· "정기멤버십 바로가기": 위 2가지 조건만 충족하면 노출됩니다.\n· "정기멤버십 해지": 위 2가지 조건만 충족하면 노출됩니다.\n· "정기멤버십 전용상품": 위 2가지 조건에 더해, 정기멤버십 전용 상품이 1개 이상 등록되어 있을 때만 노출됩니다. 전용 상품이 0개인 경우 이 메뉴 항목만 숨겨지고, 나머지 2개 메뉴는 그대로 노출됩니다.'
+      policy:'"정기멤버십" 박스(붉은 테두리 영역) 노출 조건\n· 아래 2가지 조건을 모두 만족할 때만 이 영역 전체가 노출됩니다.\n1. PG 연동 상태가 "연동됨"일 것\n2. 정기멤버십 소개 페이지의 "진열 여부"가 On일 것\n· 두 조건 중 하나라도 충족되지 않으면, 이 영역 전체가 노출되지 않습니다.\n\n개별 메뉴 노출 조건\n· "정기멤버십 바로가기": 위 2가지 조건만 충족하면 노출됩니다.\n· "정기멤버십 이용현황": 위 2가지 조건만 충족하면 노출됩니다.\n· "정기멤버십 전용상품": 위 2가지 조건에 더해, 정기멤버십 전용 상품이 1개 이상 등록되어 있을 때만 노출됩니다. 전용 상품이 0개인 경우 이 메뉴 항목만 숨겨지고, 나머지 2개 메뉴는 그대로 노출됩니다.'
     },
     'membership-cancel': {
       number:'26', label:'정기멤버십 이용현황', kind:'모바일 화면', cancel:true,
@@ -4812,6 +4834,12 @@
   function toggleTerms(){
     document.getElementById('termsRow').classList.toggle('open');
     document.getElementById('termsDetail').classList.toggle('open');
+  }
+
+  function toggleCancelSection(head){
+    head.classList.toggle('open');
+    var body = head.nextElementSibling;
+    body.hidden = !body.hidden;
   }
 
   function selectCardType(type){
