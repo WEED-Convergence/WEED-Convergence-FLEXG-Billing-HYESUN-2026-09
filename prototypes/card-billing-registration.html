@@ -3561,10 +3561,11 @@
                 </div>
               </div>
 
-              <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:16px; text-align:center;">
+              <div style="background:#FAFAFB; border:1px solid var(--line); border-radius:10px; padding:16px; text-align:center; margin-bottom:14px;">
                 <div style="font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:6px;">해지가 예약되어 있어요</div>
                 <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.7;">다음 결제일(2026.10.14)까지 혜택이 유지되며, 이후 자동으로 종료됩니다.</div>
               </div>
+              <button class="as-btn as-btn-secondary" style="width:100%; padding:13px;">이전</button>
             </div>
           </div>
         </div>
@@ -3613,7 +3614,10 @@
                   · 해지 후 다시 이용하려면 재가입이 필요합니다.
                 </div>
 
-                <button class="as-btn as-btn-warn" style="width:100%; padding:13px;">정기멤버십 해지하기</button>
+                <div style="display:flex; gap:8px;">
+                  <button class="as-btn as-btn-secondary" style="flex:0 0 auto; padding:13px 18px;">이전</button>
+                  <button class="as-btn as-btn-warn" style="flex:1; padding:13px;">정기멤버십 해지하기</button>
+                </div>
               </div>
             </div>
           </div>
@@ -3641,7 +3645,10 @@
                 <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--ink-soft); padding:5px 0;"><span>이용 종료일</span><span style="color:var(--ink); font-weight:700;">2026.10.14</span></div>
               </div>
 
-              <button class="as-btn as-btn-primary" style="width:100%; padding:13px;">정기멤버십 다시 가입하기</button>
+              <div style="display:flex; gap:8px; width:100%;">
+                <button class="as-btn as-btn-secondary" style="flex:0 0 auto; padding:13px 18px;">이전</button>
+                <button class="as-btn as-btn-primary" style="flex:1; padding:13px;">정기멤버십 다시 가입하기</button>
+              </div>
             </div>
           </div>
         </div>
@@ -3730,8 +3737,9 @@
                 <div class="as-intro-notice-body">해지 시 환불이 불가능하며 종료 예정일까지 혜택이 유지됩니다.</div>
               </div>
             </div>
-            <div class="as-intro-phone-footer" style="justify-content:center; align-items:center;">
-              <div style="width:100%; text-align:center; font-size:12.5px; font-weight:700; color:var(--warn); background:var(--warn-tint); border:1px solid var(--warn); border-radius:8px; padding:10px 12px;">이미 이용 중인 멤버십이에요</div>
+            <div class="as-intro-phone-footer" style="align-items:center;">
+              <button class="as-intro-btn-skip">이전</button>
+              <div style="flex:1; text-align:center; font-size:12.5px; font-weight:700; color:var(--warn); background:var(--warn-tint); border:1px solid var(--warn); border-radius:8px; padding:10px 12px;">이미 이용 중인 멤버십이에요</div>
             </div>
           </div>
         </div>
