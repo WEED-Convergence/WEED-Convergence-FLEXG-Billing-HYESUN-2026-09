@@ -3355,11 +3355,11 @@
           </div>
 
           <div class="ca-panel">
-            <div class="ca-panel-title">자동충전 기준 설정<span class="ca-example">ON 상태 예시</span></div>
+            <div class="ca-panel-title">자동충전 기준 설정</div>
             <div class="ca-field-row">
               <div class="ca-field-label">충전 기준 캐시</div>
               <div class="ca-field">
-                <div class="as-input-suffix"><input class="as-input" type="text" value="100,000" disabled><span class="as-suffix">c</span></div>
+                <div class="as-input-suffix"><input class="as-input" type="text" value="100,000"><span class="as-suffix">c</span></div>
                 <div class="ca-field-help">잔여 캐시가 이 값 이하가 되면 자동으로 충전됩니다.</div>
               </div>
             </div>
@@ -3368,12 +3368,17 @@
               <div class="ca-field">
                 <div class="ca-amounts">
                   <div class="ca-amount on">100,000c</div>
-                  <div class="ca-amount">200,000c</div>
                   <div class="ca-amount">500,000c</div>
                   <div class="ca-amount">1,000,000c</div>
+                  <div class="ca-amount">2,000,000c</div>
+                  <div class="ca-amount">3,000,000c</div>
+                  <div class="ca-amount">5,000,000c</div>
                 </div>
                 <div class="ca-field-help">충전 캐시는 최소 100,000c부터 설정할 수 있습니다.</div>
               </div>
+            </div>
+            <div class="as-actions right" style="margin-top:14px;">
+              <button class="as-btn as-btn-primary">저장</button>
             </div>
           </div>
 
@@ -3391,6 +3396,13 @@
                 <tr><td>2026.09.30 18:47</td><td>110,000원</td><td>100,000c</td><td><span class="as-status paid">성공</span></td><td>신한카드 **** 1234</td></tr>
               </tbody>
             </table>
+          </div>
+          <div class="as-pagination" style="max-width:760px;">
+            <div class="as-page-btn">‹</div>
+            <div class="as-page-btn active">1</div>
+            <div class="as-page-btn">2</div>
+            <div class="as-page-btn">3</div>
+            <div class="as-page-btn">›</div>
           </div>
         </div>
       </div>
@@ -4634,7 +4646,7 @@
     },
     'cash-auto-charge': {
       number:'38', label:'캐시 자동충전', kind:'어드민 화면', cashAutoCharge:true,
-      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 결제 카드 확인: 카드 관리 화면(39)에 등록된 카드로 자동충전됩니다. 카드 등록/해지는 "카드 관리로 이동" 버튼으로 카드 관리 화면에서 진행합니다.\n· 자동충전 기준 설정: 잔여 캐시가 "충전 기준 캐시" 이하가 되면 선택한 "충전 캐시"만큼 자동으로 충전합니다. 충전 캐시는 최소 100,000c부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 결제 금액(부가세 포함), 충전 캐시, 결제 결과(성공/실패), 결제 카드를 확인합니다.\n\n자동충전 토글은 현재 OFF 상태로 표시했으며, 결제 카드·충전 기준 영역은 ON 상태일 때의 예시입니다.'
+      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 결제 카드 확인: 카드 관리 화면(39)에 등록된 카드로 자동충전됩니다. 카드 등록/해지는 "카드 관리로 이동" 버튼으로 카드 관리 화면에서 진행합니다.\n· 자동충전 기준 설정: 잔여 캐시가 "충전 기준 캐시" 이하가 되면 선택한 "충전 캐시"만큼 자동으로 충전합니다. 충전 캐시는 최소 100,000c부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 결제 금액(부가세 포함), 충전 캐시, 결제 결과(성공/실패), 결제 카드를 확인합니다.\n\n자동충전 토글은 현재 OFF 상태로 표시했으며, 결제 카드 영역은 ON 상태일 때의 예시입니다.'
     },
     'auto-card-manage': {
       number:'39', label:'카드 관리', kind:'어드민 화면', autoCardManage:true,
