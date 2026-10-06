@@ -778,6 +778,18 @@
   .ca-history-head{ display:flex; align-items:baseline; gap:10px; max-width:760px; margin:22px 0 10px; }
   .ca-history-title{ font-size:15px; font-weight:800; color:var(--ink); }
   .ca-table{ max-width:760px; }
+  .ca-off .ca-field-label{ color:var(--ink-faint); }
+  .ca-off .as-input{ background:#F1F2F6; color:var(--ink-faint); }
+  .ca-off .ca-amount{ background:#F1F2F6; color:var(--ink-faint); border-color:var(--line); }
+  .ca-off .ca-field-help{ color:var(--ink-faint); }
+  .ca-switch-state.ca-switch-on{ color:var(--brand-dark); }
+  .ca-toast-row{ display:flex; align-items:center; justify-content:flex-end; gap:10px; margin-top:10px; }
+  .ca-toast-label{ font-size:10.5px; font-weight:700; color:var(--ink-faint); }
+  .ca-toast{ background:#1F2A44; color:#fff; font-size:12px; font-weight:700; padding:9px 16px; border-radius:20px; box-shadow:0 4px 12px -4px rgba(21,34,56,.35); }
+  .ca-warn{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:10px; background:#FBE9E3; border:1px solid #F3C6B8; border-radius:8px; padding:10px 14px; }
+  .ca-warn-tx{ font-size:12.5px; font-weight:700; color:#D8532B; }
+  .ca-history-count{ font-size:12px; color:var(--ink-soft); }
+  .ca-fail-reason{ font-size:11px; color:#D8532B; margin-left:6px; }
   .ca-link-box{ display:flex; align-items:center; justify-content:space-between; gap:14px; background:#F7F8FA; border:1px solid var(--line); border-radius:9px; padding:16px 20px; }
   .ca-link-note{ font-size:12.5px; font-weight:700; color:var(--ink); }
   .ca-link-card{ font-size:13px; font-weight:800; color:var(--brand-dark); margin-top:4px; }
@@ -3357,11 +3369,50 @@
                 <div class="ca-field-help">자동충전을 켜면 카드를 등록하고 충전 기준을 설정할 수 있습니다.</div>
               </div>
             </div>
+            <div class="ca-field-row ca-off">
+              <div class="ca-field-label">충전 기준 캐시</div>
+              <div class="ca-field">
+                <div class="as-input-suffix"><input class="as-input" type="text" placeholder="충전 기준 캐시 입력" disabled><span class="as-suffix">c</span></div>
+                <div class="ca-field-help">잔여 캐시가 이 값 이하가 되면 자동으로 충전됩니다.</div>
+                <div class="ca-field-help">숫자만 입력 가능하며, 최소 10,000c부터 설정할 수 있습니다.</div>
+              </div>
+            </div>
+            <div class="ca-field-row ca-off">
+              <div class="ca-field-label">충전 캐시</div>
+              <div class="ca-field">
+                <div class="ca-amounts">
+                  <div class="ca-amount">100,000c</div>
+                  <div class="ca-amount">500,000c</div>
+                  <div class="ca-amount">1,000,000c</div>
+                  <div class="ca-amount">2,000,000c</div>
+                  <div class="ca-amount">3,000,000c</div>
+                  <div class="ca-amount">5,000,000c</div>
+                </div>
+                <div class="ca-field-help">충전 캐시는 최소 100,000c부터 설정할 수 있습니다.</div>
+              </div>
+            </div>
+            <div class="as-actions right" style="margin-top:14px;">
+              <button class="as-btn as-btn-primary">저장</button>
+            </div>
+          </div>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">자동충전 설정<span class="ca-example">ON 상태 예시</span></div>
+            <div class="ca-field-row">
+              <div class="ca-field-label">자동충전</div>
+              <div class="ca-field">
+                <div class="ca-switch-row" style="padding-top:6px;">
+                  <div class="as-toggle on"><div class="knob"></div></div>
+                  <div class="ca-switch-state ca-switch-on">ON</div>
+                </div>
+              </div>
+            </div>
             <div class="ca-field-row">
               <div class="ca-field-label">충전 기준 캐시</div>
               <div class="ca-field">
-                <div class="as-input-suffix"><input class="as-input" type="text" placeholder="충전 기준 캐시 입력"><span class="as-suffix">c</span></div>
+                <div class="as-input-suffix"><input class="as-input" type="text" placeholder="충전 기준 캐시 입력" value="50,000"><span class="as-suffix">c</span></div>
                 <div class="ca-field-help">잔여 캐시가 이 값 이하가 되면 자동으로 충전됩니다.</div>
+                <div class="ca-field-help">숫자만 입력 가능하며, 최소 10,000c부터 설정할 수 있습니다.</div>
               </div>
             </div>
             <div class="ca-field-row">
@@ -3381,10 +3432,32 @@
             <div class="as-actions right" style="margin-top:14px;">
               <button class="as-btn as-btn-primary">저장</button>
             </div>
+            <div class="ca-toast-row">
+              <div class="ca-toast-label">저장 성공 시</div>
+              <div class="ca-toast">✓ 저장되었습니다</div>
+            </div>
+          </div>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">자동충전 설정<span class="ca-example">카드 미등록 상태에서 ON 시도 예시</span></div>
+            <div class="ca-field-row">
+              <div class="ca-field-label">자동충전</div>
+              <div class="ca-field">
+                <div class="ca-switch-row" style="padding-top:6px;">
+                  <div class="as-toggle"><div class="knob"></div></div>
+                  <div class="ca-switch-state">OFF</div>
+                </div>
+                <div class="ca-warn">
+                  <div class="ca-warn-tx">⚠ 카드를 먼저 등록해주세요.</div>
+                  <button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('auto-card-manage')">카드 관리로 이동</button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="ca-history-head">
             <div class="ca-history-title">자동충전 이력</div>
+            <div class="ca-history-count">전체 24건</div>
           </div>
           <div class="as-table-wrap">
             <table class="as-table ca-table">
@@ -3393,7 +3466,7 @@
               </thead>
               <tbody>
                 <tr><td>2026.10.05 14:32</td><td>110,000원</td><td>100,000c</td><td><span class="as-status paid">성공</span></td><td>신한카드 **** 1234</td></tr>
-                <tr><td>2026.10.02 09:15</td><td>110,000원</td><td>-</td><td><span class="as-status failed">실패</span></td><td>신한카드 **** 1234</td></tr>
+                <tr><td>2026.10.02 09:15</td><td>110,000원</td><td>-</td><td><span class="as-status failed">실패</span><span class="ca-fail-reason">한도초과</span></td><td>신한카드 **** 1234</td></tr>
                 <tr><td>2026.09.30 18:47</td><td>110,000원</td><td>100,000c</td><td><span class="as-status paid">성공</span></td><td>신한카드 **** 1234</td></tr>
               </tbody>
             </table>
@@ -4647,7 +4720,7 @@
     },
     'cash-auto-charge': {
       number:'38', label:'캐시 자동충전', kind:'어드민 화면', cashAutoCharge:true,
-      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 결제 카드 확인: 카드 관리 화면(39)에 등록된 카드로 자동충전됩니다. 카드 등록/해지는 "카드 관리로 이동" 버튼으로 카드 관리 화면에서 진행합니다.\n· 자동충전 설정: 자동충전 ON/OFF와 충전 기준을 한 영역에서 설정하고, 하단 [저장] 버튼 하나로 함께 저장합니다. 잔여 캐시가 "충전 기준 캐시" 이하가 되면 선택한 "충전 캐시"만큼 자동으로 충전합니다. 충전 캐시는 최소 100,000c부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 결제 금액(부가세 포함), 충전 캐시, 결제 결과(성공/실패), 결제 카드를 확인합니다.\n\n자동충전 토글은 현재 OFF 상태로 표시했으며, 결제 카드 영역은 ON 상태일 때의 예시입니다.'
+      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 결제 카드 확인: 카드 관리 화면(39)에 등록된 카드로 자동충전됩니다. 카드 등록/해지는 "카드 관리로 이동" 버튼으로 카드 관리 화면에서 진행합니다.\n· 자동충전 설정: 자동충전 ON/OFF와 충전 기준을 한 영역에서 설정하고, 하단 [저장] 버튼 하나로 함께 저장합니다. 잔여 캐시가 "충전 기준 캐시" 이하가 되면 선택한 "충전 캐시"만큼 자동으로 충전합니다. 충전 캐시는 최소 100,000c부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 결제 금액(부가세 포함), 충전 캐시, 결제 결과(성공/실패), 결제 카드를 확인합니다. 실패 건은 실패 사유(한도초과, 유효기간 만료, 카드 분실·정지 등)를 함께 표시합니다.\n\n상태별 처리\n· 자동충전 OFF: 충전 기준 캐시 입력과 충전 캐시 선택이 비활성화되며, 충전 캐시는 아무것도 선택되지 않은 상태로 표시됩니다.\n· 자동충전 ON: 두 영역이 활성화되어 입력·선택할 수 있습니다. (ON 상태 예시 영역 참고)\n· 충전 기준 캐시는 숫자만 입력 가능하며, 최소 10,000c부터 설정할 수 있습니다.\n· 저장에 성공하면 "저장되었습니다" 토스트 메시지가 노출됩니다.\n· 카드가 등록되지 않은 상태에서 자동충전을 켜면 토글은 OFF로 유지되고 "카드를 먼저 등록해주세요." 경고와 [카드 관리로 이동] 버튼이 노출됩니다.\n\n결제 카드 영역은 카드가 등록된 상태의 예시입니다.'
     },
     'auto-card-manage': {
       number:'39', label:'카드 관리', kind:'어드민 화면', autoCardManage:true,
