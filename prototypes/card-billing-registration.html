@@ -5101,7 +5101,7 @@
         document.querySelectorAll('[data-ca-card]').forEach(function(x){ x.classList.toggle('on', x === opt); });
         cardOn.hidden = !hasCard;
         cardOff.hidden = hasCard;
-        cardWarn.hidden = true;
+        cardWarn.hidden = hasCard;
         if(!hasCard) setAuto(false);
       });
     });
