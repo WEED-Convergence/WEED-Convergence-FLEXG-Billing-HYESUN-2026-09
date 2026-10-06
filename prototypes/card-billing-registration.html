@@ -3604,6 +3604,62 @@
                   </div>
                 </div>
               </div>
+
+              <div class="cn-preview">
+                <div class="cn-preview-label">자동충전 OFF 전환 시</div>
+                <div class="cn-phone">
+                  <div class="cn-phone-top">2026년 10월 6일 화요일</div>
+                  <div class="cn-msg">
+                    <div class="cn-profile">FlexG</div>
+                    <div class="cn-msg-body">
+                      <div class="cn-sender">FlexG</div>
+                      <div class="cn-bubble">
+                        <div class="cn-bubble-head">알림톡 도착</div>
+                        <div class="cn-bubble-img cn-img-cancel"><div class="cn-img-icon">⏸</div><div class="cn-img-title">자동충전 OFF</div></div>
+                        <div class="cn-bubble-text">[FlexG] 자동충전 설정 변경 안내
+
+안녕하세요, {쇼핑몰명}님
+캐시 자동충전이 꺼졌습니다.
+
+- 변경일시: 2026.10.06 11:05
+
+자동충전이 꺼져 있으면 캐시가 부족할 때 캠페인 발행이 중단될 수 있습니다.
+
+※ 본 메시지는 캐시 자동충전 결과 알림톡 받기를 설정한 쇼핑몰 담당자에게 발송되었습니다.</div>
+                      </div>
+                      <div class="cn-time">오전 11:05</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cn-preview">
+                <div class="cn-preview-label">자동충전 설정 변경 시</div>
+                <div class="cn-phone">
+                  <div class="cn-phone-top">2026년 10월 6일 화요일</div>
+                  <div class="cn-msg">
+                    <div class="cn-profile">FlexG</div>
+                    <div class="cn-msg-body">
+                      <div class="cn-sender">FlexG</div>
+                      <div class="cn-bubble">
+                        <div class="cn-bubble-head">알림톡 도착</div>
+                        <div class="cn-bubble-img cn-img-ok"><div class="cn-img-icon">⚙</div><div class="cn-img-title">자동충전 설정 변경</div></div>
+                        <div class="cn-bubble-text">[FlexG] 자동충전 설정 변경 안내
+
+안녕하세요, {쇼핑몰명}님
+캐시 자동충전 설정이 변경되었습니다.
+
+- 충전 기준 금액: 200,000c
+- 충전 금액: 200,000c
+- 변경일시: 2026.10.06 11:05
+
+※ 본 메시지는 캐시 자동충전 결과 알림톡 받기를 설정한 쇼핑몰 담당자에게 발송되었습니다.</div>
+                      </div>
+                      <div class="cn-time">오전 11:05</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
       </div>
@@ -4851,7 +4907,7 @@
     },
     'cash-auto-alimtalk': {
       number:'39', label:'캐시 자동충전 알림톡', kind:'어드민 화면', cashAutoAlimtalk:true,
-      policy:'캐시 자동충전 결과를 셀러(쇼핑몰 담당자 연락처)에게 보내는 카카오 알림톡 메시지입니다. 별도 메뉴 화면이 아니라 발송되는 알림톡의 모습을 보여줍니다.\n\n· 자동충전 성공 시: 상단 이미지와 함께 충전 금액, 충전 캐시, 결제 카드(끝 4자리), 충전 일시, 충전 후 잔여 캐시를 안내합니다.\n· 자동충전 실패 시: 상단 이미지와 함께 시도 금액, 결제 카드, 실패 사유, 시도 일시를 안내합니다.\n· 카드 등록 완료 시: 카드사, 카드번호 끝 4자리, 등록일시를 안내합니다.\n· 카드 해지 완료 시: 카드사, 카드번호 끝 4자리, 해지일시를 안내하고, 서비스 이용료 자동결제·캐시 자동충전이 모두 중단된다는 점을 알립니다.\n\n자동충전 성공·실패 메시지는 화면 38(캐시 자동충전)의 "자동충전 결과 알림톡 받기" 토글이 ON일 때만 발송되며, OFF이면 발송되지 않습니다.'
+      policy:'캐시 자동충전 결과를 셀러(쇼핑몰 담당자 연락처)에게 보내는 카카오 알림톡 메시지입니다. 별도 메뉴 화면이 아니라 발송되는 알림톡의 모습을 보여줍니다.\n\n· 자동충전 성공 시: 상단 이미지와 함께 충전 금액, 충전 캐시, 결제 카드(끝 4자리), 충전 일시, 충전 후 잔여 캐시를 안내합니다.\n· 자동충전 실패 시: 상단 이미지와 함께 시도 금액, 결제 카드, 실패 사유, 시도 일시를 안내합니다.\n· 카드 등록 완료 시: 카드사, 카드번호 끝 4자리, 등록일시를 안내합니다.\n· 카드 해지 완료 시: 카드사, 카드번호 끝 4자리, 해지일시를 안내하고, 서비스 이용료 자동결제·캐시 자동충전이 모두 중단된다는 점을 알립니다.\n· 자동충전 OFF 전환 시: 변경일시를 안내하고, 캐시 부족 시 캠페인 발행이 중단될 수 있음을 알립니다.\n· 자동충전 설정 변경 시: 변경된 충전 기준 금액, 충전 금액, 변경일시를 안내합니다.\n\n자동충전 성공·실패 메시지는 화면 38(캐시 자동충전)의 "자동충전 결과 알림톡 받기" 토글이 ON일 때만 발송되며, OFF이면 발송되지 않습니다.'
     },
     'auto-card-manage': {
       number:'40', label:'카드 관리', kind:'어드민 화면', autoCardManage:true,
