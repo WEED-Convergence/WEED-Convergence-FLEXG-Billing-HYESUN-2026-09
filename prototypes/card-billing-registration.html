@@ -805,7 +805,7 @@
   .cn-check-row{ display:flex; gap:24px; }
   .cn-check{ display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:var(--ink); }
   .cn-checkbox{ width:16px; height:16px; border-radius:4px; background:var(--brand); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; }
-  .cn-preview-grid{ display:flex; gap:20px; flex-wrap:wrap; }
+  .cn-preview-grid{ display:flex; gap:20px; flex-wrap:wrap; max-width:760px; }
   .cn-preview{ flex:1; min-width:300px; }
   .cn-preview-label{ font-size:12px; font-weight:800; color:var(--ink); margin-bottom:8px; }
   .cn-phone{ background:#ABC1D1; border-radius:18px; padding:18px 14px 22px; }
@@ -816,6 +816,13 @@
   .cn-sender{ font-size:11px; color:#3C4A5C; margin-bottom:4px; }
   .cn-bubble{ background:#fff; border-radius:4px 12px 12px 12px; overflow:hidden; }
   .cn-bubble-head{ background:#FEE500; color:#3C1E1E; font-size:11.5px; font-weight:800; padding:8px 12px; }
+  .cn-bubble-img{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; height:150px; color:#fff; text-align:center; }
+  .cn-img-ok{ background:linear-gradient(135deg,#1B2440,#3A4C7E); }
+  .cn-img-fail{ background:linear-gradient(135deg,#C2412D,#E5704F); }
+  .cn-img-icon{ width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; margin-bottom:4px; }
+  .cn-img-ok .cn-img-icon{ background:#FF7A1A; }
+  .cn-img-title{ font-size:15px; font-weight:800; letter-spacing:-.01em; }
+  .cn-img-sub{ font-size:11.5px; opacity:.85; }
   .cn-bubble-text{ font-size:11.5px; line-height:1.65; color:#1E1E1E; padding:12px; white-space:pre-line; }
   .cn-bubble-btn{ margin:0 12px 12px; background:#F1F2F6; border-radius:6px; text-align:center; font-size:11.5px; font-weight:700; color:#1E1E1E; padding:9px 0; }
   .cn-time{ font-size:9.5px; color:#3C4A5C; margin-top:4px; }
@@ -3359,7 +3366,6 @@
             <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
             <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
             <li class="as-lnb-sub active"><span class="dot">·</span>캐시 자동충전</li>
-            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전 알림톡</li>
             <li class="as-lnb-item">PG 서비스 신청</li>
             <li class="as-lnb-item">성인(사용자)인증 신청</li>
             <li class="as-lnb-item">배송 관리</li>
@@ -3489,43 +3495,7 @@
         <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
       </div>
       <div class="as-body">
-        <div class="as-lnb">
-          <div class="as-lnb-head">
-            <div class="as-lnb-title">환경설정</div>
-            <div class="as-lnb-guide">📘 가이드</div>
-          </div>
-          <ul class="as-lnb-list">
-            <li class="as-lnb-item">기본정보</li>
-            <li class="as-lnb-item">운영정책</li>
-            <li class="as-lnb-item">결제/무통장 설정</li>
-            <li class="as-lnb-item">자동결제 관리</li>
-            <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
-            <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
-            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
-            <li class="as-lnb-sub active"><span class="dot">·</span>캐시 자동충전 알림톡</li>
-            <li class="as-lnb-item">PG 서비스 신청</li>
-            <li class="as-lnb-item">성인(사용자)인증 신청</li>
-            <li class="as-lnb-item">배송 관리</li>
-          </ul>
-        </div>
-
         <div class="as-content">
-          <h1>캐시 자동충전 알림톡</h1>
-          <ul class="ca-guide">
-            <li>자동충전 결과를 셀러에게 알림톡으로 안내합니다.</li>
-            <li>발송 대상: 쇼핑몰 담당자 연락처 (가입 시 등록된 정보 기준)</li>
-          </ul>
-
-          <div class="ca-panel">
-            <div class="ca-panel-title">발송 시점</div>
-            <div class="cn-check-row">
-              <div class="cn-check"><span class="cn-checkbox">✓</span>자동충전 성공 시</div>
-              <div class="cn-check"><span class="cn-checkbox">✓</span>자동충전 실패 시</div>
-            </div>
-          </div>
-
-          <div class="ca-panel">
-            <div class="ca-panel-title">알림톡 미리보기</div>
             <div class="cn-preview-grid">
               <div class="cn-preview">
                 <div class="cn-preview-label">자동충전 성공 시</div>
@@ -3537,6 +3507,7 @@
                       <div class="cn-sender">FlexG</div>
                       <div class="cn-bubble">
                         <div class="cn-bubble-head">알림톡 도착</div>
+                        <div class="cn-bubble-img cn-img-ok"><div class="cn-img-icon">⚡</div><div class="cn-img-title">캐시 자동충전 완료</div><div class="cn-img-sub">100,000c 충전</div></div>
                         <div class="cn-bubble-text">[FlexG] 캐시 자동충전 완료 안내
 
 안녕하세요, {쇼핑몰명}님
@@ -3566,6 +3537,7 @@
                       <div class="cn-sender">FlexG</div>
                       <div class="cn-bubble">
                         <div class="cn-bubble-head">알림톡 도착</div>
+                        <div class="cn-bubble-img cn-img-fail"><div class="cn-img-icon">!</div><div class="cn-img-title">캐시 자동충전 실패</div><div class="cn-img-sub">카드 정보를 확인해주세요</div></div>
                         <div class="cn-bubble-text">[FlexG] 캐시 자동충전 실패 안내
 
 안녕하세요, {쇼핑몰명}님
@@ -3585,18 +3557,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="ca-panel">
-            <div class="ca-panel-title">메시지 포함 정보</div>
-            <ul class="cn-info-list">
-              <li>충전 금액</li>
-              <li>충전 후 잔여 캐시</li>
-              <li>결제 카드(끝 4자리)</li>
-              <li>충전 일시</li>
-              <li>실패 사유 <span class="cn-sub">(실패 시)</span></li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
@@ -3634,7 +3594,6 @@
             <li class="as-lnb-sub active"><span class="dot">·</span>카드 관리</li>
             <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
             <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
-            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전 알림톡</li>
             <li class="as-lnb-item">PG 서비스 신청</li>
             <li class="as-lnb-item">성인(사용자)인증 신청</li>
             <li class="as-lnb-item">배송 관리</li>
@@ -3707,7 +3666,6 @@
             <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
             <li class="as-lnb-sub active"><span class="dot">·</span>서비스 이용료 자동결제</li>
             <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
-            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전 알림톡</li>
             <li class="as-lnb-item">PG 서비스 신청</li>
             <li class="as-lnb-item">성인(사용자)인증 신청</li>
             <li class="as-lnb-item">배송 관리</li>
@@ -4845,7 +4803,12 @@
     },
     'cash-auto-alimtalk': {
       number:'39', label:'캐시 자동충전 알림톡', kind:'어드민 화면', cashAutoAlimtalk:true,
-      policy:'환경설정 > 자동결제 관리 하위, "캐시 자동충전" 아래에 신규로 추가한 화면입니다. 캐시 자동충전 결과를 셀러(쇼핑몰 담당자 연락처)에게 보내는 알림톡의 발송 시점과 메시지 내용을 관리합니다.\n\n· 발송 시점: 자동충전 성공 시 / 실패 시 각각 발송 여부를 선택합니다.\n· 알림톡 미리보기: 성공·실패 메시지가 실제 카카오 알림톡으로 어떻게 보이는지 확인합니다. 실패 메시지에는 [카드 관리로 이동] 버튼이 포함됩니다.\n· 메시지 포함 정보: 충전 금액, 충전 후 잔여 캐시, 결제 카드(끝 4자리), 충전 일시, (실패 시) 실패 사유가 들어갑니다.\n\n화면 38(캐시 자동충전)의 "자동충전 결과 알림톡 받기" 토글과 연결됩니다. 토글이 ON일 때만 이 화면의 설정대로 알림톡이 발송되며, OFF이면 발송되지 않습니다.'
+      policy:'캐시 자동충전 결과를 셀러(쇼핑몰 담당자 연락처)에게 보내는 카카오 알림톡 메시지입니다. 별도 메뉴 화면이 아니라 발송되는 알림톡의 모습을 보여줍니다.
+
+· 자동충전 성공 시: 상단 이미지와 함께 충전 금액, 충전 캐시, 결제 카드(끝 4자리), 충전 일시, 충전 후 잔여 캐시를 안내합니다.
+· 자동충전 실패 시: 상단 이미지와 함께 시도 금액, 결제 카드, 실패 사유, 시도 일시를 안내하고 [카드 관리로 이동] 버튼을 제공합니다.
+
+화면 38(캐시 자동충전)의 "자동충전 결과 알림톡 받기" 토글이 ON일 때만 발송되며, OFF이면 발송되지 않습니다.'
     },
     'auto-card-manage': {
       number:'40', label:'카드 관리', kind:'어드민 화면', autoCardManage:true,
