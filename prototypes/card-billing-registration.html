@@ -723,6 +723,33 @@
 
   .pm-badge{ display:inline-block; font-size:9px; font-weight:700; color:#fff; padding:2px 6px; border-radius:3px; margin:1px 2px 1px 0; white-space:nowrap; }
 
+  .cc-guide{ margin:6px 0 16px; padding-left:16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; max-width:880px; }
+  .cc-banner-ring{ max-width:880px; border:4px solid #E5484D; border-radius:16px; margin-bottom:22px; }
+  .cc-banner{ display:flex; align-items:center; gap:18px; background:linear-gradient(135deg,#1B2440,#26325A); border-radius:12px; padding:22px 26px; }
+  .cc-banner-icon{ flex:0 0 auto; width:46px; height:46px; border-radius:12px; background:#FF7A1A; color:#fff; font-size:22px; display:flex; align-items:center; justify-content:center; }
+  .cc-banner-tx{ flex:1; min-width:0; }
+  .cc-banner-title{ display:flex; align-items:center; gap:8px; font-size:15.5px; font-weight:800; color:#fff; letter-spacing:-.01em; }
+  .cc-banner-new{ flex:0 0 auto; font-size:10px; font-weight:800; color:#fff; background:#FF7A1A; padding:2px 7px; border-radius:9px; letter-spacing:.04em; }
+  .cc-banner-sub{ margin-top:6px; font-size:12px; color:rgba(255,255,255,.72); }
+  .cc-banner-btn{ flex:0 0 auto; background:#FF7A1A; color:#fff; font-size:13px; font-weight:800; padding:12px 20px; border-radius:8px; border:none; cursor:default; white-space:nowrap; }
+  .cc-balance{ display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:880px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px 24px; margin-bottom:18px; }
+  .cc-balance-label{ font-size:12.5px; font-weight:700; color:var(--ink-soft); }
+  .cc-balance-amount{ font-size:22px; font-weight:800; color:var(--ink); margin-top:4px; }
+  .cc-balance-note{ font-size:11.5px; color:var(--ink-soft); text-align:right; }
+  .cc-balance-link{ display:inline-block; margin-top:6px; font-size:12px; font-weight:700; color:var(--brand-dark); text-decoration:underline; }
+  .cc-table td, .cc-table th{ text-align:right; }
+  .cc-table td:first-child, .cc-table th:first-child{ text-align:left; }
+  .cc-table tr.cc-hl td{ background:#FFF1E4; font-weight:700; }
+  .cc-table .cc-bonus{ color:#E8650A; font-weight:700; }
+  .cc-pay{ max-width:880px; text-align:center; margin:18px 0 28px; }
+  .cc-pay-note{ font-size:12px; color:var(--ink-soft); margin-bottom:12px; }
+  .cc-pay-btns{ display:flex; gap:10px; justify-content:center; }
+  .cc-pay-btns .as-btn{ padding:12px 28px; font-size:13px; }
+  .cc-history-head{ display:flex; align-items:baseline; gap:10px; max-width:880px; }
+  .cc-history-title{ font-size:15px; font-weight:800; color:var(--ink); }
+  .cc-history-count{ font-size:12px; color:var(--ink-soft); }
+  .cc-history-note{ font-size:11.5px; color:var(--ink-soft); margin-top:6px; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -773,6 +800,7 @@
     <li class="nav-item" data-screen="membership-product-list"><div class="num">36</div><div class="tx"><div class="name">멤버십 전용상품 리스트</div><div class="kind">모바일 화면</div></div></li>
 
     <li class="nav-section-label">CRM 자동충전</li>
+    <li class="nav-item" data-screen="cash-charge"><div class="num">37</div><div class="tx"><div class="name">캐시 충전 결제</div><div class="kind">어드민 화면</div></div></li>
   </ul>
 </div>
 
@@ -3122,6 +3150,101 @@
       </div>
     </div>
 
+    <div class="admin-shell" id="cashChargeShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item active">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">CRM</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item active">캐시 충전 결제</li>
+          </ul>
+        </div>
+
+        <div class="as-content">
+          <h1>캐시 충전 결제</h1>
+          <ul class="cc-guide">
+            <li>오프사이트(알림톡, 브랜드메시지(친구톡), LMS)캠페인에 사용할 캐시를 충전합니다.</li>
+            <li>기본 캐시와 추가 혜택 캐시는 즉시 충전되며, 이벤트 캐시는 정책에 따라 영업일 기준 최대 2일 이내에 지급됩니다.</li>
+            <li>캐시 충전 시, 부가세 10%가 별도로 결제됩니다.</li>
+          </ul>
+
+          <div class="cc-banner-ring">
+            <div class="cc-banner">
+              <div class="cc-banner-icon">⚡</div>
+              <div class="cc-banner-tx">
+                <div class="cc-banner-title"><span class="cc-banner-new">NEW</span>자동충전을 설정하면 캐시가 떨어져도 캠페인 발행이 멈추지 않아요</div>
+                <div class="cc-banner-sub">잔여 캐시가 0원이 되는 순간, 설정한 금액으로 자동으로 충전됩니다.</div>
+              </div>
+              <button class="cc-banner-btn">자동충전 설정하러 가기</button>
+            </div>
+          </div>
+
+          <div class="cc-balance">
+            <div>
+              <div class="cc-balance-label">잔여 캐시</div>
+              <div class="cc-balance-amount">9,900,655c</div>
+            </div>
+            <div class="cc-balance-note">
+              캠페인에 사용되는 유형별 캐시 소진 금액을 확인해 보세요.<br>
+              <span class="cc-balance-link">유형별 발송 금액 ›</span>
+            </div>
+          </div>
+
+          <div class="as-table-wrap">
+            <table class="as-table cc-table">
+              <thead>
+                <tr><th>결제금액(부가세 별도)</th><th>기본 충전 캐시</th><th>추가 혜택 캐시</th><th>총 충전 캐시</th></tr>
+              </thead>
+              <tbody>
+                <tr class="cc-hl"><td>5,000,000원</td><td>5,000,000c</td><td class="cc-bonus">+1,000,000c (20%)</td><td>6,000,000c</td></tr>
+                <tr><td>3,000,000원</td><td>3,000,000c</td><td class="cc-bonus">+300,000c (10%)</td><td>3,300,000c</td></tr>
+                <tr><td>2,000,000원</td><td>2,000,000c</td><td class="cc-bonus">+100,000c (5%)</td><td>2,100,000c</td></tr>
+                <tr><td>1,000,000원</td><td>1,000,000c</td><td class="cc-bonus">+20,000c (2%)</td><td>1,020,000c</td></tr>
+                <tr><td>500,000원</td><td>500,000c</td><td>-</td><td>500,000c</td></tr>
+                <tr><td>200,000원</td><td>200,000c</td><td>-</td><td>200,000c</td></tr>
+                <tr><td>100,000원</td><td>100,000c</td><td>-</td><td>100,000c</td></tr>
+                <tr><td>50,000원</td><td>50,000c</td><td>-</td><td>50,000c</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cc-pay">
+            <div class="cc-pay-note">결제하시려는 금액을 선택하시고 결제하기 버튼을 눌러주세요.</div>
+            <div class="cc-pay-btns">
+              <button class="as-btn as-btn-primary">신용카드 결제</button>
+              <button class="as-btn as-btn-secondary">가상계좌 결제</button>
+            </div>
+          </div>
+
+          <div class="cc-history-head">
+            <div class="cc-history-title">캐시 결제 내역</div>
+            <div class="cc-history-count">전체 113개 (페이지 1/23)</div>
+          </div>
+          <div class="cc-history-note">· 최근 2년간의 캐시 결제 내역만 표시합니다.</div>
+        </div>
+      </div>
+    </div>
+
     <div class="admin-shell" id="imageListShell" hidden>
       <div class="as-gnb">
         <div class="as-gnb-home">⌂</div>
@@ -4235,6 +4358,10 @@
     'membership-product-list': {
       number:'36', label:'멤버십 전용상품 리스트', kind:'모바일 화면', plist:true,
       policy:'멤버십 전용상품으로 지정한 상품들만 모아서 보여주는 목록입니다.\n멤버십 뱃지는 멤버십 전용일 경우에만 노출되며 공통상품에는 노출되지 않습니다.'
+    },
+    'cash-charge': {
+      number:'37', label:'캐시 충전 결제', kind:'어드민 화면', cashCharge:true,
+      policy:'오프사이트(알림톡, 브랜드메시지(친구톡), LMS) 캠페인에 사용할 캐시를 충전하는 화면입니다. 잔여 캐시를 확인하고 충전 금액을 선택한 뒤, 신용카드 또는 가상계좌로 결제합니다. 결제금액이 클수록 추가 혜택 캐시가 함께 지급됩니다.\n\n자동충전 바로가기 배너 (신규)\n· 상단 안내문 아래 붉은 테두리로 강조한 배너는 이번에 새로 추가하는 자동충전 바로가기입니다.\n· "자동충전 설정하러 가기" 버튼을 누르면 자동충전 설정 화면으로 이동합니다.\n· 자동충전을 설정하면 잔여 캐시가 0원이 되는 순간 설정한 금액으로 자동 충전되어, 캠페인 발행이 중단되지 않습니다.'
     }
   };
 
@@ -4263,6 +4390,7 @@
   var plistShell = document.getElementById('plistShell');
   var adminProductListShell = document.getElementById('adminProductListShell');
   var purchaseLimitShell = document.getElementById('purchaseLimitShell');
+  var cashChargeShell = document.getElementById('cashChargeShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -4294,7 +4422,8 @@
     var isPlist = !!s.plist;
     var isPlistAdmin = !!s.plistAdmin;
     var isPurchaseLimit = !!s.purchaseLimit;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit;
+    var isCashCharge = !!s.cashCharge;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit || isCashCharge;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -4316,9 +4445,14 @@
     plistShell.hidden = !isPlist;
     adminProductListShell.hidden = !isPlistAdmin;
     purchaseLimitShell.hidden = !isPurchaseLimit;
-    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit);
+    cashChargeShell.hidden = !isCashCharge;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit || isCashCharge);
 
-    if(isPurchaseLimit){
+    if(isCashCharge){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isPurchaseLimit){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
