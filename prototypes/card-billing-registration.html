@@ -750,6 +750,35 @@
   .cc-history-count{ font-size:12px; color:var(--ink-soft); }
   .cc-history-note{ font-size:11.5px; color:var(--ink-soft); margin-top:6px; }
 
+  .ca-guide{ margin:6px 0 16px; padding-left:16px; font-size:11.5px; color:var(--ink-soft); line-height:1.8; max-width:760px; }
+  .ca-panel{ background:#fff; border:1px solid var(--line); border-radius:10px; box-shadow:0 2px 10px -4px rgba(21,34,56,.08); padding:20px 24px; max-width:760px; margin-bottom:16px; }
+  .ca-panel-title{ font-size:13.5px; font-weight:800; color:var(--ink); margin-bottom:12px; }
+  .ca-example{ display:inline-block; font-size:10.5px; font-weight:700; color:var(--ink-soft); background:#EDEFF3; padding:2px 8px; border-radius:9px; margin-left:6px; vertical-align:middle; }
+  .ca-switch-row{ display:flex; align-items:center; gap:12px; }
+  .ca-switch-label{ font-size:13px; font-weight:700; color:var(--ink); }
+  .ca-switch-state{ font-size:12px; font-weight:700; color:var(--ink-soft); }
+  .ca-switch-note{ font-size:12px; color:var(--ink-soft); margin-top:10px; }
+  .ca-card-empty{ display:flex; align-items:center; justify-content:space-between; gap:12px; border:1px dashed #C9CED8; border-radius:9px; padding:18px 20px; }
+  .ca-card-empty-tx{ font-size:12.5px; color:var(--ink-soft); }
+  .ca-card-item{ display:flex; align-items:center; gap:14px; border:1px solid var(--line); border-radius:9px; padding:16px 20px; margin-top:10px; }
+  .ca-card-face{ flex:0 0 auto; width:54px; height:36px; border-radius:6px; background:linear-gradient(135deg,#2F3B5C,#56658E); color:#fff; font-size:10px; font-weight:800; display:flex; align-items:flex-end; padding:4px 6px; }
+  .ca-card-tx{ flex:1; min-width:0; }
+  .ca-card-name{ font-size:13px; font-weight:800; color:var(--ink); }
+  .ca-card-date{ font-size:11.5px; color:var(--ink-soft); margin-top:3px; }
+  .ca-sub-label{ font-size:11.5px; font-weight:700; color:var(--ink-soft); margin-top:14px; }
+  .ca-field-row{ display:flex; align-items:flex-start; gap:20px; padding:12px 0; border-bottom:1px solid var(--line); }
+  .ca-field-row:last-of-type{ border-bottom:none; }
+  .ca-field-label{ flex:0 0 120px; font-size:12.5px; font-weight:700; color:var(--ink); padding-top:8px; }
+  .ca-field{ flex:1; }
+  .ca-field .as-input-suffix{ max-width:220px; }
+  .ca-field-help{ font-size:11.5px; color:var(--ink-soft); margin-top:6px; }
+  .ca-amounts{ display:flex; gap:8px; flex-wrap:wrap; }
+  .ca-amount{ font-size:12.5px; font-weight:700; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:7px; padding:9px 14px; }
+  .ca-amount.on{ border-color:var(--brand); background:var(--brand-tint); color:var(--brand-dark); }
+  .ca-history-head{ display:flex; align-items:baseline; gap:10px; max-width:760px; margin:22px 0 10px; }
+  .ca-history-title{ font-size:15px; font-weight:800; color:var(--ink); }
+  .ca-table{ max-width:760px; }
+
   .admin-screen[hidden]{ display:none; }
 </style>
 </head>
@@ -801,6 +830,7 @@
 
     <li class="nav-section-label">CRM 자동충전</li>
     <li class="nav-item" data-screen="cash-charge"><div class="num">37</div><div class="tx"><div class="name">캐시 충전 결제</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="cash-auto-charge"><div class="num">38</div><div class="tx"><div class="name">캐시 자동충전</div><div class="kind">어드민 화면</div></div></li>
   </ul>
 </div>
 
@@ -3245,6 +3275,121 @@
       </div>
     </div>
 
+    <div class="admin-shell" id="cashAutoChargeShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">환경설정</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item">기본정보</li>
+            <li class="as-lnb-item">운영정책</li>
+            <li class="as-lnb-item">결제/무통장 설정</li>
+            <li class="as-lnb-item">자동결제 관리</li>
+            <li class="as-lnb-sub active"><span class="dot">·</span>캐시 자동충전</li>
+            <li class="as-lnb-item">PG 서비스 신청</li>
+            <li class="as-lnb-item">성인(사용자)인증 신청</li>
+            <li class="as-lnb-item">배송 관리</li>
+          </ul>
+        </div>
+
+        <div class="as-content">
+          <h1>캐시 자동충전</h1>
+          <ul class="ca-guide">
+            <li>등록한 카드로 캐시가 부족할 때 자동으로 충전됩니다.</li>
+            <li>카드는 1장만 등록할 수 있으며, 변경은 기존 카드 해지 후 재등록으로 진행됩니다.</li>
+            <li>충전 시 부가세 10%가 별도로 결제됩니다.</li>
+          </ul>
+
+          <div class="ca-panel">
+            <div class="ca-switch-row">
+              <div class="ca-switch-label">자동충전</div>
+              <div class="as-toggle"><div class="knob"></div></div>
+              <div class="ca-switch-state">OFF</div>
+            </div>
+            <div class="ca-switch-note">자동충전을 켜면 카드를 등록하고 충전 기준을 설정할 수 있습니다.</div>
+          </div>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">결제 카드<span class="ca-example">ON 상태 예시</span></div>
+            <div class="ca-sub-label">등록된 카드 없음</div>
+            <div class="ca-card-empty" style="margin-top:8px;">
+              <div class="ca-card-empty-tx">등록된 카드가 없습니다</div>
+              <button class="as-btn as-btn-primary">카드 등록</button>
+            </div>
+            <div class="ca-sub-label">등록된 카드 있음</div>
+            <div class="ca-card-item">
+              <div class="ca-card-face">VISA</div>
+              <div class="ca-card-tx">
+                <div class="ca-card-name">신한카드 **** 1234</div>
+                <div class="ca-card-date">등록일 2026.09.28</div>
+              </div>
+              <button class="as-btn as-btn-secondary">카드등록해지</button>
+            </div>
+          </div>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">자동충전 기준 설정<span class="ca-example">ON 상태 예시</span></div>
+            <div class="ca-field-row">
+              <div class="ca-field-label">충전 기준 금액</div>
+              <div class="ca-field">
+                <div class="as-input-suffix"><input class="as-input" type="text" value="100,000" disabled><span class="as-suffix">c</span></div>
+                <div class="ca-field-help">잔액이 이 금액 이하가 되면 자동으로 충전됩니다.</div>
+              </div>
+            </div>
+            <div class="ca-field-row">
+              <div class="ca-field-label">충전 금액</div>
+              <div class="ca-field">
+                <div class="ca-amounts">
+                  <div class="ca-amount">50,000원</div>
+                  <div class="ca-amount on">100,000원</div>
+                  <div class="ca-amount">200,000원</div>
+                  <div class="ca-amount">500,000원</div>
+                  <div class="ca-amount">1,000,000원</div>
+                </div>
+                <div class="ca-field-help">충전 금액은 최소 5만원부터 설정할 수 있습니다.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ca-history-head">
+            <div class="ca-history-title">자동충전 이력</div>
+          </div>
+          <div class="as-table-wrap">
+            <table class="as-table ca-table">
+              <thead>
+                <tr><th>충전일시</th><th>충전 금액</th><th>결제 결과</th><th>결제 카드</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>2026.10.05 14:32</td><td>100,000원</td><td><span class="as-status paid">성공</span></td><td>신한카드 **** 1234</td></tr>
+                <tr><td>2026.10.02 09:15</td><td>100,000원</td><td><span class="as-status failed">실패</span></td><td>신한카드 **** 1234</td></tr>
+                <tr><td>2026.09.30 18:47</td><td>100,000원</td><td><span class="as-status paid">성공</span></td><td>신한카드 **** 1234</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="admin-shell" id="imageListShell" hidden>
       <div class="as-gnb">
         <div class="as-gnb-home">⌂</div>
@@ -4362,6 +4507,10 @@
     'cash-charge': {
       number:'37', label:'캐시 충전 결제', kind:'어드민 화면', cashCharge:true,
       policy:'오프사이트(알림톡, 브랜드메시지(친구톡), LMS) 캠페인에 사용할 캐시를 충전하는 화면입니다. 잔여 캐시를 확인하고 충전 금액을 선택한 뒤, 신용카드 또는 가상계좌로 결제합니다. 결제금액이 클수록 추가 혜택 캐시가 함께 지급됩니다.\n\n자동충전 바로가기 배너 (신규)\n· 상단 안내문 아래 붉은 테두리로 강조한 배너는 이번에 새로 추가하는 자동충전 바로가기입니다.\n· "자동충전 설정하러 가기" 버튼을 누르면 자동충전 설정 화면으로 이동합니다.\n· 자동충전을 설정하면 잔여 캐시가 0원이 되는 순간 설정한 금액으로 자동 충전되어, 캠페인 발행이 중단되지 않습니다.'
+    },
+    'cash-auto-charge': {
+      number:'38', label:'캐시 자동충전', kind:'어드민 화면', cashAutoCharge:true,
+      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 카드 등록/해지: 자동충전에 사용할 카드 1장을 등록하거나 해지합니다. 카드 변경은 기존 카드 해지 후 재등록으로 진행합니다.\n· 자동충전 기준 설정: 잔액이 "충전 기준 금액" 이하가 되면 선택한 "충전 금액"만큼 자동으로 충전합니다. 충전 금액은 최소 5만원부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 충전 금액, 결제 결과(성공/실패), 결제 카드를 확인합니다.\n\n자동충전 토글은 현재 OFF 상태로 표시했으며, 결제 카드·충전 기준 영역은 ON 상태일 때의 예시입니다.'
     }
   };
 
@@ -4391,6 +4540,7 @@
   var adminProductListShell = document.getElementById('adminProductListShell');
   var purchaseLimitShell = document.getElementById('purchaseLimitShell');
   var cashChargeShell = document.getElementById('cashChargeShell');
+  var cashAutoChargeShell = document.getElementById('cashAutoChargeShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -4423,7 +4573,8 @@
     var isPlistAdmin = !!s.plistAdmin;
     var isPurchaseLimit = !!s.purchaseLimit;
     var isCashCharge = !!s.cashCharge;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit || isCashCharge;
+    var isCashAutoCharge = !!s.cashAutoCharge;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -4446,9 +4597,14 @@
     adminProductListShell.hidden = !isPlistAdmin;
     purchaseLimitShell.hidden = !isPurchaseLimit;
     cashChargeShell.hidden = !isCashCharge;
-    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit || isCashCharge);
+    cashAutoChargeShell.hidden = !isCashAutoCharge;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge);
 
-    if(isCashCharge){
+    if(isCashAutoCharge){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isCashCharge){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
