@@ -795,6 +795,26 @@
   .ca-link-card{ font-size:13px; font-weight:800; color:var(--brand-dark); margin-top:4px; }
   .ca-link-empty{ font-size:11px; color:var(--ink-faint); margin-top:4px; }
 
+  .cn-check-row{ display:flex; gap:24px; }
+  .cn-check{ display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:600; color:var(--ink); }
+  .cn-checkbox{ width:16px; height:16px; border-radius:4px; background:var(--brand); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .cn-preview-grid{ display:flex; gap:20px; flex-wrap:wrap; }
+  .cn-preview{ flex:1; min-width:300px; }
+  .cn-preview-label{ font-size:12px; font-weight:800; color:var(--ink); margin-bottom:8px; }
+  .cn-phone{ background:#ABC1D1; border-radius:18px; padding:18px 14px 22px; }
+  .cn-phone-top{ font-size:10.5px; color:rgba(21,34,56,.6); text-align:center; margin-bottom:12px; }
+  .cn-msg{ display:flex; gap:8px; align-items:flex-start; }
+  .cn-profile{ flex:0 0 auto; width:34px; height:34px; border-radius:12px; background:#FEE500; color:#3C1E1E; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .cn-msg-body{ flex:1; min-width:0; }
+  .cn-sender{ font-size:11px; color:#3C4A5C; margin-bottom:4px; }
+  .cn-bubble{ background:#fff; border-radius:4px 12px 12px 12px; overflow:hidden; }
+  .cn-bubble-head{ background:#FEE500; color:#3C1E1E; font-size:11.5px; font-weight:800; padding:8px 12px; }
+  .cn-bubble-text{ font-size:11.5px; line-height:1.65; color:#1E1E1E; padding:12px; white-space:pre-line; }
+  .cn-bubble-btn{ margin:0 12px 12px; background:#F1F2F6; border-radius:6px; text-align:center; font-size:11.5px; font-weight:700; color:#1E1E1E; padding:9px 0; }
+  .cn-time{ font-size:9.5px; color:#3C4A5C; margin-top:4px; }
+  .cn-info-list{ margin:0; padding-left:18px; font-size:12.5px; color:var(--ink); line-height:1.9; }
+  .cn-info-list .cn-sub{ color:var(--ink-soft); font-size:11.5px; }
+
   .cm-usage{ margin-top:10px; border-top:1px solid var(--line); padding-top:12px; }
   .cm-usage-title{ font-size:11.5px; font-weight:700; color:var(--ink-soft); margin-bottom:8px; }
   .cm-usage-row{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; color:var(--ink); padding:5px 0; }
@@ -852,8 +872,9 @@
     <li class="nav-section-label">CRM 자동충전</li>
     <li class="nav-item" data-screen="cash-charge"><div class="num">37</div><div class="tx"><div class="name">캐시 충전 결제</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="cash-auto-charge"><div class="num">38</div><div class="tx"><div class="name">캐시 자동충전</div><div class="kind">어드민 화면</div></div></li>
-    <li class="nav-item" data-screen="auto-card-manage"><div class="num">39</div><div class="tx"><div class="name">카드 관리</div><div class="kind">어드민 화면</div></div></li>
-    <li class="nav-item" data-screen="service-fee-auto"><div class="num">40</div><div class="tx"><div class="name">서비스 이용료 자동결제</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="cash-auto-alimtalk"><div class="num">39</div><div class="tx"><div class="name">캐시 자동충전 알림톡</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="auto-card-manage"><div class="num">40</div><div class="tx"><div class="name">카드 관리</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="service-fee-auto"><div class="num">41</div><div class="tx"><div class="name">서비스 이용료 자동결제</div><div class="kind">어드민 화면</div></div></li>
   </ul>
 </div>
 
@@ -3331,6 +3352,7 @@
             <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
             <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
             <li class="as-lnb-sub active"><span class="dot">·</span>캐시 자동충전</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전 알림톡</li>
             <li class="as-lnb-item">PG 서비스 신청</li>
             <li class="as-lnb-item">성인(사용자)인증 신청</li>
             <li class="as-lnb-item">배송 관리</li>
@@ -3391,6 +3413,16 @@
                 <div class="ca-field-help">충전 캐시는 최소 100,000c부터 설정할 수 있습니다.</div>
               </div>
             </div>
+            <div class="ca-field-row">
+              <div class="ca-field-label">자동충전 결과 알림톡 받기</div>
+              <div class="ca-field">
+                <div class="ca-switch-row" style="padding-top:6px;">
+                  <div class="as-toggle on"><div class="knob"></div></div>
+                  <div class="ca-switch-state ca-switch-on">ON</div>
+                </div>
+                <div class="ca-field-help">자동충전 성공·실패 시 알림톡으로 안내해드립니다.</div>
+              </div>
+            </div>
             <div class="as-actions right" style="margin-top:14px;">
               <button class="as-btn as-btn-primary">저장</button>
             </div>
@@ -3427,6 +3459,16 @@
                   <div class="ca-amount">5,000,000c</div>
                 </div>
                 <div class="ca-field-help">충전 캐시는 최소 100,000c부터 설정할 수 있습니다.</div>
+              </div>
+            </div>
+            <div class="ca-field-row">
+              <div class="ca-field-label">자동충전 결과 알림톡 받기</div>
+              <div class="ca-field">
+                <div class="ca-switch-row" style="padding-top:6px;">
+                  <div class="as-toggle on"><div class="knob"></div></div>
+                  <div class="ca-switch-state ca-switch-on">ON</div>
+                </div>
+                <div class="ca-field-help">자동충전 성공·실패 시 알림톡으로 안내해드립니다.</div>
               </div>
             </div>
             <div class="as-actions right" style="margin-top:14px;">
@@ -3482,6 +3524,138 @@
       </div>
     </div>
 
+    <div class="admin-shell" id="cashAutoAlimtalkShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">환경설정</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item">기본정보</li>
+            <li class="as-lnb-item">운영정책</li>
+            <li class="as-lnb-item">결제/무통장 설정</li>
+            <li class="as-lnb-item">자동결제 관리</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
+            <li class="as-lnb-sub active"><span class="dot">·</span>캐시 자동충전 알림톡</li>
+            <li class="as-lnb-item">PG 서비스 신청</li>
+            <li class="as-lnb-item">성인(사용자)인증 신청</li>
+            <li class="as-lnb-item">배송 관리</li>
+          </ul>
+        </div>
+
+        <div class="as-content">
+          <h1>캐시 자동충전 알림톡</h1>
+          <ul class="ca-guide">
+            <li>자동충전 결과를 셀러에게 알림톡으로 안내합니다.</li>
+            <li>발송 대상: 쇼핑몰 담당자 연락처 (가입 시 등록된 정보 기준)</li>
+          </ul>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">발송 시점</div>
+            <div class="cn-check-row">
+              <div class="cn-check"><span class="cn-checkbox">✓</span>자동충전 성공 시</div>
+              <div class="cn-check"><span class="cn-checkbox">✓</span>자동충전 실패 시</div>
+            </div>
+          </div>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">알림톡 미리보기</div>
+            <div class="cn-preview-grid">
+              <div class="cn-preview">
+                <div class="cn-preview-label">자동충전 성공 시</div>
+                <div class="cn-phone">
+                  <div class="cn-phone-top">2026년 10월 5일 월요일</div>
+                  <div class="cn-msg">
+                    <div class="cn-profile">FlexG</div>
+                    <div class="cn-msg-body">
+                      <div class="cn-sender">FlexG</div>
+                      <div class="cn-bubble">
+                        <div class="cn-bubble-head">알림톡 도착</div>
+                        <div class="cn-bubble-text">[FlexG] 캐시 자동충전 완료 안내
+
+안녕하세요, {쇼핑몰명}님
+설정하신 기준에 따라 캐시가 자동충전되었습니다.
+
+- 충전 금액: 100,000원 (부가세 포함 110,000원)
+- 충전 캐시: 100,000c
+- 결제 카드: 신한카드 **** 1234
+- 충전 일시: 2026.10.05 14:32
+- 충전 후 잔여 캐시: 9,900,655c
+
+감사합니다.</div>
+                      </div>
+                      <div class="cn-time">오후 2:32</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cn-preview">
+                <div class="cn-preview-label">자동충전 실패 시</div>
+                <div class="cn-phone">
+                  <div class="cn-phone-top">2026년 10월 2일 금요일</div>
+                  <div class="cn-msg">
+                    <div class="cn-profile">FlexG</div>
+                    <div class="cn-msg-body">
+                      <div class="cn-sender">FlexG</div>
+                      <div class="cn-bubble">
+                        <div class="cn-bubble-head">알림톡 도착</div>
+                        <div class="cn-bubble-text">[FlexG] 캐시 자동충전 실패 안내
+
+안녕하세요, {쇼핑몰명}님
+캐시 자동충전이 실패했습니다.
+
+- 시도 금액: 100,000원
+- 결제 카드: 신한카드 **** 1234
+- 실패 사유: 한도초과
+- 시도 일시: 2026.10.02 09:15
+
+카드 정보를 확인 후 다시 시도해주세요.</div>
+                        <div class="cn-bubble-btn">카드 관리로 이동</div>
+                      </div>
+                      <div class="cn-time">오전 9:15</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">메시지 포함 정보</div>
+            <ul class="cn-info-list">
+              <li>충전 금액</li>
+              <li>충전 후 잔여 캐시</li>
+              <li>결제 카드(끝 4자리)</li>
+              <li>충전 일시</li>
+              <li>실패 사유 <span class="cn-sub">(실패 시)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="admin-shell" id="autoCardManageShell" hidden>
       <div class="as-gnb">
         <div class="as-gnb-home">⌂</div>
@@ -3515,6 +3689,7 @@
             <li class="as-lnb-sub active"><span class="dot">·</span>카드 관리</li>
             <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
             <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전 알림톡</li>
             <li class="as-lnb-item">PG 서비스 신청</li>
             <li class="as-lnb-item">성인(사용자)인증 신청</li>
             <li class="as-lnb-item">배송 관리</li>
@@ -3587,6 +3762,7 @@
             <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
             <li class="as-lnb-sub active"><span class="dot">·</span>서비스 이용료 자동결제</li>
             <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전 알림톡</li>
             <li class="as-lnb-item">PG 서비스 신청</li>
             <li class="as-lnb-item">성인(사용자)인증 신청</li>
             <li class="as-lnb-item">배송 관리</li>
@@ -4720,15 +4896,19 @@
     },
     'cash-auto-charge': {
       number:'38', label:'캐시 자동충전', kind:'어드민 화면', cashAutoCharge:true,
-      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 결제 카드 확인: 카드 관리 화면(39)에 등록된 카드로 자동충전됩니다. 카드 등록/해지는 "카드 관리로 이동" 버튼으로 카드 관리 화면에서 진행합니다.\n· 자동충전 설정: 자동충전 ON/OFF와 충전 기준을 한 영역에서 설정하고, 하단 [저장] 버튼 하나로 함께 저장합니다. 잔여 캐시가 "충전 기준 캐시" 이하가 되면 선택한 "충전 캐시"만큼 자동으로 충전합니다. 충전 캐시는 최소 100,000c부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 결제 금액(부가세 포함), 충전 캐시, 결제 결과(성공/실패), 결제 카드를 확인합니다. 실패 건은 실패 사유(한도초과, 유효기간 만료, 카드 분실·정지 등)를 함께 표시합니다.\n\n상태별 처리\n· 자동충전 OFF: 충전 기준 캐시 입력과 충전 캐시 선택이 비활성화되며, 충전 캐시는 아무것도 선택되지 않은 상태로 표시됩니다.\n· 자동충전 ON: 두 영역이 활성화되어 입력·선택할 수 있습니다. (ON 상태 예시 영역 참고)\n· 충전 기준 캐시는 숫자만 입력 가능하며, 최소 10,000c부터 설정할 수 있습니다.\n· 저장에 성공하면 "저장되었습니다" 토스트 메시지가 노출됩니다.\n· 카드가 등록되지 않은 상태에서 자동충전을 켜면 토글은 OFF로 유지되고 "카드를 먼저 등록해주세요." 경고와 [카드 관리로 이동] 버튼이 노출됩니다.\n\n결제 카드 영역은 카드가 등록된 상태의 예시입니다.'
+      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 결제 카드 확인: 카드 관리 화면(40)에 등록된 카드로 자동충전됩니다. 카드 등록/해지는 "카드 관리로 이동" 버튼으로 카드 관리 화면에서 진행합니다.\n· 자동충전 설정: 자동충전 ON/OFF와 충전 기준을 한 영역에서 설정하고, 하단 [저장] 버튼 하나로 함께 저장합니다. 잔여 캐시가 "충전 기준 캐시" 이하가 되면 선택한 "충전 캐시"만큼 자동으로 충전합니다. 충전 캐시는 최소 100,000c부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 결제 금액(부가세 포함), 충전 캐시, 결제 결과(성공/실패), 결제 카드를 확인합니다. 실패 건은 실패 사유(한도초과, 유효기간 만료, 카드 분실·정지 등)를 함께 표시합니다.\n\n상태별 처리\n· 자동충전 OFF: 충전 기준 캐시 입력과 충전 캐시 선택이 비활성화되며, 충전 캐시는 아무것도 선택되지 않은 상태로 표시됩니다.\n· 자동충전 ON: 두 영역이 활성화되어 입력·선택할 수 있습니다. (ON 상태 예시 영역 참고)\n· 충전 기준 캐시는 숫자만 입력 가능하며, 최소 10,000c부터 설정할 수 있습니다.\n· 저장에 성공하면 "저장되었습니다" 토스트 메시지가 노출됩니다.\n· 카드가 등록되지 않은 상태에서 자동충전을 켜면 토글은 OFF로 유지되고 "카드를 먼저 등록해주세요." 경고와 [카드 관리로 이동] 버튼이 노출됩니다.\n\n결제 카드 영역은 카드가 등록된 상태의 예시입니다.'
+    },
+    'cash-auto-alimtalk': {
+      number:'39', label:'캐시 자동충전 알림톡', kind:'어드민 화면', cashAutoAlimtalk:true,
+      policy:'환경설정 > 자동결제 관리 하위, "캐시 자동충전" 아래에 신규로 추가한 화면입니다. 캐시 자동충전 결과를 셀러(쇼핑몰 담당자 연락처)에게 보내는 알림톡의 발송 시점과 메시지 내용을 관리합니다.\n\n· 발송 시점: 자동충전 성공 시 / 실패 시 각각 발송 여부를 선택합니다.\n· 알림톡 미리보기: 성공·실패 메시지가 실제 카카오 알림톡으로 어떻게 보이는지 확인합니다. 실패 메시지에는 [카드 관리로 이동] 버튼이 포함됩니다.\n· 메시지 포함 정보: 충전 금액, 충전 후 잔여 캐시, 결제 카드(끝 4자리), 충전 일시, (실패 시) 실패 사유가 들어갑니다.\n\n화면 38(캐시 자동충전)의 "자동충전 결과 알림톡 받기" 토글과 연결됩니다. 토글이 ON일 때만 이 화면의 설정대로 알림톡이 발송되며, OFF이면 발송되지 않습니다.'
     },
     'auto-card-manage': {
-      number:'39', label:'카드 관리', kind:'어드민 화면', autoCardManage:true,
+      number:'40', label:'카드 관리', kind:'어드민 화면', autoCardManage:true,
       policy:'환경설정 > 자동결제 관리 하위에 신규로 추가한 화면입니다. 서비스 이용료 자동결제와 캐시 자동충전이 공통으로 사용하는 결제 카드 1장을 등록하거나 해지합니다.\n\n· 카드는 1장만 등록할 수 있으며, 변경은 기존 카드 해지 후 재등록으로 진행합니다.\n· 등록된 카드 아래 "이 카드가 사용되는 곳"에서 서비스 이용료 자동결제, 캐시 자동충전 각각의 사용 여부를 확인할 수 있습니다.\n· 캐시 자동충전 화면(38)은 카드를 직접 등록하지 않고, 이 화면에 등록된 카드를 그대로 사용합니다.'
     },
     'service-fee-auto': {
-      number:'40', label:'서비스 이용료 자동결제', kind:'어드민 화면', serviceFeeAuto:true,
-      policy:'환경설정 > 자동결제 관리 하위에 신규로 추가한 메뉴입니다. 상세 기획 전이라 플레이스홀더로만 구성했습니다.\n\n· 서비스 이용료 결제에는 카드 관리 화면(39)에 등록된 카드가 공통으로 사용될 예정입니다.'
+      number:'41', label:'서비스 이용료 자동결제', kind:'어드민 화면', serviceFeeAuto:true,
+      policy:'환경설정 > 자동결제 관리 하위에 신규로 추가한 메뉴입니다. 상세 기획 전이라 플레이스홀더로만 구성했습니다.\n\n· 서비스 이용료 결제에는 카드 관리 화면(40)에 등록된 카드가 공통으로 사용될 예정입니다.'
     }
   };
 
@@ -4760,6 +4940,7 @@
   var cashChargeShell = document.getElementById('cashChargeShell');
   var cashAutoChargeShell = document.getElementById('cashAutoChargeShell');
   var autoCardManageShell = document.getElementById('autoCardManageShell');
+  var cashAutoAlimtalkShell = document.getElementById('cashAutoAlimtalkShell');
   var serviceFeeAutoShell = document.getElementById('serviceFeeAutoShell');
   var stageFrame = document.getElementById('stageFrame');
 
@@ -4796,7 +4977,8 @@
     var isCashAutoCharge = !!s.cashAutoCharge;
     var isAutoCardManage = !!s.autoCardManage;
     var isServiceFeeAuto = !!s.serviceFeeAuto;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge || isAutoCardManage || isServiceFeeAuto;
+    var isCashAutoAlimtalk = !!s.cashAutoAlimtalk;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge || isAutoCardManage || isServiceFeeAuto || isCashAutoAlimtalk;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -4822,9 +5004,10 @@
     cashAutoChargeShell.hidden = !isCashAutoCharge;
     autoCardManageShell.hidden = !isAutoCardManage;
     serviceFeeAutoShell.hidden = !isServiceFeeAuto;
-    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge || isAutoCardManage || isServiceFeeAuto);
+    cashAutoAlimtalkShell.hidden = !isCashAutoAlimtalk;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge || isAutoCardManage || isServiceFeeAuto || isCashAutoAlimtalk);
 
-    if(isAutoCardManage || isServiceFeeAuto){
+    if(isAutoCardManage || isServiceFeeAuto || isCashAutoAlimtalk){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
