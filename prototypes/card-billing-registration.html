@@ -778,6 +778,15 @@
   .ca-history-head{ display:flex; align-items:baseline; gap:10px; max-width:760px; margin:22px 0 10px; }
   .ca-history-title{ font-size:15px; font-weight:800; color:var(--ink); }
   .ca-table{ max-width:760px; }
+  .ca-link-box{ display:flex; align-items:center; justify-content:space-between; gap:14px; background:#F7F8FA; border:1px solid var(--line); border-radius:9px; padding:16px 20px; }
+  .ca-link-note{ font-size:12.5px; font-weight:700; color:var(--ink); }
+  .ca-link-card{ font-size:13px; font-weight:800; color:var(--brand-dark); margin-top:4px; }
+  .ca-link-empty{ font-size:11px; color:var(--ink-faint); margin-top:4px; }
+
+  .cm-usage{ margin-top:10px; border-top:1px solid var(--line); padding-top:12px; }
+  .cm-usage-title{ font-size:11.5px; font-weight:700; color:var(--ink-soft); margin-bottom:8px; }
+  .cm-usage-row{ display:flex; align-items:center; justify-content:space-between; font-size:12.5px; color:var(--ink); padding:5px 0; }
+  .cm-placeholder{ display:flex; align-items:center; justify-content:center; max-width:760px; min-height:260px; background:#fff; border:1px dashed #C9CED8; border-radius:10px; font-size:14px; font-weight:700; color:var(--ink-soft); margin-top:16px; }
 
   .admin-screen[hidden]{ display:none; }
 </style>
@@ -831,6 +840,8 @@
     <li class="nav-section-label">CRM 자동충전</li>
     <li class="nav-item" data-screen="cash-charge"><div class="num">37</div><div class="tx"><div class="name">캐시 충전 결제</div><div class="kind">어드민 화면</div></div></li>
     <li class="nav-item" data-screen="cash-auto-charge"><div class="num">38</div><div class="tx"><div class="name">캐시 자동충전</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="auto-card-manage"><div class="num">39</div><div class="tx"><div class="name">카드 관리</div><div class="kind">어드민 화면</div></div></li>
+    <li class="nav-item" data-screen="service-fee-auto"><div class="num">40</div><div class="tx"><div class="name">서비스 이용료 자동결제</div><div class="kind">어드민 화면</div></div></li>
   </ul>
 </div>
 
@@ -3305,6 +3316,8 @@
             <li class="as-lnb-item">운영정책</li>
             <li class="as-lnb-item">결제/무통장 설정</li>
             <li class="as-lnb-item">자동결제 관리</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
             <li class="as-lnb-sub active"><span class="dot">·</span>캐시 자동충전</li>
             <li class="as-lnb-item">PG 서비스 신청</li>
             <li class="as-lnb-item">성인(사용자)인증 신청</li>
@@ -3331,19 +3344,13 @@
 
           <div class="ca-panel">
             <div class="ca-panel-title">결제 카드<span class="ca-example">ON 상태 예시</span></div>
-            <div class="ca-sub-label">등록된 카드 없음</div>
-            <div class="ca-card-empty" style="margin-top:8px;">
-              <div class="ca-card-empty-tx">등록된 카드가 없습니다</div>
-              <button class="as-btn as-btn-primary">카드 등록</button>
-            </div>
-            <div class="ca-sub-label">등록된 카드 있음</div>
-            <div class="ca-card-item">
-              <div class="ca-card-face">VISA</div>
-              <div class="ca-card-tx">
-                <div class="ca-card-name">신한카드 **** 1234</div>
-                <div class="ca-card-date">등록일 2026.09.28</div>
+            <div class="ca-link-box">
+              <div class="ca-link-tx">
+                <div class="ca-link-note">등록된 카드로 자동충전됩니다.</div>
+                <div class="ca-link-card">신한카드 **** 1234</div>
+                <div class="ca-link-empty">카드가 없을 때: 등록된 카드가 없습니다</div>
               </div>
-              <button class="as-btn as-btn-secondary">카드등록해지</button>
+              <button class="as-btn as-btn-secondary" onclick="selectScreen('auto-card-manage')">카드 관리로 이동</button>
             </div>
           </div>
 
@@ -3386,6 +3393,124 @@
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-shell" id="autoCardManageShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">환경설정</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item">기본정보</li>
+            <li class="as-lnb-item">운영정책</li>
+            <li class="as-lnb-item">결제/무통장 설정</li>
+            <li class="as-lnb-item">자동결제 관리</li>
+            <li class="as-lnb-sub active"><span class="dot">·</span>카드 관리</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>서비스 이용료 자동결제</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
+            <li class="as-lnb-item">PG 서비스 신청</li>
+            <li class="as-lnb-item">성인(사용자)인증 신청</li>
+            <li class="as-lnb-item">배송 관리</li>
+          </ul>
+        </div>
+
+        <div class="as-content">
+          <h1>카드 관리</h1>
+          <ul class="ca-guide">
+            <li>등록된 카드는 서비스 이용료 자동결제와 캐시 자동충전에 공통으로 사용됩니다.</li>
+            <li>카드는 1장만 등록할 수 있으며, 변경은 기존 카드 해지 후 재등록으로 진행됩니다.</li>
+          </ul>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">결제 카드</div>
+            <div class="ca-sub-label">등록된 카드 없음</div>
+            <div class="ca-card-empty" style="margin-top:8px;">
+              <div class="ca-card-empty-tx">등록된 카드가 없습니다</div>
+              <button class="as-btn as-btn-primary">카드 등록</button>
+            </div>
+            <div class="ca-sub-label">등록된 카드 있음</div>
+            <div class="ca-card-item">
+              <div class="ca-card-face">VISA</div>
+              <div class="ca-card-tx">
+                <div class="ca-card-name">신한카드 **** 1234</div>
+                <div class="ca-card-date">등록일 2026.09.28</div>
+              </div>
+              <button class="as-btn as-btn-secondary">카드등록해지</button>
+            </div>
+            <div class="cm-usage">
+              <div class="cm-usage-title">이 카드가 사용되는 곳</div>
+              <div class="cm-usage-row"><span>서비스 이용료 자동결제</span><span class="as-status active">사용중</span></div>
+              <div class="cm-usage-row"><span>캐시 자동충전</span><span class="as-status ended">미사용</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-shell" id="serviceFeeAutoShell" hidden>
+      <div class="as-gnb">
+        <div class="as-gnb-home">⌂</div>
+        <div class="as-gnb-item">상품<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">주문<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">발주<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">CS</div>
+        <div class="as-gnb-item">정산</div>
+        <div class="as-gnb-item">매출</div>
+        <div class="as-gnb-item">통계</div>
+        <div class="as-gnb-item">회원</div>
+        <div class="as-gnb-item">CRM<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item live">LIVE<span class="as-gnb-badge">N</span></div>
+        <div class="as-gnb-item">메시지</div>
+        <div class="as-gnb-item">게시판</div>
+        <div class="as-gnb-item">APP</div>
+        <div class="as-gnb-item">셀러</div>
+        <div class="as-gnb-item">제휴<span class="as-gnb-badge">N</span></div>
+      </div>
+      <div class="as-body">
+        <div class="as-lnb">
+          <div class="as-lnb-head">
+            <div class="as-lnb-title">환경설정</div>
+            <div class="as-lnb-guide">📘 가이드</div>
+          </div>
+          <ul class="as-lnb-list">
+            <li class="as-lnb-item">기본정보</li>
+            <li class="as-lnb-item">운영정책</li>
+            <li class="as-lnb-item">결제/무통장 설정</li>
+            <li class="as-lnb-item">자동결제 관리</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>카드 관리</li>
+            <li class="as-lnb-sub active"><span class="dot">·</span>서비스 이용료 자동결제</li>
+            <li class="as-lnb-sub"><span class="dot">·</span>캐시 자동충전</li>
+            <li class="as-lnb-item">PG 서비스 신청</li>
+            <li class="as-lnb-item">성인(사용자)인증 신청</li>
+            <li class="as-lnb-item">배송 관리</li>
+          </ul>
+        </div>
+
+        <div class="as-content">
+          <h1>서비스 이용료 자동결제</h1>
+          <div class="cm-placeholder">준비 중인 화면입니다</div>
         </div>
       </div>
     </div>
@@ -4510,7 +4635,15 @@
     },
     'cash-auto-charge': {
       number:'38', label:'캐시 자동충전', kind:'어드민 화면', cashAutoCharge:true,
-      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 카드 등록/해지: 자동충전에 사용할 카드 1장을 등록하거나 해지합니다. 카드 변경은 기존 카드 해지 후 재등록으로 진행합니다.\n· 자동충전 기준 설정: 잔액이 "충전 기준 금액" 이하가 되면 선택한 "충전 금액"만큼 자동으로 충전합니다. 충전 금액은 최소 5만원부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 충전 금액, 결제 결과(성공/실패), 결제 카드를 확인합니다.\n\n자동충전 토글은 현재 OFF 상태로 표시했으며, 결제 카드·충전 기준 영역은 ON 상태일 때의 예시입니다.'
+      policy:'환경설정 LNB의 "결제/무통장 설정" 아래에 신규 상위 메뉴 "자동결제 관리"를 추가하고, 그 하위 메뉴로 이 화면을 새로 만들었습니다. (서비스 이용료 자동결제, 카드 관리는 추후 추가 예정)\n\n이 화면에서 하는 일\n· 결제 카드 확인: 카드 관리 화면(39)에 등록된 카드로 자동충전됩니다. 카드 등록/해지는 "카드 관리로 이동" 버튼으로 카드 관리 화면에서 진행합니다.\n· 자동충전 기준 설정: 잔액이 "충전 기준 금액" 이하가 되면 선택한 "충전 금액"만큼 자동으로 충전합니다. 충전 금액은 최소 5만원부터 선택할 수 있습니다.\n· 자동충전 이력 조회: 충전일시, 충전 금액, 결제 결과(성공/실패), 결제 카드를 확인합니다.\n\n자동충전 토글은 현재 OFF 상태로 표시했으며, 결제 카드·충전 기준 영역은 ON 상태일 때의 예시입니다.'
+    },
+    'auto-card-manage': {
+      number:'39', label:'카드 관리', kind:'어드민 화면', autoCardManage:true,
+      policy:'환경설정 > 자동결제 관리 하위에 신규로 추가한 화면입니다. 서비스 이용료 자동결제와 캐시 자동충전이 공통으로 사용하는 결제 카드 1장을 등록하거나 해지합니다.\n\n· 카드는 1장만 등록할 수 있으며, 변경은 기존 카드 해지 후 재등록으로 진행합니다.\n· 등록된 카드 아래 "이 카드가 사용되는 곳"에서 서비스 이용료 자동결제, 캐시 자동충전 각각의 사용 여부를 확인할 수 있습니다.\n· 캐시 자동충전 화면(38)은 카드를 직접 등록하지 않고, 이 화면에 등록된 카드를 그대로 사용합니다.'
+    },
+    'service-fee-auto': {
+      number:'40', label:'서비스 이용료 자동결제', kind:'어드민 화면', serviceFeeAuto:true,
+      policy:'환경설정 > 자동결제 관리 하위에 신규로 추가한 메뉴입니다. 상세 기획 전이라 플레이스홀더로만 구성했습니다.\n\n· 서비스 이용료 결제에는 카드 관리 화면(39)에 등록된 카드가 공통으로 사용될 예정입니다.'
     }
   };
 
@@ -4541,6 +4674,8 @@
   var purchaseLimitShell = document.getElementById('purchaseLimitShell');
   var cashChargeShell = document.getElementById('cashChargeShell');
   var cashAutoChargeShell = document.getElementById('cashAutoChargeShell');
+  var autoCardManageShell = document.getElementById('autoCardManageShell');
+  var serviceFeeAutoShell = document.getElementById('serviceFeeAutoShell');
   var stageFrame = document.getElementById('stageFrame');
 
   function selectScreen(key){
@@ -4574,7 +4709,9 @@
     var isPurchaseLimit = !!s.purchaseLimit;
     var isCashCharge = !!s.cashCharge;
     var isCashAutoCharge = !!s.cashAutoCharge;
-    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge;
+    var isAutoCardManage = !!s.autoCardManage;
+    var isServiceFeeAuto = !!s.serviceFeeAuto;
+    flexgPopup.hidden = isAdmin || isDoc || isMobile || isMenu || isMsg || isMember || isIcon || isImageList || isCancel || isPaymentAlert || isCancelPending || isCancelDone || isLanding || isLandingJoined || isTerms || isJoinDone || isJoinFail || isGuard || isPlist || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge || isAutoCardManage || isServiceFeeAuto;
     adminShell.hidden = !isAdmin;
     policyShell.hidden = !isDoc;
     tabbarShell.hidden = !isMobile;
@@ -4598,9 +4735,15 @@
     purchaseLimitShell.hidden = !isPurchaseLimit;
     cashChargeShell.hidden = !isCashCharge;
     cashAutoChargeShell.hidden = !isCashAutoCharge;
-    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge);
+    autoCardManageShell.hidden = !isAutoCardManage;
+    serviceFeeAutoShell.hidden = !isServiceFeeAuto;
+    stageFrame.classList.toggle('wide', isAdmin || isDoc || isMsg || isIcon || isImageList || isPlistAdmin || isPurchaseLimit || isCashCharge || isCashAutoCharge || isAutoCardManage || isServiceFeeAuto);
 
-    if(isCashAutoCharge){
+    if(isAutoCardManage || isServiceFeeAuto){
+      popupDim.classList.remove('dimmed');
+      stageOverlay.hidden = true;
+      modalLayer.hidden = true;
+    } else if(isCashAutoCharge){
       popupDim.classList.remove('dimmed');
       stageOverlay.hidden = true;
       modalLayer.hidden = true;
