@@ -4013,8 +4013,8 @@
             <input class="as-input" type="text" placeholder="고객사명·쇼핑몰ID·사업자번호 검색" style="width:240px;">
             <select class="as-input" style="width:auto;">
               <option>전체</option>
-              <option>사용 중</option>
-              <option>충전 실패</option>
+              <option>최근 충전 성공</option>
+              <option>최근 충전 실패</option>
             </select>
             <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
           </div>
@@ -4028,28 +4028,28 @@
                 <td>위드리빙</td><td>214-88-10234</td>
                 <td><span class="as-status active">사용 중</span></td>
                 <td>10,000c 이하</td><td>100,000c</td><td>1,320,000원</td>
-                <td>2026.10.07 09:12</td>
+                <td><span class="as-status paid" style="margin-right:6px;">성공</span>2026.10.07 09:12</td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
               <tr style="background:#FFF4E0;">
                 <td>모두의쇼핑</td><td>123-45-67890</td>
-                <td><span class="as-status failed">충전 실패</span></td>
+                <td><span class="as-status active">사용 중</span></td>
                 <td>10,000c 이하</td><td>50,000c</td><td>450,000원</td>
-                <td>2026.10.07 10:03 · <span style="color:var(--warn); font-weight:700;">한도초과</span></td>
+                <td><span class="as-status failed" style="margin-right:6px;">실패</span>2026.10.07 10:03 · <span style="color:var(--warn); font-weight:700;">한도초과</span></td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
               <tr>
                 <td>스타일클로젯</td><td>522-07-33210</td>
                 <td><span class="as-status active">사용 중</span></td>
                 <td>20,000c 이하</td><td>200,000c</td><td>2,860,000원</td>
-                <td>2026.10.06 23:47</td>
+                <td><span class="as-status paid" style="margin-right:6px;">성공</span>2026.10.06 23:47</td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
               <tr>
                 <td>썸띵포유</td><td>618-33-77412</td>
                 <td><span class="as-status active">사용 중</span></td>
                 <td>10,000c 이하</td><td>80,000c</td><td>960,000원</td>
-                <td>2026.10.07 06:30</td>
+                <td><span class="as-status paid" style="margin-right:6px;">성공</span>2026.10.07 06:30</td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
             </tbody>
