@@ -3770,6 +3770,7 @@
               <div class="ca-card-tx">
                 <div class="ca-card-name">신한카드 **** 1234</div>
                 <div class="ca-card-date">등록일 2026.09.28</div>
+                <div class="ca-card-date">유효기간 2029.08</div>
               </div>
               <button class="as-btn as-btn-secondary">카드등록해지</button>
             </div>
@@ -3777,6 +3778,30 @@
               <div class="cm-usage-title">이 카드가 사용되는 곳</div>
               <div class="cm-usage-row"><span>서비스 이용료 자동결제</span><span class="as-status active">사용중</span></div>
               <div class="cm-usage-row"><span>캐시 자동충전</span><span class="as-status ended">미사용</span></div>
+            </div>
+          </div>
+
+          <div class="ca-panel">
+            <div class="ca-panel-title">카드 해지 확인 팝업 (노출 예시)</div>
+            <div style="position:relative; height:260px; overflow:hidden; border:1px solid var(--line); border-radius:9px; padding:20px 24px; background:#fff;">
+              <div class="ca-card-item" style="margin-top:0;">
+                <div class="ca-card-tx">
+                  <div class="ca-card-name">신한카드 **** 1234</div>
+                  <div class="ca-card-date">등록일 2026.09.28</div>
+                  <div class="ca-card-date">유효기간 2029.08</div>
+                </div>
+                <button class="as-btn as-btn-secondary">카드등록해지</button>
+              </div>
+              <div class="as-modal-overlay">
+                <div class="as-modal" style="width:380px; max-height:none; padding:24px 24px 20px;">
+                  <div class="as-modal-title" style="font-size:15px; margin-bottom:8px;">카드를 해지하시겠습니까?</div>
+                  <div class="modal-desc" style="margin:0 0 20px; font-size:12px;">카드 해지 시 서비스 이용료 자동결제, 캐시 자동충전이 모두 중단됩니다.</div>
+                  <div style="display:flex; gap:8px;">
+                    <button class="as-btn as-btn-secondary" style="flex:1; padding:11px;">취소</button>
+                    <button class="as-btn as-btn-primary" style="flex:1; padding:11px;">해지하기</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
