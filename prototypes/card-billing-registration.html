@@ -113,6 +113,13 @@
   .sa-tab{ padding:10px 24px; font-size:13px; font-weight:800; color:#475569; border-radius:8px; cursor:pointer; }
   .sa-tab.active{ background:#1F2937; color:#fff; box-shadow:0 2px 6px rgba(15,23,42,.25); }
 
+  .sa-hist-list{ border-top:1px solid var(--line); }
+  .sa-hist-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 4px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .sa-hist-left{ display:flex; align-items:center; gap:8px; }
+  .sa-hist-date{ font-size:13px; font-weight:700; color:var(--ink); }
+  .sa-hist-reason{ font-size:12px; font-weight:700; color:var(--warn); }
+  .sa-hist-right{ font-size:12px; color:var(--ink-soft); }
+
 
   /* ============ CENTER: STAGE ============ */
   .stage{
@@ -4108,21 +4115,29 @@
 
           <div class="as-panel" style="max-width:760px;">
             <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">자동충전 이력</div>
-            <div class="as-table-wrap">
-              <table class="as-table" style="width:100%;">
-                <thead><tr><th>No.</th><th>충전일시</th><th>결제금액(부가세 포함)</th><th>충전 캐시</th><th>결과</th><th>비고</th></tr></thead>
-                <tbody>
-                  <tr style="background:var(--warn-tint);">
-                    <td>1</td><td>2026.10.07 10:03</td><td>55,000원</td><td>-</td><td><span class="as-status failed">실패</span></td><td style="color:var(--warn); font-weight:700;">한도초과</td>
-                  </tr>
-                  <tr>
-                    <td>2</td><td>2026.09.20 03:00</td><td>55,000원</td><td>50,000c</td><td><span class="as-status paid">성공</span></td><td>-</td>
-                  </tr>
-                  <tr>
-                    <td>3</td><td>2026.09.05 03:00</td><td>55,000원</td><td>50,000c</td><td><span class="as-status paid">성공</span></td><td>-</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="sa-hist-list">
+              <div class="sa-hist-row">
+                <div class="sa-hist-left">
+                  <span class="as-status failed">실패</span>
+                  <span class="sa-hist-date">2026.10.07 10:03</span>
+                  <span class="sa-hist-reason">· 한도초과</span>
+                </div>
+                <div class="sa-hist-right">결제금액 55,000원</div>
+              </div>
+              <div class="sa-hist-row">
+                <div class="sa-hist-left">
+                  <span class="as-status paid">성공</span>
+                  <span class="sa-hist-date">2026.09.20 03:00</span>
+                </div>
+                <div class="sa-hist-right">결제금액 55,000원 · 충전 캐시 50,000c</div>
+              </div>
+              <div class="sa-hist-row">
+                <div class="sa-hist-left">
+                  <span class="as-status paid">성공</span>
+                  <span class="sa-hist-date">2026.09.05 03:00</span>
+                </div>
+                <div class="sa-hist-right">결제금액 55,000원 · 충전 캐시 50,000c</div>
+              </div>
             </div>
             <div class="as-pagination">
               <div class="as-page-btn">‹</div>
