@@ -3889,13 +3889,6 @@
             <div class="as-stat-icon">💳</div>
             <div class="as-stat-label">카드 등록 고객사</div>
             <div class="as-stat-value">128<span class="unit">개사</span></div>
-            <div class="as-stat-sub">전체 고객사 142개사 중 (등록률 90.1%)</div>
-          </div>
-          <div class="as-stat-card risk">
-            <div class="as-stat-icon">⚠️</div>
-            <div class="as-stat-label">유효기간 만료 임박</div>
-            <div class="as-stat-value">4<span class="unit">개사</span></div>
-            <div class="as-stat-sub">3개월 이내 만료 예정</div>
           </div>
           <div class="as-stat-card">
             <div class="as-stat-icon">✨</div>
@@ -3913,38 +3906,37 @@
               <option>전체</option>
               <option>등록됨</option>
               <option>미등록</option>
-              <option>유효기간 임박</option>
             </select>
             <button class="as-btn as-btn-secondary as-btn-sm">⭳ 엑셀 다운로드</button>
           </div>
         </div>
 
         <div class="as-table-wrap">
-          <table class="as-table" style="min-width:980px;">
-            <thead><tr><th>고객사명</th><th>사업자번호</th><th>카드사</th><th>카드번호</th><th>등록일</th><th>유효기간</th><th>상태</th><th>상세</th></tr></thead>
+          <table class="as-table" style="min-width:860px;">
+            <thead><tr><th>고객사명</th><th>사업자번호</th><th>카드사</th><th>카드번호</th><th>등록일</th><th>상태</th><th>상세</th></tr></thead>
             <tbody>
-              <tr style="background:#FFF4E0;">
-                <td>모두의쇼핑</td><td>123-45-67890</td><td>국민카드</td><td>**** 7781</td><td>2025.11.02</td><td>2026.11</td>
-                <td><span class="as-status endsoon">만료 임박</span></td>
-                <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
-              </tr>
               <tr>
-                <td>위드리빙</td><td>214-88-10234</td><td>삼성카드</td><td>**** 3392</td><td>2026.02.14</td><td>2028.02</td>
+                <td>모두의쇼핑</td><td>123-45-67890</td><td>국민카드</td><td>**** 7781</td><td>2025.11.02</td>
                 <td><span class="as-status active">정상</span></td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
               <tr>
-                <td>데일리뷰티몰</td><td>305-11-55678</td><td>-</td><td>-</td><td>-</td><td>-</td>
-                <td><span class="as-status ended">미등록</span></td>
-                <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
-              </tr>
-              <tr style="background:#FFF4E0;">
-                <td>그린테이블</td><td>410-22-98765</td><td>신한카드</td><td>**** 5520</td><td>2026.06.30</td><td>2026.12</td>
-                <td><span class="as-status endsoon">만료 임박</span></td>
+                <td>위드리빙</td><td>214-88-10234</td><td>삼성카드</td><td>**** 3392</td><td>2026.02.14</td>
+                <td><span class="as-status active">정상</span></td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
               <tr>
-                <td>스타일클로젯</td><td>522-07-33210</td><td>현대카드</td><td>**** 9014</td><td>2026.01.09</td><td>2029.01</td>
+                <td>데일리뷰티몰</td><td>305-11-55678</td><td>-</td><td>-</td><td>-</td>
+                <td><span class="as-status ended">미등록</span></td>
+                <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
+              </tr>
+              <tr>
+                <td>그린테이블</td><td>410-22-98765</td><td>신한카드</td><td>**** 5520</td><td>2026.06.30</td>
+                <td><span class="as-status active">정상</span></td>
+                <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
+              </tr>
+              <tr>
+                <td>스타일클로젯</td><td>522-07-33210</td><td>현대카드</td><td>**** 9014</td><td>2026.01.09</td>
                 <td><span class="as-status active">정상</span></td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
@@ -3982,7 +3974,7 @@
             <div class="as-stat-icon">⚠️</div>
             <div class="as-stat-label">오늘 충전 실패</div>
             <div class="as-stat-value">3<span class="unit">건</span></div>
-            <div class="as-stat-sub">한도초과 2건 · 유효기간 만료 1건</div>
+            <div class="as-stat-sub">한도초과 3건</div>
           </div>
           <div class="as-stat-card">
             <div class="as-stat-icon">💰</div>
@@ -4044,7 +4036,7 @@
                 <td>모두의쇼핑</td><td>123-45-67890</td>
                 <td><span class="as-status failed">충전 실패</span></td>
                 <td>10,000c 이하 → 50,000c</td><td>450,000원</td>
-                <td>2026.10.07 10:03 · <span style="color:var(--warn); font-weight:700;">유효기간 만료</span></td>
+                <td>2026.10.07 10:03 · <span style="color:var(--warn); font-weight:700;">한도초과</span></td>
                 <td class="as-td-actions"><button class="as-btn as-btn-secondary as-btn-sm" onclick="selectScreen('sa-merchant-detail')">상세</button></td>
               </tr>
               <tr>
@@ -4093,7 +4085,6 @@
           <div class="as-row"><div class="as-label">카드사</div><div class="as-field">국민카드</div></div>
           <div class="as-row"><div class="as-label">카드번호</div><div class="as-field">**** 7781</div></div>
           <div class="as-row"><div class="as-label">등록일</div><div class="as-field">2025.11.02</div></div>
-          <div class="as-row"><div class="as-label">유효기간</div><div class="as-field" style="color:var(--warn); font-weight:700;">2026.11</div></div>
         </div>
 
         <div class="as-panel" style="max-width:560px;">
@@ -4102,15 +4093,6 @@
           <div class="as-row"><div class="as-label">충전 기준 캐시</div><div class="as-field">10,000c 이하</div></div>
           <div class="as-row"><div class="as-label">충전 캐시</div><div class="as-field">50,000c</div></div>
           <div class="as-row"><div class="as-label">알림톡 받기</div><div class="as-field"><span class="as-status active">ON</span></div></div>
-        </div>
-
-        <div class="as-panel" style="max-width:560px;">
-          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">직원 처리</div>
-          <div style="display:flex; gap:10px; margin-bottom:10px;">
-            <button class="as-btn as-btn-primary">재충전 시도</button>
-            <button class="as-btn as-btn-warn">자동충전 강제 중지</button>
-          </div>
-          <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.6;">이 영역에서 직원이 실행한 모든 처리는 아래 처리 이력에 자동으로 기록됩니다.</div>
         </div>
 
         <div class="as-stat-group-label">자동충전 이력</div>
@@ -4125,10 +4107,19 @@
                 <td>2026.09.05 03:00</td><td>55,000원</td><td>50,000c</td><td><span class="as-status paid">성공</span></td><td>-</td>
               </tr>
               <tr style="background:var(--warn-tint);">
-                <td>2026.10.07 10:03</td><td>55,000원</td><td>-</td><td><span class="as-status failed">실패</span></td><td style="color:var(--warn); font-weight:700;">유효기간 만료</td>
+                <td>2026.10.07 10:03</td><td>55,000원</td><td>-</td><td><span class="as-status failed">실패</span></td><td style="color:var(--warn); font-weight:700;">한도초과</td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="as-panel" style="max-width:560px;">
+          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">직원 처리</div>
+          <div style="display:flex; gap:10px; margin-bottom:10px;">
+            <button class="as-btn as-btn-primary">재충전 시도</button>
+            <button class="as-btn as-btn-warn">자동충전 강제 중지</button>
+          </div>
+          <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.6;">이 영역에서 직원이 실행한 모든 처리는 아래 처리 이력에 자동으로 기록됩니다.</div>
         </div>
 
         <div class="as-stat-group-label">처리 이력</div>
@@ -5278,7 +5269,7 @@
     },
     'sa-card-status': {
       number:'43', label:'SA · 카드 등록 현황', kind:'내부 화면', saCardStatus:true,
-      policy:'플렉스지 직원이 보는 내부(슈퍼어드민) 화면이에요. 고객사별 결제 카드 등록 현황을 한눈에 보고, 유효기간이 임박한 고객사를 미리 파악할 수 있어요. 목록의 "상세"를 누르면 화면 45(SA·고객사 상세)로 이동해요.'
+      policy:'플렉스지 직원이 보는 내부(슈퍼어드민) 화면이에요. 고객사별 결제 카드 등록 현황을 한눈에 볼 수 있어요. 목록의 "상세"를 누르면 화면 45(SA·고객사 상세)로 이동해요.'
     },
     'sa-autocharge-status': {
       number:'44', label:'SA · 캐시 자동충전 현황', kind:'내부 화면', saAutoChargeStatus:true,
