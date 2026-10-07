@@ -109,6 +109,10 @@
     margin-right:5px; vertical-align:1px;
   }
 
+  .sa-tabs{ display:inline-flex; background:#E2E8F0; border-radius:10px; padding:4px; gap:4px; margin-bottom:22px; }
+  .sa-tab{ padding:10px 24px; font-size:13px; font-weight:800; color:#475569; border-radius:8px; cursor:pointer; }
+  .sa-tab.active{ background:#1F2937; color:#fff; box-shadow:0 2px 6px rgba(15,23,42,.25); }
+
 
   /* ============ CENTER: STAGE ============ */
   .stage{
@@ -4072,62 +4076,78 @@
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
           <h1 style="margin:0;">모두의쇼핑</h1>
           <span class="as-status failed">충전 실패</span>
+          <span class="as-modal-close" style="margin-left:auto; font-size:17px;" onclick="selectScreen('sa-autocharge-status')">✕</span>
         </div>
         <p class="as-desc">쇼핑몰ID moduishopping · 사업자번호 123-45-67890</p>
 
-        <div class="as-panel" style="max-width:760px;">
-          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">결제 카드</div>
-          <div class="as-row"><div class="as-label">카드사</div><div class="as-field" style="font-size:12.5px;">국민카드</div></div>
-          <div class="as-row"><div class="as-label">카드번호</div><div class="as-field" style="font-size:12.5px;">**** 7781</div></div>
-          <div class="as-row"><div class="as-label">등록일</div><div class="as-field" style="font-size:12.5px;">2025.11.02</div></div>
+        <div class="sa-tabs">
+          <div class="sa-tab active" data-sa-tab="autocharge" onclick="selectSaDetailTab('autocharge')">자동충전</div>
+          <div class="sa-tab" data-sa-tab="servicefee" onclick="selectSaDetailTab('servicefee')">서비스 이용료</div>
         </div>
 
-        <div class="as-panel" style="max-width:760px;">
-          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">자동충전 설정</div>
-          <div class="as-row"><div class="as-label">자동충전</div><div class="as-field"><span class="as-status active">ON</span></div></div>
-          <div class="as-row"><div class="as-label">충전 기준 캐시</div><div class="as-field" style="font-size:12.5px;">10,000c 이하</div></div>
-          <div class="as-row"><div class="as-label">충전 캐시</div><div class="as-field" style="font-size:12.5px;">50,000c</div></div>
-          <div class="as-row"><div class="as-label">알림톡 받기</div><div class="as-field"><span class="as-status active">ON</span></div></div>
-        </div>
-
-        <div class="as-panel" style="max-width:760px;">
-          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">자동충전 이력</div>
-          <div class="as-table-wrap">
-            <table class="as-table" style="width:100%;">
-              <thead><tr><th>충전일시</th><th>결제금액(부가세 포함)</th><th>충전 캐시</th><th>결과</th><th>비고</th></tr></thead>
-              <tbody>
-                <tr style="background:var(--warn-tint);">
-                  <td>2026.10.07 10:03</td><td>55,000원</td><td>-</td><td><span class="as-status failed">실패</span></td><td style="color:var(--warn); font-weight:700;">한도초과</td>
-                </tr>
-                <tr>
-                  <td>2026.09.20 03:00</td><td>55,000원</td><td>50,000c</td><td><span class="as-status paid">성공</span></td><td>-</td>
-                </tr>
-                <tr>
-                  <td>2026.09.05 03:00</td><td>55,000원</td><td>50,000c</td><td><span class="as-status paid">성공</span></td><td>-</td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="sa-tab-panel" data-sa-panel="autocharge">
+          <div class="as-panel" style="max-width:760px;">
+            <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">결제 카드</div>
+            <div class="as-row"><div class="as-label">카드사</div><div class="as-field" style="font-size:12.5px;">국민카드</div></div>
+            <div class="as-row"><div class="as-label">카드번호</div><div class="as-field" style="font-size:12.5px;">**** 7781</div></div>
+            <div class="as-row"><div class="as-label">등록일</div><div class="as-field" style="font-size:12.5px;">2025.11.02</div></div>
           </div>
-          <div class="as-pagination">
-            <div class="as-page-btn">‹</div>
-            <div class="as-page-btn active">1</div>
-            <div class="as-page-btn">2</div>
-            <div class="as-page-btn">›</div>
+
+          <div class="as-panel" style="max-width:760px;">
+            <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">자동충전 설정</div>
+            <div class="as-row"><div class="as-label">자동충전</div><div class="as-field"><span class="as-status active">ON</span></div></div>
+            <div class="as-row"><div class="as-label">충전 기준 캐시</div><div class="as-field" style="font-size:12.5px;">10,000c 이하</div></div>
+            <div class="as-row"><div class="as-label">충전 캐시</div><div class="as-field" style="font-size:12.5px;">50,000c</div></div>
+            <div class="as-row"><div class="as-label">알림톡 받기</div><div class="as-field"><span class="as-status active">ON</span></div></div>
+          </div>
+
+          <div class="as-panel" style="max-width:760px;">
+            <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">자동충전 이력</div>
+            <div class="as-table-wrap">
+              <table class="as-table" style="width:100%;">
+                <thead><tr><th>충전일시</th><th>결제금액(부가세 포함)</th><th>충전 캐시</th><th>결과</th><th>비고</th></tr></thead>
+                <tbody>
+                  <tr style="background:var(--warn-tint);">
+                    <td>2026.10.07 10:03</td><td>55,000원</td><td>-</td><td><span class="as-status failed">실패</span></td><td style="color:var(--warn); font-weight:700;">한도초과</td>
+                  </tr>
+                  <tr>
+                    <td>2026.09.20 03:00</td><td>55,000원</td><td>50,000c</td><td><span class="as-status paid">성공</span></td><td>-</td>
+                  </tr>
+                  <tr>
+                    <td>2026.09.05 03:00</td><td>55,000원</td><td>50,000c</td><td><span class="as-status paid">성공</span></td><td>-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="as-pagination">
+              <div class="as-page-btn">‹</div>
+              <div class="as-page-btn active">1</div>
+              <div class="as-page-btn">2</div>
+              <div class="as-page-btn">›</div>
+            </div>
+          </div>
+
+          <div class="as-panel" style="max-width:760px;">
+            <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">직원 처리</div>
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
+              <button class="as-btn as-btn-primary">재충전 시도</button>
+              <button class="as-btn as-btn-warn">자동충전 강제 중지</button>
+            </div>
+            <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.6;">이 영역에서 직원이 실행한 모든 처리는 아래 처리 이력에 자동으로 기록됩니다.</div>
+          </div>
+
+          <div class="as-panel" style="max-width:760px;">
+            <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">처리 이력</div>
+            <div style="font-size:12.5px; color:var(--ink);">이하윤 · 재충전 시도 실행 <span style="color:var(--warn); font-weight:700;">(실패)</span><span style="color:var(--ink-faint); font-size:11px; margin-left:8px;">2026.10.07 10:04</span></div>
           </div>
         </div>
 
-        <div class="as-panel" style="max-width:760px;">
-          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">직원 처리</div>
-          <div style="display:flex; gap:10px; margin-bottom:10px;">
-            <button class="as-btn as-btn-primary">재충전 시도</button>
-            <button class="as-btn as-btn-warn">자동충전 강제 중지</button>
-          </div>
-          <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.6;">이 영역에서 직원이 실행한 모든 처리는 아래 처리 이력에 자동으로 기록됩니다.</div>
+        <div class="sa-tab-panel" data-sa-panel="servicefee" hidden>
+          <div class="cm-placeholder">준비중인 화면입니다.</div>
         </div>
 
-        <div class="as-panel" style="max-width:760px;">
-          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">처리 이력</div>
-          <div style="font-size:12.5px; color:var(--ink);">이하윤 · 재충전 시도 실행 <span style="color:var(--warn); font-weight:700;">(실패)</span><span style="color:var(--ink-faint); font-size:11px; margin-left:8px;">2026.10.07 10:04</span></div>
+        <div style="display:flex; justify-content:flex-end; max-width:760px; margin-top:4px;">
+          <button class="as-btn as-btn-secondary" onclick="selectScreen('sa-autocharge-status')">닫기</button>
         </div>
       </div>
     </div>
@@ -5319,6 +5339,15 @@
   var saAutoChargeStatusShell = document.getElementById('saAutoChargeStatusShell');
   var saMerchantDetailShell = document.getElementById('saMerchantDetailShell');
   var stageFrame = document.getElementById('stageFrame');
+
+  function selectSaDetailTab(tab){
+    document.querySelectorAll('#saMerchantDetailShell .sa-tab').forEach(function(el){
+      el.classList.toggle('active', el.getAttribute('data-sa-tab') === tab);
+    });
+    document.querySelectorAll('#saMerchantDetailShell .sa-tab-panel').forEach(function(el){
+      el.hidden = el.getAttribute('data-sa-panel') !== tab;
+    });
+  }
 
   function selectScreen(key){
     var s = SCREENS[key];
