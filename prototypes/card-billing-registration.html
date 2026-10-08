@@ -1751,13 +1751,31 @@
                 </div>
                 <div class="as-field-group">
                   <div class="as-label">결제상태</div>
-                  <div class="as-field">
-                    <select class="as-input" disabled>
-                      <option>전체</option>
-                      <option>결제완료</option>
-                      <option>재시도중</option>
-                      <option>최종실패</option>
-                    </select>
+                  <div class="as-field" style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                    <label style="display:flex; align-items:center; gap:5px; font-size:12.5px; color:var(--ink);"><input type="checkbox" checked disabled>전체</label>
+                    <label style="display:flex; align-items:center; gap:5px; font-size:12.5px; color:var(--ink);"><input type="checkbox" checked disabled>결제완료</label>
+                    <label style="display:flex; align-items:center; gap:5px; font-size:12.5px; color:var(--ink);"><input type="checkbox" checked disabled>재시도중</label>
+                    <label style="display:flex; align-items:center; gap:5px; font-size:12.5px; color:var(--ink);"><input type="checkbox" checked disabled>최종실패</label>
+                  </div>
+                </div>
+              </div>
+              <div class="as-row-pair">
+                <div class="as-field-group">
+                  <div class="as-label">결제 기간</div>
+                  <div class="as-field" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <input class="as-input" type="text" value="2026-01-01" disabled style="max-width:130px;">
+                      <span style="color:var(--ink-soft); font-size:12px;">~</span>
+                      <input class="as-input" type="text" value="2026-09-10" disabled style="max-width:130px;">
+                    </div>
+                    <div class="as-date-quick">
+                      <div class="as-date-quick-btn">오늘</div>
+                      <div class="as-date-quick-btn">7일</div>
+                      <div class="as-date-quick-btn">15일</div>
+                      <div class="as-date-quick-btn">1개월</div>
+                      <div class="as-date-quick-btn">2개월</div>
+                      <div class="as-date-quick-btn">전체</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1780,49 +1798,49 @@
             </div>
 
             <div class="as-table-wrap">
-              <table class="as-table" style="min-width:1080px;">
+              <table class="as-table" style="min-width:1170px;">
                 <thead>
                   <tr>
-                    <th>No.</th><th>아이디</th><th>가입일</th><th>결제상태</th><th>이용상태</th>
+                    <th>No.</th><th>결제일</th><th>아이디</th><th>가입일</th><th>결제상태</th><th>이용상태</th>
                     <th>결제차수</th><th>정기결제 금액</th><th>누적 결제금액</th><th>다음 결제예정일</th>
                     <th>최근 로그인</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td><td>flexg_user01</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
-                    <td>7회차</td><td>9,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>69,300원</td><td>2026.10.14</td>
-                    <td>2026.09.09 14:22</td>
-                  </tr>
-                  <tr>
-                    <td>2</td><td>weed_min22</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status ended">해지완료</span></td>
-                    <td>6회차</td><td>19,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>119,400원</td><td>-</td>
-                    <td>2026.09.10 09:03</td>
-                  </tr>
-                  <tr>
-                    <td>3</td><td>subin_kim</td><td>2026.04.19</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
-                    <td>5회차</td><td>9,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>49,500원</td><td>2026.10.19</td>
-                    <td>2026.08.30 21:47</td>
-                  </tr>
-                  <tr>
-                    <td>4</td><td>hyesun_choi</td><td>2026.05.27</td><td><span class="as-status retry" data-fail-reason="카드 한도초과" data-fail-at="2026.09.10 14:32" data-retry-at="2026.09.11 14:32">재시도중<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status active">이용중</span></td>
-                    <td>4회차</td><td>19,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>59,700원</td><td>2026.10.27</td>
-                    <td>2026.09.01 11:15</td>
-                  </tr>
-                  <tr>
-                    <td>5</td><td>flexg_biz03</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status endsoon">해지예정</span></td>
+                    <td>1</td><td>2026.09.30</td><td>flexg_biz03</td><td>2026.06.30</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status endsoon">해지예정</span></td>
                     <td>3회차</td><td>9,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>29,700원</td><td>2026.10.30</td>
                     <td>2026.09.10 08:40</td>
                   </tr>
                   <tr>
-                    <td>6</td><td>flexg_dev99</td><td>2026.07.11</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
+                    <td>2</td><td>2026.09.27</td><td>hyesun_choi</td><td>2026.05.27</td><td><span class="as-status retry" data-fail-reason="카드 한도초과" data-fail-at="2026.09.10 14:32" data-retry-at="2026.09.11 14:32">재시도중<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status active">이용중</span></td>
+                    <td>4회차</td><td>19,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>59,700원</td><td>2026.10.27</td>
+                    <td>2026.09.01 11:15</td>
+                  </tr>
+                  <tr>
+                    <td>3</td><td>2026.09.19</td><td>subin_kim</td><td>2026.04.19</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
+                    <td>5회차</td><td>9,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>49,500원</td><td>2026.10.19</td>
+                    <td>2026.08.30 21:47</td>
+                  </tr>
+                  <tr>
+                    <td>4</td><td>2026.09.14</td><td>flexg_user01</td><td>2026.02.14</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
+                    <td>7회차</td><td>9,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>69,300원</td><td>2026.10.14</td>
+                    <td>2026.09.09 14:22</td>
+                  </tr>
+                  <tr>
+                    <td>5</td><td>2026.09.11</td><td>flexg_dev99</td><td>2026.07.11</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status active">이용중</span></td>
                     <td>2회차</td><td>19,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>39,800원</td><td>2026.10.11</td>
                     <td>2026.09.08 19:02</td>
                   </tr>
                   <tr>
-                    <td>7</td><td>flexg_test01</td><td>2026.03.05</td><td><span class="as-status finalfail" data-fail-reason="카드 한도초과" data-fail-at="2026.09.05 10:15">최종실패<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status ended">해지완료</span></td>
+                    <td>6</td><td>2026.09.05</td><td>flexg_test01</td><td>2026.03.05</td><td><span class="as-status finalfail" data-fail-reason="카드 한도초과" data-fail-at="2026.09.05 10:15">최종실패<span class="as-status-info-icon">ⓘ</span></span></td><td><span class="as-status ended">해지완료</span></td>
                     <td>6회차</td><td>9,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>49,500원</td><td>-</td>
                     <td>2026.08.28 16:40</td>
+                  </tr>
+                  <tr>
+                    <td>7</td><td>2026.08.02</td><td>weed_min22</td><td>2026.03.02</td><td><span class="as-status paid">결제완료</span></td><td><span class="as-status ended">해지완료</span></td>
+                    <td>6회차</td><td>19,900원<button class="as-btn as-btn-white as-btn-sm as-statement-btn">거래명세서</button></td><td>119,400원</td><td>-</td>
+                    <td>2026.09.10 09:03</td>
                   </tr>
                 </tbody>
               </table>
