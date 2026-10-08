@@ -4174,7 +4174,30 @@
 
           <div class="as-panel" style="max-width:760px;">
             <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">처리 이력</div>
+            <div style="font-size:12.5px; color:var(--ink); margin-bottom:6px;">이하윤 · 자동충전 강제 중지 <span style="color:var(--ink-soft);">(사유: 고객사 요청으로 임시 중지)</span><span style="color:var(--ink-faint); font-size:11px; margin-left:8px;">2026.10.07 10:12</span></div>
             <div style="font-size:12.5px; color:var(--ink);">이하윤 · 재충전 시도 실행 <span style="color:var(--warn); font-weight:700;">(실패)</span><span style="color:var(--ink-faint); font-size:11px; margin-left:8px;">2026.10.07 10:04</span></div>
+          </div>
+
+          <div class="as-panel" style="max-width:760px;">
+            <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">예시: "자동충전 강제 중지" 팝업 노출 상태</div>
+            <div style="font-size:11.5px; color:var(--ink-soft); margin-bottom:12px;">"자동충전 강제 중지" 버튼 클릭 시 뜨는 확인 팝업의 예시입니다. 사유 입력란에 예시 텍스트가 입력된 상태를 보여줍니다.</div>
+            <div style="background:rgba(15,23,42,.4); border-radius:14px; padding:40px; display:flex; justify-content:center;">
+              <div class="as-modal" style="width:400px; max-height:none;">
+                <div class="as-modal-head">
+                  <div class="as-modal-title">자동충전을 강제로 중지하시겠습니까?</div>
+                  <div class="as-modal-close">✕</div>
+                </div>
+                <div class="modal-desc" style="margin:0 0 16px;">중지 시 캠페인 발행 중 캐시 부족 상황에서도 자동충전되지 않습니다.</div>
+                <div class="as-row" style="padding:0 0 20px; align-items:flex-start;">
+                  <div class="as-label">사유 <span style="color:var(--warn);">*</span></div>
+                  <div class="as-field"><input class="as-input" type="text" value="고객사 요청으로 임시 중지" disabled></div>
+                </div>
+                <div class="as-actions right">
+                  <button class="as-btn as-btn-secondary">취소</button>
+                  <button class="as-btn as-btn-warn">중지하기</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -4207,7 +4230,11 @@
             <div class="as-modal-title">자동충전을 강제로 중지하시겠습니까?</div>
             <div class="as-modal-close" onclick="document.getElementById('saAutoChargeStopConfirmOverlay').hidden=true;">✕</div>
           </div>
-          <div class="modal-desc" style="margin:0 0 20px;">중지 후에는 잔여 캐시가 부족해도 자동으로 충전되지 않습니다. 처리 내역은 처리 이력에 자동으로 기록됩니다.</div>
+          <div class="modal-desc" style="margin:0 0 16px;">중지 시 캠페인 발행 중 캐시 부족 상황에서도 자동충전되지 않습니다.</div>
+          <div class="as-row" style="padding:0 0 20px; align-items:flex-start;">
+            <div class="as-label">사유 <span style="color:var(--warn);">*</span></div>
+            <div class="as-field"><input class="as-input" type="text" placeholder="중지 사유를 입력해주세요 (예: 고객 요청, 이상 결제 패턴 감지 등)"></div>
+          </div>
           <div class="as-actions right">
             <button class="as-btn as-btn-secondary" onclick="document.getElementById('saAutoChargeStopConfirmOverlay').hidden=true;">취소</button>
             <button class="as-btn as-btn-warn" onclick="document.getElementById('saAutoChargeStopConfirmOverlay').hidden=true;">중지하기</button>
