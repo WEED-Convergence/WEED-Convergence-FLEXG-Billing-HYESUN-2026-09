@@ -3717,7 +3717,7 @@
           </thead>
           <tbody>
             <tr><td>1</td><td class="ap-name">자동충전 기본 동작</td><td>캠페인 발행 시 캐시가 부족하면 발행 전에 자동으로 충전</td></tr>
-            <tr><td>2</td><td class="ap-name">반복 충전</td><td>한 번 부족할 때 여러 번 나눠서 충전하지 않고, 부족한 금액만큼 한 번에 충전 (다음에 또 부족해지면 그때 다시 자동충전됨)</td></tr>
+            <tr><td>2</td><td class="ap-name">반복 충전</td><td>한 번 부족할 때 여러 번 나눠서 충전하지 않고, 미리 설정해 둔 고정 충전 금액으로 한 번에 충전 (다음에 또 부족해지면 그때 다시 자동충전됨)</td></tr>
             <tr><td>3</td><td class="ap-name">동시 캠페인 처리</td><td>한 고객사가 캠페인을 여러 개 동시에 발행하면, 우선순위 순서대로 하나씩 처리</td></tr>
             <tr><td>4</td><td class="ap-name">운영자 재시도</td><td>일시적 오류(네트워크 등)만 재시도 가능, 카드 문제(한도초과·만료 등)는 재시도 불가</td></tr>
             <tr><td>5</td><td class="ap-name">카드 등록</td><td>카드는 1장만 등록 가능, 변경은 기존 카드 해지 후 재등록</td></tr>
@@ -4089,6 +4089,16 @@
           <div class="as-row"><div class="as-label">카드사</div><div class="as-field" style="font-size:12.5px;">국민카드</div></div>
           <div class="as-row"><div class="as-label">카드번호</div><div class="as-field" style="font-size:12.5px;">**** 7781</div></div>
           <div class="as-row"><div class="as-label">등록일</div><div class="as-field" style="font-size:12.5px;">2025.11.02 14:23</div></div>
+        </div>
+
+        <div class="as-panel" style="max-width:760px;">
+          <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">참고: 카드가 해지된 고객사 상세 화면 예시</div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <div style="font-size:13px; font-weight:800; color:var(--ink);">데일리뷰티몰</div>
+            <span class="as-status ended">카드 해지</span>
+          </div>
+          <div class="as-row"><div class="as-label">카드사</div><div class="as-field" style="font-size:12.5px; color:var(--ink-faint);">등록된 카드가 없습니다</div></div>
+          <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.6; margin-top:8px;">카드가 해지된 고객사는 자동충전·서비스 이용료 탭에 설정 정보와 이력 없이 "등록된 카드가 없습니다" 안내만 표시되며, 재충전 시도·강제 중지 버튼도 비활성화됩니다.</div>
         </div>
 
         <div class="sa-tabs">
