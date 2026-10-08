@@ -4126,9 +4126,10 @@
           <div class="as-panel" style="max-width:760px;">
             <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">직원 처리</div>
             <div style="display:flex; gap:10px; margin-bottom:10px;">
-              <button class="as-btn as-btn-primary" onclick="document.getElementById('saRechargeConfirmOverlay').hidden=false;">재충전 시도</button>
+              <button class="as-btn as-btn-primary" disabled>재충전 시도</button>
               <button class="as-btn as-btn-warn" onclick="document.getElementById('saAutoChargeStopConfirmOverlay').hidden=false;">자동충전 강제 중지</button>
             </div>
+            <div style="font-size:11.5px; color:var(--warn); font-weight:600; line-height:1.6; margin-bottom:6px;">⚠ 최근 실패 사유가 "한도초과"(카드 문제)로, 재시도할 수 없습니다. 일시적 오류(네트워크 등)로 실패했을 때만 재충전 시도가 가능합니다.</div>
             <div style="font-size:11.5px; color:var(--ink-soft); line-height:1.6;">이 영역에서 직원이 실행한 모든 처리는 아래 처리 이력에 자동으로 기록됩니다.</div>
           </div>
 
