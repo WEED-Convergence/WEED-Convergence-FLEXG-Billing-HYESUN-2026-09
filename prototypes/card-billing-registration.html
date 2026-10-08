@@ -3731,6 +3731,27 @@
       <div class="as-content" style="flex:1; height:100%;">
         <h1>캐시 자동충전 정책</h1>
 
+        <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">정책 요약</div>
+        <table class="as-table ap-table" style="margin-bottom:28px;">
+          <thead>
+            <tr><th>No</th><th>정책</th><th>내용</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="ap-name">자동충전 기본 동작</td><td>캠페인 발행 시 캐시가 부족하면 발행 전에 자동으로 충전</td></tr>
+            <tr><td>2</td><td class="ap-name">자동충전 한도</td><td>부족한 금액이 충전 금액의 3배 이내면 자동충전, 3배 넘으면 자동충전 안 하고 직접 충전 안내</td></tr>
+            <tr><td>3</td><td class="ap-name">반복 충전</td><td>한 번 부족할 때 여러 번 나눠서 충전하지 않고, 부족한 금액만큼 한 번에 충전 (다음에 또 부족해지면 그때 다시 자동충전됨)</td></tr>
+            <tr><td>4</td><td class="ap-name">동시 캠페인 처리</td><td>한 고객사가 캠페인을 여러 개 동시에 발행하면, 우선순위 순서대로 하나씩 처리</td></tr>
+            <tr><td>5</td><td class="ap-name">운영자 재시도</td><td>일시적 오류(네트워크 등)만 재시도 가능, 카드 문제(한도초과·만료 등)는 재시도 불가</td></tr>
+            <tr><td>6</td><td class="ap-name">카드 등록</td><td>카드는 1장만 등록 가능, 변경은 기존 카드 해지 후 재등록</td></tr>
+            <tr><td>7</td><td class="ap-name">알림</td><td>자동충전 성공·실패 시 알림톡 발송 (판매자가 수신 여부 설정 가능)</td></tr>
+            <tr><td>8</td><td class="ap-name">환불</td><td>충전됐지만 안 쓴 캐시는 환불 가능, 이미 사용한 충전분은 환불 불가</td></tr>
+            <tr><td>9</td><td class="ap-name">운영자 강제 중지</td><td>자동충전을 강제로 끌 때는 사유 입력 필수</td></tr>
+            <tr><td>10</td><td class="ap-name">결제 수단</td><td>신용카드·체크카드만 가능</td></tr>
+            <tr><td>11</td><td class="ap-name">부가세</td><td>충전 시 부가세 10% 별도 결제</td></tr>
+          </tbody>
+        </table>
+
+        <div class="as-stat-group-label" style="padding-left:0;">상세 정책</div>
         <table class="as-table ap-table">
           <thead>
             <tr><th>No</th><th>정책</th><th>내용</th><th>예시</th></tr>
