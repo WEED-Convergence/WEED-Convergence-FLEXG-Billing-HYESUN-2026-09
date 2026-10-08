@@ -3740,8 +3740,7 @@
       <div class="as-content" style="flex:1; height:100%;">
         <h1>캐시 자동충전 정책</h1>
 
-        <div class="as-stat-group-label" style="margin-top:0; padding-left:0;">정책 요약</div>
-        <table class="as-table ap-table" style="margin-bottom:28px;">
+        <table class="as-table ap-table">
           <thead>
             <tr><th>No</th><th>정책</th><th>내용</th></tr>
           </thead>
@@ -3757,41 +3756,6 @@
             <tr><td>9</td><td class="ap-name">운영자 강제 중지</td><td>자동충전을 강제로 끌 때는 사유 입력 필수</td></tr>
             <tr><td>10</td><td class="ap-name">결제 수단</td><td>신용카드·체크카드만 가능</td></tr>
             <tr><td>11</td><td class="ap-name">부가세</td><td>충전 시 부가세 10% 별도 결제</td></tr>
-          </tbody>
-        </table>
-
-        <div class="as-stat-group-label" style="padding-left:0;">상세 정책</div>
-        <table class="as-table ap-table">
-          <thead>
-            <tr><th>No</th><th>정책</th><th>내용</th><th>예시</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td class="ap-name">캠페인 발행 시 자동충전 처리 정책</td>
-              <td>
-                <div class="ap-sec-title">1. 기본 구조</div>
-                <ul class="ap-list">
-                  <li>캠페인 발행 요청 시 캐시가 부족하면, 발행 전에 부족분을 자동충전 후 발행 진행</li>
-                </ul>
-                <div class="ap-sec-title">2. 자동충전 허용 범위</div>
-                <ul class="ap-list">
-                  <li>부족분이 충전 금액의 <b>3배 이내</b> → 부족한 만큼 1회 자동충전 후 발행</li>
-                  <li>부족분이 충전 금액의 <b>3배 초과</b> → 자동충전 시도하지 않고 발행 중단, "캐시가 많이 부족합니다. 직접 충전해주세요" 안내</li>
-                </ul>
-                <div class="ap-sec-title">3. 반복 충전 없음</div>
-                <ul class="ap-list">
-                  <li>허용 범위 안이어도 여러 번 나눠서 충전하지 않고, 항상 1회로 처리</li>
-                </ul>
-              </td>
-              <td>
-                <div class="ap-ex-title">충전 금액이 10만원으로 설정된 경우</div>
-                <ul class="ap-list">
-                  <li>부족분 30만원 이하 → 자동충전 진행</li>
-                  <li>부족분 30만원 초과(예: 500만원 캠페인) → 자동충전 안 하고 수동 충전 안내</li>
-                </ul>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
