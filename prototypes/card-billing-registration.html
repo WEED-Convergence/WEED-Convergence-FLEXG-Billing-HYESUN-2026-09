@@ -2989,6 +2989,19 @@
             </div>
 
             <div class="at-card new">
+              <div class="at-head"><span class="talk-ic">talk</span>정기멤버십 결제 실패</div>
+              <div class="at-body">
+                <div class="at-image">이미지</div>
+                <div class="at-icon">⚠️</div>
+                <div class="at-title">정기멤버십 결제가
+실패했어요</div>
+                <div class="at-sender">#{상점명}</div>
+                <div class="at-lines">#{회원명}님의 정기멤버십 결제가 실패했어요.<br>▶ 멤버십: #{멤버십명}<br>▶ 재결제 시도일: #{재결제시도일자}<br>▶ 결제 수단 변경: #{결제수단변경URL}</div>
+              </div>
+              <div class="at-btn">결제 수단 변경</div>
+            </div>
+
+            <div class="at-card new">
               <div class="at-head"><span class="talk-ic">talk</span>정기멤버십 결제 최종실패</div>
               <div class="at-body">
                 <div class="at-image">이미지</div>
@@ -5268,7 +5281,7 @@
     },
     'membership-alimtalk': {
       number:'17', label:'알림톡 설정', kind:'어드민 화면', msg:true,
-      policy:'메시지 &gt; 알림톡 설정 화면에 정기멤버십용 알림톡 템플릿 3개(가입완료·해지·쿠폰 발송)가 추가돼요. 기존 세컨찬스·선물하기 알림톡과 같은 카드 형태로 노출되고, 각 카드는 발송 조건과 예시 문구, 사용 가능한 치환 태그를 보여줘요.'
+      policy:'메시지 &gt; 알림톡 설정 화면에 정기멤버십용 알림톡 템플릿 4개(가입완료·해지·결제 실패·결제 최종실패)가 추가돼요. 기존 세컨찬스·선물하기 알림톡과 같은 카드 형태로 노출되고, 각 카드는 발송 조건과 예시 문구, 사용 가능한 치환 태그를 보여줘요.\n\n결제 실패(1차 실패, 재시도 대기)와 결제 최종실패(재시도까지 실패)는 서로 다른 알림톡이에요. 결제 실패 알림톡에는 "재결제 시도일"을 안내해 구매자가 재시도 전까지 결제 수단을 확인하거나 변경할 수 있게 해요.'
     },
     'member-detail': {
       number:'18', label:'회원 상세', kind:'팝업', member:true,
